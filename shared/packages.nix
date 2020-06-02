@@ -8,8 +8,8 @@
     
     # Web get tools. 
     wget	# for wgeting things.
-    git 	# if you don't know what this is git lost.
-    
+    git
+
     # Editor
     neovim	# prefered editor
     vim		# nice to have a backup
