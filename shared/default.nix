@@ -17,8 +17,9 @@ in
     ./users.nix
     ./services.nix
     ./ssh.nix
-    ./shell.nix
-    ./xserver.nix
+    ./programs/bspwm.nix
+    ./programs/zsh.nix
+    ./programs/alacritty.nix
   ];
   
   networking.hostName = mkDefault "nixos"; # Define your hostname.
