@@ -13,10 +13,7 @@
     # Editor
     neovim	# prefered editor
     vim		# nice to have a backup
-   
-    # Terminal
-    alacritty	# prefered terminal
-    xterm	# nice to have a backup
+  
   ];
 
 }
