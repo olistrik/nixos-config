@@ -1,14 +1,22 @@
 
 {config, pkgs, ...}:
 
-{
+let
+  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
+in {
   environment.systemPackages = with pkgs; [
     thefuck
     fzf
     starship
-];
+  ];
+  
+  fonts.fonts = with pkgs; [
+    (unstable.nerdfonts.override { fonts = ["Hermit" "JetBrainsMono"]; })
+  ];
 
   users.defaultUserShell = pkgs.zsh;
+  
+  programs.alacritty.font.normal.family = "JetBrainsMono Nerd Font";
   
   programs.zsh = {
     enable = true;

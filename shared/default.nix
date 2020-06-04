@@ -17,9 +17,9 @@ in
     ./users.nix
     ./services.nix
     ./ssh.nix
+    ./modules
     ./programs/bspwm.nix
     ./programs/zsh.nix
-    ./programs/alacritty.nix
   ];
   
   networking.hostName = mkDefault "nixos"; # Define your hostname.
@@ -41,6 +41,9 @@ in
   networking.interfaces.enp0s3.useDHCP = true;
 
   
+  # configure alacritty
+  programs.alacritty.enable = true;
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave

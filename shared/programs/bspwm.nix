@@ -2,6 +2,10 @@
 
 {
 
+  environment.systemPackages = with pkgs; [ 
+    xterm
+  ];
+
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
