@@ -1,5 +1,3 @@
-## configuration module for alacritty
-
 {config, lib, pkgs, ...}:
 
 with lib;
@@ -211,33 +209,34 @@ in
       environment.etc."alacritty/alacritty.yml".text = ''
       #Font configuration
         font:
-        normal:
-          family: "${cfg.font.normal.family}"
-          style: ${cfg.font.normal.style}
-        size: ${cfg.font.size}
-        draw_bold_text_with_bright_colors: ${builtins.toString cfg.brightBold}
+          normal:
+            family: "${cfg.font.normal.family}"
+            style: ${cfg.font.normal.style}
+          size: ${cfg.font.size}
+        draw_bold_text_with_bright_colors: ${if cfg.brightBold then "true" else
+        "false"}
         colors:
-        primary:
-          background: '${cfg.colors.primary.background}'
-          foreground: '${cfg.colors.primary.foreground}'
-        normal:
-          black:   '${cfg.colors.normal.black}'
-          red:     '${cfg.colors.normal.red}'
-          green:   '${cfg.colors.normal.green}'
-          yellow:  '${cfg.colors.normal.yellow}'
-          blue:    '${cfg.colors.normal.blue}'
-          magenta: '${cfg.colors.normal.magenta}'
-          cyan:    '${cfg.colors.normal.cyan}'
-          white:   '${cfg.colors.normal.white}'
-        bright:
-          black:   '${cfg.colors.bright.black}'
-          red:     '${cfg.colors.bright.red}'
-          green:   '${cfg.colors.bright.green}'
-          yellow:  '${cfg.colors.bright.yellow}'
-          blue:    '${cfg.colors.bright.blue}'
-          magenta: '${cfg.colors.bright.magenta}'
-          cyan:    '${cfg.colors.bright.cyan}'
-          white:   '${cfg.colors.bright.white}'
+          primary:
+            background: '${cfg.colors.primary.background}'
+            foreground: '${cfg.colors.primary.foreground}'
+          normal:
+            black:   '${cfg.colors.normal.black}'
+            red:     '${cfg.colors.normal.red}'
+            green:   '${cfg.colors.normal.green}'
+            yellow:  '${cfg.colors.normal.yellow}'
+            blue:    '${cfg.colors.normal.blue}'
+            magenta: '${cfg.colors.normal.magenta}'
+            cyan:    '${cfg.colors.normal.cyan}'
+            white:   '${cfg.colors.normal.white}'
+          bright:
+            black:   '${cfg.colors.bright.black}'
+            red:     '${cfg.colors.bright.red}'
+            green:   '${cfg.colors.bright.green}'
+            yellow:  '${cfg.colors.bright.yellow}'
+            blue:    '${cfg.colors.bright.blue}'
+            magenta: '${cfg.colors.bright.magenta}'
+            cyan:    '${cfg.colors.bright.cyan}'
+            white:   '${cfg.colors.bright.white}'
       '';
     };
   }
