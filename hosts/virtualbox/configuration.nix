@@ -5,7 +5,8 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    ../../modules
     ../../hardware/virtualbox.nix
     ../../shared/efi.nix
     ../../shared/default.nix
@@ -14,7 +15,12 @@
 
   networking.hostName = "nixos-virtualbox"; # Define your hostname.
 
-  services.xserver.displayManager.defaultSession = "xterm+bspwm";
+  # configure bspwm
+  programs.bspwm.enable = true;
+  services.xserver.displayManager.defaultSession = "none+bspwm";
+
+  # configure alacritty
+  programs.alacritty.enable = true;
 
   #services.xserver.displayManager.sddm.autoLogin = {
   #  enable = true;
