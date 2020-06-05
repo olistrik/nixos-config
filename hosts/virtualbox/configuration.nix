@@ -6,8 +6,8 @@
 
 {
   imports = [
+    ./hardware-configuration.nix
     ../../modules
-    ../../hardware/virtualbox.nix
     ../../shared/efi.nix
     ../../shared/default.nix
     ./firewall.nix
