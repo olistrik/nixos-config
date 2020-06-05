@@ -30,7 +30,7 @@
 
           syntax on
           set termguicolors
-          let ayucolor="dark"
+          let ayucolor="mirage"
           colorscheme ayu
 
           set number relativenumber
