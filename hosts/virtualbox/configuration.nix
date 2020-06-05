@@ -20,7 +20,10 @@
   services.xserver.displayManager.defaultSession = "none+bspwm";
 
   # configure alacritty
-  programs.alacritty.enable = true;
+  programs.alacritty = {
+    enable = true;
+    brightBold = true;
+  };
 
   #services.xserver.displayManager.sddm.autoLogin = {
   #  enable = true;

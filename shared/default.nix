@@ -19,6 +19,7 @@ in
     ./services.nix
     ./ssh.nix
     ./programs/zsh.nix
+    ./programs/neovim.nix
   ];
   
   networking.hostName = mkDefault "nixos"; # Define your hostname.

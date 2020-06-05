@@ -5,15 +5,11 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    
-    # Web get tools. 
-    wget	# for wgeting things.
+
+    # Web get tools.
+    wget # for wgeting things.
     git
 
-    # Editor
-    neovim	# prefered editor
-    vim		# nice to have a backup
-  
   ];
 
 }
