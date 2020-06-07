@@ -14,14 +14,24 @@ in
 
   imports = [
     ../modules
-    ./packages.nix
     ./users.nix
     ./services.nix
     ./ssh.nix
     ./programs/zsh.nix
     ./programs/neovim.nix
   ];
-  
+
+  environment.systemPackages = with pkgs; [
+
+    # Net sync.
+    wget
+    git
+
+    # Image viewers.
+    feh
+
+  ]
+
   networking.hostName = mkDefault "nixos"; # Define your hostname.
   
   # Select internationalisation properties.
