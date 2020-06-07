@@ -30,7 +30,7 @@ in
     # Image viewers.
     feh
 
-  ]
+  ];
 
   networking.hostName = mkDefault "nixos"; # Define your hostname.
   

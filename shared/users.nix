@@ -4,15 +4,31 @@
 
 { config, pkgs, ... }:
 
+let
+
+  secrets = {
+    root = import ../secrets/root.nix;
+    kranex = import ../secrets/kranex.nix;
+  };
+
+in
+
 {
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+
+  # Define acounts account. Don't forget to set a password with ‘passwd’.
   users = {
     mutableUsers = false;
-    users.kranex = {
-      isNormalUser = true;
-      extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-      hashedPassword = import ../secrets/kranex/hashedPassword.nix;
+    users = {
+      kranex = {
+        isNormalUser = true;
+        extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+        hashedPassword = secrets.kranex.hashedPassword;
+      };
+      root = {
+        hashedPassword = secrets.root.hashedPassword;
+      };
     };
   };
 
 }
+
