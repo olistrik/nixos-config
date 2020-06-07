@@ -11,6 +11,7 @@
     ../../shared/efi.nix
     ../../shared/default.nix
     ./firewall.nix
+
   ];
 
   networking.hostName = "nixos-virtualbox"; # Define your hostname.
@@ -31,7 +32,4 @@
   #  user = "root";
   #};
 
-  users.users.root = {
-    hashedPassword = import ../../secrets/kranex/hashedPassword.nix;
-  };
 }
