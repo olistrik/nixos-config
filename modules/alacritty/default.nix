@@ -59,137 +59,40 @@ in
             If true, bold text is drawn using the bright color variants.
           '';
         };
-        colors = {
-          primary = {
-            background = mkOption {
-              type = types.str;
-              default = "#1d1f21";
-              description = ''
-                the background color.
-              '';
+        theme = mkOption {
+          type = types.attrs;
+          default = {
+            primary = {
+              background = "#1d1f21";
+              foreground = "#c5c8c6";
             };
-            foreground = mkOption {
-              type = types.str;
-              default = "#c5c8c6";
-              description = ''
-                the foreground color.
-              '';
+            cursor = {
+              text = "#000000";
+              cursor = "#ffffff";
             };
-          };
-          normal = {
-            black = mkOption {
-              type = types.str;
-              default = "#1d1f21";
-              description = ''
-                The normal black color.
-              '';
+            selection = {
+              text = "#eaeaea";
+              background = "#404040";
             };
-            red = mkOption {
-              type = types.str;
-              default = "#cc6666";
-              description = ''
-                The normal red color.
-              '';
+            normal = {
+              black = "#1d1f21";
+              red = "#cc6666";
+              green = "#b5bd68";
+              yellow = "#f0c678";
+              blue = "#81a2be";
+              magenta = "#b294bb";
+              cyan = "#8abeb7";
+              white = "#c5c8c6";
             };
-            green = mkOption {
-              type = types.str;
-              default = "#b5bd68";
-              description = ''
-                The normal green color.
-              '';
-            };
-            yellow = mkOption {
-              type = types.str;
-              default = "#f0c678";
-              description = ''
-                The normal yellow color.
-              '';
-            };
-            blue = mkOption {
-              type = types.str;
-              default = "#81a2be";
-              description = ''
-                The normal blue color.
-              '';
-            };
-            magenta = mkOption {
-              type = types.str;
-              default = "#b294bb";
-              description = ''
-                The normal magenta color.
-              '';
-            };
-            cyan = mkOption {
-              type = types.str;
-              default = "#8abeb7";
-              description = ''
-                The normal cyan color.
-              '';
-            };
-            white = mkOption {
-              type = types.str;
-              default = "#c5c8c6";
-              description = ''
-                The normal white color.
-              '';
-            };
-          };
-          bright = {
-            black = mkOption {
-              type = types.str;
-              default = "#666666";
-              description = ''
-                The bright black color.
-              '';
-            };
-            red = mkOption {
-              type = types.str;
-              default = "#d54e53";
-              description = ''
-                The bright red color.
-              '';
-            };
-            green = mkOption {
-              type = types.str;
-              default = "#b9ac4a";
-              description = ''
-                The bright green color.
-              '';
-            };
-            yellow = mkOption {
-              type = types.str;
-              default = "#e7c547";
-              description = ''
-                The bright yellow color.
-              '';
-            };
-            blue = mkOption {
-              type = types.str;
-              default = "#7aa6da";
-              description = ''
-                The bright blue color.
-              '';
-            };
-            magenta = mkOption {
-              type = types.str;
-              default = "#c397d8";
-              description = ''
-                The bright magenta color.
-              '';
-            };
-            cyan = mkOption {
-              type = types.str;
-              default = "#70c0b1";
-              description = ''
-                The bright cyan color.
-              '';
-            };
-            white = mkOption {
-              type = types.str;
-              default = "#eaeaea";
-              description = ''
-                The bright white color.
-              '';
+            bright = {
+              black = "#666666";
+              red = "#d54e53";
+              green = "#b9ac4a";
+              yellow = "#e7c547";
+              blue = "#7aa6da";
+              magenta = "#c397d8";
+              cyan = "#70c0b1";
+              white = "#eaeaea";
             };
           };
         };
@@ -217,26 +120,32 @@ in
         "false"}
         colors:
           primary:
-            background: '${cfg.colors.primary.background}'
-            foreground: '${cfg.colors.primary.foreground}'
+            background: '${cfg.theme.primary.background}'
+            foreground: '${cfg.theme.primary.foreground}'
+          cursor:
+            text:    '${cfg.theme.cursor.text}'
+            cursor:  '${cfg.theme.cursor.cursor}'
+          selection:
+            text:        '${cfg.theme.selection.text}'
+            background:  '${cfg.theme.selection.background}'
           normal:
-            black:   '${cfg.colors.normal.black}'
-            red:     '${cfg.colors.normal.red}'
-            green:   '${cfg.colors.normal.green}'
-            yellow:  '${cfg.colors.normal.yellow}'
-            blue:    '${cfg.colors.normal.blue}'
-            magenta: '${cfg.colors.normal.magenta}'
-            cyan:    '${cfg.colors.normal.cyan}'
-            white:   '${cfg.colors.normal.white}'
+            black:   '${cfg.theme.normal.black}'
+            red:     '${cfg.theme.normal.red}'
+            green:   '${cfg.theme.normal.green}'
+            yellow:  '${cfg.theme.normal.yellow}'
+            blue:    '${cfg.theme.normal.blue}'
+            magenta: '${cfg.theme.normal.magenta}'
+            cyan:    '${cfg.theme.normal.cyan}'
+            white:   '${cfg.theme.normal.white}'
           bright:
-            black:   '${cfg.colors.bright.black}'
-            red:     '${cfg.colors.bright.red}'
-            green:   '${cfg.colors.bright.green}'
-            yellow:  '${cfg.colors.bright.yellow}'
-            blue:    '${cfg.colors.bright.blue}'
-            magenta: '${cfg.colors.bright.magenta}'
-            cyan:    '${cfg.colors.bright.cyan}'
-            white:   '${cfg.colors.bright.white}'
+            black:   '${cfg.theme.bright.black}'
+            red:     '${cfg.theme.bright.red}'
+            green:   '${cfg.theme.bright.green}'
+            yellow:  '${cfg.theme.bright.yellow}'
+            blue:    '${cfg.theme.bright.blue}'
+            magenta: '${cfg.theme.bright.magenta}'
+            cyan:    '${cfg.theme.bright.cyan}'
+            white:   '${cfg.theme.bright.white}'
       '';
     };
   }

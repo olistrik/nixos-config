@@ -23,6 +23,7 @@
   programs.alacritty = {
     enable = true;
     brightBold = true;
+    theme = import ../../themes/ayu-mirage.nix;
   };
 
   #services.xserver.displayManager.sddm.autoLogin = {
