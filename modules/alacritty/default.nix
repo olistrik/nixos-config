@@ -103,7 +103,7 @@ in
       system.activationScripts.alacritty = ''
         for d in $(grep -v "nologin" /etc/passwd | cut -d: -f6); do
         if [ ! -e ''${d}/.config/alacritty/alacritty.yml ]; then
-          mkdir -p ~/.config/alacritty
+          mkdir -p ''${d}/.config/alacritty
           ln -s /etc/alacritty/alacritty.yml ''${d}/.config/alacritty/alacritty.yml
         fi
         done
