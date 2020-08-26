@@ -55,7 +55,7 @@ if [[ ${REPLY} -lt $i ]]; then
     exit 1
   fi
   rm configuration.nix
-  ln -s ${DIR}/hosts/${HOST}/configuration.nix configuration.nix
+  ln -s $ROOT/${DIR}/hosts/${HOST}/configuration.nix configuration.nix
 else
   # if the user wishes to create a new host...
   # Prompt the user for the host name.
@@ -85,7 +85,7 @@ else
 
   echo "linking new configuration..."
   rm configuration.nix
-  ln -s ${DIR}/hosts/${HOST}/configuration.nix
+  ln -s $ROOT/${DIR}/hosts/${HOST}/configuration.nix configuration.nix
 fi
 
 echo "configuration is linked."
@@ -99,7 +99,11 @@ if [[ "${REPLY,,}" != "n" ]]; then
     /etc/nixos. You will need to install manually."
     exit 0
   fi
-  nixos-install --root ${ROOT}
+  nix-channel --add https://nixos.org/channels/nixos-unstable nixos-unstable
+  nixos-rebuild test --upgrade
+  nixos-install --root ${ROOT} --show-trace
+  rm configuration.nix  
+  ln -s ${DIR}/hosts/${HOST}/configuration.nix configuration.nix
   echo done! reboot whenever you are ready.
 else
   echo done!
