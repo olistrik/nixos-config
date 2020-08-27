@@ -18,6 +18,8 @@
 
   # configure bspwm
   programs.bspwm.enable = true;
+  services.xserver.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
   services.xserver.displayManager.defaultSession = "none+bspwm";
 
   # configure alacritty

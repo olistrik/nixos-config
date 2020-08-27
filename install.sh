@@ -99,8 +99,6 @@ if [[ "${REPLY,,}" != "n" ]]; then
     /etc/nixos. You will need to install manually."
     exit 0
   fi
-  nix-channel --add https://nixos.org/channels/nixos-unstable nixos-unstable
-  nixos-rebuild test --upgrade
   nixos-install --root ${ROOT} --show-trace
   rm configuration.nix  
   ln -s ${DIR}/hosts/${HOST}/configuration.nix configuration.nix
