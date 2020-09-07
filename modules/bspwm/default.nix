@@ -18,33 +18,32 @@ in
       enable = mkOption {
         default = false;
         description = ''
-	  enable or disable bspwm.
-	'';
-	type = types.bool;
+          enable or disable bspwm.
+          '';
+        type = types.bool;
       };
     };
   };
-  
+
   config = mkIf cfg.enable {
-  
-    environment.systemPackages = with pkgs; [ 
+
+    environment.systemPackages = with pkgs; [
       xterm
     ];
-
-    # Enable sound.
-    sound.enable = true;
-    hardware.pulseaudio.enable = true;
 
     # Enable the X11 windowing system.
     services.xserver.enable = true;
     services.xserver.layout = "us";
     services.xserver.xkbOptions = "eurosign:e";
-    
+
     # Enable touchpad support.
     # services.xserver.libinput.enable = true;
 
     # Enable SDDM display manager.
-    services.xserver.displayManager.sddm.enable = true;
+    services.xserver.displayManager = {
+      sddm.enable = true;
+      defaultSession = "none+bspwm";
+    };
 
     # Enable the BSPWM Window Manager.
     services.xserver.windowManager.bspwm.enable = true;

@@ -74,7 +74,7 @@ else
   # Create the configuration and hardware-configuration for the host.
   echo "creating new configuration..."
   mkdir hosts/${HOST}
-  nixos-generate-config --root ${ROOT} --dir ${ROOT}${DIR}/hosts/${HOST}
+  nixos-generate-config --root ${ROOT} --dir ${DIR}/hosts/${HOST}
   
   # Allow user to edit the config.
   printf "Would you like to edit the configuration? (Y/n): "

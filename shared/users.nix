@@ -21,7 +21,7 @@ in
     users = {
       kranex = {
         isNormalUser = true;
-        extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+        extraGroups = [ "wheel" "audio" "sound" "video" "input" "tty"]; # Enable ‘sudo’ for the user.
         hashedPassword = secrets.kranex.hashedPassword;
       };
       root = {
