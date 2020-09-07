@@ -3,24 +3,31 @@
 {pkgs, ...}:
 {
   environment.variables = { EDITOR = "vim"; };
-
   environment.systemPackages = with pkgs; [
     (neovim.override {
       vimAlias = true;
       configure = {
         packages.myPlugins = with pkgs.vimPlugins; {
           start = [
+            # Language Support
             vim-nix
+            vim-pandoc
+            plantuml-syntax
 
+            # QOL
             vim-gitgutter
-
             fzf-vim
-
             vim-repeat
-
             auto-pairs
             vim-surround
+            nerdtree
+            nerdtree-git-plugin
 
+            # IDE
+            ale
+            YouCompleteMe
+
+            # Themes
             ayu-vim
           ];
           opt = [];
@@ -77,7 +84,24 @@
 
           set list
           set listchars=tab:>\ ,trail:•,extends:#,nbsp:.
-        '';
+
+
+          " NERDTree
+          "" close on file open
+          let g:NERDTreeQuitOnOpen = 1
+
+          "" Open on F2
+          map <F2> :NERDTreeToggle<CR>
+
+          "" close if only thing open.
+          autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+          "" YouCompleteMe
+          let g:ycm_min_num_of_chars_for_completion = 3
+          let g:ycm_show_diagnostics_ui = 0
+
+
+          '';
       };
     })];
 

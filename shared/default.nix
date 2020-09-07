@@ -17,19 +17,59 @@ in
     ./users.nix
     ./services.nix
     ./ssh.nix
+    ./audio.nix
     ./programs/zsh.nix
     ./programs/neovim.nix
   ];
 
+  nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
+
+    nix-index
+
+    # dependencies
+    libpng12
+
+    # misc
+    killall
+    zip
+    unzip
+
+    # for the lolz
+    lolcat
+    sl
+
+    # compilers
+    gcc10
+    gnumake
+    cmake
 
     # Net sync.
     wget
     git
 
-    # Image viewers.
+    # Document viewers.
     feh
+    zathura
 
+    #bspwm stuff
+    polybar
+    dmenu
+    sxhkd
+    compton
+    neofetch
+    imagemagick
+    xdotool
+
+    #Web Browser
+    vivaldi-ffmpeg-codecs
+    vivaldi-widevine
+    (vivaldi.override {
+      proprietaryCodecs = true;
+      vivaldi-ffmpeg-codecs = pkgs.vivaldi-ffmpeg-codecs;
+      enableWidevine = true;
+      vivaldi-widevine = pkgs.vivaldi-widevine;
+    })
   ];
 
   networking.hostName = mkDefault "nixos"; # Define your hostname.
@@ -48,7 +88,7 @@ in
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking.useDHCP = mkDefault false;
-  networking.interfaces.enp0s3.useDHCP = mkDefault true;
+  # networking.interfaces.enp0s3.useDHCP = mkDefault true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
