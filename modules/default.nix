@@ -4,5 +4,6 @@
   imports = [
     ./alacritty
     ./bspwm
+    ./eclipse
   ];
 }

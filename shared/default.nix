@@ -16,8 +16,10 @@ in
     ../modules
     ./users.nix
     ./services.nix
+    ./development.nix
     ./ssh.nix
     ./audio.nix
+    ./screencapture.nix
     ./programs/zsh.nix
     ./programs/neovim.nix
   ];
@@ -39,11 +41,6 @@ in
     lolcat
     sl
 
-    # compilers
-    gcc10
-    gnumake
-    cmake
-
     # Net sync.
     wget
     git
@@ -58,8 +55,6 @@ in
     sxhkd
     compton
     neofetch
-    imagemagick
-    xdotool
 
     #Web Browser
     vivaldi-ffmpeg-codecs
@@ -73,7 +68,7 @@ in
   ];
 
   networking.hostName = mkDefault "nixos"; # Define your hostname.
-  
+
   # Select internationalisation properties.
   i18n.defaultLocale = mkDefault "en_US.UTF-8";
   console = mkDefault {

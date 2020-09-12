@@ -68,17 +68,25 @@
 
           set modelines=0
 
+          "" Enable mouse
+          set mouse=a
+
+          "" Set the wrapping.
           set wrap
           set textwidth=80
           set colorcolumn=+1
           set linebreak
           set showbreak=+++
 
+          "" Set tab to space indent and the number of spaces.
           set expandtab
           set tabstop=2
           set softtabstop=2
           set shiftwidth=2
           set autoindent
+
+          "" Set tab width for C++
+          autocmd FileType cpp setlocal textwidth=78 tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 
           set backspace=indent,eol,start
 

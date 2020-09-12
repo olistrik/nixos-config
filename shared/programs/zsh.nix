@@ -25,6 +25,27 @@ in {
     autosuggestions.enable = true;
     interactiveShellInit = ''
       #################################
+      ## Magic Shit
+
+      setopt correct                   # Auto correct mistakes
+      setopt extendedglob              # Extended globbing. Allows using regular expressions with *
+      setopt nocaseglob                # Case insensitive globbing
+      # setopt rcexpandparam             # Array expension with parameters
+      # setopt nocheckjobs               # Don't warn about running processes when exiting
+      setopt numericglobsort           # Sort filenames numerically when it makes sense
+      setopt nobeep                    # No beep
+      setopt appendhistory             # Immediately append history instead of overwriting
+      setopt histignorealldups         # If a new command is a duplicate, remove the older one
+      setopt autocd                    # if only directory path is entered, cd there.
+
+      #################################
+      ## Enable Ctrl + S and Ctrl + Q
+
+      stty start undef
+      stty stop undef
+      setopt noflowcontrol
+
+      #################################
       ## Enable fzf searching.
       if [ -n "''${commands[fzf-share]}" ]; then
         source "$(fzf-share)/key-bindings.zsh"
@@ -47,6 +68,12 @@ in {
       bindkey -M emacs '\e\e' fuck-command-line
       bindkey -M vicmd '\e\e' fuck-command-line
       bindkey -M viins '\e\e' fuck-command-line
+
+
+      #################################
+      ## Hook direnv
+      eval "$(direnv hook zsh)"
+
       #################################
       ## Enable vi mode
       bindkey -v
