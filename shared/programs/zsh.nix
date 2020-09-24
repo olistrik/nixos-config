@@ -77,6 +77,11 @@ in {
       #################################
       ## Enable vi mode
       bindkey -v
+
+      #################################
+      ## Aliases
+      alias zzz="systemctl suspend"
+
     '';
     promptInit = ''
       eval "$(starship init zsh)"

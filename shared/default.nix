@@ -20,6 +20,7 @@ in
     ./ssh.nix
     ./audio.nix
     ./screencapture.nix
+    ./makemd.nix
     ./programs/zsh.nix
     ./programs/neovim.nix
   ];
