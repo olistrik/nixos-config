@@ -11,8 +11,10 @@
         car
         bestglm
         faraway
+        ISLR
       ];
     })
     pandoc
+    haskellPackages.pandoc-citeproc
   ];
 }

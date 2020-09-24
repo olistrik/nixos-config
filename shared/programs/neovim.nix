@@ -12,6 +12,7 @@
             # Language Support
             vim-nix
             vim-pandoc
+            vim-pandoc-syntax
             plantuml-syntax
 
             # QOL
@@ -68,8 +69,16 @@
 
           set modelines=0
 
+          " Display different types of white spaces.
+          set list
+          set listchars=tab:›\ ,trail:•,extends:#,nbsp:.
+
           "" Enable mouse
           set mouse=a
+          set ttyfast
+
+          "" Use the system clipboard
+          set clipboard=unnamedplus
 
           "" Set the wrapping.
           set wrap
@@ -88,11 +97,24 @@
           "" Set tab width for C++
           autocmd FileType cpp setlocal textwidth=78 tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 
+          "" Set .ih files to cpp type
+          augroup filetypedetect
+            au BufRead,BufNewFile *.ih set filetype=cpp
+          augroup END
+
+          "" Set textwidth for pandoc
+          autocmd FileType pandoc setlocal textwidth=80
+
           set backspace=indent,eol,start
 
           set list
           set listchars=tab:>\ ,trail:•,extends:#,nbsp:.
 
+          "" WHY IS IT HIGHLIGHTED?
+          nm <silent> <F1> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
+              \ . '> trans<' . synIDattr(synID(line("."),col("."),0),"name")
+              \ . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")
+              \ . ">"<CR>
 
           " NERDTree
           "" close on file open
@@ -104,6 +126,21 @@
           "" close if only thing open.
           autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+
+          " Ctrl+s to save
+          nnoremap <c-s> :w<CR>
+          inoremap <c-s> <ESC>:w<CR>
+          vnoremap <c-s> <ESC>:w<CR>
+
+          " Ctrl+q to quit
+          nnoremap <c-q> :q<CR>
+          inoremap <c-q> <ESC>:q<CR>
+          vnoremap <c-q> <ESC>:q<CR>
+
+          " Ctrl+p to FZF
+          nnoremap <silent> <C-p> :FZF<CR>
+
+
           "" YouCompleteMe
           let g:ycm_min_num_of_chars_for_completion = 3
           let g:ycm_show_diagnostics_ui = 0
@@ -114,3 +151,4 @@
     })];
 
   }
+

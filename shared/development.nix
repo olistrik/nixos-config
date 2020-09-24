@@ -11,6 +11,13 @@
 
     # Environment Managers
     direnv
+
+    # Debuggers
+    gdb
+    valgrind
+
+    # Packaging
+    binutils
   ];
 
   # To manage direnv
