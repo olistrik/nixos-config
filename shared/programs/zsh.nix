@@ -81,6 +81,7 @@ in {
       #################################
       ## Aliases
       alias zzz="systemctl suspend"
+      alias zura="zathura --fork"
 
     '';
     promptInit = ''

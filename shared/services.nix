@@ -10,5 +10,5 @@ in
   
   # Enable CUPS to print documents.
   services.printing.enable = mkDefault true;
-
+  services.printing.drivers = [ pkgs.brlaser ];
 }

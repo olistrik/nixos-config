@@ -1,0 +1,1 @@
+/etc/nixos/hosts/rubidium/configuration.nix
