@@ -5,6 +5,10 @@
     # Compilers
     gcc10
 
+    # Rust
+    cargo
+    carnix
+
     # Compile Managers
     gnumake
     bear

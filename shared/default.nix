@@ -23,6 +23,7 @@ in
     ./makemd.nix
     ./programs/zsh.nix
     ./programs/neovim.nix
+    #./programs/jetbrains.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -49,6 +50,7 @@ in
     # Document viewers.
     feh
     zathura
+    mplayer
 
     #bspwm stuff
     polybar

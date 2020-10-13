@@ -96,7 +96,7 @@
 
           "" Set tab width for C++
           autocmd FileType cpp setlocal textwidth=78 tabstop=4 shiftwidth=4 softtabstop=4 expandtab
-
+          autocmd FileType cpp let g:ale_cpp_gcc_options='--std=c++2a -Wall -pedantic'
           "" Set .ih files to cpp type
           augroup filetypedetect
             au BufRead,BufNewFile *.ih set filetype=cpp
