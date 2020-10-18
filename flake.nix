@@ -5,9 +5,13 @@
     unstable = {
       url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     };
+    secrets = {
+      url = "/etc/nixos/secrets";
+      flake = false;
+    };
   };
 
-  outputs = {self, nixpkgs, unstable}:
+  outputs = {self, nixpkgs, unstable, secrets}:
     let
       pkgs = import nixpkgs {
         system = "x86_64-linux";
@@ -27,7 +31,7 @@
           system = "x86_64-linux";
 
           specialArgs = {
-            inherit pkgs pkgs-unstable;
+            inherit pkgs pkgs-unstable secrets;
           };
 
           modules = [ ./hosts/nixbidium/configuration.nix ];
