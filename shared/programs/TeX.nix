@@ -7,6 +7,8 @@
                                          xcolor
                                          fancyvrb
                                          framed
-                                         etoolbox; })
+                                         etoolbox
+                                         booktabs
+                                         mdwtools; })
   ];
 }

@@ -1,1 +1,1 @@
-/etc/nixos/hosts/rubidium/configuration.nix
+/etc/nixos/hosts/nixbidium/configuration.nix
