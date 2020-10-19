@@ -28,6 +28,8 @@ in
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
 
+    hicolor_icon_theme
+
     nix-index
 
     # dependencies
