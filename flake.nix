@@ -12,7 +12,7 @@
     };
 
     custom = {
-      url = "/etc/nixos/nixpkgs-custom";
+      url = "github:kranex/nixpkgs-custom";
     };
 
     secrets-dir = {
@@ -33,10 +33,6 @@
         config.allowUnfree = true;
       };
 
-      pkgs-custom = import custom {
-        pkgs = pkgs;
-      };
-
       secrets = import secrets-dir;
     in
     {
@@ -46,10 +42,13 @@
           system = "x86_64-linux";
 
           specialArgs = {
-            inherit pkgs pkgs-unstable pkgs-custom secrets;
+            inherit pkgs pkgs-unstable secrets;
           };
 
-          modules = [ ./hosts/nixbidium/configuration.nix ];
+          modules = [ 
+            ./hosts/nixbidium/configuration.nix
+            custom.nixosModules.nixpkgs-custom
+          ];
 
         in
 
