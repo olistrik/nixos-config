@@ -35,7 +35,7 @@
     qtbase
     qtquickcontrols
     qtgraphicaleffects
-    pkgs-custom.hello
+    pkgs-custom.sddm.themes.chili
   ];
 
   #pkgs.(writeScriptBin "eclipse" ''
