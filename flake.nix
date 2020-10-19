@@ -5,6 +5,7 @@
     unstable = {
       url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     };
+
     secrets = {
       url = "/etc/nixos/secrets";
       flake = false;
