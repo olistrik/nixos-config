@@ -2,12 +2,19 @@
   description = "Nix is love. Nix is life.";
 
   inputs = {
+
     stable = {
       url = "github:NixOS/nixpkgs/release-20.09";
     };
+
     unstable = {
       url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     };
+
+    custom = {
+      url = "/etc/nixos/nixpkgs-custom";
+      flake = false;
+    }
 
     secrets-dir = {
       url = "/etc/nixos/secrets";
@@ -15,7 +22,7 @@
     };
   };
 
-  outputs = {self, stable, unstable, secrets-dir}:
+  outputs = {self, stable, unstable, custom, secrets-dir}:
     let
       pkgs = import stable {
         system = "x86_64-linux";
@@ -27,6 +34,8 @@
         config.allowUnfree = true;
       };
 
+      pkgs-custom = import custom;
+
       secrets = import secrets-dir;
     in
     {
@@ -36,10 +45,10 @@
           system = "x86_64-linux";
 
           specialArgs = {
-            inherit pkgs pkgs-unstable secrets;
+            inherit pkgs pkgs-unstable pkgs-custom secrets;
           };
 
-          modules = [ ./hosts/nixbidium/configuration.nix ];
+          modules = [ ./hosts/nixbidium/configuration.nix pkgs-custom.modules ];
 
         in
 
