@@ -1,37 +1,15 @@
 {
   "nodes": {
     "custom": {
-      "inputs": {
-        "pkgs": "pkgs"
-      },
+      "flake": false,
       "locked": {
-        "lastModified": 1603130296,
-        "narHash": "sha256-Vyq1DDCquSs5YEo7nCc/t3upac16bsm0/EHZq3i/X4w=",
-        "owner": "kranex",
-        "repo": "nixpkgs-custom",
-        "rev": "ea89bc472aba15a1a47ab112a20b7e9be6f6eaa3",
-        "type": "github"
+        "narHash": "sha256-/1dydOHBsyAPh8gozvoGMxUWwlnc5iWnUWzENREmSpQ=",
+        "path": "/etc/nixos/nixpkgs-custom",
+        "type": "path"
       },
       "original": {
-        "owner": "kranex",
-        "repo": "nixpkgs-custom",
-        "type": "github"
-      }
-    },
-    "pkgs": {
-      "locked": {
-        "lastModified": 1602363692,
-        "narHash": "sha256-9V8jl1Lzgw+QMqpEWz4+TjRmXktBWLZjqr3yBWBLL1g=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "51aaa3fa1b69559456f9bd4968bd5b179a784f67",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-20.09",
-        "repo": "nixpkgs",
-        "type": "github"
+        "path": "/etc/nixos/nixpkgs-custom",
+        "type": "path"
       }
     },
     "root": {
@@ -56,11 +34,11 @@
     },
     "stable": {
       "locked": {
-        "lastModified": 1603122734,
-        "narHash": "sha256-BuPzR/rVmb9pYr/q29fdVKuUDV6/HIJzMD9MpM9NVmw=",
+        "lastModified": 1603133237,
+        "narHash": "sha256-nIJQXuH3+DAvtBkedkbERfRziPzo+nhCn7uTFR58s5w=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "0aee4508fb901c1e2ad027ea633651303a0f8a34",
+        "rev": "722734d1d7c19a7bab329b4cb2b604bf76321a15",
         "type": "github"
       },
       "original": {

@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-custom, ... }:
 
 #let eclipse_unwrapped = (pkgs.eclipses.eclipseWithPlugins {
 #       eclipse = pkgs.eclipses.eclipse-platform;
@@ -35,6 +35,7 @@
     qtbase
     qtquickcontrols
     qtgraphicaleffects
+    pkgs-custom.hello
   ];
 
   #pkgs.(writeScriptBin "eclipse" ''

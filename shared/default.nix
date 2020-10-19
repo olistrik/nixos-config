@@ -13,7 +13,6 @@ in
 {
 
   imports = [
-    ../modules
     ./users.nix
     ./services.nix
     ./development.nix
