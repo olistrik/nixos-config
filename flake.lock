@@ -1,7 +1,20 @@
 {
   "nodes": {
+    "custom": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-msl626jN3grErveyUe4IHEGLrv/OL8ThC7dVZ/kXZXA=",
+        "path": "/etc/nixos/nixpkgs-custom",
+        "type": "path"
+      },
+      "original": {
+        "path": "/etc/nixos/nixpkgs-custom",
+        "type": "path"
+      }
+    },
     "root": {
       "inputs": {
+        "custom": "custom",
         "secrets-dir": "secrets-dir",
         "stable": "stable",
         "unstable": "unstable"
