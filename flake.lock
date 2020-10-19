@@ -3,7 +3,7 @@
     "custom": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-msl626jN3grErveyUe4IHEGLrv/OL8ThC7dVZ/kXZXA=",
+        "narHash": "sha256-Jf7hJOZPpLAkQvN5Zx4UwE/c6HI/zYYsy2aU/3GKgo0=",
         "path": "/etc/nixos/nixpkgs-custom",
         "type": "path"
       },
@@ -23,7 +23,7 @@
     "secrets-dir": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-t+xLhAMJhVrr1ayuM/NIQX/i7sGiozuWDJSSHJ3Hv94=",
+        "narHash": "sha256-QKDfJh98qkmsjbRWo6Up/4DwZr0zP3MvQ573AuJe8q0=",
         "path": "/etc/nixos/secrets",
         "type": "path"
       },
@@ -34,11 +34,11 @@
     },
     "stable": {
       "locked": {
-        "lastModified": 1603096238,
-        "narHash": "sha256-7iUXBWFk3pHPr6kl5UoW76saeltFb+2MEgPPEyQ+bt0=",
+        "lastModified": 1603120854,
+        "narHash": "sha256-yqzdapujW6sXqdMLS6UFVrGQaS9LeHqPEfegwxwSHlI=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "dfe0fba7abed5bacfbb5522516b70c106bcfc7b8",
+        "rev": "41b11ef47d077bfb01c65683c14b3390ad5c2aea",
         "type": "github"
       },
       "original": {

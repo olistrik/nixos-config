@@ -34,7 +34,9 @@
         config.allowUnfree = true;
       };
 
-      pkgs-custom = import custom;
+      pkgs-custom = import custom {
+        pkgs = pkgs;
+      };
 
       secrets = import secrets-dir;
     in
@@ -48,7 +50,7 @@
             inherit pkgs pkgs-unstable pkgs-custom secrets;
           };
 
-          modules = [ ./hosts/nixbidium/configuration.nix pkgs-custom.modules ];
+          modules = [ ./hosts/nixbidium/configuration.nix ];
 
         in
 
