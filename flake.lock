@@ -17,14 +17,14 @@
     "root": {
       "inputs": {
         "nixpkgs": "nixpkgs",
-        "secrets": "secrets",
+        "secrets-dir": "secrets-dir",
         "unstable": "unstable"
       }
     },
-    "secrets": {
+    "secrets-dir": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-tOKUnwe0FDrscFM9dut236beQgW4dluNv/yrbMioyZI=",
+        "narHash": "sha256-t+xLhAMJhVrr1ayuM/NIQX/i7sGiozuWDJSSHJ3Hv94=",
         "path": "/etc/nixos/secrets",
         "type": "path"
       },
