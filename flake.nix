@@ -13,7 +13,6 @@
 
     custom = {
       url = "/etc/nixos/nixpkgs-custom";
-      flake = false;
     };
 
     secrets-dir = {
