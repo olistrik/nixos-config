@@ -1,23 +1,9 @@
 {
   "nodes": {
-    "nixpkgs": {
-      "locked": {
-        "lastModified": 1603066386,
-        "narHash": "sha256-BpO5yrRi2oqYaOHwWZBoRlLydOeYm0YhuLG4ISsaSzE=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "5265d49a36bb5a18c85e6817b338b456acc3b8cc",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "type": "indirect"
-      }
-    },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs",
         "secrets-dir": "secrets-dir",
+        "stable": "stable",
         "unstable": "unstable"
       }
     },
@@ -31,6 +17,22 @@
       "original": {
         "path": "/etc/nixos/secrets",
         "type": "path"
+      }
+    },
+    "stable": {
+      "locked": {
+        "lastModified": 1603096238,
+        "narHash": "sha256-7iUXBWFk3pHPr6kl5UoW76saeltFb+2MEgPPEyQ+bt0=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "dfe0fba7abed5bacfbb5522516b70c106bcfc7b8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "release-20.09",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "unstable": {

@@ -2,6 +2,9 @@
   description = "Nix is love. Nix is life.";
 
   inputs = {
+    stable = {
+      url = "github:NixOS/nixpkgs/release-20.09";
+    };
     unstable = {
       url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     };
@@ -12,9 +15,9 @@
     };
   };
 
-  outputs = {self, nixpkgs, unstable, secrets-dir}:
+  outputs = {self, stable, unstable, secrets-dir}:
     let
-      pkgs = import nixpkgs {
+      pkgs = import stable {
         system = "x86_64-linux";
         config.allowUnfree = true;
       };
@@ -40,6 +43,6 @@
 
         in
 
-        nixpkgs.lib.nixosSystem { inherit system modules specialArgs; };
+        stable.lib.nixosSystem { inherit system modules specialArgs; };
     };
 }
