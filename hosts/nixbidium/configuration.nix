@@ -15,7 +15,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules
     ../../shared/efi.nix
     ../../shared/default.nix
     #../../shared/programs/R.nix
