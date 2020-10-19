@@ -18,9 +18,28 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+
+  config = let
+    unwrapped = pkgs.eclipses.eclipseWithPlugins {
+      eclipse = pkgs.eclipses.eclipse-platform;
+      jvmArgs = ["-Xmx2048m"];
+      plugins = with pkgs.eclipses.plugins; [
+        vrapper
+      ];
+    };
+  in with symlinkJoin; with makeWrapper; mkIf cfg.enable {
     environment.systemPackages = [
-      (import ./eclipse.nix)
+      (
+        symlinkJoin {
+          name = "elcipse";
+          paths = [ eclipse ];
+          buildInputs = [ makeWrapper ];
+          postBuild = ''
+            wrapProgram $out/bin/eclipse \
+              --set GTK_THEME Raleigh
+          '';
+        }
+      )
     ];
   };
 }
