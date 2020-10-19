@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, secrets, ... }:
+{ config, pkgs, ... }:
 
 {
 
@@ -14,10 +14,10 @@
         isNormalUser = true;
         extraGroups = [ "wheel" "audio" "sound" "video" "input" "tty" "dialout"
       "osboxes"]; # Enable ‘sudo’ for the user.
-        hashedPassword = secrets.kranex.hashedPassword;
+        hashedPassword = config.secrets.kranex.hashedPassword;
       };
       root = {
-        hashedPassword = secrets.root.hashedPassword;
+        hashedPassword = config.secrets.root.hashedPassword;
       };
     };
   };
