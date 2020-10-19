@@ -3,7 +3,7 @@
     "custom": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-/1dydOHBsyAPh8gozvoGMxUWwlnc5iWnUWzENREmSpQ=",
+        "narHash": "sha256-psx0H7F6lFOfFhDUe3EtUxgJGIdm0HsZE0rW78mvxJs=",
         "path": "/etc/nixos/nixpkgs-custom",
         "type": "path"
       },
