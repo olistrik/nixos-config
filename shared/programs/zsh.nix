@@ -1,9 +1,6 @@
 
-{config, pkgs, ...}:
-
-let
-  unstable = import (fetchTarball https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz) { config = { allowUnfree = true; }; };
-in {
+{config, pkgs, pkgs-unstable, ...}:
+{
   environment.systemPackages = with pkgs; [
     thefuck
     fzf
@@ -11,7 +8,7 @@ in {
   ];
   
   fonts.fonts = with pkgs; [
-    (unstable.nerdfonts.override { fonts = ["Hermit" "JetBrainsMono"]; })
+    (pkgs-unstable.nerdfonts.override { fonts = ["Hermit" "JetBrainsMono"]; })
   ];
 
   users.defaultUserShell = pkgs.zsh;

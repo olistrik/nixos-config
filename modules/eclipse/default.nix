@@ -7,6 +7,14 @@ let
   cfge = config.environment;
   cfg = config.programs.eclipse;
 
+  unwrapped = pkgs.eclipses.eclipseWithPlugins {
+    eclipse = pkgs.eclipses.eclipse-platform;
+    jvmArgs = ["-Xmx2048m"];
+    plugins = with pkgs.eclipses.plugins; [
+      vrapper
+    ];
+  };
+
 in {
   options = {
     programs.eclipse.enable = mkOption {
@@ -19,21 +27,13 @@ in {
   };
 
 
-  config = let
-    unwrapped = pkgs.eclipses.eclipseWithPlugins {
-      eclipse = pkgs.eclipses.eclipse-platform;
-      jvmArgs = ["-Xmx2048m"];
-      plugins = with pkgs.eclipses.plugins; [
-        vrapper
-      ];
-    };
-  in with symlinkJoin; with makeWrapper; mkIf cfg.enable {
+  config = mkIf cfg.enable {
     environment.systemPackages = [
       (
-        symlinkJoin {
+        pkgs.symlinkJoin {
           name = "elcipse";
-          paths = [ eclipse ];
-          buildInputs = [ makeWrapper ];
+          paths = [ unwrapped ];
+          buildInputs = [ pkgs.makeWrapper ];
           postBuild = ''
             wrapProgram $out/bin/eclipse \
               --set GTK_THEME Raleigh
