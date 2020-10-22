@@ -1,0 +1,3 @@
+[submodule "nixpkgs-custom"]
+	path = nixpkgs-custom
+	url = git@github.com:Kranex/nixpkgs-custom.git
