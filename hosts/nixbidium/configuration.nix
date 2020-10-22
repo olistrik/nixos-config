@@ -14,22 +14,23 @@
 #in
 {
   imports = [
+    ./nixpkgs-custom
     ./hardware-configuration.nix
     ../../shared/efi.nix
     ../../shared/default.nix
-    ../../shared/programs/R.nix
-    ../../shared/programs/TeX.nix
+#    ../../shared/programs/R.nix
+ #   ../../shared/programs/TeX.nix
     ./firewall.nix
 
   ];
 
 
-  nix = {
-    package = pkgs.nixUnstable;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
+#  nix = {
+#    package = pkgs.nixUnstable;
+#    extraOptions = ''
+#      experimental-features = nix-command flakes
+#    '';
+#  };
 
   environment.systemPackages = with pkgs.qt5; [
     qtbase

@@ -12,6 +12,9 @@
         bestglm
         faraway
         ISLR
+        LARF
+        sjPlot
+        oddsratio
       ];
     })
     pandoc
