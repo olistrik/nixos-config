@@ -15,9 +15,13 @@
         LARF
         sjPlot
         oddsratio
+        boot
+        ggplot2
+        ggpubr
       ];
     })
     pandoc
     haskellPackages.pandoc-citeproc
+    haskellPackages.pandoc-crossref
   ];
 }

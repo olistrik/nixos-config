@@ -15,6 +15,7 @@
 
     # Environment Managers
     direnv
+    nix-direnv
 
     # Debuggers
     gdb
@@ -22,10 +23,27 @@
 
     # Packaging
     binutils
+
+
+    # Docker
+    docker-compose
   ];
 
+  # enable docker
+  virtualisation.docker.enable = true;
+  users.users.kranex.extraGroups = [ "docker" ];
+
   # To manage direnv
-  services.lorri.enable = true;
+  # services.lorri.enable = true;
+
+  # nix options for derivations to persist garbage collection
+  nix.extraOptions = ''
+    keep-outputs = true
+    keep-derivations = true
+  '';
+  environment.pathsToLink = [
+    "/share/nix-direnv"
+  ];
 
 }
 

@@ -7,6 +7,13 @@
                                          xcolor
                                          fancyvrb
                                          framed
+                                         setspace
+                                         booktabs
+                                         mdwtools
+                                         subfig
+                                         caption
+                                         float
                                          etoolbox; })
+   liberation_ttf
   ];
 }

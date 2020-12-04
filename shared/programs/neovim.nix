@@ -14,6 +14,7 @@
             vim-pandoc
             vim-pandoc-syntax
             plantuml-syntax
+            vim-jsx-pretty
 
             # QOL
             vim-gitgutter

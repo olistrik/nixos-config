@@ -18,8 +18,8 @@
     ../../modules
     ../../shared/efi.nix
     ../../shared/default.nix
-    ../../shared/programs/R.nix
-   ../../shared/programs/TeX.nix
+    ../../shared/programs/pandoc.nix
+    ../../shared/programs/TeX.nix
     ./firewall.nix
 
   ];
