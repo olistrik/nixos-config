@@ -9,8 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../shared/users.nix
-      ../../shared/programs/neovim.nix
-      ../../shared/programs/zsh.nix
+      ../../shared/work.nix
     ];
 
   nix = {
@@ -20,11 +19,8 @@
     '';
   };
 
-  environment.systemPackages = with pkgs; [
-    git
-  ];
-
   #fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
+  #
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.efi.canTouchEfiVariables = true;
@@ -45,8 +41,9 @@
     };
   };
 
+
   networking.hostName = "nixogen"; # Define your hostname.
-  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
@@ -57,10 +54,44 @@
   networking.useDHCP = false;
   networking.interfaces.enp2s0.useDHCP = true;
   networking.interfaces.wlp3s0.useDHCP = true;
-  
+
   systemd.services.systemd-udev-settle.enable = false;
   systemd.services.NetworkManager-wait-online.enable = false;
- 
+
+  services.xserver.enable = true;
+  services.xserver.layout = "us";
+  services.xserver.xkbOptions = "eurosign:e";
+
+  services.xserver.libinput.enable = true;
+
+  services.xserver.desktopManager.gnome3.enable = true;
+
+  #services.xserver.displayManager.startx.enable = true;
+  # Enable SDDM display manager.
+  #services.xserver.displayManager = {
+  #  sddm.enable = true;
+  #  defaultSession = "none+bspwm";
+  #};
+
+  # Enable the BSPWM Window Manager.
+  #services.xserver.windowManager.bspwm.enable = true;
+
+
+  services.xserver.displayManager.sddm.theme = "${(pkgs.fetchFromGitHub {
+    owner = "MarianArlt";
+    repo = "sddm-chili";
+    rev = "0.1.5";
+    sha256 = "036fxsa7m8ymmp3p40z671z163y6fcsa9a641lrxdrw225ssq5f3";
+  })}";
+
+  # configure alacritty
+  programs.alacritty = {
+    enable = true;
+    brightBold = true;
+    theme = import ../../themes/ayu-mirage.nix;
+  };
+
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
