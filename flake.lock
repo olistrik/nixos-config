@@ -1,35 +1,54 @@
 {
   "nodes": {
-    "nixpkgs": {
+    "nixosPkgs": {
       "locked": {
-        "lastModified": 1608304212,
-        "narHash": "sha256-oNhKQ0EBFMXj6FCG6io5385NU0FyZ82vXTpA7ZqpcF8=",
-        "owner": "NixOS",
+        "lastModified": 1608062904,
+        "narHash": "sha256-QVaxOnGwZoBtNTlnAV0aeC30ASeJpo583wjotmhpOtg=",
+        "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "a0a87c86ac148c6a0d937d7b8cd4dcf6a668c600",
+        "rev": "647cc06986c1ae4a2bb05298e0cf598723e42970",
         "type": "github"
       },
       "original": {
-        "id": "nixpkgs",
-        "type": "indirect"
+        "owner": "nixos",
+        "ref": "nixos-20.09",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs",
-        "secrets-dir": "secrets-dir"
+        "nixosPkgs": "nixosPkgs",
+        "secrets-dir": "secrets-dir",
+        "unstable": "unstable"
       }
     },
     "secrets-dir": {
       "flake": false,
       "locked": {
         "narHash": "sha256-oYKWXfn7f8wg6YPXbF8rfzuqytlrgDjfc5zb1Rms2qk=",
-        "path": "/mnt/etc/nixos/secrets",
+        "path": "/etc/nixos/secrets",
         "type": "path"
       },
       "original": {
-        "path": "/mnt/etc/nixos/secrets",
+        "path": "/etc/nixos/secrets",
         "type": "path"
+      }
+    },
+    "unstable": {
+      "locked": {
+        "lastModified": 1607522989,
+        "narHash": "sha256-o/jWhOSAlaK7y2M57OIriRt6whuVVocS/T0mG7fd1TI=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "e9158eca70ae59e73fae23be5d13d3fa0cfc78b4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     }
   },
