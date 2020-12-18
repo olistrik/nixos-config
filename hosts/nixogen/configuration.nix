@@ -7,8 +7,10 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ../../shared/users.nix
       ./hardware-configuration.nix
+      ../../shared/users.nix
+      ../../shared/programs/neovim.nix
+      ../../shared/programs/zsh.nix
     ];
 
   nix = {
@@ -16,12 +18,32 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-  }
+  };
+
+  environment.systemPackages = with pkgs; [
+    git
+  ];
+
+  #fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "boot/efi";
+  #boot.loader.grub  = {
+  #  enable = true;
+  #  version = 2;
+  #  device = "nodev";
+  #  efiSupport = true;
+  #  enableCryptodisk = true;
+  #};
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  boot.initrd.luks.devices = {
+    root = {
+       device = "/dev/disk/by-uuid/741fa890-193a-489c-960e-d6d308860f33";
+       preLVM = true;
+      #allowDiscards = true;
+    };
+  };
 
   networking.hostName = "nixogen"; # Define your hostname.
   networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -35,7 +57,10 @@
   networking.useDHCP = false;
   networking.interfaces.enp2s0.useDHCP = true;
   networking.interfaces.wlp3s0.useDHCP = true;
-
+  
+  systemd.services.systemd-udev-settle.enable = false;
+  systemd.services.NetworkManager-wait-online.enable = false;
+ 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";

@@ -1,5 +1,5 @@
 
-{config, pkgs, pkgs-unstable, ...}:
+{config, pkgs, unstable, ...}:
 {
   environment.systemPackages = with pkgs; [
     thefuck
@@ -7,13 +7,13 @@
     starship
   ];
   
-  fonts.fonts = with pkgs; [
-    (pkgs-unstable.nerdfonts.override { fonts = ["Hermit" "JetBrainsMono"]; })
+  fonts.fonts = with unstable; [
+    (nerdfonts.override { fonts = ["Hermit" "JetBrainsMono"]; })
   ];
 
   users.defaultUserShell = pkgs.zsh;
   
-  programs.alacritty.font.normal.family = "JetBrainsMono Nerd Font";
+  #programs.alacritty.font.normal.family = "JetBrainsMono Nerd Font";
   
   programs.zsh = {
     enable = true;

@@ -2,27 +2,26 @@
   description = "Nix is love. Nix is life.";
 
   inputs = {
+    nixosPkgs.url = "github:nixos/nixpkgs/nixos-20.09";
+
+    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
     secrets-dir = {
-      url = "/mnt/etc/nixos/secrets";
+      url = "/etc/nixos/secrets";
       flake = false;
     };
   };
 
-  outputs = {self, nixpkgs, secrets-dir}:
-    let
-      secrets = import secrets-dir;
-    in
-    {
-      nixosConfigurations = {
-      	nixogen = nixpkgs.lib.nixosSystem {
-		  system = "x86_64-linux";
-		  specialArgs = {
-		    inherit secrets;
-		  };
-		  modules = [
-		    ./hosts/nixogen/configuration.nix
-		  ];
-	};
+  outputs = inputs@{self, nixosPkgs, ...}: {
+    nixosConfigurations = let
+      secrets = import inputs.secrets-dir;
+      unstable = import inputs.unstable { system = "x86_64-linux"; };
+    in {
+      nixogen = nixosPkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit secrets unstable; };
+        modules = [ ./hosts/nixogen/configuration.nix ];
       };
     };
+  };
 }
