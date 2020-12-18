@@ -1,5 +1,17 @@
 {
   "nodes": {
+    "custom": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-dB+6H9Q7gMVlQpAVTVmYpPfmU7mIxDBk7RwphhF7xbM=",
+        "path": "/etc/nixos/nixpkgs-custom",
+        "type": "path"
+      },
+      "original": {
+        "path": "/etc/nixos/nixpkgs-custom",
+        "type": "path"
+      }
+    },
     "nixosPkgs": {
       "locked": {
         "lastModified": 1608062904,
@@ -18,6 +30,7 @@
     },
     "root": {
       "inputs": {
+        "custom": "custom",
         "nixosPkgs": "nixosPkgs",
         "secrets-dir": "secrets-dir",
         "unstable": "unstable"
