@@ -1,67 +1,35 @@
 {
   "nodes": {
-    "custom": {
-      "flake": false,
+    "nixpkgs": {
       "locked": {
-        "narHash": "sha256-wpfh4FFTX7jRlF3r5bF+SY+WnAmH0l8wNqWqtvcw610=",
-        "path": "/etc/nixos/nixpkgs-custom",
-        "type": "path"
+        "lastModified": 1608304212,
+        "narHash": "sha256-oNhKQ0EBFMXj6FCG6io5385NU0FyZ82vXTpA7ZqpcF8=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "a0a87c86ac148c6a0d937d7b8cd4dcf6a668c600",
+        "type": "github"
       },
       "original": {
-        "path": "/etc/nixos/nixpkgs-custom",
-        "type": "path"
+        "id": "nixpkgs",
+        "type": "indirect"
       }
     },
     "root": {
       "inputs": {
-        "custom": "custom",
-        "secrets-dir": "secrets-dir",
-        "stable": "stable",
-        "unstable": "unstable"
+        "nixpkgs": "nixpkgs",
+        "secrets-dir": "secrets-dir"
       }
     },
     "secrets-dir": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-QKDfJh98qkmsjbRWo6Up/4DwZr0zP3MvQ573AuJe8q0=",
-        "path": "/etc/nixos/secrets",
+        "narHash": "sha256-oYKWXfn7f8wg6YPXbF8rfzuqytlrgDjfc5zb1Rms2qk=",
+        "path": "/mnt/etc/nixos/secrets",
         "type": "path"
       },
       "original": {
-        "path": "/etc/nixos/secrets",
+        "path": "/mnt/etc/nixos/secrets",
         "type": "path"
-      }
-    },
-    "stable": {
-      "locked": {
-        "lastModified": 1603393949,
-        "narHash": "sha256-wNDb3ZA7ig3dPnrI6vODv3MAr5GlzUVyoVC8qscv7cU=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "7d29f0696d69774f17edd3e5accf98dc05f6572c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "release-20.09",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "unstable": {
-      "locked": {
-        "lastModified": 1602473909,
-        "narHash": "sha256-tZfZhmjYNX4UrUySEjbosJO7Bj3eiCGnjfX5DkVClQw=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "cfed29bfcb28259376713005d176a6f82951014a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
       }
     }
   },
