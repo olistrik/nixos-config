@@ -37,16 +37,19 @@ in
     zathura
     mplayer
 
+    ##################
+    ## develop stuff
+    yarn
+
     #bspwm stuff
-    polybar
-    dmenu
-    sxhkd
-    compton
-    neofetch
+    polybar  #
+    dmenu    #
+    sxhkd    #
+    picom    #
 
     #Web Browser
-    chromium
-    firefox
+    chromium  #
+    firefox   #
   ];
 
 }
