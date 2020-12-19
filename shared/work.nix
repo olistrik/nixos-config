@@ -39,7 +39,30 @@ in
 
     ##################
     ## develop stuff
+
+    # General
+    gnumake
+    direnv
+    nix-direnv
+
+    # Docker
+    docker-compose
+
+    # JavaScript
+    nodejs
     yarn
+
+    # Ruby
+    ruby
+
+    # C & C++
+    gcc10
+    gdb
+    valgrind
+    binutils
+
+    ######################
+    ## Move somewhere else
 
     #bspwm stuff
     polybar  #
@@ -50,6 +73,19 @@ in
     #Web Browser
     chromium  #
     firefox   #
+  ];
+
+  # Docker
+  virtualisation.docker.enable = true;
+  users.users.kranex.extraGroups = [ "docker" ];
+
+  # Configure direnv
+  nix.extraOptions = ''
+    keep-outputs = true
+    keep-derivations = true
+  '';
+  environment.pathToLink = [
+    "share/nix-direnv"
   ];
 
 }
