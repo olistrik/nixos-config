@@ -1,5 +1,6 @@
-# notes on nix installing
 
+
+# notes on nix installing
 # Enable WIFI on CD
 
 ```
@@ -61,7 +62,7 @@ systemctl start wpa_supplicant
     ```
 
 
-4. create secrets/default.nix:
+4. create /mnt/secrets/default.nix:
 
     ```
     {
@@ -72,7 +73,7 @@ systemctl start wpa_supplicant
     ```
   hashedPasswords can be generated using `mkpasswd -m sha-512 > my_hashed_passwd`
 
-  NOTE: You may need to change the path of the sectrets dir temporarily to /mnt/etc/nixos/secrets
+  NOTE: You will need to link /mnt/secrets to /secrets.
 
 5. finally install:
 
