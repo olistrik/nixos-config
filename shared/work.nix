@@ -27,6 +27,7 @@ in
     zip
     unzip
     neofetch
+    tree
 
     # Net sync.
     wget
@@ -84,7 +85,7 @@ in
     keep-outputs = true
     keep-derivations = true
   '';
-  environment.pathToLink = [
+  environment.pathsToLink = [
     "share/nix-direnv"
   ];
 
