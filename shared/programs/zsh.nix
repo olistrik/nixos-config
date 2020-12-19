@@ -1,20 +1,15 @@
 
-{config, pkgs, unstable, ...}:
+{config, pkgs, ...}:
 {
   environment.systemPackages = with pkgs; [
     thefuck
     fzf
     starship
-  ];
-  
-  fonts.fonts = with unstable; [
-    (nerdfonts.override { fonts = ["Hermit" "JetBrainsMono"]; })
+    direnv
   ];
 
   users.defaultUserShell = pkgs.zsh;
-  
-  #programs.alacritty.font.normal.family = "JetBrainsMono Nerd Font";
-  
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
