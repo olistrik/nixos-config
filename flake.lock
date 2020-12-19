@@ -12,7 +12,7 @@
         "type": "path"
       }
     },
-    "nixosPkgs": {
+    "nixpkgs": {
       "locked": {
         "lastModified": 1608062904,
         "narHash": "sha256-QVaxOnGwZoBtNTlnAV0aeC30ASeJpo583wjotmhpOtg=",
@@ -28,27 +28,7 @@
         "type": "github"
       }
     },
-    "root": {
-      "inputs": {
-        "custom": "custom",
-        "nixosPkgs": "nixosPkgs",
-        "secrets-dir": "secrets-dir",
-        "unstable": "unstable"
-      }
-    },
-    "secrets-dir": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-oYKWXfn7f8wg6YPXbF8rfzuqytlrgDjfc5zb1Rms2qk=",
-        "path": "/etc/nixos/secrets",
-        "type": "path"
-      },
-      "original": {
-        "path": "/etc/nixos/secrets",
-        "type": "path"
-      }
-    },
-    "unstable": {
+    "nixpkgs-unstable": {
       "locked": {
         "lastModified": 1607522989,
         "narHash": "sha256-o/jWhOSAlaK7y2M57OIriRt6whuVVocS/T0mG7fd1TI=",
@@ -62,6 +42,26 @@
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "custom": "custom",
+        "nixpkgs": "nixpkgs",
+        "nixpkgs-unstable": "nixpkgs-unstable",
+        "secrets-dir": "secrets-dir"
+      }
+    },
+    "secrets-dir": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-oYKWXfn7f8wg6YPXbF8rfzuqytlrgDjfc5zb1Rms2qk=",
+        "path": "/etc/nixos/secrets",
+        "type": "path"
+      },
+      "original": {
+        "path": "/etc/nixos/secrets",
+        "type": "path"
       }
     }
   },
