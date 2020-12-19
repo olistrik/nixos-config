@@ -8,7 +8,7 @@
 ##     /root : 100%FREE ##
 ##########################
 
-{ config, pkgs, unstable, ... }:
+{ config, pkgs, ... }:
 
 {
   imports =
@@ -36,7 +36,7 @@
 
   # Work devices are "Other non metals" and this one is running Nixos.
   # Nixos + Nitrogen = Nixogen.
-  networking.hostName = "Nixogen";
+  networking.hostName = "nixogen";
 
   # Use the systemd-boot EFI boot loader.
   boot = {
@@ -116,7 +116,7 @@
   };
 
   # Add nerdfonts to Hermit and Jetbrains
-  fonts.fonts = with unstable; [
+  fonts.fonts = with pkgs.unstable; [
     (nerdfonts.override { fonts = ["Hermit" "JetBrainsMono"]; })
   ];
 
