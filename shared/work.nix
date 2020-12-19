@@ -26,6 +26,7 @@ in
     killall
     zip
     unzip
+    neofetch
 
     # Net sync.
     wget

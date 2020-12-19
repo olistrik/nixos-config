@@ -1,12 +1,18 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+##########################
+## AMD LENOVO E15 GEN 2 ##
+##########################
+## Partitions:          ##
+## /dev/nvme1: EFI BOOT ##
+## /dev/nvme2: LUKS LVM ##
+##     /swap : 12 GB    ##
+##     /root : 100%FREE ##
+##########################
 
-{ config, pkgs, ... }:
+{ config, pkgs, unstable, ... }:
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
       ./hardware-configuration.nix
       ../../shared/users.nix
       ../../shared/work.nix
@@ -19,135 +25,146 @@
     '';
   };
 
-  #fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
-  #
+  #################
+  ## E15 Specific
+
+  # The E15 needs the latest linux kernel for Radeon graphics to work.
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  ##################
+  ## Work specific
+
+  # Work devices are "Other non metals" and this one is running Nixos.
+  # Nixos + Nitrogen = Nixogen.
+  networking.hostName = "Nixogen";
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.efi.canTouchEfiVariables = true;
-  #boot.loader.grub  = {
-  #  enable = true;
-  #  version = 2;
-  #  device = "nodev";
-  #  efiSupport = true;
-  #  enableCryptodisk = true;
-  #};
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  boot.initrd.luks.devices = {
-    root = {
+  boot = {
+    loader = {
+      # Use Systemd-boot. Grub really doesn't like LUKS.
+      systemd-boot.enable = true;
+      # Change the EFI mount point to "/boot/efi"
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot/efi";
+      };
+    };
+    ## Mark /dev/nvme2 as luks.
+    initrd.luks.devices = {
+      root = {
        device = "/dev/disk/by-uuid/741fa890-193a-489c-960e-d6d308860f33";
        preLVM = true;
-      #allowDiscards = true;
+      };
     };
   };
 
+  ####################
+  ## Laptop Specific
 
-  networking.hostName = "nixogen"; # Define your hostname.
-  #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  # Enable laptop touchpad.
+  services.xserver.libinput.enable = true;
 
-  # Set your time zone.
+  # Enables wireless support via wpa_supplicant.
+  networking.wireless.enable = true;
+  networking.interfaces.wlp3s0.useDHCP = true;
+
+  #################
+  ## Localisation
+
+  # Locale
   time.timeZone = "Europe/Amsterdam";
+
+  # Terminal keymap and font.
+  i18n.defaultLocale = "en_US.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "us";
+  };
+
+  ############
+  ## Network
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking.useDHCP = false;
-  networking.interfaces.enp2s0.useDHCP = true;
-  networking.interfaces.wlp3s0.useDHCP = true;
 
+  # DHCP on the lan port, dunno if i'll ever use it.
+  networking.interfaces.enp2s0.useDHCP = true;
+
+  # Stops the network manager and DHCP from stalling boot for like 200 years.
   systemd.services.systemd-udev-settle.enable = false;
   systemd.services.NetworkManager-wait-online.enable = false;
 
-  services.xserver.enable = true;
-  services.xserver.layout = "us";
-  services.xserver.xkbOptions = "eurosign:e";
+  ####################
+  ## Graphical Stuff
 
-  services.xserver.libinput.enable = true;
+  ## Enable X + SDDM + BSPWM.
+  services.xserver = {
+    enable = true;
+    layout = "us";
+    xkbOptions = "eurosign:5";
 
-  services.xserver.desktopManager.gnome3.enable = true;
+    displayManager = {
+      sddm.enable = true;
+      defaultSession = "none+bspwm";
+    };
 
-  #services.xserver.displayManager.startx.enable = true;
-  # Enable SDDM display manager.
-  #services.xserver.displayManager = {
-  #  sddm.enable = true;
-  #  defaultSession = "none+bspwm";
-  #};
+    windowManager.bspwm = {
+      enable = true;
+    };
+  };
 
-  # Enable the BSPWM Window Manager.
-  #services.xserver.windowManager.bspwm.enable = true;
-
-
-  services.xserver.displayManager.sddm.theme = "${(pkgs.fetchFromGitHub {
-    owner = "MarianArlt";
-    repo = "sddm-chili";
-    rev = "0.1.5";
-    sha256 = "036fxsa7m8ymmp3p40z671z163y6fcsa9a641lrxdrw225ssq5f3";
-  })}";
+  # Add nerdfonts to Hermit and Jetbrains
+  fonts.fonts = with unstable; [
+    (nerdfonts.override { fonts = ["Hermit" "JetBrainsMono"]; })
+  ];
 
   # configure alacritty
   programs.alacritty = {
     enable = true;
     brightBold = true;
+    font = {
+      normal.family = "JetBrainsMono NerdFont";
+      size = "8.0";
+    };
     theme = import ../../themes/ayu-mirage.nix;
   };
 
+  ########################
+  ## Old and hacky stuff
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  # dependencies for sddm theme
+  #environment.systemPackages = with pkgs.qt5; [
+  #  qtbase
+  #  qtquickcontrols
+  #  qtgraphicaleffects
+  #];
 
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  # };
+  #services.xserver.displayManager.sddm.theme = "${(pkgs.fetchFromGitHub {
+  #  owner = "MarianArlt";
+  #  repo = "sddm-chili";
+  #  rev = "0.1.5";
+  #  sha256 = "036fxsa7m8ymmp3p40z671z163y6fcsa9a641lrxdrw225ssq5f3";
+  #})}";
 
-  # Configure keymap in X11
-  # services.xserver.layout = "us";
-  # services.xserver.xkbOptions = "eurosign:e";
 
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
+  # Enable i3 + LightDM
+  #services.xserver.windowManager.i3 = {
+  #  enable = true;
+  #  package = pkgs.i3-gaps;
 
-  # Enable sound.
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = true;
+  #  desktopManager = {
+  #    xterm.enable = false;
+  #  };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  #  displayManager = {
+  #    defaultSession = "none+i3";
+  #  };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  # users.users.jane = {
-  #   isNormalUser = true;
-  #   extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-  # };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  # environment.systemPackages = with pkgs; [
-  #   wget vim
-  #   firefox
-  # ];
+  #};
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -156,6 +173,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "20.09"; # Did you read the comment?
-
 }
-
