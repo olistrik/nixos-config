@@ -16,7 +16,7 @@
 
     # where the secrets dir is.
     secrets-dir = {
-      url = "/etc/nixos/secrets";
+      url = "/secrets";
       flake = false;
     };
   };
