@@ -38,12 +38,12 @@
   '';
 
   # Temp hack to fix the Fn buttons.
-  systemd.services.fixFn = {
-    script = ''
-      rtcwake -m mem -s 1
-    '';
-    wantedBy = [ "multi-user.target" ];
-  };
+  #services.cron = {
+  #  enable = true;
+  #  systemCronJobs = [
+  #    "@reboot  root  ${pkgs.rtcwake} -m mem -s 2"
+  #  ];
+  #};
 
   ##################
   ## Work specific
