@@ -6,6 +6,7 @@
     fzf
     starship
     direnv
+    zplug
   ];
 
   users.defaultUserShell = pkgs.zsh;
@@ -16,7 +17,16 @@
     syntaxHighlighting.enable = true;
     autosuggestions.enable = true;
     interactiveShellInit = ''
-      #################################
+    source ${pkgs.zplug}/init.zsh
+
+    zplug "agkozak/zsh-z"
+
+    if ! zplug check; then
+      zplug install
+    fi
+    zplug load
+
+    #################################
       ## Magic Shit
 
       setopt correct                   # Auto correct mistakes

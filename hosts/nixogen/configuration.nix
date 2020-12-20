@@ -31,6 +31,20 @@
   # The E15 needs the latest linux kernel for Radeon graphics to work.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+
+  # Audio is hard on the E15
+  boot.extraModprobeConfig = ''
+    options snd-hda-intel id=Generic1 index=1
+  '';
+
+  # Temp hack to fix the Fn buttons.
+  systemd.services.fixFn = {
+    script = ''
+      rtcwake -m mem -s 1
+    '';
+    wantedBy = [ "multi-user.target" ];
+  };
+
   ##################
   ## Work specific
 
