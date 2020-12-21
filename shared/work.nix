@@ -14,7 +14,7 @@ in
 
   imports = [
     ./audio.nix
-    ./screencapture.nix
+    ./scripts/screencapture.nix
     ./programs/zsh.nix
     ./programs/neovim.nix
     #./programs/jetbrains.nix
