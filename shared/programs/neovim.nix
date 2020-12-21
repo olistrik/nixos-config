@@ -14,6 +14,7 @@
             vim-pandoc
             vim-pandoc-syntax
             plantuml-syntax
+            i3config-vim
 
             vim-table-mode
 
