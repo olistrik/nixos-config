@@ -33,35 +33,35 @@ in
     };
 
     config.services.xserver = {
+      enable = true;
+
+      desktopManager = {
+        xterm.enable = false;
+      };
+
+      displayManager = {
+        defaultSession = "none+i3";
+      };
+
+      windowManager.i3 = {
         enable = true;
+        package = pkgs.i3-gaps;
 
-        desktopManager = {
-          xterm.enable = false;
-        };
+        extraPackages = with pkgs; [
+          rofi
+          i3lock
+          i3status
+        ];
 
-        displayManager = {
-          defaultSession = "none+i3";
-        };
+        configFile = (pkgs.writeText "i3-config" (''
+            # Generated Config
+            gaps inner ${builtins.toString cfg.gaps.inner}
+            gaps outer ${builtins.toString cfg.gaps.outer}
 
-        windowManager.i3 = {
-          enable = true;
-          package = pkgs.i3-gaps;
-
-          extraPackages = with pkgs; [
-            rofi
-            i3lock
-            i3status
-          ];
-
-          configFile = (pkgs.writeText "i3-config" (''
-              # Generated Config
-              gaps inner ${builtins.toString cfg.gaps.inner}
-              gaps outer ${builtins.toString cfg.gaps.outer}
-
-              # User Config
-            ''
-            + (builtins.readFile ../../dots/i3.config)));
-        };
+            # User Config
+          ''
+          + (builtins.readFile ../../dots/i3.config))
+        );
       };
     };
   }
