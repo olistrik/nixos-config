@@ -41,6 +41,16 @@ in
 
       displayManager = {
         defaultSession = "none+i3";
+        lightdm.greeters.mini = {
+          enable = true;
+          user = "kranex";
+          extraConfig = ''
+            [greeter]
+            show-password-label = false
+            [greeter-theme]
+            background-image = "/home/kranex/.lock_image"
+          '';
+        };
       };
 
       windowManager.i3 = {
