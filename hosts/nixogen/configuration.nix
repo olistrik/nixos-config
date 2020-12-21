@@ -143,7 +143,7 @@
       normal.family = "JetBrainsMono NerdFont";
       size = "8.0";
     };
-    theme = import ../../themes/ayu-mirage.nix;
+    theme = import ../../shared/themes/ayu-mirage.nix;
   };
 
   ########################
