@@ -17,7 +17,7 @@
       package = pkgs.i3-gaps;
 
       extraPackages = with pkgs; [
-        dmenu
+        rofi
         i3lock
         i3status
       ];
