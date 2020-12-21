@@ -13,15 +13,19 @@ in
 {
 
   imports = [
-    ./audio.nix
-    ./scripts/screencapture.nix
+    ./audio.nix # explicitly disable that plague called pulseaudio
+    ./scripts/screencapture.nix # for screenshot etc
+
+    # install programs with my configurations
     ./programs/zsh.nix
     ./programs/neovim.nix
     ./programs/alacritty.nix
-    #./programs/jetbrains.nix
   ];
 
+  # not sure why I need this. Jetbrains stuff?
   nixpkgs.config.allowUnfree = true;
+
+  # programs that don't need "much" configuration.
   environment.systemPackages = with pkgs; [
     # misc
     killall
@@ -72,7 +76,8 @@ in
   virtualisation.docker.enable = true;
   users.users.kranex.extraGroups = [ "docker" ];
 
-  # Configure direnv
+  # Configure direnv, also requires `eval ${direnv hook zsh)` in zsh.
+  # TODO move direnv to it's own module and make it set that hook somehow.
   nix.extraOptions = ''
     keep-outputs = true
     keep-derivations = true
@@ -80,6 +85,6 @@ in
   environment.pathsToLink = [
     "share/nix-direnv"
   ];
-
+  
 }
 

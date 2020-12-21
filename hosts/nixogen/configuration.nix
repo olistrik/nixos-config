@@ -120,7 +120,10 @@
   ################
   ## Theming WIP
 
-  programs.alacritty.theme = import ../../shared/themes/ayu-mirage.nix
+  programs.alacritty = {
+    font.size = "8.0";
+    theme = import ../../shared/themes/ayu-mirage.nix;
+  };
 
   ########################
   ## Old and hacky stuff
