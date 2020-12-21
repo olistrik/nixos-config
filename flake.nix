@@ -10,7 +10,7 @@
 
     # My custom packages WIP
     custom = {
-      url = "/etc/nixos/nixpkgs-custom";
+      url = "/etc/nixos/pkgs";
       flake = false;
     };
 
