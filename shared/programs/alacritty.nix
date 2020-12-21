@@ -1,6 +1,8 @@
 {config, lib, pkgs, ...}:
 
-{
+let
+  inherit (lib.modules) mkDefault;
+in {
   # add fonts for polybar and Alacritty.
   fonts.fonts = with pkgs; [
     hermit
@@ -13,8 +15,6 @@
     brightBold = true;
     font = {
       normal.family = "JetBrainsMono NerdFont";
-      size = "8.0";
     };
-    theme = lib.mkDefault import ../../shared/themes/ayu-mirage.nix;
   };
 }
