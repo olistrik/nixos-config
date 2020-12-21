@@ -22,7 +22,7 @@
         i3status
       ];
 
-      configFile = pkgs.writeText "i3-config" (builtins.readFile ../../dots/i3.config);
+      configFile = import ../../dots/i3.config;
     };
 
   };
