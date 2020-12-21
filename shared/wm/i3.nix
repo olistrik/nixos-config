@@ -22,7 +22,8 @@
         i3status
       ];
 
-      configFile = import ../../dots/i3.config;
+      configFile = (import ../../dots/i3.config) pkgs;
+    
     };
 
   };
