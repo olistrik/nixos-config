@@ -7,7 +7,7 @@
     (neovim.override {
       vimAlias = true;
       configure = {
-        packages.myPlugins = with pkgs.vimPlugins; {
+        packages.myPlugins = with pkgs.unstable.vimPlugins; {
           start = [
             # Language Support
             vim-nix
