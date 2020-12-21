@@ -130,8 +130,9 @@
   };
 
   # Add nerdfonts to Hermit and Jetbrains
-  fonts.fonts = with pkgs.unstable; [
-    (nerdfonts.override { fonts = ["Hermit" "JetBrainsMono"]; })
+  fonts.fonts = with pkgs; [
+    hermit
+    (unstable.nerdfonts.override { fonts = ["Hermit" "JetBrainsMono"]; })
   ];
 
   # configure alacritty
