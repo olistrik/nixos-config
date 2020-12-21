@@ -48,7 +48,9 @@ in
             [greeter]
             show-password-label = false
             [greeter-theme]
-            background-image = "/home/kranex/.lock_image"
+            background-color = "#303030"
+            background-image = "/etc/lightdm/background.jpg"
+            window-color ="#000000"
           '';
         };
       };
