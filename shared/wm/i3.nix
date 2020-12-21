@@ -22,7 +22,7 @@
         i3status
       ];
 
-      configFile = import ../../dots/i3.conf;
+      configFile = ../../dots/i3.config;
     };
 
   };
