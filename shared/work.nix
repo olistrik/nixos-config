@@ -17,6 +17,7 @@ in
     ./scripts/screencapture.nix
     ./programs/zsh.nix
     ./programs/neovim.nix
+    ./programs/alacritty.nix
     #./programs/jetbrains.nix
   ];
 
@@ -61,15 +62,6 @@ in
     gdb
     valgrind
     binutils
-
-    ######################
-    ## Move somewhere else
-
-    #bspwm stuff
-    polybar  #
-    dmenu    #
-    sxhkd    #
-    picom    #
 
     #Web Browser
     chromium  #
