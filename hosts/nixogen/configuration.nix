@@ -125,6 +125,13 @@
     theme = import ../../shared/themes/ayu-mirage.nix;
   };
 
+  services.xserver.windowManager.i3 = {
+    gaps = {
+      inner = 10;
+      outer = -5;
+    };
+  };
+
   ########################
   ## Old and hacky stuff
 
