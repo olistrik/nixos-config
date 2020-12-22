@@ -32,48 +32,52 @@ in
       };
     };
 
-    config.services.xserver = {
-      enable = true;
+    config = {
+      #environment.etc."lightdm/background".source = pkgs.copyPathToStore /home/kranex/.lock_image;
 
-      desktopManager = {
-        xterm.enable = false;
-      };
-
-      displayManager = {
-        defaultSession = "none+i3";
-        lightdm.greeters.mini = {
-          enable = true;
-          user = "kranex";
-          extraConfig = ''
-            [greeter]
-            show-password-label = false
-            [greeter-theme]
-            background-color = "#303030"
-            background-image = "/etc/lightdm/background.jpg"
-            window-color ="#000000"
-          '';
-        };
-      };
-
-      windowManager.i3 = {
+      services.xserver = {
         enable = true;
-        package = pkgs.i3-gaps;
 
-        extraPackages = with pkgs; [
-          rofi
-          i3lock
-          i3status
-        ];
+        desktopManager = {
+          xterm.enable = false;
+        };
 
-        configFile = (pkgs.writeText "i3-config" (''
-            # Generated Config
-            gaps inner ${builtins.toString cfg.gaps.inner}
-            gaps outer ${builtins.toString cfg.gaps.outer}
+        displayManager = {
+          defaultSession = "none+i3";
+          lightdm.greeters.mini = {
+            enable = true;
+            user = "kranex";
+            extraConfig = ''
+              [greeter]
+              show-password-label = false
+              [greeter-theme]
+              background-color = "#303030"
+              background-image = "/etc/lightdm/background.jpg"
+              window-color ="#000000"
+            '';
+          };
+        };
 
-            # User Config
-          ''
-          + (builtins.readFile ../../dots/i3.config))
-        );
+        windowManager.i3 = {
+          enable = true;
+          package = pkgs.i3-gaps;
+
+          extraPackages = with pkgs; [
+            rofi
+            i3lock
+            i3status
+          ];
+
+          configFile = (pkgs.writeText "i3-config" (''
+              # Generated Config
+              gaps inner ${builtins.toString cfg.gaps.inner}
+              gaps outer ${builtins.toString cfg.gaps.outer}
+
+              # User Config
+            ''
+            + (builtins.readFile ../../dots/i3.config))
+          );
+        };
       };
     };
   }
