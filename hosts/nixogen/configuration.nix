@@ -133,7 +133,7 @@
 
   programs.alacritty = {
     font.size = "8.0";
-    themer = system.themer.theme;
+    theme = config.system.themer.theme;
   };
 
 
