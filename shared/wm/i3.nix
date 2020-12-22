@@ -12,7 +12,7 @@ in
 
     #environment.etc."lightdm/background".source = pkgs.copyPathToStore /home/kranex/.lock_image;
 
-    environment.etc."i3/xdg/i3status/config".source = ../../dots/i3status.conf;
+    environment.etc."xdg/i3status/config".source = ../../dots/i3status.conf;
 
     services.xserver = {
       enable = true;
@@ -44,6 +44,7 @@ in
         extraPackages = with pkgs; [
           rofi
           i3lock
+          polybar
           i3status
           i3blocks
         ];
