@@ -36,24 +36,24 @@ in
 
       programs.sway = {
         enable = true;
-        extraPackages = with pkgs; {
+        extraPackages = with pkgs; [
           swaylock
           swayidle
           xwayland
           waybar
           mako
           kanshi
-        };
+        ];
       };
 
       environment = {
         etc = {
-          "sway/config".source = ../../dots/i3.config
+          "sway/config".source = ../../dots/i3.config;
         };
       };
 
-      environments.systemPackages = with pkgs; [
-        pkgs.writeTextFile {
+      environment.systemPackages = with pkgs; [
+        (pkgs.writeTextFile {
           name = "startsway";
           destination = "/bin/startsway";
           executable = true;
@@ -65,7 +65,7 @@ in
             # then start the service
             exec systemctl --user start sway.service
           '';
-        }
+        })
       ];
 
       systemd.user.targets.sway-session = {
