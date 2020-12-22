@@ -12,6 +12,8 @@ in
 
     #environment.etc."lightdm/background".source = pkgs.copyPathToStore /home/kranex/.lock_image;
 
+    environment.etc."i3/xdg/i3status/config".source = ../../dots/i3status.conf;
+
     services.xserver = {
       enable = true;
 
@@ -43,6 +45,7 @@ in
           rofi
           i3lock
           i3status
+          i3blocks
         ];
 
         configFile = (pkgs.writeText "i3-config" (''
