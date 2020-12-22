@@ -43,6 +43,9 @@ in
     zathura
     mplayer
 
+    # Image manipulation.
+    gimp
+
     ##################
     ## develop stuff
 
