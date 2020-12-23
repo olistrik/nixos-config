@@ -56,6 +56,10 @@ in
     config = mkIf cfg.enable {
       environment.systemPackages = with pkgs; [
         lightlocker
+        (pkgs.makeAutostartItem {
+          name = "light-locker";
+          package = lightlocker;
+        })
       ];
     };
   }
