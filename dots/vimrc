@@ -53,6 +53,9 @@ set autoindent
 "" Set tab width for C++
 autocmd FileType cpp setlocal textwidth=78 tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 
+" set .tsx and .jsx as typescriptreact
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
+
 set backspace=indent,eol,start
 
 set list

@@ -1,11 +1,11 @@
 {config, lib, pkgs, ...}:
 
 let
-  cfg = config.services.light-locker;
+  cfg = config.programs.lightlocker;
 in
   with lib; {
     options = {
-      services.lightlocker = {
+      programs.lightlocker = {
         enable = mkOption {
           type = types.bool;
           default = true;
@@ -53,13 +53,13 @@ in
       };
     };
 
-    config = mkif cfg.enable {
+    config = mkIf cfg.enable {
       environment.systemPackages = with pkgs; [
         lightlocker
       ];
       systemd.services.lightlocker = {
-        wantedBy = [ "multi-user.target" ];
-        after = ["graphical.target"];
+        wantedBy = [ "graphical-session.target" ];
+        after = ["graphical-session.target"];
         description = "Start lightlocker";
         serviceConfig = {
           Type = "exec";
