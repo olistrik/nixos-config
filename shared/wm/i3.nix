@@ -42,9 +42,8 @@ in
         xautolock = {
           enable = true;
           time = 5;
-          locker = "${pkgs.lightdm}/bin/dm-tool lock";
-          nowlocker = "${pkgs.lightdm}/bin/dm-tool lock";
-        }
+          locker = "${pkgs.i3lock}/bin/i3lock";
+        };
         windowManager.i3 = {
           enable = true;
           package = pkgs.i3-gaps;
@@ -52,6 +51,7 @@ in
           extraPackages = with pkgs; [
             rofi
             polybar
+            i3lock
             i3status
             i3blocks
           ];
