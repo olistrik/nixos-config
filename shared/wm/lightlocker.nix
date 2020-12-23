@@ -57,20 +57,5 @@ in
       environment.systemPackages = with pkgs; [
         lightlocker
       ];
-      systemd.services.lightlocker = {
-        wantedBy = [ "graphical-session.target" ];
-        after = ["graphical-session.target"];
-        description = "Start lightlocker";
-        serviceConfig = {
-          Type = "exec";
-          ExecStart = '' ${pkgs.lightlocker}/bin/light-locker \
-            --lock-after-screensaver=${toString cfg.lock-after-screensaver} \
-            --${if cfg.late-locking then "" else "no-"}late-locking \
-            --${if cfg.lock-on-suspend then "" else "no-"}lock-on-suspend \
-            --${if cfg.lock-on-lid then "" else "no-"}lock-on-lid \
-            --${if cfg.idle-hint then "" else "no-"}idle-hint
-          '';
-        };
-      };
     };
   }
