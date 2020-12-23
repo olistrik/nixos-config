@@ -56,16 +56,12 @@ in
             pkgs.writeText "i3-config" (''
                 ##########################
                 # Generated Config
-                gaps inner ${builtins.toString cfg.wm.gaps.inner}
-                gaps outer ${builtins.toString cfg.wm.gaps.outer}
+                gaps inner ${builtins.toString themer.wm.gaps.inner}
+                gaps outer ${builtins.toString themer.wm.gaps.outer}
 
                 # Autostart
 
-                exec --no-startup-id lightlocker \
-                  --lock-after-screensaver=30 \
-                  --lock-on-suspend \
-                  --lock-on-lid \
-                  --no-idle-hint
+                exec --no-startup-id light-locker
 
                 ##########################
                 # User Config
