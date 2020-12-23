@@ -1,5 +1,5 @@
 default:
-	sudo nixos-rebuild switch
+	nixos-rebuild switch
 
 %:
-	sudo nix flake update --update-input $*
+	nix flake update --update-input $*
