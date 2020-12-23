@@ -4,7 +4,7 @@ with lib;
 
 let
   themer = config.system.themer;
-  cfg = config.services.windowManager.i3;
+  cfg = config.services.xserver.windowManager.i3;
 in
   {
     imports = [
