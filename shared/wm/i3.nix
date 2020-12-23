@@ -39,7 +39,12 @@ in
             '';
           };
         };
-
+        xautolock = {
+          enable = true;
+          time = 5;
+          locker = "${pkgs.lightdm}/bin/dm-tool lock";
+          nowlocker = "${pkgs.lightdm}/bin/dm-tool lock";
+        }
         windowManager.i3 = {
           enable = true;
           package = pkgs.i3-gaps;
