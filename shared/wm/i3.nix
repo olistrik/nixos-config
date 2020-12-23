@@ -8,6 +8,7 @@ in
   {
     imports = [
       ./picom.nix
+      ./lightlocker.nix
     ];
 
     #environment.etc."lightdm/background".source = pkgs.copyPathToStore /home/kranex/.lock_image;
@@ -43,7 +44,7 @@ in
 
         extraPackages = with pkgs; [
           rofi
-          i3lock
+          lightlocker
           polybar
           i3status
           i3blocks
