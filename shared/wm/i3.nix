@@ -46,7 +46,6 @@ in
 
           extraPackages = with pkgs; [
             rofi
-            lightlocker
             polybar
             i3status
             i3blocks
@@ -58,10 +57,6 @@ in
                 # Generated Config
                 gaps inner ${builtins.toString themer.wm.gaps.inner}
                 gaps outer ${builtins.toString themer.wm.gaps.outer}
-
-                # Autostart
-
-                exec --no-startup-id light-locker
 
                 ##########################
                 # User Config
