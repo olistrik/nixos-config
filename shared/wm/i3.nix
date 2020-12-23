@@ -15,6 +15,8 @@ in
 
     environment.etc."xdg/i3status/config".source = ../../dots/i3status.conf;
 
+    xdg.autostart.enable = true;
+
     services.xserver = {
       enable = true;
 
