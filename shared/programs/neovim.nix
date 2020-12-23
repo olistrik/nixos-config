@@ -15,6 +15,8 @@
             vim-pandoc-syntax
             plantuml-syntax
             i3config-vim
+            typescript-vim
+            vim-jsx-typescript
 
             vim-table-mode
 
