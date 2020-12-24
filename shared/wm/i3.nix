@@ -10,11 +10,10 @@ in
     imports = [
       ./programs/picom.nix
       ./programs/i3lock.nix
+      ./programs/i3blocks.nix
     ];
 
     config = {
-
-      environment.etc."xdg/i3status/config".source = ../../dots/i3status.conf;
 
       services.xserver = {
         enable = true;
@@ -134,7 +133,11 @@ in
 
                 ###############################################
 
-                exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+                bar {
+                  status_command i3blocks
+                }
+
+                #exec_always --no-startup-id $HOME/.config/polybar/launch.sh
               ''
             )
           );
