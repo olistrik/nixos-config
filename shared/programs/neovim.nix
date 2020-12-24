@@ -10,7 +10,7 @@
         packages.myPlugins = with pkgs.unstable.vimPlugins; {
           start = [
             # Language Support
-            vim-nix
+            vim-addon-nix
             vim-pandoc
             vim-pandoc-syntax
             plantuml-syntax
