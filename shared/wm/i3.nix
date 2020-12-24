@@ -9,13 +9,14 @@ in
   {
     imports = [
       ./picom.nix
+      ../scripts/chuckjoke.nix
     ];
 
     options = {
       services.xserver.windowManager.i3 = {
         locker = mkOption {
           type = types.str;
-          default = "${pkgs.i3lock}/bin/i3lock -e -i ~/.lock_image";
+          default = ''${pkgs.i3lock}/bin/i3lock-fancy --no-fork -t '$( ${pkgs.wget}/bin/wget http://api.icndb.com/jokes/random -qO- | jshon -e value -e joke -u | fold -s)' -f 'JetBrains-Mono-Regular-Nerd-Font-Complete' '';
         };
       };
     };
@@ -25,7 +26,7 @@ in
       environment.etc."xdg/i3status/config".source = ../../dots/i3status.conf;
 
       xdg.autostart.enable = true;
-
+      
       services.xserver = {
         enable = true;
 
@@ -48,6 +49,15 @@ in
             '';
           };
         };
+
+        xautolock = {
+          enable = true;
+          time = 5;
+          locker = "${pkgs.i3lock-fancy}/bin/i3lock-fancy --nofork -t '$(${pkgs.chucknorris}/bin/chucknorris)' -f 'JetBrains-Mono-Regular-Nerd-Font-Complete'";
+          nowlocker = "${pkgs.i3lock-fancy}/bin/i3lock-fancy --nofork -t '$(${pkgs.chucknorris}/bin/chucknorris)' -f 'JetBrains-Mono-Regular-Nerd-Font-Complete'";
+          #default = ''${pkgs.i3lock}/bin/i3lock-fancy --no-fork -t '$( ${pkgs.wget}/bin/wget http://api.icndb.com/jokes/random -qO- | jshon -e value -e joke -u | fold -s)' -f 'JetBrains-Mono-Regular-Nerd-Font-Complete' '';
+        };
+
         windowManager.i3 = {
           enable = true;
           package = pkgs.i3-gaps;
@@ -55,8 +65,7 @@ in
           extraPackages = with pkgs; [
             rofi
             polybar
-            i3lock
-            xautolock
+            i3lock-fancy
             i3status
             i3blocks
           ];
@@ -68,7 +77,6 @@ in
                 gaps inner ${builtins.toString themer.wm.gaps.inner}
                 gaps outer ${builtins.toString themer.wm.gaps.outer}
 
-                exec --no-startup-id xautolock -time 5 -locker "${pkgs.lightdm}/bin/dm-tool lock" -nowlocker "${pkgs.lightdm}/bin/dm-tool lock"
                 ##########################
                 # User Config
               ''
