@@ -8,7 +8,8 @@ let
 in
   {
     imports = [
-      ./picom.nix
+      ./programs/picom.nix
+      ./programs/i3lock.nix
     ];
 
     config = {
