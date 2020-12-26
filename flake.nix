@@ -9,7 +9,10 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # My custom packages WIP
-    nixpkgs-custom.url = "github:kranex/nixpkgs-custom";
+    nixpkgs-custom = {
+      url = "github:kranex/nixpkgs-custom";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # where the secrets dir is.
     secrets-dir = {
