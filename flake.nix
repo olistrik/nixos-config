@@ -9,10 +9,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # My custom packages WIP
-    custom = {
-      url = "/etc/nixos/pkgs";
-      flake = false;
-    };
+    nixpkgs-custom.url = "github:kranex/nixpkgs-custom";
 
     # where the secrets dir is.
     secrets-dir = {
@@ -23,6 +20,7 @@
 
  outputs = inputs@{self, nixpkgs, ...}:
     let
+      custom-modules = inputs.nixpkgs-custom.nixosModules.custom;
       # overlay unstable on nixpkgs. pkgs.unstable.[package] should now be
       # available.
       overlay-unstable = final: prev: {
@@ -30,8 +28,6 @@
       };
       # import the secrets dir.
       secrets = import inputs.secrets-dir;
-      # import custom using stable as the base.
-      custom = import inputs.custom { pkgs = nixpkgs; };
     in {
       nixosConfigurations = {
         ## Work Lenovo E15
@@ -41,7 +37,7 @@
           modules = [
             ({pkgs, ...}: { nixpkgs.overlays = [overlay-unstable]; })
             ./hosts/nixogen/configuration.nix
-            custom.modules
+            custom-modules
           ];
         };
       };
