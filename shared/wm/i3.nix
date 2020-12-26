@@ -61,9 +61,10 @@ in
                 # set gaps
                 gaps inner ${builtins.toString themer.wm.gaps.inner}
                 gaps outer ${builtins.toString themer.wm.gaps.outer}
+                gaps top -4
 
                 # Set font
-                font pango:JetBrains Mono NerdFont Mono 8
+                font pango:JetBrains Mono NerdFont 10
 
                 # Move floating windows with Mouse + MOD
                 floating_modifier $mod
@@ -134,7 +135,11 @@ in
                 ###############################################
 
                 bar {
-                  status_command i3blocks
+                  position top
+                  status_command i3blocks -c /etc/i3blocks.conf
+                  colors {
+                    background #3c3b3a
+                  }
                 }
 
                 #exec_always --no-startup-id $HOME/.config/polybar/launch.sh

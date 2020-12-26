@@ -125,8 +125,8 @@
     theme = import ../../shared/themes/ayu-mirage.nix;
     wm = {
       gaps = {
-        inner = 10;
-        outer = -5;
+        inner = 5;
+        outer = -4;
       };
     };
   };
