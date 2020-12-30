@@ -11,6 +11,7 @@
           start = [
             # Language Support
             vim-nix
+            vim-tsx
             vim-pandoc
             vim-pandoc-syntax
             plantuml-syntax
@@ -104,7 +105,7 @@
           augroup END
 
           "" Set textwidth for pandoc
-          autocmd FileType pandoc setlocal textwidth=80
+          autocmd FileType pandoc setlocal textwidth=80 fo+=t fo-=l
 
           set backspace=indent,eol,start
 

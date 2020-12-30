@@ -9,6 +9,10 @@
     cargo
     carnix
 
+    # Web Stuff
+    yarn
+    nodejs
+
     # Compile Managers
     gnumake
     bear
@@ -24,6 +28,9 @@
     # Packaging
     binutils
 
+    # Navigation
+    ranger
+    highlight
 
     # Docker
     docker-compose

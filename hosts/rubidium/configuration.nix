@@ -19,6 +19,7 @@
     ../../shared/efi.nix
     ../../shared/default.nix
     ../../shared/programs/pandoc.nix
+    ../../shared/programs/1password.nix
     ../../shared/programs/TeX.nix
     ./firewall.nix
 
@@ -28,6 +29,8 @@
     qtbase
     qtquickcontrols
     qtgraphicaleffects
+    pkgs.i3lock
+    pkgs.i3lock-pixeled
   ];
 
   #pkgs.(writeScriptBin "eclipse" ''
