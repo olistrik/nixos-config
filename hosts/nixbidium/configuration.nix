@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, pkgs-custom, ... }:
+{ config, pkgs, ... }:
 
 #let eclipse_unwrapped = (pkgs.eclipses.eclipseWithPlugins {
 #       eclipse = pkgs.eclipses.eclipse-platform;
@@ -14,35 +14,46 @@
 #in
 {
   imports = [
-    ./nixpkgs-custom
     ./hardware-configuration.nix
-    ../../shared/efi.nix
-    ../../shared/default.nix
+    ../../shared/themer.nix
+    ../../shared/users.nix
+    ../../shared/work.nix
+    ../../shared/work.nix
+    ../../shared/wm/bspwm.nix
 #    ../../shared/programs/R.nix
  #   ../../shared/programs/TeX.nix
     ./firewall.nix
 
   ];
 
+  nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
 
-#  nix = {
-#    package = pkgs.nixUnstable;
-#    extraOptions = ''
-#      experimental-features = nix-command flakes
-#    '';
-#  };
-
-  environment.systemPackages = with pkgs.qt5; [
-    qtbase
-    qtquickcontrols
-    qtgraphicaleffects
-    pkgs-custom.hello
+  environment.systemPackages = with pkgs; [
+    refind
+    efibootmgr
   ];
 
-  #pkgs.(writeScriptBin "eclipse" ''
-  #    #!${pkgs.stdenv.shell}
-  #    exec GTK_THEME=Raleigh ${pkgs.eclipses.eclipseWithPlugins}/bin/eclipse
-  #  '');
+  ###########################
+  ## Boot
+
+  boot.loader = {
+    efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot/efi";
+    };
+    grub = {
+      efiSupport = true;
+      device = "nodev";
+    };
+  };
+
+  ##############################
+  ## networking
 
   networking.dhcpcd.enable = false;
   networking.interfaces.eno1.ipv4.addresses = [ {
@@ -55,25 +66,30 @@
 
   networking.hostName = "nixbidium"; # Define your hostname.
 
-  # configure bspwm
-  programs.bspwm.enable = true;
-  services.xserver.displayManager.defaultSession = "none+bspwm";
-  services.xserver.displayManager.sddm.theme = "${(pkgs.fetchFromGitHub {
-    owner = "MarianArlt";
-    repo = "sddm-chili";
-    rev = "0.1.5";
-    sha256 = "036fxsa7m8ymmp3p40z671z163y6fcsa9a641lrxdrw225ssq5f3";
-  })}";
 
-  # configure alacritty
-  programs.alacritty = {
-    enable = true;
-    brightBold = true;
-    theme = import ../../themes/ayu-mirage.nix;
-  };
+  #################################
+  ## Programs
 
   # configure eclipse
   programs.eclipse.enable = true;
+
+  ################
+  ## Theming WIP
+
+  system.themer = {
+    theme = import ../../shared/themes/ayu-mirage.nix;
+    wm = {
+      gaps = {
+        inner = 5;
+        outer = -4;
+      };
+    };
+  };
+
+  programs.alacritty = {
+    font.size = "8.0";
+    theme = config.system.themer.theme;
+  };
 
   #services.xserver.displayManager.sddm.autoLogin = {
   #  enable = true;

@@ -43,6 +43,16 @@
             custom-modules
           ];
         };
+        ## Home PC
+        nixbidium = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit secrets; };
+          modules = [
+            ({pkgs, ...}: { nixpkgs.overlays = [overlay-unstable]; })
+            ./hosts/nixbidium/configuration.nix
+            custom-modules
+          ];
+        };
       };
     };
 }
