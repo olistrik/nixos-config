@@ -18,7 +18,6 @@
     ../../shared/themer.nix
     ../../shared/users.nix
     ../../shared/work.nix
-    ../../shared/work.nix
     ../../shared/wm/bspwm.nix
 #    ../../shared/programs/R.nix
  #   ../../shared/programs/TeX.nix
@@ -87,7 +86,7 @@
   };
 
   programs.alacritty = {
-    font.size = "8.0";
+    font.size = "10.0";
     theme = config.system.themer.theme;
   };
 
