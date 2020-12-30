@@ -20,7 +20,7 @@
     ../../shared/work.nix
     ../../shared/wm/bspwm.nix
 #    ../../shared/programs/R.nix
- #   ../../shared/programs/TeX.nix
+    ../../shared/programs/Pandoc.nix
     ./firewall.nix
 
   ];
