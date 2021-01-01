@@ -4,9 +4,6 @@ with lib;
 
 let
   themer = config.system.themer;
-  chucknorris = pkgs.writeScriptBin "chucknorris" ''
-    #!${pkgs.stdenv.shell}
-    ${pkgs.wget}/bin/wget http://api.icndb.com/jokes/random -qO- | ${pkgs.jshon}/bin/jshon -e value -e joke -u | fold -s'';
 in
   {
     imports = [
@@ -19,6 +16,16 @@ in
         jshon
         wget
       ];
+
+      systemd.services.suspendLock = {
+        description = "lock on suspend";
+        wantedBy = [ "sleep.target" ];
+        before = sleep.target;
+        serviceConfig = {
+          Environment= "DISPLAY=:0";
+          ExecStart = "${pkgs.xautolock} -locknow";
+        };
+      };
 
       services.xserver = {
         xautolock = {
