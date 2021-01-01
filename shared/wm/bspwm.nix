@@ -1,22 +1,39 @@
 {config, pkgs, ...}:
 
 {
+
+  imports = [
+    ./programs/picom.nix
+  ];
+
   environment.systemPackages = with pkgs; [
     polybar
     dmenu
     sxhkd
-    picom
   ];
 
   ## Enable X + SDDM + BSPWM.
   services.xserver = {
     enable = true;
-    layout = "us";
-    xkbOptions = "eurosign:5";
+
+    desktopManager = {
+      xterm.enable = false;
+    };
 
     displayManager = {
-      sddm.enable = true;
       defaultSession = "none+bspwm";
+      lightdm.greeters.mini = {
+        enable = true;
+        user = "kranex";
+        extraConfig = ''
+          [greeter]
+          show-password-label = false
+          [greeter-theme]
+          background-color = "#303030"
+          background-image = "/etc/lightdm/background.jpg"
+          window-color ="#000000"
+        '';
+      };
     };
 
     windowManager.bspwm = {
