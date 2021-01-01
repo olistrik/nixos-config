@@ -88,6 +88,5 @@ in
   environment.pathsToLink = [
     "share/nix-direnv"
   ];
-  
 }
 
