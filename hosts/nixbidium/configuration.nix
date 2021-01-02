@@ -21,6 +21,7 @@
     ../../shared/wm/bspwm.nix
 #    ../../shared/programs/R.nix
     ../../shared/programs/Pandoc.nix
+    ../../shared/ssh.nix
     ./firewall.nix
 
   ];
