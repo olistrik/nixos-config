@@ -63,7 +63,7 @@
     "secrets-dir": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-78KRZgqymJgPmNgNrJCxKc6D1L1Bwewrnnb+xbH0N74=",
+        "narHash": "sha256-SdQVPed1HhsLYbSXdo+Yc+7vtIpB2ADrxNpSL9AIjyM=",
         "path": "/secrets",
         "type": "path"
       },

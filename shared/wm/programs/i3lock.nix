@@ -12,18 +12,15 @@ in
     config = {
       environment.systemPackages = with pkgs; [
         i3lock-fancy
-        chucknorris
-        jshon
-        wget
       ];
 
       systemd.services.suspendLock = {
         description = "lock on suspend";
         wantedBy = [ "sleep.target" ];
-        before = sleep.target;
+        before = [ "sleep.target" ];
         serviceConfig = {
-          Environment= "DISPLAY=:0";
-          ExecStart = "${pkgs.xautolock} -locknow";
+          #Environment= "DISPLAY=:0";
+          ExecStart = "${pkgs.xautolock}/bin/xautolock -locknow";
         };
       };
 
