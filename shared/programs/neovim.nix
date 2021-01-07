@@ -13,6 +13,8 @@
             vim-nix
             vim-pandoc
             vim-pandoc-syntax
+            vim-ruby
+            vim-rails
             plantuml-syntax
             i3config-vim
             typescript-vim
