@@ -45,6 +45,7 @@ in
           extraPackages = with pkgs; [
             rofi
             polybar
+            shutter
             i3status
             i3blocks
           ];
@@ -116,6 +117,15 @@ in
 
                 # dmenu
                 bindsym $mod+space exec rofi -theme Arc-Dark -show run
+
+                # screenshot
+                bindsym $mod+p exec screenshot $HOME/Pictures
+
+                # screencrop
+                bindsym --release $mod+Shift+p exec screencrop $HOME/Pictures
+
+                # screencrop
+                bindsym --release $mod+Ctrl+p exec windowshot $HOME/Pictures
 
                 #######################
                 ## container Controls
