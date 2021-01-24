@@ -25,6 +25,20 @@ in
             set $ws3 "3"
             set $ws4 "4"
             set $ws5 "5"
+
+            # switch workspace
+            bindsym $mod+1 workspace number $ws1
+            bindsym $mod+2 workspace number $ws2
+            bindsym $mod+3 workspace number $ws3
+            bindsym $mod+4 workspace number $ws4
+            bindsym $mod+5 workspace number $ws5
+
+            # send container to workspace
+            bindsym $mod+Shift+exclam     move container to workspace number $ws1
+            bindsym $mod+Shift+at         move container to workspace number $ws2
+            bindsym $mod+Shift+numbersign move container to workspace number $ws3
+            bindsym $mod+Shift+dollar     move container to workspace number $ws4
+            bindsym $mod+Shift+percent    move container to workspace number $ws5
             '';
         };
       };
@@ -105,13 +119,6 @@ in
                 # kill focus window
                 bindsym $mod+Shift+q kill
 
-                # switch workspace
-                bindsym $mod+1 workspace number $ws1
-                bindsym $mod+2 workspace number $ws2
-                bindsym $mod+3 workspace number $ws3
-                bindsym $mod+4 workspace number $ws4
-                bindsym $mod+5 workspace number $ws5
-
                 # reload the config
                 bindsym $mod+Shift+c reload
 
@@ -149,13 +156,6 @@ in
                 bindsym $mod+s layout stacking
                 bindsym $mod+t layout tabbed
                 bindsym $mod+e layout default
-
-                # send container to workspace
-                bindsym $mod+Shift+exclam     move container to workspace number $ws1
-                bindsym $mod+Shift+at         move container to workspace number $ws2
-                bindsym $mod+Shift+numbersign move container to workspace number $ws3
-                bindsym $mod+Shift+dollar     move container to workspace number $ws4
-                bindsym $mod+Shift+percent    move container to workspace number $ws5
 
                 ###############################################
 
