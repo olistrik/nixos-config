@@ -1,4 +1,10 @@
 default:
+	git add -A
+	nixos-rebuild test
+
+switch:
+	git add -A
+	git commit
 	nixos-rebuild switch
 
 perms:
