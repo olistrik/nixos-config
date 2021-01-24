@@ -53,6 +53,16 @@
             custom-modules
           ];
         };
+        ## New PC
+        nixium = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit secrets; };
+          modules = [
+            ({pkgs, ...}: { nixpkgs.overlays = [overlay-unstable]; })
+            ./hosts/nixium/configuration.nix
+            custom-modules
+          ];
+        };
       };
     };
 }
