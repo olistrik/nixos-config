@@ -14,20 +14,11 @@ in
         i3lock-fancy
       ];
 
-      systemd.services.suspendLock = {
-        description = "lock on suspend";
-        wantedBy = [ "sleep.target" ];
-        before = [ "sleep.target" ];
-        serviceConfig = {
-          #Environment= "DISPLAY=:0";
-          ExecStart = "${pkgs.xautolock}/bin/xautolock -locknow";
-        };
-      };
-
       services.xserver = {
         xautolock = {
           enable = true;
           time = 5;
+          extraOptions = ["-detectsleep" "-lockaftersleep"];
           locker = "${pkgs.i3lock-fancy}/bin/i3lock-fancy --nofork -t 'locked' -f 'JetBrains-Mono-Regular-Nerd-Font-Complete'";
           nowlocker = "${pkgs.i3lock-fancy}/bin/i3lock-fancy --nofork -t 'locked' -f 'JetBrains-Mono-Regular-Nerd-Font-Complete'";
         };
