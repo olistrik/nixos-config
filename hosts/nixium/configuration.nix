@@ -32,6 +32,8 @@
   #########################
   ## NVIDIA 3080 Specific
 
+  services.xserver.videoDrivers = [ "nvidia" ];
+
   #######################
   ## Home/Work Specific
 
@@ -69,6 +71,30 @@
   services.xserver = {
     layout = "us";
     xkbOptions = "eurosign:5";
+
+    windowManager.i3 = {
+      workspaces = ''
+        # Set workspace names
+        set $ws1 "1"
+        set $ws2 "2"
+        set $ws3 "3"
+        set $ws4 "4"
+        set $ws5 "5"
+        set $ws6 "6"
+        set $ws7 "7"
+        set $ws8 "8"
+
+        # Put workspaces on correct screens
+        workspace $ws1 output right
+        workspace $ws2 output left
+        workspace $ws3 output right
+        workspace $ws4 output left
+        workspace $ws5 output right
+        workspace $ws6 output left
+        workspace $ws7 output right
+        workspace $ws8 output left
+      '';
+    };
   };
 
   ############

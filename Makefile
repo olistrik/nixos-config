@@ -1,11 +1,12 @@
 default:
 	git add -A
-	nixos-rebuild test
+	sudo nixos-rebuild test
+	sudo rm result
 
 switch:
 	git add -A
 	git commit
-	nixos-rebuild switch
+	sudo nixos-rebuild switch
 
 perms:
 	chown -R root:wheel ../nixos
