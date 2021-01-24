@@ -13,6 +13,23 @@ in
       ./programs/i3blocks.nix
     ];
 
+
+    options = {
+      services.xserver.windowManager.i3 = {
+        workspaces = mkOption {
+          type = types.str;
+          default = ''
+            # Set workspace names
+            set $ws1 "1"
+            set $ws2 "2"
+            set $ws3 "3"
+            set $ws4 "4"
+            set $ws5 "5"
+            '';
+        };
+      };
+    };
+
     config = {
 
       services.xserver = {
@@ -45,7 +62,6 @@ in
           extraPackages = with pkgs; [
             rofi
             polybar
-            shutter
             i3status
             i3blocks
           ];
@@ -70,15 +86,14 @@ in
                 # Move floating windows with Mouse + MOD
                 floating_modifier $mod
 
-                # Set workspace names
-                set $ws1 "1"
-                set $ws2 "2"
-                set $ws3 "3"
-                set $ws4 "4"
-                set $ws5 "5"
-
                 # hide window titles
                 for_window [class="^.*"] border pixel 2
+
+                ################################################
+                ## Workspaces  #################################
+                ################################################
+
+                ${cfg.workspaces}
 
                 ################################################
                 ## Keybindings #################################
