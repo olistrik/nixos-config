@@ -53,9 +53,13 @@ in
     gnumake
     direnv
     nix-direnv
+    vscode
 
     # Docker
     docker-compose
+
+    # Java
+    jre8
 
     # JavaScript
     nodejs
