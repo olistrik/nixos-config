@@ -25,7 +25,6 @@
     '';
   };
 
-
   #######################
   ## AMD 5950X Specific
 
@@ -37,6 +36,11 @@
   #######################
   ## Home/Work Specific
 
+  # Set up refind for dual boot
+  environment.systemPackages = with pkgs; [
+    efibootmgr
+    refind
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot = {
