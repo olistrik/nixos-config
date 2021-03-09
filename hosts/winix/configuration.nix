@@ -8,7 +8,14 @@ in
 {
   imports = [
     "${modulesPath}/profiles/minimal.nix"
+    ../../shared/themer.nix
     ../../shared/programs/neovim.nix
+    ../../shared/programs/zsh.nix
+  ];
+
+  environment.systemPackages = with pkgs; [
+    gnumake
+    git
   ];
 
   # This is for a WSL2 NixOS. Windows + Nix = winix.
@@ -20,6 +27,9 @@ in
       experimental-features = nix-command flakes
     '';
   };
+
+  ########################
+  ## WSL Specific
 
   # WSL is closer to a container than anything else
   boot.isContainer = true;
@@ -54,4 +64,11 @@ in
 
   # Don't allow emergency mode, because we don't have a console.
   systemd.enableEmergencyMode = false;
+
+  #################
+  ## Theming WIP
+
+  system.themer = {
+    theme = import ../../shared/themes/ayu-mirage.nix;
+  };
 }
