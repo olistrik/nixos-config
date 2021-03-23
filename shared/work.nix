@@ -66,6 +66,12 @@ in
           version = "0.28.1";
           sha256 = "HAUdv+2T+neJ5aCGiQ37pCO6x6r57HIUnLm4apg9L50=";
         }
+        {
+          name = "vscode-ruby";
+          publisher = "wingrunr21";
+          version = "0.28.0";
+          sha256 = "H3f1+c31x+lgCzhgTb0uLg9Bdn3pZyJGPPwfpCYrS70=";
+        }
       ];
     })
 
