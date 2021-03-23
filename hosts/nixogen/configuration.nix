@@ -17,6 +17,7 @@
       ../../shared/themer.nix      # load the theming defaults.
       ../../shared/users.nix       # configure kranex and root.
       ../../shared/work.nix        # configure work programs.
+      ../../shared/programs/Pandoc.nix
       ../../shared/wm/i3.nix       # use lightdm + i3.
     ];
 
@@ -26,6 +27,8 @@
       experimental-features = nix-command flakes
     '';
   };
+
+  nixpkgs.config.allowUnfree = true;
 
   #################
   ## E15 Specific
@@ -84,6 +87,8 @@
   networking.wireless.enable = true;
   networking.interfaces.wlp3s0.useDHCP = true;
 
+  services.autorandr.enable = true;
+
   #################
   ## Localisation
 
@@ -115,8 +120,8 @@
   networking.interfaces.enp2s0.useDHCP = true;
 
   # Stops the network manager and DHCP from stalling boot for like 200 years.
-  systemd.services.systemd-udev-settle.enable = false;
-  systemd.services.NetworkManager-wait-online.enable = false;
+  # systemd.services.systemd-udev-settle.enable = false;
+  # systemd.services.NetworkManager-wait-online.enable = false;
 
   ################
   ## Theming WIP

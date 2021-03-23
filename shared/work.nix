@@ -53,7 +53,14 @@ in
     gnumake
     direnv
     nix-direnv
-    vscode
+    (vscode-with-extensions.override {
+      vscodeExtensions = (with unstable.vscode-extensions; [
+        ms-vsliveshare.vsliveshare
+        vscodevim.vim
+        #eamodio.gitlens
+        #dbaeumer.vscode-eslint
+      ]);
+    })
 
     # Docker
     docker-compose

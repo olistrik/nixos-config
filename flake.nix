@@ -27,7 +27,10 @@
       # overlay unstable on nixpkgs. pkgs.unstable.[package] should now be
       # available.
       overlay-unstable = final: prev: {
-        unstable = inputs.nixpkgs-unstable.legacyPackages.${final.system};
+        unstable =  import inputs.nixpkgs-unstable {
+          system = "${final.system}";
+          config.allowUnfree = true;
+        };
       };
       # import the secrets dir.
       secrets = import inputs.secrets-dir;
