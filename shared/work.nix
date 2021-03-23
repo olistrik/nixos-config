@@ -57,9 +57,16 @@ in
       vscodeExtensions = (with unstable.vscode-extensions; [
         ms-vsliveshare.vsliveshare
         vscodevim.vim
-        #eamodio.gitlens
-        #dbaeumer.vscode-eslint
-      ]);
+        eamodio.gitlens
+        dbaeumer.vscode-eslint
+      ]) ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        {
+          name = "ruby";
+          publisher = "rebornix";
+          version = "0.28.1";
+          sha256 = "HAUdv+2T+neJ5aCGiQ37pCO6x6r57HIUnLm4apg9L50=";
+        }
+      ];
     })
 
     # Docker
@@ -73,7 +80,14 @@ in
     yarn
 
     # Ruby
-    ruby
+    ruby.devEnv
+    sqlite
+    libpcap
+    postgresql
+    libxml2
+    libxslt
+    pkg-config
+    bundix
 
     # C & C++
     gcc10
