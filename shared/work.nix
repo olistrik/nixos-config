@@ -37,6 +37,7 @@ in
     # Net sync.
     wget
     git
+    unstable.commitizen
 
     # Document viewers.
     feh
