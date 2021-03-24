@@ -59,6 +59,9 @@ in
                 # Set modifier key to windows
                 set $mod Mod4
 
+                # focus following is really annoying
+                focus_follows_mouse no
+
                 # set gaps
                 gaps inner ${builtins.toString themer.wm.gaps.inner}
                 gaps outer ${builtins.toString themer.wm.gaps.outer}
@@ -79,6 +82,7 @@ in
 
                 # hide window titles
                 for_window [class="^.*"] border pixel 2
+
 
                 ################################################
                 ## Keybindings #################################
