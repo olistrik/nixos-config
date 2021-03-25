@@ -58,8 +58,6 @@ in
       vscodeExtensions = (with unstable.vscode-extensions; [
         ms-vsliveshare.vsliveshare
         vscodevim.vim
-        eamodio.gitlens
-        dbaeumer.vscode-eslint
       ]) ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "ruby";
@@ -72,6 +70,18 @@ in
           publisher = "wingrunr21";
           version = "0.28.0";
           sha256 = "H3f1+c31x+lgCzhgTb0uLg9Bdn3pZyJGPPwfpCYrS70=";
+        }
+        {
+          name = "vscode-eslint";
+          publisher = "dbaeumer";
+          version = "2.1.10";
+          sha256 = "parXZhF9qyRAlmeGItCbvPfyyQQ9WmlBKKFYQ8KIFH0=";
+        }
+        {
+          name = "gitlens";
+          publisher = "eamodio";
+          version = "11.3.0";
+          sha256 = "m2Zn+e6hj59SujcW5ptdrYDrc4CviZ4wyCndO2BhyF8=";
         }
       ];
     })
