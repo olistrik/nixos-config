@@ -83,6 +83,12 @@ in
           version = "11.3.0";
           sha256 = "m2Zn+e6hj59SujcW5ptdrYDrc4CviZ4wyCndO2BhyF8=";
         }
+        {
+          name = "vscode-ts-auto-return-type";
+          publisher = "ebrithil30";
+          version = "1.1.0";
+          sha256 ="8ydpxZtKnWdfBaS9Ln10pPB0eoic+JQ5HA+rKw+BAI8=";
+        }
       ];
     })
 
