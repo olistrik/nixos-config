@@ -4,7 +4,7 @@ test:
 
 switch: perms
 	git add -A
-	git cz
+	git commit
 	sudo nixos-rebuild switch
 
 perms:
