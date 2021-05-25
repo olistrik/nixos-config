@@ -65,7 +65,7 @@
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
- 
+
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
@@ -77,53 +77,6 @@
   services.xserver = {
     layout = "us";
     xkbOptions = "eurosign:5";
-
-    windowManager.i3 = {
-      workspaces = ''
-        set $left  "DP-4"
-        set $right "HDMI-0"
-
-        # Set workspace names
-        set $ws1 "1"
-        set $ws2 "2"
-        set $ws3 "3"
-        set $ws4 "4"
-        set $ws5 "5"
-        set $ws6 "6"
-        set $ws7 "7"
-        set $ws8 "8"
-
-        # Put workspaces on correct screens
-        workspace $ws1 output $left
-        workspace $ws2 output $right
-        workspace $ws3 output $left
-        workspace $ws4 output $right
-        workspace $ws5 output $left
-        workspace $ws6 output $right
-        workspace $ws7 output $left
-        workspace $ws8 output $right
-
-        # switch workspace
-        bindsym $mod+1 workspace number $ws1
-        bindsym $mod+2 workspace number $ws2
-        bindsym $mod+3 workspace number $ws3
-        bindsym $mod+4 workspace number $ws4
-        bindsym $mod+5 workspace number $ws5
-        bindsym $mod+6 workspace number $ws6
-        bindsym $mod+7 workspace number $ws7
-        bindsym $mod+8 workspace number $ws8
-
-        # send container to workspace
-        bindsym $mod+Shift+exclam     move container to workspace number $ws1
-        bindsym $mod+Shift+at         move container to workspace number $ws2
-        bindsym $mod+Shift+numbersign move container to workspace number $ws3
-        bindsym $mod+Shift+dollar     move container to workspace number $ws4
-        bindsym $mod+Shift+percent    move container to workspace number $ws5
-        bindsym $mod+Shift+asciicirum move container to workspace number $ws6
-        bindsym $mod+Shift+ampersand  move container to workspace number $ws7
-        bindsym $mod+Shift+asterisk   move container to workspace number $ws8
-      '';
-    };
   };
 
   ############
