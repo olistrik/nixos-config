@@ -64,6 +64,7 @@
           modules = [
             ({pkgs, ...}: { nixpkgs.overlays = [overlay-unstable]; })
             ./hosts/nixium/configuration.nix
+            custom-modules
           ];
         };
 
