@@ -28,6 +28,7 @@
       # available.
       overlay-unstable = final: prev: {
         unstable = inputs.nixpkgs-unstable.legacyPackages.${final.system};
+        config.allowUnfree = true;
       };
       # import the secrets dir.
       secrets = import inputs.secrets-dir;
@@ -56,7 +57,6 @@
         ## New PC
         nixium = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          config.allowUnfree = true;
           specialArgs = { inherit secrets; };
           modules = [
             ({pkgs, ...}: { nixpkgs.overlays = [overlay-unstable]; })

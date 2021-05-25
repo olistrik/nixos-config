@@ -25,6 +25,8 @@
     '';
   };
 
+  nixpkgs.config.allowUnfree = true;
+
   #######################
   ## AMD 5950X Specific
 
