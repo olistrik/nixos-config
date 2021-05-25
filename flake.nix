@@ -27,8 +27,10 @@
       # overlay unstable on nixpkgs. pkgs.unstable.[package] should now be
       # available.
       overlay-unstable = final: prev: {
-        unstable = inputs.nixpkgs-unstable.legacyPackages.${final.system};
-        config.allowUnfree = true;
+        unstable =  import inputs.nixpkgs-unstable {
+          system = "${final.system}";
+          config.allowUnfree = true;
+        };
       };
       # import the secrets dir.
       secrets = import inputs.secrets-dir;
@@ -54,6 +56,7 @@
             custom-modules
           ];
         };
+
         ## New PC
         nixium = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -61,6 +64,16 @@
           modules = [
             ({pkgs, ...}: { nixpkgs.overlays = [overlay-unstable]; })
             ./hosts/nixium/configuration.nix
+          ];
+        };
+
+        ## WSL 2
+        winix = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit secrets; };
+          modules = [
+            ({pkgs, ...}: { nixpkgs.overlays = [overlay-unstable]; })
+            ./hosts/winix/configuration.nix
             custom-modules
           ];
         };

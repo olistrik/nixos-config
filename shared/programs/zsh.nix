@@ -106,6 +106,9 @@
       ## Aliases
       alias zzz="systemctl suspend"
       alias zura="zathura --fork"
+      alias dcu="docker-compose up -d"
+      alias dcd="docker-compose down"
+      alias dcb="docker-compose build --parallel"
 
     '';
     promptInit = ''
