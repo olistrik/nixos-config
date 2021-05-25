@@ -119,7 +119,7 @@ in
     binutils
 
     #Web Browser
-    chrome
+    google-chrome
     firefox   #
   ];
 
