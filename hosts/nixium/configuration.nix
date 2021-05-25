@@ -135,6 +135,12 @@
   networking.interfaces.enp7s0.useDHCP = true;
   networking.interfaces.wlp5s0.useDHCP = true;
 
+  #################################
+  ## Super Ultra wide boiii
+  services.xserver.resolutions = [{ x = 5120; y = 1440; }];
+
+  environment.variables.WINIT_X11_SCALE_FACTOR = "1.25";
+
   ################
   ## Theming WIP
 
