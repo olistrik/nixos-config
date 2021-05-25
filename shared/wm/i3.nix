@@ -149,6 +149,7 @@ in
 
                 # screencrop
                 bindsym --release $mod+Shift+p exec screencrop $HOME/Pictures
+                bindsym --release $mod+Shift+s exec screencrop $HOME/Pictures
 
                 # screencrop
                 bindsym --release $mod+Ctrl+p exec windowshot $HOME/Pictures
