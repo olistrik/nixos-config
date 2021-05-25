@@ -56,6 +56,7 @@
         ## New PC
         nixium = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
+          config.allowUnfree = true;
           specialArgs = { inherit secrets; };
           modules = [
             ({pkgs, ...}: { nixpkgs.overlays = [overlay-unstable]; })
