@@ -13,6 +13,37 @@ in
       ./programs/i3blocks.nix
     ];
 
+
+    options = {
+      services.xserver.windowManager.i3 = {
+        workspaces = mkOption {
+          type = types.str;
+          default = ''
+            # Set workspace names
+            set $ws1 "1"
+            set $ws2 "2"
+            set $ws3 "3"
+            set $ws4 "4"
+            set $ws5 "5"
+
+            # switch workspace
+            bindsym $mod+1 workspace number $ws1
+            bindsym $mod+2 workspace number $ws2
+            bindsym $mod+3 workspace number $ws3
+            bindsym $mod+4 workspace number $ws4
+            bindsym $mod+5 workspace number $ws5
+
+            # send container to workspace
+            bindsym $mod+Shift+exclam     move container to workspace number $ws1
+            bindsym $mod+Shift+at         move container to workspace number $ws2
+            bindsym $mod+Shift+numbersign move container to workspace number $ws3
+            bindsym $mod+Shift+dollar     move container to workspace number $ws4
+            bindsym $mod+Shift+percent    move container to workspace number $ws5
+            '';
+        };
+      };
+    };
+
     config = {
 
       services.xserver = {
@@ -45,7 +76,6 @@ in
           extraPackages = with pkgs; [
             rofi
             polybar
-            shutter
             i3status
             i3blocks
           ];
@@ -73,16 +103,15 @@ in
                 # Move floating windows with Mouse + MOD
                 floating_modifier $mod
 
-                # Set workspace names
-                set $ws1 "1"
-                set $ws2 "2"
-                set $ws3 "3"
-                set $ws4 "4"
-                set $ws5 "5"
-
                 # hide window titles
                 for_window [class="^.*"] border pixel 2
 
+
+                ################################################
+                ## Workspaces  #################################
+                ################################################
+
+                ${cfg.workspaces}
 
                 ################################################
                 ## Keybindings #################################
@@ -93,13 +122,6 @@ in
 
                 # kill focus window
                 bindsym $mod+Shift+q kill
-
-                # switch workspace
-                bindsym $mod+1 workspace number $ws1
-                bindsym $mod+2 workspace number $ws2
-                bindsym $mod+3 workspace number $ws3
-                bindsym $mod+4 workspace number $ws4
-                bindsym $mod+5 workspace number $ws5
 
                 # reload the config
                 bindsym $mod+Shift+c reload
@@ -127,6 +149,7 @@ in
 
                 # screencrop
                 bindsym --release $mod+Shift+p exec screencrop $HOME/Pictures
+                bindsym --release $mod+Shift+s exec screencrop $HOME/Pictures
 
                 # screencrop
                 bindsym --release $mod+Ctrl+p exec windowshot $HOME/Pictures
@@ -138,13 +161,6 @@ in
                 bindsym $mod+s layout stacking
                 bindsym $mod+t layout tabbed
                 bindsym $mod+e layout default
-
-                # send container to workspace
-                bindsym $mod+Shift+exclam     move container to workspace number $ws1
-                bindsym $mod+Shift+at         move container to workspace number $ws2
-                bindsym $mod+Shift+numbersign move container to workspace number $ws3
-                bindsym $mod+Shift+dollar     move container to workspace number $ws4
-                bindsym $mod+Shift+percent    move container to workspace number $ws5
 
                 ###############################################
 
