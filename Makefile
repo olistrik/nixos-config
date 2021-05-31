@@ -1,4 +1,5 @@
 test:
+	git add -A
 	sudo nixos-rebuild test
 	sudo rm -rf result
 
