@@ -66,7 +66,6 @@
 
   networking.hostName = "nixbidium"; # Define your hostname.
 
-
   #################################
   ## Programs
 
