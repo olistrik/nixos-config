@@ -119,6 +119,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let g:ycm_min_num_of_chars_for_completion = 3
 let g:ycm_show_diagnostics_ui = 0
 
+"" FZF
+let $FZF_DEFAULT_COMMAND = "find -L -not -path '*/\.git/*'"
+nnoremap <silent> <C-p> :FZF<CR>
 
 "" Vim Table Mode
 function! s:isAtStartOfLine(mapping)
