@@ -14,6 +14,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    sops-nix.url = "github:Mic92/sops-nix";
+
     # where the secrets dir is.
     secrets-dir = {
       url = "/secrets";
@@ -44,6 +46,7 @@
             ({pkgs, ...}: { nixpkgs.overlays = [overlay-unstable]; })
             ./hosts/nixogen/configuration.nix
             custom-modules
+            inputs.sops-nix.nixosModules.sops
           ];
         };
         ## Home PC
