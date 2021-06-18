@@ -30,6 +30,15 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  programs = {
+    ssh.startAgent = false;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+      pinentryFlavor = "gnome3";
+    };
+  };
+
   #################
   ## E15 Specific
 
