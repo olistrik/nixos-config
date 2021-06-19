@@ -84,7 +84,10 @@
   services.xserver.libinput.enable = true;
 
   # Enables wireless support via wpa_supplicant.
-  networking.wireless.enable = true;
+  networking.wireless = {
+    enable = true;
+    interfaces = [ "wlp3s0" ];
+  };
   networking.interfaces.wlp3s0.useDHCP = true;
 
   services.autorandr.enable = true;
