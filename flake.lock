@@ -57,31 +57,18 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-custom": "nixpkgs-custom",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "secrets": "secrets",
-        "secrets-dir": "secrets-dir"
+        "secrets": "secrets"
       }
     },
     "secrets": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-iKi8v72wleZ2wcLZ+NEunn8Rcl9EAPzk2niAnZYGJ8o=",
+        "narHash": "sha256-6SZEUAf9pEyEqKLSPZmTXnRy4/dDyg9dRveTZAiT9E0=",
         "path": "/etc/nixos/secrets",
         "type": "path"
       },
       "original": {
         "path": "/etc/nixos/secrets",
-        "type": "path"
-      }
-    },
-    "secrets-dir": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-SdQVPed1HhsLYbSXdo+Yc+7vtIpB2ADrxNpSL9AIjyM=",
-        "path": "/secrets",
-        "type": "path"
-      },
-      "original": {
-        "path": "/secrets",
         "type": "path"
       }
     }
