@@ -14,10 +14,10 @@
         isNormalUser = true;
         extraGroups = [ "wheel" "audio" "sound" "video" "input" "tty" "dialout"
       "osboxes"]; # Enable ‘sudo’ for the user.
-        hashedPassword = secrets.kranex.hashedPassword;
+        hashedPassword = secrets.users.kranex.hashedPassword;
       };
       root = {
-        hashedPassword = secrets.root.hashedPassword;
+        hashedPassword = secrets.users.root.hashedPassword;
       };
     };
   };

@@ -14,13 +14,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    sops-nix.url = "github:Mic92/sops-nix";
-
     # where the secrets dir is.
     secrets-dir = {
       url = "/secrets";
       flake = false;
     };
+
+    secrets.url = "/etc/nixos/secrets/";
   };
 
  outputs = inputs@{self, nixpkgs, ...}:
@@ -35,7 +35,8 @@
         };
       };
       # import the secrets dir.
-      secrets = import inputs.secrets-dir;
+      # secrets = import inputs.secrets-dir;
+      secrets = inputs.secrets;
     in {
       nixosConfigurations = {
         ## Work Lenovo E15
@@ -46,7 +47,6 @@
             ({pkgs, ...}: { nixpkgs.overlays = [overlay-unstable]; })
             ./hosts/nixogen/configuration.nix
             custom-modules
-            inputs.sops-nix.nixosModules.sops
           ];
         };
         ## Home PC
