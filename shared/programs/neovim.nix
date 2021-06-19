@@ -9,6 +9,7 @@
     vimAlias = true;
     runtime = {
       "parser/tsx.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-tsx}/parser";
+      "parser/nix.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-nix}/parser";
     };
     configure = {
       packages.myPlugins = with pkgs.unstable.vimPlugins; {
