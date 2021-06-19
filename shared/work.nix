@@ -22,6 +22,17 @@ in
     ./programs/alacritty.nix
   ];
 
+  # Every pc needs this.
+  programs = {
+    ssh.startAgent = false;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+      pinentryFlavor = "gnome3";
+    };
+  };
+
+
   # not sure why I need this. Jetbrains stuff?
   nixpkgs.config.allowUnfree = true;
 
