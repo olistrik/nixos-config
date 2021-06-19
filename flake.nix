@@ -3,10 +3,16 @@
 
   inputs = {
     # Pin nixpkgs to 20.09
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-20.09";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-21.05";
 
     # Unstable branch
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    # nvim 0.5
+    neovim = {
+      url = "github:neovim/neovim?dir=contrib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # My custom packages WIP
     nixpkgs-custom = {
@@ -21,40 +27,44 @@
 
   };
 
- outputs = inputs@{self, nixpkgs, ...}:
+ outputs = {self, nixpkgs, ... }@inputs:
     let
       custom-modules = inputs.nixpkgs-custom.nixosModules.custom;
       # overlay unstable on nixpkgs. pkgs.unstable.[package] should now be
       # available.
-      overlay-unstable = final: prev: {
-        unstable =  import inputs.nixpkgs-unstable {
-          system = "${final.system}";
-          config.allowUnfree = true;
-        };
+      nixpkgsConfig = with inputs; rec {
+        config = { allowUnfree = true; };
+        overlays = [
+          (
+            final: prev: {
+              unstable =  import nixpkgs-unstable {
+                inherit (prev) system; inherit config;
+              };
+
+              neovim-nightly = neovim.packages.${prev.system}.neovim;
+              # Packages to be on bleeding edge.
+              vimPlugins = prev.vimPlugins // final.unstable.vimPlugins;
+            }
+          )
+        ];
       };
+
       # import the secrets dir.
       # secrets = import inputs.secrets-dir;
       secrets = (import inputs.secrets).secrets;
+
+      commonModules = [
+        custom-modules
+        ({conifg, lib, ...}: { nixpkgs = nixpkgsConfig; })
+      ];
     in {
       nixosConfigurations = {
         ## Work Lenovo E15
         nixogen = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit secrets; };
-          modules = [
-            ({pkgs, ...}: { nixpkgs.overlays = [overlay-unstable]; })
+          modules = commonModules ++ [
             ./hosts/nixogen/configuration.nix
-            custom-modules
-          ];
-        };
-        ## Home PC
-        nixbidium = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit secrets; };
-          modules = [
-            ({pkgs, ...}: { nixpkgs.overlays = [overlay-unstable]; })
-            ./hosts/nixbidium/configuration.nix
-            custom-modules
           ];
         };
 
@@ -62,10 +72,8 @@
         nixium = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit secrets; };
-          modules = [
-            ({pkgs, ...}: { nixpkgs.overlays = [overlay-unstable]; })
+          modules = commonModules ++ [
             ./hosts/nixium/configuration.nix
-            custom-modules
           ];
         };
 
@@ -73,10 +81,8 @@
         winix = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit secrets; };
-          modules = [
-            ({pkgs, ...}: { nixpkgs.overlays = [overlay-unstable]; })
+          modules = commonModules ++ [
             ./hosts/winix/configuration.nix
-            custom-modules
           ];
         };
       };

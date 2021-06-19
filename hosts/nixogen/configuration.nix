@@ -17,7 +17,7 @@
       ../../shared/themer.nix      # load the theming defaults.
       ../../shared/users.nix       # configure kranex and root.
       ../../shared/work.nix        # configure work programs.
-      ../../shared/programs/Pandoc.nix
+      # ../../shared/programs/Pandoc.nix
       ../../shared/wm/i3.nix       # use lightdm + i3.
     ];
 
