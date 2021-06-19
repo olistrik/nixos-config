@@ -14,12 +14,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # where the secrets dir is.
-    secrets-dir = {
-      url = "/secrets";
-      flake = false;
-    };
-
     secrets = {
       url = "/etc/nixos/secrets";
       flake = false;
