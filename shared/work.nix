@@ -121,6 +121,9 @@ in
     #Web Browser
     google-chrome
     firefox   #
+
+    # because
+    sops
   ];
 
   # Docker
