@@ -29,8 +29,8 @@ secrets:
 
 decrypt:
 	nix run 'nixpkgs#sops' -- \
-		--output secrets/decrypted.json \
+		--output secrets/secrets.json \
 		--output-type json \
-		-d secrets/secrets.yml
+		-d secrets/secrets.enc.yml
 
 

@@ -64,7 +64,7 @@
     "secrets": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-EhTuhiY1+vnsiPfUu9mvSZU64BoTNZ/89J+4cND1xcg=",
+        "narHash": "sha256-b00v+z920UTN81EeFBWp0LFEzRgFQQQ+TjsqGcurXdY=",
         "path": "/etc/nixos/secrets",
         "type": "path"
       },
