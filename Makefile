@@ -13,6 +13,8 @@ perms:
 	sudo find ../nixos -type d -exec chmod 775 {} +
 	sudo find ../nixos -type f -exec chmod 664 {} +
 	sudo find ../nixos/scripts -type f -exec chmod 755 {} +
+	sudo chown root:wheel secrets/secrets.json
+	sudo chmod 620 secrets/secrets.json
 
 update:
 	sudo nix flake update
@@ -23,14 +25,15 @@ new_key:
 
 update_keys:
 	scripts/update_keys.sh
-
-secrets:
-	nix run 'nixpkgs#sops' -- secrets/secrets.yml
+	
+edit_sops:
+	sops ./secrets/secrets.enc.yml
 
 decrypt:
-	nix run 'nixpkgs#sops' -- \
+	sudo sops \
 		--output secrets/secrets.json \
 		--output-type json \
 		-d secrets/secrets.enc.yml
+	sudo nix flake lock --update-input secrets
 
-
+sops: edit_sops decrypt
