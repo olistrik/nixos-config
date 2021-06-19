@@ -40,7 +40,7 @@
       };
       # import the secrets dir.
       # secrets = import inputs.secrets-dir;
-      secrets = import inputs.secrets;
+      secrets = (import inputs.secrets).secrets;
     in {
       nixosConfigurations = {
         ## Work Lenovo E15
