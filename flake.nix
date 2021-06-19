@@ -20,7 +20,11 @@
       flake = false;
     };
 
-    secrets.url = "/etc/nixos/secrets/";
+    secrets = {
+      url = "/etc/nixos/secrets";
+      flake = false;
+    };
+
   };
 
  outputs = inputs@{self, nixpkgs, ...}:
@@ -36,7 +40,7 @@
       };
       # import the secrets dir.
       # secrets = import inputs.secrets-dir;
-      secrets = inputs.secrets;
+      secrets = import inputs.secrets;
     in {
       nixosConfigurations = {
         ## Work Lenovo E15
