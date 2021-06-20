@@ -24,7 +24,13 @@ in
 
   # Every pc needs this.
   programs = {
-    ssh.startAgent = false;
+    ssh = {
+      startAgent = false;
+      extraConfig = ''
+      Host gitlab.com
+        UpdateHostKeys no
+      '';
+    };
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
