@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+
+ruby '2.7.3'
+
+gem 'rubocop', '~> 0.90.0'
+gem 'rubocop-performance', '~> 1.6.1'
+gem 'rubocop-rails', '~> 2.6.0'
+gem 'rubocop-rspec', '~> 1.40.0'

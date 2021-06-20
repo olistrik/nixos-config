@@ -7,6 +7,7 @@
 let
 
   inherit (lib.modules) mkDefault;
+  rubocop-sdv = pkgs.callPackage ./programs/rubocop-sdv {  };
 
 in
 
@@ -120,7 +121,7 @@ in
     yarn
 
     # Ruby
-    ruby.devEnv
+    rubocop-sdv
     solargraph
 
     # C & C++
