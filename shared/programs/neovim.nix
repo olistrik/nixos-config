@@ -2,6 +2,9 @@
 
 {pkgs, ...}:
 {
+  environment.systemPackages = with pkgs; [
+    ripgrep
+  ];
   programs.neovim = {
     package = pkgs.neovim-nightly;
     enable = true;
@@ -10,6 +13,7 @@
     runtime = {
       "parser/tsx.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-tsx}/parser";
       "parser/nix.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-nix}/parser";
+      "parser/rb.so".source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-ruby}/parser";
     };
     configure = {
       packages.myPlugins = with pkgs.unstable.vimPlugins; {
@@ -38,8 +42,15 @@
           nerdtree-git-plugin
           fzf-vim
 
+          ###########
           # 0.5 stuff
+
+          # Telescope
+          popup-nvim
+          plenary-nvim
           telescope-nvim
+
+          # Treesitter
           nvim-treesitter
 
           # IDE
@@ -136,6 +147,7 @@
 
       "" Telescope
       nnoremap <silent> <C-p> <cmd>Telescope find_files<cr>
+      nnoremap <silent> <C-f> <cmd>Telescope live_grep<cr>
 
       "" Treesitter
       lua <<EOF
