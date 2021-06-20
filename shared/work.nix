@@ -121,13 +121,7 @@ in
 
     # Ruby
     ruby.devEnv
-    sqlite
-    libpcap
-    postgresql
-    libxml2
-    libxslt
-    pkg-config
-    bundix
+    solargraph
 
     # C & C++
     gcc10
