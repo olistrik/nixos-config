@@ -14,6 +14,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # My secrets
     secrets = {
       url = "/etc/nixos/secrets";
       flake = false;
@@ -21,81 +22,78 @@
 
   };
 
- outputs = {self, nixpkgs, ... }@inputs:
-    let
-      custom-modules = inputs.nixpkgs-custom.nixosModules.custom;
-      # overlay unstable on nixpkgs. pkgs.unstable.[package] should now be
-      # available.
-      nixpkgsConfig = with inputs; rec {
-        config = { allowUnfree = true; };
-        overlays = [
-          (
-            final: prev: {
-              unstable = import nixpkgs-unstable {
-                inherit (prev) system; inherit config;
-              };
+   outputs = {self, nixpkgs, ... }@inputs:
+   let
+    # might want these in the future.
+    # inherit (builtins) toPath;
+    # inherit (nixpkgs) lib;
+    # inherit (lib) genAttrs;
 
-              # I want my overlays in pkgs.kranex
-              kranex = import nixpkgs {
-                inherit (prev) system; inherit config; inherit (self) overlays;
-              };
+    # overlays on nixpkgs.
+    nixpkgsConfig = with inputs; rec {
+      config = { allowUnfree = true; };
+      overlays = [
+        (
+          final: prev: {
+            # for unstable pkgs.
+            unstable = import nixpkgs-unstable {
+              inherit (prev) system; inherit config;
+            };
 
-              # Packages to be on bleeding edge.
-              vimPlugins = prev.vimPlugins // final.unstable.vimPlugins;
-            }
-          )
-        ];
-      };
+            # I want my overlays in pkgs.kranex
+            kranex = import nixpkgs {
+              inherit (prev) system; inherit config; inherit (self) overlays;
+            };
 
-      # import the secrets dir.
-      # secrets = import inputs.secrets-dir;
-      secrets = (import inputs.secrets).secrets;
-
-      commonModules = with self.modules; [
-        programs.alacritty
-        ({config, lib, ...}: { nixpkgs = nixpkgsConfig; })
+            # Packages to be on bleeding edge.
+            vimPlugins = prev.vimPlugins // final.unstable.vimPlugins;
+          }
+        )
       ];
-    in {
-      nixosConfigurations = {
-        ## Work Lenovo E15
-        nixogen = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit secrets; };
-          modules = commonModules ++ [
-            ./hosts/nixogen/configuration.nix
-          ];
-        };
-
-        ## New PC
-        nixium = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit secrets; };
-          modules = commonModules ++ [
-            ./hosts/nixium/configuration.nix
-          ];
-        };
-
-        ## WSL 2
-        winix = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit secrets; };
-          modules = commonModules ++ [
-            ./hosts/winix/configuration.nix
-          ];
-        };
-      };
-
-      # My overlays, see nixpkgsConfig for usage.
-      overlays = with inputs; [
-        (final: prev: {
-          neovim-nightly = neovim.packages.${prev.system}.neovim;
-          rubocop-sdv = final.callPackage ./pkgs/programs/rubocop-sdv {  };
-        })
-      ]; # ++ map import (./overlays)
-
-      # My modules, see commonModules for usage.
-      modules = {
-        programs.alacritty = import ./modules/programs/alacritty;
-      };
     };
+
+    # import the secrets dir.
+    secrets = (import inputs.secrets).secrets;
+
+    # modules that are shared between all hosts.
+    commonModules = with self.modules; [
+      # my custom modules.
+      programs.alacritty
+
+      # add the overlays.
+      ({config, lib, ...}: { nixpkgs = nixpkgsConfig; })
+    ];
+
+    # shortcut for x86-64 linux systems.
+    linux64 = host: nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = { inherit secrets; };
+      modules = commonModules ++ [
+        (./. + "/hosts/${host}/configuration.nix")
+      ];
+    };
+  in {
+    # My systems.
+    nixosConfigurations = {
+      ## Work Lenovo E15
+      nixogen = linux64 "nixogen";
+      ## Home Desktop
+      nixium = linux64 "nixium";
+      ## WSL 2
+      winix = linux64 "winix";
+    };
+
+    # My overlays, see nixpkgsConfig for usage.
+    overlays = with inputs; [
+      (final: prev: {
+        neovim-nightly = neovim.packages.${prev.system}.neovim;
+        rubocop-sdv = final.callPackage ./pkgs/programs/rubocop-sdv {  };
+      })
+    ]; # ++ map import (./overlays)
+
+    # My modules, see commonModules for usage.
+    modules = {
+      programs.alacritty = import ./modules/programs/alacritty;
+    };
+  };
 }
