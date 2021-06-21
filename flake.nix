@@ -8,21 +8,18 @@
     # Unstable nixpkgs
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    # My secrets
+    secrets = { url = "/etc/nixos/secrets"; flake = false; };
+
     # nvim 0.5
     neovim = {
       url = "github:neovim/neovim?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # My secrets
-    secrets = {
-      url = "/etc/nixos/secrets";
-      flake = false;
-    };
-
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
-   outputs = {self, nixpkgs, ... }@inputs:
+   outputs = {self, nixpkgs, flake-utils, ... }@inputs:
    let
     # might want these in the future.
     # inherit (builtins) toPath;
@@ -57,10 +54,19 @@
     # attempt with sops.
     secrets = (import inputs.secrets).secrets;
 
+    pin-flake-reg = with inputs; {
+      nix.registry.nixpkgs.flake = nixpkgs;
+      nix.registry.unstable.flake = nixpkgs-unstable;
+      nix.registry.kranex.flake = self;
+    };
+
     # modules that are shared between all hosts.
     commonModules = with self.modules; [
       # my custom modules.
       programs.alacritty
+
+      # pin the pkgs.
+      pin-flake-reg
 
       # add the overlays.
       ({config, lib, ...}: { nixpkgs = nixpkgsConfig; })
@@ -98,5 +104,9 @@
     modules = {
       programs.alacritty = import ./modules/programs/alacritty;
     };
-  };
+  } // flake-utils.lib.eachDefaultSystem ( system: {
+    legacyPackages = (import nixpkgs {
+      inherit system; inherit (nixpkgsConfig) config overlays;
+    }).kranex;
+  });
 }
