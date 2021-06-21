@@ -170,7 +170,7 @@ in
                 bindsym $mod+Down focus down
                 bindsym $mod+Left focus left
                 bindsym $mod+Right focus right
-                bindsym $mod+Up move up
+                bindsym $mod+Shift+Up move up
                 bindsym $mod+Shift+Down move down
                 bindsym $mod+Shift+Left move left
                 bindsym $mod+Shift+Right move right
