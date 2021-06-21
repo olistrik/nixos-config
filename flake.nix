@@ -2,10 +2,10 @@
   description = "Nix is love. Nix is life.";
 
   inputs = {
-    # Pin nixpkgs to 20.09
+    # Normal nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-21.05";
 
-    # Unstable branch
+    # Unstable nixpkgs
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # nvim 0.5
@@ -35,12 +35,12 @@
       overlays = [
         (
           final: prev: {
-            # for unstable pkgs.
+            # pkgs.unstable
             unstable = import nixpkgs-unstable {
               inherit (prev) system; inherit config;
             };
 
-            # I want my overlays in pkgs.kranex
+            # pkgs.kranex
             kranex = import nixpkgs {
               inherit (prev) system; inherit config; inherit (self) overlays;
             };
@@ -52,7 +52,9 @@
       ];
     };
 
-    # import the secrets dir.
+    # import decrypted secrets. These are stored plain text in the nix store.
+    # Probs best look into proper secret management before you copy my soppy
+    # attempt with sops.
     secrets = (import inputs.secrets).secrets;
 
     # modules that are shared between all hosts.
