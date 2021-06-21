@@ -6,7 +6,7 @@
     ripgrep
   ];
   programs.neovim = {
-    package = pkgs.neovim-nightly;
+    package = pkgs.kranex.neovim-nightly;
     enable = true;
     defaultEditor = true;
     vimAlias = true;
