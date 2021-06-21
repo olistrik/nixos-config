@@ -12,7 +12,7 @@ in
 
   imports = [
     ./audio.nix # explicitly disable that plague called pulseaudio
-    ./scripts/screencapture.nix # for screenshot etc
+    # ./scripts/screencapture.nix # for screenshot etc
 
     # install programs with my configurations
     ./programs/zsh.nix

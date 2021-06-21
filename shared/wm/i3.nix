@@ -78,6 +78,7 @@ in
             polybar
             i3status
             i3blocks
+            kranex.screencapture-scripts
           ];
 
           configFile = (
