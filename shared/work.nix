@@ -48,6 +48,7 @@ in
     unzip
     neofetch
     tree
+    slack-dark
 
     # Net sync.
     wget
