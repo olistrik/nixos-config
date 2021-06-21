@@ -89,7 +89,8 @@
     overlays = with inputs; [
       (final: prev: {
         neovim-nightly = neovim.packages.${prev.system}.neovim;
-        rubocop-sdv = final.callPackage ./pkgs/programs/rubocop-sdv {  };
+        rubocop-sdv = final.callPackage ./pkgs/programs/rubocop-sdv {};
+        screencapture-scripts = final.callPackage ./pkgs/scripts/screencapture {};
       })
     ]; # ++ map import (./overlays)
 

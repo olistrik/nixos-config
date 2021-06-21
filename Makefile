@@ -5,8 +5,9 @@ test:
 
 switch: perms
 	git add -A
+	[-z $(git status -s)] || git commit
 	sudo nixos-rebuild switch
-	git commit -a
+	[-z $(git status -s)] || git commit -am "chore: update flake.lock"
 
 perms:
 	sudo chown -R root:wheel ../nixos
