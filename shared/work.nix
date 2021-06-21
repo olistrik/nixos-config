@@ -5,10 +5,7 @@
 { config, lib, pkgs, ... }:
 
 let
-
   inherit (lib.modules) mkDefault;
-  rubocop-sdv = pkgs.callPackage ./programs/rubocop-sdv {  };
-
 in
 
 {
@@ -121,7 +118,7 @@ in
     yarn
 
     # Ruby
-    rubocop-sdv
+    kranex.rubocop-sdv
     solargraph
 
     # C & C++

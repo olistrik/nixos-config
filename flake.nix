@@ -14,12 +14,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # My custom packages WIP
-    nixpkgs-custom = {
-      url = "github:kranex/nixpkgs-custom";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     secrets = {
       url = "/etc/nixos/secrets";
       flake = false;
@@ -37,11 +31,15 @@
         overlays = [
           (
             final: prev: {
-              unstable =  import nixpkgs-unstable {
+              unstable = import nixpkgs-unstable {
                 inherit (prev) system; inherit config;
               };
 
-              neovim-nightly = neovim.packages.${prev.system}.neovim;
+              # I want my overlays in pkgs.kranex
+              kranex = import nixpkgs {
+                inherit (prev) system; inherit config; inherit (self) overlays;
+              };
+
               # Packages to be on bleeding edge.
               vimPlugins = prev.vimPlugins // final.unstable.vimPlugins;
             }
@@ -53,9 +51,9 @@
       # secrets = import inputs.secrets-dir;
       secrets = (import inputs.secrets).secrets;
 
-      commonModules = [
-        custom-modules
-        ({conifg, lib, ...}: { nixpkgs = nixpkgsConfig; })
+      commonModules = with self.modules; [
+        programs.alacritty
+        ({config, lib, ...}: { nixpkgs = nixpkgsConfig; })
       ];
     in {
       nixosConfigurations = {
@@ -85,6 +83,19 @@
             ./hosts/winix/configuration.nix
           ];
         };
+      };
+
+      # My overlays, see nixpkgsConfig for usage.
+      overlays = with inputs; [
+        (final: prev: {
+          neovim-nightly = neovim.packages.${prev.system}.neovim;
+          rubocop-sdv = final.callPackage ./pkgs/programs/rubocop-sdv {  };
+        })
+      ]; # ++ map import (./overlays)
+
+      # My modules, see commonModules for usage.
+      modules = {
+        programs.alacritty = import ./modules/programs/alacritty;
       };
     };
 }
