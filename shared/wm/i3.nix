@@ -106,6 +106,8 @@ in
                 # hide window titles
                 for_window [class="^.*"] border pixel 2
 
+                # auto split orientation
+                # default_orientation auto
 
                 ################################################
                 ## Workspaces  #################################
@@ -149,7 +151,7 @@ in
 
                 # screencrop
                 bindsym --release $mod+Shift+p exec screencrop $HOME/Pictures
-                bindsym --release $mod+Shift+s exec screencrop $HOME/Pictures
+                bindsym --release $mod+Shift+s exec screencrop $HOME/Pictures€ý,€ý,
 
                 # screencrop
                 bindsym --release $mod+Ctrl+p exec windowshot $HOME/Pictures
@@ -161,6 +163,18 @@ in
                 bindsym $mod+s layout stacking
                 bindsym $mod+t layout tabbed
                 bindsym $mod+e layout default
+
+                # split controls
+                bindsym $mod+l layout toggle split
+                bindsym $mod+Up focus up
+                bindsym $mod+Down focus down
+                bindsym $mod+Left focus left
+                bindsym $mod+Right focus right
+                bindsym $mod+Up move up
+                bindsym $mod+Shift+Down move down
+                bindsym $mod+Shift+Left move left
+                bindsym $mod+Shift+Right move right
+
 
                 ###############################################
 
