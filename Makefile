@@ -6,7 +6,7 @@ test:
 switch: perms
 	git add -A
 	sudo nixos-rebuild switch
-	git commit
+	git commit -a
 
 perms:
 	sudo chown -R root:wheel ../nixos
