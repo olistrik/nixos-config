@@ -8,9 +8,6 @@
     # Unstable nixpkgs
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # My secrets
-    secrets = { url = "/etc/nixos/secrets"; flake = false; };
-
     # nvim 0.5
     neovim = {
       url = "github:neovim/neovim?dir=contrib";
@@ -49,11 +46,6 @@
       ];
     };
 
-    # import decrypted secrets. These are stored plain text in the nix store.
-    # Probs best look into proper secret management before you copy my soppy
-    # attempt with sops.
-    secrets = (import inputs.secrets).secrets;
-
     pin-flake-reg = with inputs; {
       nix.registry.nixpkgs.flake = nixpkgs;
       nix.registry.unstable.flake = nixpkgs-unstable;
@@ -75,7 +67,6 @@
     # shortcut for x86-64 linux systems.
     linux64 = host: nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit secrets; };
       modules = commonModules ++ [
         (./. + "/hosts/${host}/configuration.nix")
       ];

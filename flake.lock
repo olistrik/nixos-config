@@ -90,20 +90,7 @@
         "flake-utils": "flake-utils",
         "neovim": "neovim",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-unstable": "nixpkgs-unstable",
-        "secrets": "secrets"
-      }
-    },
-    "secrets": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-4fyNnV8Akw89sIF7VAfyOQrbuGoCUTPGz4mOFMs7FQM=",
-        "path": "/etc/nixos/secrets",
-        "type": "path"
-      },
-      "original": {
-        "path": "/etc/nixos/secrets",
-        "type": "path"
+        "nixpkgs-unstable": "nixpkgs-unstable"
       }
     }
   },
