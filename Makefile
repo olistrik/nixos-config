@@ -14,8 +14,6 @@ perms:
 	sudo find ../nixos -type d -exec chmod 775 {} +
 	sudo find ../nixos -type f -exec chmod 664 {} +
 	sudo find ../nixos/scripts -type f -exec chmod 755 {} +
-	sudo chown root:wheel secrets/secrets.json
-	sudo chmod 600 secrets/secrets.json
 
 update:
 	sudo nix flake update
