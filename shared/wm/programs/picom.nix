@@ -12,6 +12,7 @@
         "100:class_g *= 'chromium-browser'"
         "100:class_g *= 'Vivaldi'"
         "100:class_g *= 'i3lock'"
+        "100:class_g *= 'GIMP'"
       ];
       settings = {
         blur-background = true;

@@ -118,8 +118,7 @@ in
             family: "${cfg.font.normal.family}"
             style: ${cfg.font.normal.style}
           size: ${cfg.font.size}
-        draw_bold_text_with_bright_colors: ${if cfg.brightBold then "true" else
-        "false"}
+        draw_bold_text_with_bright_colors: ${if cfg.brightBold then "true" else "false"}
         colors:
           primary:
             background: '${cfg.theme.primary.background}'
@@ -148,6 +147,12 @@ in
             magenta: '${cfg.theme.bright.magenta}'
             cyan:    '${cfg.theme.bright.cyan}'
             white:   '${cfg.theme.bright.white}'
+
+          keybindings:
+            - { key: +, mods: Control, action: IncreaseFontSize }
+            - { key: -, mods: Control, action: DecreaseFontSize }
+            - { key: =, mods: Control, action: IncreaseFontSize }
+            - { key: _, mods: Control, action: DecreaseFontSize }
       '';
     };
   }
