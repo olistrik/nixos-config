@@ -4,10 +4,10 @@ with lib;
 let
   mkJetBrainsProduct = callPackage ./common.nix {inherit vmopts; };
 
-  buildIntellijClient = {name, version, src, license, description, wmClass, ...  }:
+  buildIntellijClient = {name, version, src, licence, description, wmClass, ...  }:
   (mkJetBrainsProduct {
     inherit name version src wmClass jdk;
-    product = "IntellijClient";
+    product = "Intellij_Client";
     extraLdPath = [ zlib ];
     meta = with lib; {
       hompage = "https://www.jetbrains.com/code-with-me/";
@@ -20,7 +20,7 @@ let
   });
 in buildIntellijClient rec {
   name = "intellij-client-${version}";
-  version = "203.8084.38";
+  version = "203.8084.28";
   description = "The code with me client";
   licence = lib.licences.unfree;
   src = fetchurl {

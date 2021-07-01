@@ -36,6 +36,16 @@ in
     };
   };
 
+  services.xserver.libinput.enable = true;
+  services.xserver.config = ''
+    Section "InputClass"
+      Identifier "mouse accel"
+      Driver "libinput"
+      MatchIsPointer "on"
+      Option "AccelProfile" "flat"
+      Option "AccelSpeed" "0"
+    EndSection
+  '';
 
   # not sure why I need this. Jetbrains stuff?
   nixpkgs.config.allowUnfree = true;
@@ -49,6 +59,8 @@ in
     neofetch
     tree
     slack-dark
+
+    kranex.code-with-me
 
     # Net sync.
     wget
