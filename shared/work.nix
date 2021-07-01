@@ -59,8 +59,9 @@ in
     neofetch
     tree
     slack-dark
+    spotify
 
-    kranex.code-with-me
+    # kranex.code-with-me
 
     # Net sync.
     wget
@@ -82,52 +83,52 @@ in
     gnumake
     direnv
     nix-direnv
-    (vscode-with-extensions.override {
-      vscodeExtensions = (with unstable.vscode-extensions; [
-        ms-vsliveshare.vsliveshare
-        vscodevim.vim
-      ]) ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-        {
-          name = "ruby";
-          publisher = "rebornix";
-          version = "0.28.1";
-          sha256 = "HAUdv+2T+neJ5aCGiQ37pCO6x6r57HIUnLm4apg9L50=";
-        }
-        {
-          name = "vscode-ruby";
-          publisher = "wingrunr21";
-          version = "0.28.0";
-          sha256 = "H3f1+c31x+lgCzhgTb0uLg9Bdn3pZyJGPPwfpCYrS70=";
-        }
-        {
-          name = "vscode-eslint";
-          publisher = "dbaeumer";
-          version = "2.1.10";
-          sha256 = "parXZhF9qyRAlmeGItCbvPfyyQQ9WmlBKKFYQ8KIFH0=";
-        }
-        {
-          name = "gitlens";
-          publisher = "eamodio";
-          version = "11.3.0";
-          sha256 = "m2Zn+e6hj59SujcW5ptdrYDrc4CviZ4wyCndO2BhyF8=";
-        }
-        {
-          name = "vscode-ts-auto-return-type";
-          publisher = "ebrithil30";
-          version = "1.1.0";
-          sha256 ="8ydpxZtKnWdfBaS9Ln10pPB0eoic+JQ5HA+rKw+BAI8=";
-        }
-      ];
-    })
+    # (vscode-with-extensions.override {
+    #   vscodeExtensions = (with unstable.vscode-extensions; [
+    #     ms-vsliveshare.vsliveshare
+    #     vscodevim.vim
+    #   ]) ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+    #     {
+    #       name = "ruby";
+    #       publisher = "rebornix";
+    #       version = "0.28.1";
+    #       sha256 = "HAUdv+2T+neJ5aCGiQ37pCO6x6r57HIUnLm4apg9L50=";
+    #     }
+    #     {
+    #       name = "vscode-ruby";
+    #       publisher = "wingrunr21";
+    #       version = "0.28.0";
+    #       sha256 = "H3f1+c31x+lgCzhgTb0uLg9Bdn3pZyJGPPwfpCYrS70=";
+    #     }
+    #     {
+    #       name = "vscode-eslint";
+    #       publisher = "dbaeumer";
+    #       version = "2.1.10";
+    #       sha256 = "parXZhF9qyRAlmeGItCbvPfyyQQ9WmlBKKFYQ8KIFH0=";
+    #     }
+    #     {
+    #       name = "gitlens";
+    #       publisher = "eamodio";
+    #       version = "11.3.0";
+    #       sha256 = "m2Zn+e6hj59SujcW5ptdrYDrc4CviZ4wyCndO2BhyF8=";
+    #     }
+    #     {
+    #       name = "vscode-ts-auto-return-type";
+    #       publisher = "ebrithil30";
+    #       version = "1.1.0";
+    #       sha256 ="8ydpxZtKnWdfBaS9Ln10pPB0eoic+JQ5HA+rKw+BAI8=";
+    #     }
+    #   ];
+    # })
 
     # Docker
     docker-compose
 
     # Java
-    jre8
+    # jre8
 
     # JavaScript
-    nodejs
+    # nodejs
     yarn
 
     # Ruby
@@ -145,7 +146,7 @@ in
     firefox   #
 
     # because
-    sops
+    # sops
   ];
 
   # Docker
