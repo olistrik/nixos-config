@@ -39,7 +39,7 @@
 
   # Audio is hard on the E15
   boot.extraModprobeConfig = ''
-  options snd-hda-intel enable=1,0 index=-1
+  options snd-hda-intel enable=0,1 index=-1
   options snd-usb-audio index=-2
   '';
 
