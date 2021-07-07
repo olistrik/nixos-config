@@ -55,6 +55,11 @@
     };
   };
 
+  boot.extraModprobeConfig = ''
+    options snd-hda-intel enable=0,1 index=-1
+    options snd-usb-audio enable=1,0 index=-2
+  '';
+
   # While I do intend to work on this system, it is primarily a personal
   # system. Personal desktops are Alkali Metals and this one is running
   # Nixos. Nixos + Lithium = Nixium.
