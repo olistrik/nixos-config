@@ -16,7 +16,7 @@ in
 
     # install programs with my configurations
     ./programs/zsh.nix
-    ./programs/neovim.nix
+    ./programs/neovim
     ./programs/alacritty.nix
   ];
 
