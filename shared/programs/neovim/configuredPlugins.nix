@@ -94,17 +94,6 @@ with vimPlugins; {
         set signcolumn=yes
 
         lua <<EOF
-        local nvim_lsp = require'lspconfig'
-
-        local on_attach = function(client)
-          require'completion'.on_attach(client)
-        end
-
-        -- Register all the language servers
-        nvim_lsp.rnix.setup { on_attach = on_attach }
-        nvim_lsp.tsserver.setup { on_attach = on_attach }
-        nvim_lsp.rust_analyzer.setup { on_attach = on_attach }
-
         -- Enable diagnostics
         vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
           vim.lsp.diagnostic.on_publish_diagnostics, {
