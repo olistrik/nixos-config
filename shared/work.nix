@@ -131,10 +131,6 @@ in
     # nodejs
     yarn
 
-    # Ruby
-    kranex.rubocop-sdv
-    solargraph
-
     # C & C++
     gcc10
     gdb
