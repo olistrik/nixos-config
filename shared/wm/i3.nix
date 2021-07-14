@@ -161,21 +161,32 @@ in
                 ## container Controls
 
                 # change layout
-                bindsym $mod+s layout stacking
-                bindsym $mod+t layout tabbed
-                bindsym $mod+e layout default
+                bindsym $mod+e layout toggle stacking tabbed split
 
                 # split controls
-                bindsym $mod+l layout toggle split
+                bindsym $mod+apostrophe split toggle
+
+                bindsym $mod+j resize shrink width 20
+                bindsym $mod+k resize shrink height 20
+                bindsym $mod+l resize grow height 20
+                bindsym $mod+semicolon resize grow width 20
+
                 bindsym $mod+Up focus up
                 bindsym $mod+Down focus down
                 bindsym $mod+Left focus left
                 bindsym $mod+Right focus right
+
                 bindsym $mod+Shift+Up move up
                 bindsym $mod+Shift+Down move down
                 bindsym $mod+Shift+Left move left
                 bindsym $mod+Shift+Right move right
 
+                #####################
+                ## Audio Controls
+
+                bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer -q sset Master,0 5+ unmute"
+                bindsym XF86AudioLowerVolume exec --no-startup-id "amixer -q sset Master,0 5- unmute"
+                bindsym XF86AudioMute exec --no-startup-id "amixer -q sset Master,0 toggle"
 
                 ###############################################
 
