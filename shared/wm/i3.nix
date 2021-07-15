@@ -78,6 +78,7 @@ in
             polybar
             i3status
             i3blocks
+            playerctl
             kranex.screencapture-scripts
           ];
 
@@ -187,6 +188,8 @@ in
                 bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer -q sset Master,0 5+ unmute"
                 bindsym XF86AudioLowerVolume exec --no-startup-id "amixer -q sset Master,0 5- unmute"
                 bindsym XF86AudioMute exec --no-startup-id "amixer -q sset Master,0 toggle"
+                bindsym XF86AudioPlay exec playerctl play-pause
+                bindsym XF86AudioNext exec playerctl next
 
                 ###############################################
 
