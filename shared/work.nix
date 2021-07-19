@@ -20,6 +20,10 @@ in
     ./programs/alacritty.nix
   ];
 
+  networking.extraHosts = ''
+    127.0.0.1 keycloak
+  '';
+
   # Every pc needs this.
   programs = {
     ssh = {
@@ -60,6 +64,7 @@ in
     tree
     slack-dark
     spotify
+    httpie
 
     # kranex.code-with-me
 
