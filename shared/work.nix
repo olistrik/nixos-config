@@ -79,6 +79,10 @@ in
     ##################
     ## develop stuff
 
+    # Android
+    # android-studio # sucks on i3
+    jmtpfs
+
     # General
     gnumake
     direnv

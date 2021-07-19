@@ -78,6 +78,7 @@ in
             polybar
             i3status
             i3blocks
+            xcwd
             playerctl
             kranex.screencapture-scripts
           ];
@@ -144,6 +145,7 @@ in
 
                 # Alacritty Terminal
                 bindsym $mod+Return exec alacritty
+                bindsym $mod+Shift+Return exec alacritty --working-directory $(xcwd)
 
                 # dmenu
                 bindsym $mod+space exec rofi -theme Arc-Dark -show run
@@ -163,6 +165,7 @@ in
 
                 # change layout
                 bindsym $mod+e layout toggle stacking tabbed split
+                bindsym $mod+f layout floating toggle
 
                 # split controls
                 bindsym $mod+apostrophe split toggle
