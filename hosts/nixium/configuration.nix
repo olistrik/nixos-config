@@ -34,6 +34,9 @@
 
   systemd.services.openrgb = {
     script = ''
+      echo setting strips to length 16
+      ${pkgs.openrgb}/bin/openrgb -d 4 -z 1 -s 16 -z 2 -s 16
+
       echo setting RGB to 00FF00
       ${pkgs.openrgb}/bin/openrgb -c 00FF00
     '';
