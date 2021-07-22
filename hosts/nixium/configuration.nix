@@ -32,6 +32,14 @@
   ## ASUS X570-E Specific
   hardware.i2c.enable = true;
 
+  systemd.services.foo = {
+    script = ''
+      echo setting RGB to 00FF00
+      openrgb -c 00FF00
+    '';
+    wantedBy = [ "multi-user.target" ];
+  };
+
   #######################
   ## AMD 5950X Specific
 
