@@ -32,7 +32,7 @@
   ## ASUS X570-E Specific
   hardware.i2c.enable = true;
 
-  systemd.services.foo = {
+  systemd.services.openrgb = {
     script = ''
       echo setting RGB to 00FF00
       openrgb -c 00FF00
@@ -57,6 +57,7 @@
     refind
 
     # i2c stuff.
+    openrgb
     i2c-tools
   ];
 
