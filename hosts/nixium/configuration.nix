@@ -27,6 +27,11 @@
 
   nixpkgs.config.allowUnfree = true;
 
+
+  #######################
+  ## ASUS X570-E Specific
+  hardware.i2c.enable = true;
+
   #######################
   ## AMD 5950X Specific
 
@@ -42,6 +47,9 @@
   environment.systemPackages = with pkgs; [
     efibootmgr
     refind
+
+    # i2c stuff.
+    i2c-tools
   ];
 
   # Use the systemd-boot EFI boot loader.
