@@ -35,7 +35,7 @@
   systemd.services.openrgb = {
     script = ''
       echo setting RGB to 00FF00
-      openrgb -c 00FF00
+      ${pkgs.openrgb}/bin/openrgb -c 00FF00
     '';
     wantedBy = [ "multi-user.target" ];
   };
