@@ -74,18 +74,51 @@ with vimPlugins; {
       # ));
     };
 
-    lspconfig = {
-      plugin = nvim-lspconfig;
-      extras = [ lsp_extensions-nvim completion-nvim ];
+    compe = {
+      plugin = nvim-compe;
+      extras = [];
       config = ''
-        filetype plugin indent on
-
         " Set completeopt to have a better completion experience
         " :help completeopt
         " menuone: popup even when there's only one match
         " noinsert: Do not insert text until a selection is made
         " noselect: Do not select, force user to select one from the menu
         set completeopt=menuone,noinsert,noselect
+
+
+        lua <<EOF
+
+        require'compe'.setup {
+          enabled = true;
+          autocomplete = true;
+          debug = false;
+          source = {
+            path = true;
+            buffer = true;
+            nvim_lsp = true;
+          };
+        }
+
+        EOF
+
+        " TODO: Keybindings
+        " Use <Tab> and <S-Tab> to navigate through popup menu if it's open
+        " inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+        " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+        " use <Tab> as trigger keys
+        " imap <Tab> <Plug>(completion_smart_tab)
+        " imap <S-Tab> <Plug>(completion_smart_s_tab)
+
+
+      '';
+    };
+
+    lspconfig = {
+      plugin = nvim-lspconfig;
+      extras = [ lsp_extensions-nvim ];
+      config = ''
+        filetype plugin indent on
 
         " Avoid showing extra messages when using completion
         set shortmess+=c
@@ -94,7 +127,9 @@ with vimPlugins; {
         set signcolumn=yes
 
         lua <<EOF
+        vim.lsp.set_log_level("debug")
         -- Enable diagnostics
+
         vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
           vim.lsp.diagnostic.on_publish_diagnostics, {
             virtual_text = true,
@@ -116,13 +151,6 @@ with vimPlugins; {
         nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.declaration()<CR>
         nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
 
-        " Use <Tab> and <S-Tab> to navigate through popup menu if it's open
-        inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-        inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-        " use <Tab> as trigger keys
-        imap <Tab> <Plug>(completion_smart_tab)
-        imap <S-Tab> <Plug>(completion_smart_s_tab)
 
         " Set updatetime for CursorHold
         " 300ms of no cursor movement to trigger CursorHold
