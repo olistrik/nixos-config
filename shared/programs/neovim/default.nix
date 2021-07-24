@@ -17,6 +17,7 @@ let
 
     # completion
     # YouCompleteMe
+    compe
 
     # linting
     treesitter
