@@ -11,6 +11,15 @@ let
     require'lspconfig'.${name}.setup {${setup}}
     EOF
   '';
+
+  tsserver = pkgs.nodePackages.typescript-language-server.overrideAttrs ( oldAttrs: rec {
+    src = pkgs.fetchFromGitHub {
+      owner = "theia-ide";
+      repo = "typescript-language-server";
+      rev = "9ce7aa4ae399a5b66ea0bc027447a14aed273e3a";
+      sha256 = "rknONZq+EG1aFZPdgSwcGihC99+1jy34xpPid49jE6M=";
+    };
+  });
 in {
     golang = rec {
       requires = with pkgs; [ gopls ];
@@ -41,9 +50,12 @@ in {
     };
 
     ts = rec {
-      requires = with pkgs; [ nodePackages.typescript-language-server ];
+      requires = with pkgs; [ nodePackages.typescript-language-server nodePackages.typescript];
       runtime = tsRuntime grammars.tree-sitter-typescript;
-      config = lspConfig "tsserver" "";
+      config = lspConfig "tsserver" ''
+        cmd = { 'typescript-language-server', '--stdio', '--tsserver-path',
+        '${pkgs.nodePackages.typescript}/bin/tsserver' }
+      '';
     };
 
     ruby = rec {
