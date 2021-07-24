@@ -41,7 +41,7 @@ in {
     };
 
     ts = rec {
-      requires = with pkgs; [ nodePackages.typescript nodePackages.typescript-language-server ];
+      requires = with pkgs; [ nodePackages.typescript-language-server ];
       runtime = tsRuntime grammars.tree-sitter-typescript;
       config = lspConfig "tsserver" "";
     };
