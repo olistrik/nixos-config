@@ -73,4 +73,10 @@ in {
     yaml = rec {
       runtime = tsRuntime grammars.tree-sitter-yaml;
     };
+
+    python = rec {
+      requires = with pkgs; [ pyright ];
+      runtime = tsRuntime grammars.tree-sitter-python;
+      config = lspConfig "pyright" "";
+    };
 }
