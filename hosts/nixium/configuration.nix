@@ -32,15 +32,25 @@
   ## ASUS X570-E Specific
   hardware.i2c.enable = true;
 
-  systemd.services.openrgb = {
+  systemd.services.openrgbBoot = {
     script = ''
       echo setting strips to length 16
       ${pkgs.openrgb}/bin/openrgb -d 4 -z 1 -s 16 -z 2 -s 16
 
-      echo setting RGB to 8899FF
-      ${pkgs.openrgb}/bin/openrgb -c 8899FF
+      echo setting RGB to off white 8899FF
+      ${pkgs.openrgb}/bin/openrgb -c 0000FF
     '';
-    wantedBy = [ "multi-user.target" ];
+    wantedBy = [ "multiuser.target" ];
+  };
+  systemd.services.openrgbSleep = {
+    script = ''
+      echo setting strips to length 16
+      ${pkgs.openrgb}/bin/openrgb -d 4 -z 1 -s 16 -z 2 -s 16
+
+      echo setting RGB to red
+      ${pkgs.openrgb}/bin/openrgb -c 990000
+    '';
+    before = [ "suspend.target" ];
   };
 
   #######################
