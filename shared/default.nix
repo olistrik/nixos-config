@@ -18,6 +18,7 @@ in
     # install programs with my configurations
     ./programs/zsh.nix
     ./programs/neovim
+    ./programs/direnv.nix
   ];
 
   # Every pc needs this.
@@ -31,12 +32,12 @@ in
     };
   };
 
-
   # programs that don't need "much" configuration.
   environment.systemPackages = with pkgs; [
     # General
     git
     wget
+    gnumake
 
     # misc
     killall
@@ -45,26 +46,11 @@ in
     neofetch
     tree
 
-    # devenv
-    gnumake
-    direnv
-    nix-direnv
-
     # C & C++
     gcc10
     gdb
     valgrind
     binutils
-  ];
-
-  # Configure direnv, also requires `eval ${direnv hook zsh)` in zsh.
-  # TODO move direnv to it's own module and make it set that hook somehow.
-  nix.extraOptions = ''
-    keep-outputs = true
-    keep-derivations = true
-  '';
-  environment.pathsToLink = [
-    "share/nix-direnv"
   ];
 }
 
