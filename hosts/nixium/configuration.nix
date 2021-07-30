@@ -9,14 +9,14 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../../shared/themer.nix
-      ../../shared/users.nix
-      ../../shared/work.nix
-      ../../shared/wm/i3.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./rgb.nix
+    ../../shared/themer.nix
+    ../../shared/users.nix
+    ../../shared/work.nix
+    ../../shared/wm/i3.nix
+  ];
 
   nix = {
     package=pkgs.nixFlakes;
@@ -27,32 +27,14 @@
 
   nixpkgs.config.allowUnfree = true;
 
-
   #######################
   ## ASUS X570-E Specific
-  hardware.i2c.enable = true;
 
-  systemd.services.openrgbBoot = {
-    script = ''
-      echo setting strips to length 16
-      ${pkgs.openrgb}/bin/openrgb -d 4 -z 1 -s 16 -z 2 -s 16
+  boot.extraModprobeConfig = ''
+    options snd-hda-intel enable=0,1 index=-1
+    options snd-usb-audio enable=1,0 index=-2
+  '';
 
-      echo setting RGB to off white 8899FF
-      ${pkgs.openrgb}/bin/openrgb -c 0000FF
-    '';
-    wantedBy = [ "multiuser.target" ];
-    after = [ "suspend.target" ];
-  };
-  systemd.services.openrgbSleep = {
-    script = ''
-      echo setting strips to length 16
-      ${pkgs.openrgb}/bin/openrgb -d 4 -z 1 -s 16 -z 2 -s 16
-
-      echo setting RGB to red
-      ${pkgs.openrgb}/bin/openrgb -c 990000
-    '';
-    before = [ "suspend.target" ];
-  };
 
   #######################
   ## AMD 5950X Specific
@@ -69,10 +51,6 @@
   environment.systemPackages = with pkgs; [
     efibootmgr
     refind
-
-    # i2c stuff.
-    openrgb
-    i2c-tools
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -86,15 +64,19 @@
     };
   };
 
-  boot.extraModprobeConfig = ''
-    options snd-hda-intel enable=0,1 index=-1
-    options snd-usb-audio enable=1,0 index=-2
-  '';
-
   # While I do intend to work on this system, it is primarily a personal
   # system. Personal desktops are Alkali Metals and this one is running
   # Nixos. Nixos + Lithium = Nixium.
   networking.hostName = "nixium";
+
+  # Make the CRG9 readable.
+  services.xserver.resolutions = [{ x = 5120; y = 1440; }];
+  environment.variables.WINIT_X11_SCALE_FACTOR = "1.25";
+
+  programs.alacritty = {
+    font.size = "10.0";
+    theme = config.system.themer.theme;
+  };
 
   #################
   ## Localisation
@@ -122,15 +104,10 @@
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking.useDHCP = false;
-  networking.interfaces.enp6s0.useDHCP = true;
+  networking.interfaces.enp6s0.useDHCP = false;
   networking.interfaces.enp7s0.useDHCP = true;
-  networking.interfaces.wlp5s0.useDHCP = true;
+  networking.interfaces.wlp5s0.useDHCP = false;
 
-  #################################
-  ## Super Ultra wide boiii
-  services.xserver.resolutions = [{ x = 5120; y = 1440; }];
-
-  environment.variables.WINIT_X11_SCALE_FACTOR = "1.25";
 
   ################
   ## Theming WIP
@@ -143,11 +120,6 @@
         outer = -4;
       };
     };
-  };
-
-  programs.alacritty = {
-    font.size = "10.0";
-    theme = config.system.themer.theme;
   };
 
   # This value determines the NixOS release from which the default
