@@ -54,6 +54,8 @@
 
     # modules that are shared between all hosts.
     commonModules = with self.modules; [
+      ./shared/default.nix # default programs and config for all systems.
+
       # my custom modules.
       programs.alacritty
 
