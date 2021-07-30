@@ -12,10 +12,9 @@
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./rgb.nix
-    ../../shared/themer.nix
-    ../../shared/users.nix
+
+    ../../shared/personal.nix
     ../../shared/work.nix
-    ../../shared/wm/i3.nix
   ];
 
   nix = {
@@ -34,7 +33,6 @@
     options snd-hda-intel enable=0,1 index=-1
     options snd-usb-audio enable=1,0 index=-2
   '';
-
 
   #######################
   ## AMD 5950X Specific
