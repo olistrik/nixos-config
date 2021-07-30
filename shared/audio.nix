@@ -1,7 +1,7 @@
 {config, pkgs, ...}:
 
 {
-  nvironment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     pavucontrol
   ];
 
