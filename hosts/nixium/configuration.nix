@@ -29,10 +29,10 @@
   #######################
   ## ASUS X570-E Specific
 
-  boot.extraModprobeConfig = ''
-    options snd-hda-intel enable=0,1 index=-1
-    options snd-usb-audio enable=1,0 index=-2
-  '';
+  #boot.extraModprobeConfig = ''
+  #  options snd-hda-intel enable=0,1 index=-1
+  #  options snd-usb-audio enable=1,0 index=-2
+  #'';
 
   #######################
   ## AMD 5950X Specific
