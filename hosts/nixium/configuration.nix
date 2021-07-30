@@ -41,6 +41,7 @@
       ${pkgs.openrgb}/bin/openrgb -c 0000FF
     '';
     wantedBy = [ "multiuser.target" ];
+    after = [ "suspend.target" ];
   };
   systemd.services.openrgbSleep = {
     script = ''
