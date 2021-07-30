@@ -1,12 +1,12 @@
 test:
 	git add -A
-	sudo nixos-rebuild test
+	sudo nixos-rebuild test --flake ".#"
 	sudo rm -rf result
 
 switch: perms
 	git add -A
 	[[ -z $$(git status -s) ]] || git commit
-	sudo nixos-rebuild switch
+	sudo nixos-rebuild switch --flake ".#"
 	[[ -z $$(git status -s) ]] || git commit -am "chore: update flake.lock"
 	git push
 
