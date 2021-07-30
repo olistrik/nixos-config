@@ -9,9 +9,6 @@
   hardware.pulseaudio = {
     enable = true;
     support32Bit = true;
-    extraModules = with pkgs; [
-      pulseaudio-alsa
-    ];
     extraConfig = ''
     '';
   };
