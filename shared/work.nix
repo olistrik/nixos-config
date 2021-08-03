@@ -6,6 +6,7 @@
 {
   networking.extraHosts = ''
     127.0.0.1 keycloak
+    127.0.0.1 ckan
   '';
 
   # programs that don't need "much" configuration.
