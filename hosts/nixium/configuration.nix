@@ -102,9 +102,15 @@
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking.useDHCP = false;
-  networking.interfaces.enp6s0.useDHCP = false;
   networking.interfaces.enp7s0.useDHCP = true;
+
+  # Not using these.
+  networking.interfaces.enp6s0.useDHCP = false;
   networking.interfaces.wlp5s0.useDHCP = false;
+
+  # don't stall boot for 2000 years.
+  systemd.services.systemd-udev-settle.enable = false;
+  systemd.services.NetworkManager-wait-online.enable = false;
 
 
   ################
