@@ -49,6 +49,7 @@
   environment.systemPackages = with pkgs; [
     efibootmgr
     refind
+    sl
   ];
 
   # Use the systemd-boot EFI boot loader.
