@@ -45,6 +45,10 @@ in {
       '';
     };
 
+    js = rec {
+      runtime = tsRuntime grammars.tree-sitter-javascript;
+    };
+
     tsx = rec {
       runtime = tsRuntime grammars.tree-sitter-tsx;
     };
