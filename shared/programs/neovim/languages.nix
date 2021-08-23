@@ -22,9 +22,15 @@ let
   });
 in {
     golang = rec {
-      requires = with pkgs; [ gopls ];
+      requires = with pkgs; [ gopls go ];
       runtime = tsRuntime grammars.tree-sitter-go;
-      config = lspConfig "gopls" "";
+      config = lspConfig "gopls" "" + ''
+        " Auto format go on save
+        autocmd Filetype go set noexpandtab
+        autocmd BufWritePost *.go silent! !${pkgs.go}/bin/go fmt <afile>
+        autocmd BufWritePost *.go edit
+        autocmd BufWritePost *.go redraw!
+      '';
     };
 
     nix = rec {
