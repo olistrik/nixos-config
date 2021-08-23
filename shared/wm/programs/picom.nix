@@ -8,8 +8,7 @@
       inactiveOpacity = 0.7;
       opacityRules = [
         "100:class_g *= 'Firefox'"
-        "100:class_g *= 'Chromium-browser'"
-        "100:class_g *= 'chromium-browser'"
+        "100:class_g *= 'Google-chrome'"
         "100:class_g *= 'Vivaldi'"
         "100:class_g *= 'i3lock'"
         "100:class_g *= 'GIMP'"
