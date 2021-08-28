@@ -74,6 +74,15 @@ with vimPlugins; {
       # ));
     };
 
+    ts-autotag = {
+      plugin = nvim-ts-autotag;
+      config = ''
+        lua <<EOF
+          require('nvim-ts-autotag').setup()
+        EOF
+      '';
+    };
+
     compe = {
       plugin = nvim-compe;
       extras = [];
