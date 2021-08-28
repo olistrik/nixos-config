@@ -40,7 +40,7 @@
             };
 
             # Packages to be on bleeding edge.
-            vimPlugins = prev.vimPlugins // final.unstable.vimPlugins;
+            vimPlugins = prev.vimPlugins // final.unstable.vimPlugins // final.kranex.vimPlugins;
           }
         )
       ];
@@ -91,6 +91,10 @@
         rubocop-sdv = final.callPackage ./pkgs/programs/rubocop-sdv {};
         screencapture-scripts = final.callPackage ./pkgs/scripts/screencapture {};
         code-with-me = final.callPackage ./pkgs/programs/code-with-me {};
+
+        vimPlugins = {
+          nvim-ts-autotag = final.callPackage ./pkgs/vimPlugins/nvim-ts-autotag {};
+        };
       })
     ]; # ++ map import (./overlays)
 

@@ -21,6 +21,7 @@ let
 
     # linting
     treesitter
+    ts-autotag
 
     # languages
     lspconfig
