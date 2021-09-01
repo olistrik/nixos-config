@@ -22,6 +22,8 @@
 
     # JavaScript
     yarn
+    nodejs
+    nodePackages."@angular/cli"
 
     # C & C++
     gcc10
