@@ -9,8 +9,8 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
 
-      ../shared/personal.nix
-      ../shared/work.nix
+      ../../shared/personal.nix
+      ../../shared/work.nix
     ];
 
   nix = {
