@@ -8,7 +8,6 @@ switch: perms
 	[[ -z $$(git status -s) ]] || git commit
 	sudo nixos-rebuild switch --flake ".#"
 	[[ -z $$(git status -s) ]] || git commit -am "chore: update flake.lock"
-	git push
 
 perms:
 	sudo chown -R root:wheel ../nixos
