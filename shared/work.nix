@@ -12,6 +12,7 @@
   # programs that don't need "much" configuration.
   environment.systemPackages = with pkgs; [
     # utility
+    postman
     httpie
 
     # communications
