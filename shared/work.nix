@@ -15,7 +15,11 @@
     httpie
 
     # communications
-    slack-dark
+    discord
+
+    # editors
+    jetbrains.goland
+    jetbrains.webstorm
 
     # Docker
     docker-compose
