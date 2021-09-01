@@ -21,6 +21,7 @@
     # editors
     jetbrains.goland
     jetbrains.webstorm
+    poedit
 
     # Docker
     docker-compose
