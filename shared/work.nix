@@ -17,6 +17,7 @@
 
     # communications
     discord
+    zoom-us
 
     # editors
     jetbrains.goland
