@@ -67,7 +67,7 @@
 
   services.autorandr.enable = true;
 
-
+  environment.variables.WINIT_X11_SCALE_FACTOR = "1.25";
 
   #################
   ## Localisation
@@ -102,7 +102,7 @@
   };
 
   programs.alacritty = {
-    font.size = "8.0";
+    font.size = "10.0";
     theme = config.system.themer.theme;
   };
 
