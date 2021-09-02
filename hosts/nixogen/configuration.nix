@@ -67,7 +67,7 @@
 
   services.autorandr.enable = true;
 
-  environment.variables.WINIT_X11_SCALE_FACTOR = "1.25";
+  # environment.variables.WINIT_X11_SCALE_FACTOR = "1.25";
 
   #################
   ## Localisation
