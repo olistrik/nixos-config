@@ -198,6 +198,7 @@ in
 
                 bar {
                   position top
+                  tray_output none
                   status_command i3blocks -c /etc/i3blocks.conf
                   colors {
                     background #3c3b3a
