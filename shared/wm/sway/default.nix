@@ -31,8 +31,9 @@ in {
         --inside-color 00000088 \
         --separator-color 00000000 \
         --fade-in 0.1 \
-        --effect-scale 0.5 --effect-blur 7x3 --effect-scale 2 \
+        --effect-scale 0.5 --effect-blur 3x3 --effect-scale 2 \
         --effect-vignette 0.5:0.5 \
+        --effect-pixelate 10 \
         "$@"
       '')
     ];
