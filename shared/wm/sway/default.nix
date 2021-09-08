@@ -99,7 +99,7 @@ in {
       bindsym $mod+Shift+c reload
 
       # lock i3
-      bindsym $mod+Shift+l exec swaylock -f -c 000000
+      bindsym $mod+Shift+l exec loginctl lock-session
 
       #############
       ## Programs
@@ -158,10 +158,11 @@ in {
       exec waybar
       exec kanshi
       exec swayidle -w \
-        timeout 300 'swaylock -f -c 000000' \
+        timeout 300 'loginctl lock-session' \
         timeout 600 'swaymsg "output * dpms off"' \
-        resume 'swaymsg "output * dpms on"' \
-        before-sleep 'swaylock -f -c 000000'
+              resume 'swaymsg "output * dpms on"' \
+        before-sleep 'loginctl lock-session' \
+        lock 'swaylock -f -c 000000'
     '';
   };
 }
