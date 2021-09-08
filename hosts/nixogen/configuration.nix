@@ -51,6 +51,14 @@
   
   ####################
   ## Laptop Specific
+  nixpkgs.config.packageOverrides = pkgs: {
+    vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+  };
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    extraPackages = with pkgs; [ vaapiVdpau libvdpau-va-gl ];
+  };
 
   # Enable laptop touchpad.
   services.xserver.libinput.mouse = {
