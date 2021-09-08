@@ -39,6 +39,10 @@
         canTouchEfiVariables = true;
         efiSysMountPoint = "/boot/efi";
       };
+
+    };
+    kernel.sysctl = {
+      "fs.inotify.max_user_watches" = "1048576";
     };
     ## Mark /dev/nvme2 as luks.
     initrd.luks.devices = {
