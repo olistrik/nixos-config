@@ -73,11 +73,11 @@ in {
       bindsym $mod+5 workspace number $ws5
 
       # send container to workspace
-      bindsym $mod+Shift+exclam     move container to workspace number $ws1
-      bindsym $mod+Shift+at         move container to workspace number $ws2
-      bindsym $mod+Shift+numbersign move container to workspace number $ws3
-      bindsym $mod+Shift+dollar     move container to workspace number $ws4
-      bindsym $mod+Shift+percent    move container to workspace number $ws5
+      bindsym $mod+Shift+1 move container to workspace number $ws1
+      bindsym $mod+Shift+2 move container to workspace number $ws2
+      bindsym $mod+Shift+3 move container to workspace number $ws3
+      bindsym $mod+Shift+4 move container to workspace number $ws4
+      bindsym $mod+Shift+5 move container to workspace number $ws5
 
       ################################################
       ## Keybindings #################################
