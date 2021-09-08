@@ -9,6 +9,7 @@ in {
   programs.sway = {
     enable = true;
     extraPackages = with pkgs; [
+      swayidle
       swaylock
       wofi
       xwayland
