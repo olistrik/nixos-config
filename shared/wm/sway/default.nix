@@ -4,7 +4,6 @@ let
 in {
   imports = [
     ./waybar.nix
-    ./kanshi.nix
   ];
 
   programs.sway = {
@@ -12,6 +11,7 @@ in {
     extraPackages = with pkgs; [
       wofi
       xwayland
+      kanshi
     ];
   };
 
@@ -150,6 +150,7 @@ in {
       bindsym XF86AudioNext exec playerctl next
 
       exec waybar
+      exec kanshi
     '';
   };
 }
