@@ -104,7 +104,7 @@
 
       #################################
       ## Aliases
-      alias zzz="xautolock -locknow && systemctl suspend"
+      alias zzz="systemctl suspend"
       alias zura="zathura --fork"
 
       alias dc="docker-compose"

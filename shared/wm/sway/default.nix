@@ -21,7 +21,7 @@ in {
       playerctl
 
       (pkgs.writeScriptBin "lock" ''
-        ${swaylock-effects}/bin/swaylock --screenshots --clock --indicator-idle-visible \
+        ${swaylock-effects}/bin/swaylock -f --screenshots --clock --indicator-idle-visible \
         --indicator-radius 100 \
         --indicator-thickness 7 \
         --ring-color 455a64 \
@@ -31,9 +31,7 @@ in {
         --inside-color 00000088 \
         --separator-color 00000000 \
         --fade-in 0.1 \
-        --effect-scale 0.5 --effect-blur 3x3 --effect-scale 2 \
-        --effect-vignette 0.5:0.5 \
-        --effect-pixelate 10 \
+        --effect-pixelate 5 \
         "$@"
       '')
     ];
@@ -173,9 +171,12 @@ in {
       bindsym XF86AudioPlay exec playerctl play-pause
       bindsym XF86AudioNext exec playerctl next
 
-      exec waybar
-      exec kanshi
-      exec swayidle -w \
+      exec_always killall .waybar_wrapped
+      exec_always waybar
+      exec_always killall knashi
+      exec_always kanshi
+      exec_always killall swayidle
+      exec_always swayidle -w \
         timeout 300 'lock --grace 5 --fade-in 4' \
         timeout 600 'swaymsg "output * dpms off"' \
               resume 'swaymsg "output * dpms on"' \
