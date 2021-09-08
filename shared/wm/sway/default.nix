@@ -9,9 +9,34 @@ in {
   programs.sway = {
     enable = true;
     extraPackages = with pkgs; [
-
+      waybar
+      dmenu
     ];
   };
+  services.xserver = {
+    enable = true;
+
+    desktopManager = {
+      xterm.enable = false;
+    };
+
+    displayManager = {
+      defaultSession = "sway";
+      lightdm.greeters.mini = {
+        enable = true;
+        user = "kranex";
+        extraConfig = ''
+          [greeter]
+          show-password-label = false
+          [greeter-theme]
+          background-color = "#303030"
+          background-image = "/etc/lightdm/background.jpg"
+          window-color ="#000000"
+        '';
+      };
+    };
+  };
+
   environment = {
     etc."sway/config".source = pkgs.writeText "sway-config" ''
       ################################################
@@ -147,7 +172,7 @@ in {
       bar {
         position top
         tray_output none
-        status_command i3blocks -c /etc/i3blocks.conf
+        swaybar_command waybar
         colors {
           background #3c3b3a
         }
