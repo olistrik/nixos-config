@@ -13,6 +13,15 @@ in {
       xwayland
       kanshi
     ];
+
+    extraSessionCommands = ''
+      source /etc/profile
+      test -f $HOME/.profile && source $HOME/.profile
+      export MOZ_ENABLE_WAYLAND=1
+      systemctl --user import-environment
+    '';
+
+    wrapperFeatures.gtk = true;
   };
 
   environment = {
