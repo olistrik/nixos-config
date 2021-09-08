@@ -15,13 +15,10 @@ in {
     ];
 
     extraSessionCommands = ''
-      source /etc/profile
-      test -f $HOME/.profile && source $HOME/.profile
       export MOZ_ENABLE_WAYLAND=1
+      export _JAVA_AWT_WM_NONREPARENTING=1
       systemctl --user import-environment
     '';
-
-    wrapperFeatures.gtk = true;
   };
 
   environment = {
