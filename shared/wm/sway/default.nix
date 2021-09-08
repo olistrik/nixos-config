@@ -10,7 +10,7 @@ in {
     enable = true;
     extraPackages = with pkgs; [
       swayidle
-      swaylock
+      swaylock-effects
       wofi
       xwayland
       kanshi
@@ -19,6 +19,22 @@ in {
       slurp
       wl-clipboard
       playerctl
+
+      (pkgs.writeScriptBin "lock" ''
+        ${swaylock-effects}/bin/swaylock --screenshots --clock --indicator-idle-visible \
+        --indicator-radius 100 \
+        --indicator-thickness 7 \
+        --ring-color 455a64 \
+        --key-hl-color be5046 \
+        --text-color ffc107 \
+        --line-color 00000000 \
+        --inside-color 00000088 \
+        --separator-color 00000000 \
+        --fade-in 0.1 \
+        --effect-scale 0.5 --effect-blur 7x3 --effect-scale 2 \
+        --effect-vignette 0.5:0.5 \
+        "$@"
+      '')
     ];
 
     extraSessionCommands = ''
@@ -100,7 +116,7 @@ in {
       bindsym $mod+Shift+c reload
 
       # lock i3
-      bindsym $mod+Shift+l exec loginctl lock-session
+      bindsym $mod+Shift+l exec lock
 
       #############
       ## Programs
@@ -159,11 +175,10 @@ in {
       exec waybar
       exec kanshi
       exec swayidle -w \
-        timeout 300 'loginctl lock-session' \
+        timeout 300 'lock --grace 5 --fade-in 4' \
         timeout 600 'swaymsg "output * dpms off"' \
               resume 'swaymsg "output * dpms on"' \
-        before-sleep 'loginctl lock-session' \
-        lock 'swaylock -f -c 000000'
+        before-sleep 'lock'
     '';
   };
 }
