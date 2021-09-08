@@ -9,9 +9,15 @@ in {
   programs.sway = {
     enable = true;
     extraPackages = with pkgs; [
+      swaylock
       wofi
       xwayland
       kanshi
+      grim
+      jq
+      slurp
+      wl-clipboard
+      playerctl
     ];
 
     extraSessionCommands = ''
@@ -92,14 +98,8 @@ in {
       # reload the config
       bindsym $mod+Shift+c reload
 
-      # restart i3
-      bindsym $mod+Shift+r restart
-
-      # exit i3 (logs you out of your X session)
-      bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-
       # lock i3
-      bindsym $mod+Shift+l exec xautolock -locknow
+      bindsym $mod+Shift+l exec swaylock -f -c 000000
 
       #############
       ## Programs
@@ -108,18 +108,18 @@ in {
       bindsym $mod+Return exec alacritty
       bindsym $mod+Shift+Return exec alacritty --working-directory $(xcwd)
 
-      # dmenu
+      # wofi run menu
       bindsym $mod+space exec wofi --gtk-dark --show run
 
       # screenshot
-      bindsym $mod+p exec screenshot $HOME/Pictures
+      bindsym $mod+p exec grim - | wl-copy
 
       # screencrop
-      bindsym --release $mod+Shift+p exec screencrop $HOME/Pictures
-      bindsym --release $mod+Shift+s exec screencrop $HOME/Pictures
+      bindsym --release $mod+Shift+p exec grim -g "$(slurp)" - | wl-copy
+      bindsym --release $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy
 
-      # screencrop
-      bindsym --release $mod+Ctrl+p exec windowshot $HOME/Pictures
+      # windowshot
+      bindsym --release $mod+Ctrl+p exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')"
 
       #######################
       ## container Controls
@@ -157,6 +157,11 @@ in {
 
       exec waybar
       exec kanshi
+      exec swayidle -w \
+        timeout 300 'swaylock -f -c 000000' \
+        timeout 600 'swaymsg "output * dpms off"' \
+        resume 'swaymsg "output * dpms on"' \
+        before-sleep 'swaylock -f -c 000000'
     '';
   };
 }
