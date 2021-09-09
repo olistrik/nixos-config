@@ -31,7 +31,7 @@ in {
         --inside-color 00000088 \
         --separator-color 00000000 \
         --fade-in 0.1 \
-        --effect-pixelate 5 \
+        --effect-pixelate 16 \
         "$@"
       '')
     ];
@@ -141,8 +141,7 @@ in {
       ## container Controls
 
       # change layout
-      bindsym $mod+e layout toggle stacking tabbed split
-      bindsym $mod+f layout floating toggle
+      bindsym $mod+e layout toggle tabbed split
 
       # split controls
       bindsym $mod+apostrophe split toggle
@@ -171,9 +170,8 @@ in {
       bindsym XF86AudioPlay exec playerctl play-pause
       bindsym XF86AudioNext exec playerctl next
 
-      exec_always killall .waybar_wrapped
-      exec_always waybar
-      exec_always killall knashi
+      exec waybar
+      exec_always killall kanshi
       exec_always kanshi
       exec_always killall swayidle
       exec_always swayidle -w \
