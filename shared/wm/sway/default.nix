@@ -131,11 +131,11 @@ in {
       bindsym $mod+p exec grim - | wl-copy -t image/png
 
       # screencrop
-      bindsym --release $mod+Shift+p exec grim -g "$(slurp)" - | wl-copy -t image/png
-      bindsym --release $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy -t image/png
+      bindsym $mod+Shift+p exec grim -g "$(slurp)" - | wl-copy -t image/png
+      bindsym $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy -t image/png
  
       # windowshot
-      bindsym --release $mod+Ctrl+p exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')" - | wl-copy -t image/png
+      bindsym $mod+Ctrl+p exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')" - | wl-copy -t image/png
 
       #######################
       ## container Controls
