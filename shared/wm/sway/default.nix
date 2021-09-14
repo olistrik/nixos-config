@@ -3,7 +3,7 @@ let
   themer = config.system.themer;
 in {
   imports = [
-    ./waybar.nix
+    ../programs/waybar
   ];
 
   programs.sway = {
@@ -179,6 +179,8 @@ in {
         timeout 600 'swaymsg "output * dpms off"' \
               resume 'swaymsg "output * dpms on"' \
         before-sleep 'lock'
+
+      output * bg $HOME/wallpaper fill
     '';
   };
 }
