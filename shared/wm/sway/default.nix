@@ -10,8 +10,8 @@ in {
     enable = true;
     displayManager = {
       defaultSession = "sway";
-      sddm.enable = "true";
-      libinput.enable = "true";
+      sddm.enable = true;
+      libinput.enable = true;
     };
   };
 
