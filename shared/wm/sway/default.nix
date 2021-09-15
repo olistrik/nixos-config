@@ -4,7 +4,12 @@ let
 in {
   imports = [
     ../programs/waybar
+    ../programs/greetd
   ];
+
+  services.greetd.settings = {
+    command = "sway";
+  };
 
   programs.sway = {
     enable = true;
@@ -44,10 +49,6 @@ in {
   };
 
   environment = {
-    loginShellInit = ''
-      [[ "$(tty)" == /dev/tty1 ]] && sway
-    '';
-
     etc."sway/config".source = pkgs.writeText "sway-config" ''
       ################################################
       ##  i3 cnfig   #################################
