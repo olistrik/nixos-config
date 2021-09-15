@@ -4,11 +4,15 @@ let
 in {
   imports = [
     ../programs/waybar
-    ../programs/greetd
   ];
 
-  services.greetd.settings = {
-    command = "sway";
+  services.xserver = {
+    enable = true;
+    displayManager = {
+      defaultSession = "sway";
+      sddm.enable = "true";
+      libinput.enable = "true";
+    };
   };
 
   programs.sway = {
