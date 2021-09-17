@@ -4,7 +4,8 @@
 {
   imports = [
     ./programs/alacritty.nix
-    ./wm/sway
+    # ./wm/sway
+    ./wm/i3.nix
   ];
 
   # disable mouse acceleration
