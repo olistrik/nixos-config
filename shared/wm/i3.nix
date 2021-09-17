@@ -54,7 +54,7 @@ in
         };
 
         displayManager = {
-          defaultSession = "sway";
+          defaultSession = "none+i3";
           lightdm.greeters.mini = {
             enable = true;
             user = "kranex";
