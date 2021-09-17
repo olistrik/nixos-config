@@ -15,6 +15,7 @@
 
     ../../shared/personal.nix
     ../../shared/work.nix
+    ../../shared/wm/i3.nix
   ];
 
   nix = {
