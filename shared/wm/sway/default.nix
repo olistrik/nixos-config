@@ -3,8 +3,17 @@ let
   themer = config.system.themer;
 in {
   imports = [
-    ./waybar.nix
+    ../programs/waybar
   ];
+
+  services.xserver = {
+    enable = true;
+    libinput.enable = true;
+    displayManager = {
+      defaultSession = "sway";
+      sddm.enable = true;
+    };
+  };
 
   programs.sway = {
     enable = true;
@@ -44,10 +53,6 @@ in {
   };
 
   environment = {
-    loginShellInit = ''
-      [[ "$(tty)" == /dev/tty1 ]] && sway
-    '';
-
     etc."sway/config".source = pkgs.writeText "sway-config" ''
       ################################################
       ##  i3 cnfig   #################################
@@ -131,11 +136,11 @@ in {
       bindsym $mod+p exec grim - | wl-copy -t image/png
 
       # screencrop
-      bindsym --release $mod+Shift+p exec grim -g "$(slurp)" - | wl-copy -t image/png
-      bindsym --release $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy -t image/png
+      bindsym $mod+Shift+p exec grim -g "$(slurp)" - | wl-copy -t image/png
+      bindsym $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy -t image/png
  
       # windowshot
-      bindsym --release $mod+Ctrl+p exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')" - | wl-copy -t image/png
+      bindsym $mod+Ctrl+p exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')" - | wl-copy -t image/png
 
       #######################
       ## container Controls
@@ -179,6 +184,8 @@ in {
         timeout 600 'swaymsg "output * dpms off"' \
               resume 'swaymsg "output * dpms on"' \
         before-sleep 'lock'
+
+      output * bg $HOME/wallpaper fill
     '';
   };
 }
