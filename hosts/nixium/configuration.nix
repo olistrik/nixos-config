@@ -41,7 +41,7 @@
   #########################
   ## NVIDIA 3080 Specific
 
-  services.xserver.videoDrivers = [ "nouveau" ];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   #######################
   ## Home/Work Specific
