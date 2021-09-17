@@ -32,6 +32,7 @@
     yarn
     nodejs
     nodePackages."@angular/cli"
+    nodePackages.prettier
 
     # C & C++
     gcc10
