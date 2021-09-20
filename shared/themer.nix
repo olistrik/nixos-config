@@ -43,7 +43,6 @@ with lib; {
           };
         };
       };
-
       wm = {
         gaps = {
           inner = mkOption {

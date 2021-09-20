@@ -59,6 +59,15 @@ in
             If true, bold text is drawn using the bright color variants.
           '';
         };
+
+        backgroundOpacity = mkOption {
+          type = types.str;
+          default = "1.0";
+          description = ''
+            the background opacity of alacritty 0.0 to 1.0.
+          '';
+        };
+
         theme = mkOption {
           type = types.attrs;
           default = {
@@ -119,6 +128,7 @@ in
             style: ${cfg.font.normal.style}
           size: ${cfg.font.size}
         draw_bold_text_with_bright_colors: ${if cfg.brightBold then "true" else "false"}
+        background_opacity: ${cfg.backgroundOpacity}
         colors:
           primary:
             background: '${cfg.theme.primary.background}'
