@@ -21,8 +21,8 @@
     zoom-us
 
     # editors
-    # jetbrains.goland
-    # jetbrains.webstorm
+    jetbrains.goland
+    jetbrains.webstorm
     poedit
 
     # Docker
