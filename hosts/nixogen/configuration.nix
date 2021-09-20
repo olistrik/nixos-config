@@ -11,6 +11,7 @@
 
       ../../shared/personal.nix
       ../../shared/work.nix
+      ../../shared/wm/sway
     ];
 
   nix = {
