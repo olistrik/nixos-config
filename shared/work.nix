@@ -7,6 +7,7 @@
   networking.extraHosts = ''
     127.0.0.1 keycloak
     127.0.0.1 ckan
+    127.0.0.1 s3
   '';
 
   # programs that don't need "much" configuration.
@@ -20,8 +21,8 @@
     zoom-us
 
     # editors
-    jetbrains.goland
-    jetbrains.webstorm
+    # jetbrains.goland
+    # jetbrains.webstorm
     poedit
 
     # Docker
