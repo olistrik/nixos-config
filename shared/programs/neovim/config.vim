@@ -50,3 +50,5 @@ set backspace=indent,eol,start
 "" not sure what this does.
 set list
 set listchars=tab:>\ ,trail:•,extends:#,nbsp:.
+
+highlight Normal guibg=none

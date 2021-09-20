@@ -175,6 +175,20 @@ in {
       bindsym XF86AudioPlay exec playerctl play-pause
       bindsym XF86AudioNext exec playerctl next
 
+      #################################
+      ## backgrounds and transparency
+
+      set $solid 1.0
+      set $opacity 0.8
+
+      for_window [class=".*"] opacity $solid
+      # for_window [app_id=".*"] opacity $opacity
+
+      output * bg $HOME/wallpaper fill
+
+      ##########################
+      ## Background Programs
+
       exec waybar
       exec_always killall kanshi
       exec_always kanshi
@@ -185,7 +199,6 @@ in {
               resume 'swaymsg "output * dpms on"' \
         before-sleep 'lock'
 
-      output * bg $HOME/wallpaper fill
     '';
   };
 }
