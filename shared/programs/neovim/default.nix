@@ -20,8 +20,8 @@ let
     compe
 
     # linting
-    # treesitter
-    # ts-autotag #### BROKE, maintained by me
+    treesitter
+    ts-autotag # maintained by me
 
     # languages
     lspconfig
