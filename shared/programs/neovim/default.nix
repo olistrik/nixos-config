@@ -20,8 +20,8 @@ let
     compe
 
     # linting
-    treesitter
-    ts-autotag
+    # treesitter
+    # ts-autotag #### BROKE, maintained by me
 
     # languages
     lspconfig
@@ -50,36 +50,31 @@ in {
   # Add in all the dependencies that some languages have (also some plugins have
   # "optional?" dependencies that nix won't add).
   # TODO: I want to use a wrapper for this so they don't all endup on my path.
-  environment.systemPackages = builtins.concatLists (builtins.catAttrs "requires" plugins);
+  environment.systemPackages = with pkgs; [
+    (unstable.neovim.override {
+      configure = {
+        # Merge the selected configured plugins, any extras from them and the
+        # unconfigured plugins.
+        plug.plugins =(
+          builtins.catAttrs "plugin" plugins ++
+          builtins.concatLists (builtins.catAttrs "extras" plugins) ++
+          unconfiguredPlugins
+        );
+        # Merge the configs from all the configured plugins and the main neovim
+        # config.
+        customRC =
+          (builtins.concatStringsSep "\n" (builtins.catAttrs "config" plugins)) +
+          builtins.readFile ./config.vim;
+      };
+    })
+  ] ++ builtins.concatLists (builtins.catAttrs "requires" plugins);
 
   programs.neovim = {
-    package = pkgs.unstable.neovim-unwrapped;
-    enable = true;
-
     defaultEditor = true;
     # viAlias = true; # vi is actually useful when neovim breaks.
     vimAlias = true;
 
     # Merge all the runtime attrsets from all the selected configuredPlugins.
     runtime = lib.fold (x: y: lib.mergeAttrs x y ) {} (builtins.catAttrs "runtime" plugins);
-
-    configure = {
-      packages.myPlugins = {
-        # Merge the selected configured plugins, any extras from them and the
-        # unconfigured plugins.
-        start =
-          builtins.catAttrs "plugin" plugins ++
-          builtins.concatLists (builtins.catAttrs "extras" plugins) ++
-          unconfiguredPlugins;
-
-        opt = [];
-      };
-
-      # Merge the configs from all the configured plugins and the main neovim
-      # config.
-      customRC =
-        (builtins.concatStringsSep "\n" (builtins.catAttrs "config" plugins)) +
-        builtins.readFile ./config.vim;
-    };
   };
 }
