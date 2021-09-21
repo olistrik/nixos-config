@@ -10,9 +10,9 @@
 
     # nvim 0.5
     neovim = {
-      url = "github:neovim/neovim?dir=contrib";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:neovim/neovim?dir=contrib#";
     };
+
     flake-utils.url = "github:numtide/flake-utils";
   };
 

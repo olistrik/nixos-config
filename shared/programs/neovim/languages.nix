@@ -1,13 +1,8 @@
 {pkgs, lib, vimPlugins ? pkgs.vimPlugins, grammars ? pkgs.tree-sitter.builtGrammars}:
 let
-  # this is annoying to type.
-  tsRuntime = pkg: {
-    "parser/${builtins.elemAt (lib.splitString "-" pkg.name) 2}.so".source = "${pkg}/parser";
-  };
-
   # creates a lot of duplicate code, but it works.
   lspConfig = name: setup: ''
-    lua << EOF
+    lua <<EOF
     require'lspconfig'.${name}.setup {${setup}}
     EOF
   '';
@@ -23,7 +18,6 @@ let
 in {
     golang = rec {
       requires = with pkgs; [ gopls go ];
-      runtime = tsRuntime grammars.tree-sitter-go;
       config = lspConfig "gopls" "" + ''
         " Auto format go on save
         autocmd Filetype go set noexpandtab
@@ -36,12 +30,10 @@ in {
     nix = rec {
       requires = with pkgs; [ rnix-lsp ];
       extras = with vimPlugins; [ vim-nix ];
-      # runtime = tsRuntime suffix tree-sitter-nix;
       config = lspConfig "rnix" "";
     };
 
     c = rec {
-      runtime = tsRuntime grammars.tree-sitter-c;
     };
 
     cpp = {
@@ -52,16 +44,13 @@ in {
     };
 
     js = rec {
-      runtime = tsRuntime grammars.tree-sitter-javascript;
     };
 
     tsx = rec {
-      runtime = tsRuntime grammars.tree-sitter-tsx;
     };
 
     ts = rec {
       requires = with pkgs; [ nodePackages.typescript-language-server nodePackages.typescript];
-      runtime = tsRuntime grammars.tree-sitter-typescript;
       config = lspConfig "tsserver" ''
         cmd = { 'typescript-language-server', '--stdio', '--tsserver-path',
         '${pkgs.nodePackages.typescript}/bin/tsserver' }
@@ -71,7 +60,6 @@ in {
     ruby = rec {
       requires = with pkgs; [ kranex.rubocop-sdv solargraph ];
       extras = with vimPlugins; [ vim-rails ]; # Not sure if i need this?
-      runtime = tsRuntime grammars.tree-sitter-ruby;
       config = (lspConfig "solargraph" "") + ''
         " Auto lint and fix ruby on save
         autocmd BufWritePost *.rb silent! !${pkgs.kranex.rubocop-sdv}/bin/rubocop -A <afile>
@@ -81,12 +69,10 @@ in {
     };
 
     yaml = rec {
-      runtime = tsRuntime grammars.tree-sitter-yaml;
     };
 
     python = rec {
       requires = with pkgs; [ pyright ];
-      runtime = tsRuntime grammars.tree-sitter-python;
       config = lspConfig "pyright" "";
     };
 }
