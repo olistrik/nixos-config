@@ -52,7 +52,7 @@ with vimPlugins; {
 
     treesitter = {
       plugin = nvim-treesitter.withPlugins (
-          plugins: pkgs.tree-sitter.allGrammars
+          plugins: pkgs.tree-sitter.allGrammars # maybe on a per language basis?
       );
       config = ''
         lua <<EOF
@@ -76,14 +76,14 @@ with vimPlugins; {
       # ));
     };
 
-    # ts-autotag = {
-    #   plugin = nvim-ts-autotag;
-    #     config = ''
-    #     lua <<EOF
-    #       require('nvim-ts-autotag').setup()
-    #     EOF
-    #   '';
-    # };
+    ts-autotag = {
+      plugin = nvim-ts-autotag; # maintained by me
+        config = ''
+        lua <<EOF
+          require('nvim-ts-autotag').setup()
+        EOF
+      '';
+    };
 
     compe = {
       plugin = nvim-compe;

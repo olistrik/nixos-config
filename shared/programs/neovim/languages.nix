@@ -20,7 +20,7 @@ in {
       requires = with pkgs; [ gopls go ];
       config = lspConfig "gopls" "" + ''
         " Auto format go on save
-        autocmd Filetype go set noexpandtab
+        autocmd Filetype go setlocal noexpandtab
         autocmd BufWritePost *.go silent! !${pkgs.go}/bin/go fmt <afile>
         autocmd BufWritePost *.go edit
         autocmd BufWritePost *.go redraw!
