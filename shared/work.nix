@@ -23,7 +23,7 @@
     # editors
     jetbrains.goland
     jetbrains.webstorm
-    poedit
+    unstable.poedit
 
     # Docker
     docker-compose
