@@ -26,5 +26,8 @@
 
     # browsers
     google-chrome
+
+    # keyboard
+    qmk
   ];
 }
