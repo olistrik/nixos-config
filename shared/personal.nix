@@ -28,6 +28,6 @@
     google-chrome
 
     # keyboard
-    qmk
+    unstable.qmk
   ];
 }
