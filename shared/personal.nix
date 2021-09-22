@@ -29,5 +29,7 @@
 
     # keyboard
     unstable.qmk
+    gcc-arm-embedded
+    dfu-util
   ];
 }
