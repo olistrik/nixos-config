@@ -115,6 +115,14 @@
       alias dce="docker-compose exec"
       alias dcl="docker-compose logs -f"
 
+			#################################
+			## Git specials
+
+			alias gga="git add -A && git commit"
+			alias ggi="git add -i && git commit"
+			alias git-home="git config user.email oliverstrik@gmail.com && git config user.name Kranex && git config -l | grep user"
+			alias git-work="git config user.email oliver@klippa.com && git config user.name 'Oliver Strik' && git config -l | grep user"
+
     '';
     promptInit = ''
       eval "$(starship init zsh)"
