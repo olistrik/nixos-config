@@ -5,7 +5,7 @@
     kranex = {
       isNormalUser = true;
       extraGroups = [
-        "wheel" "audio" "sound" "video" "input" "tty" "dialout" "osboxes"
+        "wheel" "audio" "sound" "video" "input" "tty" "dialout" "plugdev" "osboxes"
       ];
     };
   };
