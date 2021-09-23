@@ -17,7 +17,7 @@
     httpie
 
     # communications
-    discord
+    unstable.discord
     zoom-us
 
     # editors
