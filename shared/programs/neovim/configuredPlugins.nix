@@ -149,6 +149,13 @@ with vimPlugins; {
             update_in_insert = true,
           }
         )
+
+        _G.open_diagnostics = function()
+          local popup_buf, winnr = vim.lsp.diagnostic.show_line_diagnostics()
+          if popup_buf ~= nil then
+            vim.api.nvim_buf_set_keymap(popup_buf, 'n', '<ESC>', '<CMD>bdelete<CR>', {noremap = true})
+          end
+        end
         EOF
 
         " Code navigation shortcuts
@@ -170,7 +177,7 @@ with vimPlugins; {
         set updatetime=300
 
         " Show diagnostic popup on cursor hold
-        autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+        autocmd CursorHold * lua _G.open_diagnostics()
 
         " Goto previous/next diagnostic warning/error
         nnoremap <silent> g[ <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
