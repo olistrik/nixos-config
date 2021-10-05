@@ -40,6 +40,9 @@
     valgrind
     binutils
 
+    # Python
+    python39
+
     #Web Browsers
     google-chrome
     firefox
