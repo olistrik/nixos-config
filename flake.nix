@@ -39,8 +39,9 @@
               inherit (prev) system; inherit config; inherit (self) overlays;
             };
 
-            # Packages to be on bleeding edge.
-            vimPlugins = prev.vimPlugins // final.unstable.vimPlugins // final.kranex.vimPlugins;
+            # Packages to be on bleeding edge. TODO: when unstable is fixed.
+            # vimPlugins = prev.vimPlugins // final.unstable.vimPlugins // final.kranex.vimPlugins;
+            vimPlugins = prev.vimPlugins // final.kranex.vimPlugins;
           }
         )
       ];
