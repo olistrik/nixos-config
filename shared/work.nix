@@ -19,10 +19,12 @@
     # communications
     unstable.discord
     zoom-us
+    teams
 
     # editors
     jetbrains.goland
     jetbrains.webstorm
+    jetbrains.idea-community
     unstable.poedit
 
     # Docker
@@ -46,7 +48,12 @@
     #Web Browsers
     google-chrome
     firefox
+
+    wakatime
   ];
+
+  # wakatime variables
+  environment.variables.WAKATIME_BIN = "${pkgs.wakatime}/bin/wakatime";
 
   # Docker
   virtualisation.docker.enable = true;

@@ -15,6 +15,8 @@
   };
 
   environment.systemPackages = with pkgs; [
+    steam-run # for shit software
+
     # media
     spotify
     feh

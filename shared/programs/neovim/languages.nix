@@ -43,6 +43,13 @@ in {
       '';
     };
 
+    html = rec {
+      config = ''
+        "" Don't linebreak at ruler in html
+        autocmd FileType html setlocal nolinebreak
+      '';
+    };
+
     js = rec {
     };
 
