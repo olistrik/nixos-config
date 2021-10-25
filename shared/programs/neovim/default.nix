@@ -2,7 +2,7 @@
 {pkgs, lib, ...}:
 let
   # the set of plugins to use.
-  vimPlugins = pkgs.vimPlugins;
+  vimPlugins = pkgs.vimPlugins // pkgs.unstable.vimPlugins // pkgs.kranex.vimPlugins;
 
   # Plugins that have configurations attached.
   configuredPlugins = import ./configuredPlugins.nix {inherit pkgs; inherit vimPlugins;};
@@ -76,15 +76,30 @@ in {
     })
   ] ++ builtins.concatLists (builtins.catAttrs "requires" plugins);
 
+
+  # environment.systemPackages = builtins.concatLists (builtins.catAttrs "requires" plugins);
   # programs.neovim = {
-  #  enable = true;
-  #  package = pkgs.unstable.neovim-unwrapped;
+  #   enable = true;
+  #   package = pkgs.unstable.neovim-unwrapped;
 
-  #  defaultEditor = true;
-    # viAlias = true; # vi is actually useful when neovim breaks.
-  #  vimAlias = true;
+  #   defaultEditor = true;
+  #   viAlias = true; # vi is actually useful when neovim breaks.
+  #   vimAlias = true;
 
-    # Merge all the runtime attrsets from all the selected configuredPlugins.
-  #  runtime = lib.fold (x: y: lib.mergeAttrs x y ) {} (builtins.catAttrs "runtime" plugins);
+  #   # Merge all the runtime attrsets from all the selected configuredPlugins.
+  #   runtime = lib.fold (x: y: lib.mergeAttrs x y ) {} (builtins.catAttrs "runtime" plugins);
+
+  #   configure = {
+  #     packages.myPlugins = {
+  #       opt = [];
+  #       start =
+  #         builtins.catAttrs "plugin" plugins ++
+  #         builtins.concatLists (builtins.catAttrs "extras" plugins) ++
+  #         unconfiguredPlugins;
+  #     };
+  #     customRC =
+  #       (builtins.concatStringsSep "\n" (builtins.catAttrs "config" plugins)) +
+  #       builtins.readFile ./config.vim;
+  #   };
   # };
 }
