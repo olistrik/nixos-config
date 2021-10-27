@@ -115,13 +115,27 @@
       alias dce="docker-compose exec"
       alias dcl="docker-compose logs -f"
 
-			#################################
-			## Git specials
+      #################################
+      ## Git specials
 
-			alias gga="git add -A && git commit"
-			alias ggi="git add -i && git commit"
-			alias git-home="git config user.email oliverstrik@gmail.com && git config user.name Kranex && git config -l | grep user"
-			alias git-work="git config user.email oliver@klippa.com && git config user.name 'Oliver Strik' && git config -l | grep user"
+      grb() {
+        [[ -z $1 ]] && echo "usage: grb <branch to rebase on>" && return 1
+        [[ -n $(git status -s) ]] && "please commit changes first" && return 1
+        git checkout $1
+        git pull
+        git checkout -
+        git rebase $1
+      }
+      compdef _git grb=git-rebase
+
+      alias gsw="git switch"
+      alias gaa="git add -A"
+      alias gca="git add -A && git commit"
+      alias gci="git add -i && git commit"
+      alias grc="git rebase --continue"
+      alias gra="git rebase --abort"
+      alias git-home="git config user.email oliverstrik@gmail.com && git config user.name Kranex && git config -l | grep user"
+      alias git-work="git config user.email oliver@klippa.com && git config user.name 'Oliver Strik' && git config -l | grep user"
 
     '';
     promptInit = ''
