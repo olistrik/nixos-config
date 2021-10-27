@@ -3,7 +3,24 @@
 # of different kinds of systems.
 
 { config, lib, pkgs, ... }:
-{
+let
+
+  wrapEnv = pkg: cmd: vars: pkgs.symlinkJoin {
+    name = pkg.name;
+    paths = [ pkg ];
+    buildInputs = [ pkgs.makeWrapper ];
+    postBuild = builtins.concatStringsSep  " --set " (
+      ["wrapProgram $out/bin/${cmd}"] ++
+      map (var: "${var.name} ${var.value}") vars
+    );
+  };
+
+  jetbrainsVars = [
+    { name="WAKATIME_CLI_LOCATION"; value="${pkgs.wakatime}/bin/wakatime"; }
+    { name="CHROME_BIN"; value="${pkgs.google-chrome}/bin/google-chrome-stable"; }
+  ];
+
+in {
   networking.extraHosts = ''
     127.0.0.1 keycloak
     127.0.0.1 ckan
@@ -22,9 +39,10 @@
     teams
 
     # editors
-    jetbrains.goland
-    jetbrains.webstorm
-    jetbrains.idea-community
+
+    (wrapEnv jetbrains.goland         "goland"         jetbrainsVars)
+    (wrapEnv jetbrains.webstorm       "webstorm"       jetbrainsVars)
+    (wrapEnv jetbrains.idea-community "idea-community" jetbrainsVars)
     unstable.poedit
 
     # Docker
