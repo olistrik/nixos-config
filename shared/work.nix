@@ -63,6 +63,9 @@ in {
     # Python
     python39
 
+    # Go
+    air
+
     #Web Browsers
     google-chrome
     firefox
