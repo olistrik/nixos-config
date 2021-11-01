@@ -67,6 +67,13 @@ in {
     google-chrome
     firefox
 
+    # Database cli's
+    mycli
+    pgcli
+    litecli
+
+
+    # Time Keeping
     wakatime
   ];
 
