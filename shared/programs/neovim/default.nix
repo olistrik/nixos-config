@@ -44,6 +44,7 @@ let
     auto-pairs
     vim-surround
     #vim-table-mode
+    markdown-preview-nvim
 
     # IDE
     # ale
