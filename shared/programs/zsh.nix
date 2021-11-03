@@ -33,109 +33,89 @@
     zplug load
 
     #################################
-    ## fix nix
-
-    function _nix() {
-      local ifs_bk="$IFS"
-      local input=("''${(Q)words[@]}")
-      IFS=$'\n'
-      local res=($(NIX_GET_COMPLETIONS=$((CURRENT - 1)) "$input[@]"))
-      IFS="$ifs_bk"
-      local tpe="$res[1]"
-      local suggestions=(''${res:1})
-      if [[ "$tpe" == filenames ]]; then
-        compadd -fa suggestions
-      else
-        compadd -a suggestions
-      fi
-    }
-
-    compdef _nix nix
-
-    #################################
     ## Magic Shit
 
-      setopt correct                   # Auto correct mistakes
-      setopt extendedglob              # Extended globbing. Allows using regular expressions with *
-      setopt nocaseglob                # Case insensitive globbing
-      # setopt rcexpandparam             # Array expension with parameters
-      # setopt nocheckjobs               # Don't warn about running processes when exiting
-      setopt numericglobsort           # Sort filenames numerically when it makes sense
-      setopt nobeep                    # No beep
-      setopt appendhistory             # Immediately append history instead of overwriting
-      setopt histignorealldups         # If a new command is a duplicate, remove the older one
-      setopt autocd                    # if only directory path is entered, cd there.
+    setopt correct                   # Auto correct mistakes
+    setopt extendedglob              # Extended globbing. Allows using regular expressions with *
+    setopt nocaseglob                # Case insensitive globbing
+    # setopt rcexpandparam             # Array expension with parameters
+    # setopt nocheckjobs               # Don't warn about running processes when exiting
+    setopt numericglobsort           # Sort filenames numerically when it makes sense
+    setopt nobeep                    # No beep
+    setopt appendhistory             # Immediately append history instead of overwriting
+    setopt histignorealldups         # If a new command is a duplicate, remove the older one
+    setopt autocd                    # if only directory path is entered, cd there.
 
-      #################################
-      ## Enable Ctrl + S and Ctrl + Q
+    #################################
+    ## Enable Ctrl + S and Ctrl + Q
 
-      stty start undef
-      stty stop undef
-      setopt noflowcontrol
+    stty start undef
+    stty stop undef
+    setopt noflowcontrol
 
-      #################################
-      ## Enable fzf searching.
-      if [ -n "''${commands[fzf-share]}" ]; then
-        source "$(fzf-share)/key-bindings.zsh"
-        source "$(fzf-share)/completion.zsh"
-      fi
+    #################################
+    ## Enable fzf searching.
+    if [ -n "''${commands[fzf-share]}" ]; then
+      source "$(fzf-share)/key-bindings.zsh"
+      source "$(fzf-share)/completion.zsh"
+    fi
 
-      #################################
-      ## Enable thefuck on ESC-ESC
-      #Register alias
-      eval "$(thefuck --alias)"
+    #################################
+    ## Enable thefuck on ESC-ESC
+    #Register alias
+    eval "$(thefuck --alias)"
 
-      fuck-command-line() {
-        local FUCK="$(THEFUCK_REQUIRE_CONFIRMATION=0 thefuck $(fc -ln -1 | tail -n 1) 2> /dev/null)"
-        [[ -z $FUCK ]] && echo -n -e "\a" && return
-        BUFFER=$FUCK
-        zle end-of-line
-      }
-      zle -N fuck-command-line
-      # Defined shortcut keys: [Esc] [Esc]
-      bindkey -M emacs '\e\e' fuck-command-line
-      bindkey -M vicmd '\e\e' fuck-command-line
-      bindkey -M viins '\e\e' fuck-command-line
+    fuck-command-line() {
+      local FUCK="$(THEFUCK_REQUIRE_CONFIRMATION=0 thefuck $(fc -ln -1 | tail -n 1) 2> /dev/null)"
+      [[ -z $FUCK ]] && echo -n -e "\a" && return
+      BUFFER=$FUCK
+      zle end-of-line
+    }
+    zle -N fuck-command-line
+    # Defined shortcut keys: [Esc] [Esc]
+    bindkey -M emacs '\e\e' fuck-command-line
+    bindkey -M vicmd '\e\e' fuck-command-line
+    bindkey -M viins '\e\e' fuck-command-line
 
 
-      #################################
-      ## Enable vi mode
-      ## bindkey -v
+    #################################
+    ## Enable vi mode
+    ## bindkey -v
 
-      #################################
-      ## Aliases
-      alias zzz="systemctl suspend"
-      alias zura="zathura --fork"
+    #################################
+    ## Aliases
+    alias zzz="systemctl suspend"
+    alias zura="zathura --fork"
 
-      alias dc="docker-compose"
-      alias dcu="docker-compose up -d"
-      alias dcd="docker-compose down"
-      alias dcb="docker-compose build --parallel"
-      alias dcr="docker-compose restart"
-      alias dce="docker-compose exec"
-      alias dcl="docker-compose logs -f"
+    alias dc="docker-compose"
+    alias dcu="docker-compose up -d"
+    alias dcd="docker-compose down"
+    alias dcb="docker-compose build --parallel"
+    alias dcr="docker-compose restart"
+    alias dce="docker-compose exec"
+    alias dcl="docker-compose logs -f"
 
-      #################################
-      ## Git specials
+    #################################
+    ## Git specials
 
-      grb() {
-        [[ -z $1 ]] && echo "usage: grb <branch to rebase on>" && return 1
-        [[ -n $(git status -s) ]] && "please commit changes first" && return 1
-        git checkout $1
-        git pull
-        git checkout -
-        git rebase $1
-      }
-      compdef _git grb=git-rebase
+    grb() {
+      [[ -z $1 ]] && echo "usage: grb <branch to rebase on>" && return 1
+      [[ -n $(git status -s) ]] && "please commit changes first" && return 1
+      git checkout $1
+      git pull
+      git checkout -
+      git rebase $1
+    }
+    compdef _git grb=git-rebase
 
-      alias gsw="git switch"
-      alias gaa="git add -A"
-      alias gca="git add -A && git commit"
-      alias gci="git add -i && git commit"
-      alias grc="git rebase --continue"
-      alias gra="git rebase --abort"
-      alias git-home="git config user.email oliverstrik@gmail.com && git config user.name Kranex && git config -l | grep user"
-      alias git-work="git config user.email oliver@klippa.com && git config user.name 'Oliver Strik' && git config -l | grep user"
+    alias gsw="git switch"
+    alias gaa="git add -A"
+    alias gca="git add -A && git commit"
+    alias gci="git add -i && git commit"
+    alias grc="git rebase --continue"
+    alias gra="git rebase --abort"
+    alias git-home="git config user.email oliverstrik@gmail.com && git config user.name Kranex && git config -l | grep user"
+    alias git-work="git config user.email oliver@klippa.com && git config user.name 'Oliver Strik' && git config -l | grep user"
 
     '';
     promptInit = ''
