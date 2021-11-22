@@ -60,9 +60,6 @@ in {
     valgrind
     binutils
 
-    # Python
-    python39
-
     # Go
     air
 
