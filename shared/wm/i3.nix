@@ -74,6 +74,7 @@ in
           package = pkgs.i3-gaps;
 
           extraPackages = with pkgs; [
+            feh
             rofi
             polybar
             i3status
@@ -204,6 +205,8 @@ in
                     background #3c3b3a
                   }
                 }
+
+                ${pkgs.feh}/bin/feh --bg-scale $HOME/wallpaper
 
                 #exec_always --no-startup-id $HOME/.config/polybar/launch.sh
               ''
