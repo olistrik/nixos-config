@@ -149,7 +149,7 @@ with vimPlugins; {
         set signcolumn=yes
 
         lua <<EOF
-        vim.lsp.set_log_level("debug")
+        -- vim.lsp.set_log_level("debug")
         -- Enable diagnostics
 
         vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
