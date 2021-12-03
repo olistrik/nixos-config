@@ -206,7 +206,7 @@ in
                   }
                 }
 
-                ${pkgs.feh}/bin/feh --bg-scale $HOME/wallpaper
+                exec ${pkgs.feh}/bin/feh --bg-scale $HOME/wallpaper
 
                 #exec_always --no-startup-id $HOME/.config/polybar/launch.sh
               ''
