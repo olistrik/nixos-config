@@ -37,6 +37,7 @@ in {
     unstable.discord
     zoom-us
     teams
+    minecraft
 
     # editors
 
