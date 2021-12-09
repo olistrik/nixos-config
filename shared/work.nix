@@ -25,7 +25,7 @@ in {
     127.0.0.1 keycloak
     127.0.0.1 ckan
     127.0.0.1 s3
-    188.166.155.59 klippacraft
+    188.166.115.59 klippacraft
   '';
 
   # programs that don't need "much" configuration.
