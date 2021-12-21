@@ -47,6 +47,7 @@ in {
       config = ''
         "" Don't linebreak at ruler in html
         autocmd FileType html setlocal nolinebreak
+        autocmd Filetype html setlocal noexpandtab
       '';
     };
 
@@ -61,6 +62,16 @@ in {
       config = lspConfig "tsserver" ''
         cmd = { 'typescript-language-server', '--stdio', '--tsserver-path',
         '${pkgs.nodePackages.typescript}/bin/tsserver' }
+      '' + ''
+        autocmd Filetype typescript setlocal noexpandtab
+      '';
+    };
+
+    css = rec {
+      config = ''
+        "" Don't linebreak at ruler in html
+        autocmd Filetype css setlocal noexpandtab
+        autocmd Filetype scss setlocal noexpandtab
       '';
     };
 
@@ -81,5 +92,17 @@ in {
     python = rec {
       requires = with pkgs; [ pyright ];
       config = lspConfig "pyright" "";
+    };
+
+    angular = rec {
+      requires = with pkgs; [ ];
+      config = lspConfig "angularls" ''
+        cmd = { './node_modules/@angular/language-server/bin/ngserver', '--stdio', '--tsProbeLocations',
+          './node_modules', '--ngProbeLocations', './node_modules' },
+        on_new_config = function(new_config, new_root_dir)
+          new_config.cmd = { './node_modules/@angular/language-server/bin/ngserver', '--stdio', '--tsProbeLocations',
+          './node_modules', '--ngProbeLocations', './node_modules' }
+        end,
+      '';
     };
 }
