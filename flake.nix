@@ -95,6 +95,8 @@
         vimPlugins = {
           nvim-ts-autotag = final.callPackage ./pkgs/vimPlugins/nvim-ts-autotag {};
         };
+
+        nodePackages = final.callPackage ./pkgs/node-packages {};
       })
     ]; # ++ map import (./overlays)
 
