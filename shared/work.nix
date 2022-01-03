@@ -63,6 +63,7 @@ in {
     binutils
 
     # Go
+    go
     air
 
     #Web Browsers
