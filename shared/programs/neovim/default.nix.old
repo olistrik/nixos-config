@@ -8,22 +8,50 @@ let
   configuredPlugins = import ./configuredPlugins.nix {inherit pkgs; inherit vimPlugins;};
 
   # Language support configurations and plugins.
-  # languages = import ./languages.nix {inherit pkgs; inherit vimPlugins; inherit lib;};
+  languages = import ./languages.nix {inherit pkgs; inherit vimPlugins; inherit lib;};
 
   # The configured plugins I actually want to use.
-  plugins = with configuredPlugins; [
+  plugins = with configuredPlugins; with languages; [
     colorscheme
-  ];
+
+    # file browsing
+    telescope # fzf
+    nerdtree
+
+    # completion
+    # YouCompleteMe
+    compe
+
+    # linting
+    treesitter
+    ts-autotag # maintained by me
+
+    # languages
+    lspconfig
+  ] ++ lib.mapAttrsToList (name: value: value) languages; # currently I just want all the languages...
 
   # Extra plugins that either don't need configuration or I haven't configured yet.
   unconfiguredPlugins = with vimPlugins; [
+    # Language Support
+    vim-pandoc
+    vim-pandoc-syntax
+    plantuml-syntax
+    i3config-vim
 
+    # QOL
+    vim-gitgutter
+    vim-repeat
+    auto-pairs
+    vim-surround
+    #vim-table-mode
+    markdown-preview-nvim
+
+    # IDE
+    # ale
+
+    # Time tracking
+    vim-wakatime
   ];
-
-  # '"path/to/plugin_a.lua", "path/to/plugin_b.lua"'
-  sourcePluginConfigs = builtins.concatStringsSep "\n" (
-      builtins.map (x: "source ${x}") (builtins.catAttrs "config" plugins)
-  );
 
 in {
   # Add in all the dependencies that some languages have (also some plugins have
@@ -35,17 +63,16 @@ in {
       configure = {
         # Merge the selected configured plugins, any extras from them and the
         # unconfigured plugins.
-        plug.plugins = (
+        plug.plugins =(
           builtins.catAttrs "plugin" plugins ++
           builtins.concatLists (builtins.catAttrs "extras" plugins) ++
           unconfiguredPlugins
         );
         # Merge the configs from all the configured plugins and the main neovim
         # config.
-        customRC = ''
-        source ${./configs/init.lua}
-        ${sourcePluginConfigs}
-        '';
+        customRC =
+          (builtins.concatStringsSep "\n" (builtins.catAttrs "config" plugins)) +
+          builtins.readFile ./config.vim;
       };
     })
   ] ++ builtins.concatLists (builtins.catAttrs "requires" plugins);
