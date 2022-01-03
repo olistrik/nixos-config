@@ -5,19 +5,29 @@ with vimPlugins; {
       config = ./configs/colorscheme.lua;
     };
 
+    telescope = {
+      plugin = telescope-nvim;
+      extras = [ popup-nvim plenary-nvim ];
+      requires = with pkgs; [ ripgrep ];
+      config = ./configs/telescope.lua;
+    };
+
     nerdtree = {
       plugin = nerdtree;
       extras = [ nerdtree-git-plugin ];
-      config = ''
-        "" close on file open
-        let g:NERDTreeQuitOnOpen = 1
+      config = ./configs/nerdtree.vim;
+    };
 
-        "" Open on F2
-        map <F2> :NERDTreeToggle<CR>
+    treesitter = {
+      plugin = nvim-treesitter.withPlugins (
+          plugins: pkgs.tree-sitter.allGrammars # maybe on a per language basis?
+      );
+      config = ./configs/treesitter.lua;
+    };
 
-        "" close if only thing open.
-        autocmd bufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-      '';
+    ts-autotag = {
+      plugin = nvim-ts-autotag; # maintained by me
+        config = ./configs/ts-autotag.lua;
     };
 
     YouCompleteMe = {
@@ -33,61 +43,6 @@ with vimPlugins; {
       config = ''
         let $FZF_DEFAULT_COMMAND = "find -L -not -path '*/\.git/*'"
         nnoremap <silent> <C-p> :FZF<CR>
-      '';
-    };
-
-    telescope = {
-      plugin = telescope-nvim;
-      extras = [ popup-nvim plenary-nvim ];
-      requires = with pkgs; [ ripgrep ];
-      config = ''
-        lua << EOF
-        require('telescope').setup{
-          defaults = {
-            file_ignore_patterns= {
-              "^.git/"
-            }
-          }
-        }
-        EOF
-
-        nnoremap <silent> <C-p> <cmd>Telescope find_files hidden=true<CR>
-        nnoremap <silent> <C-f> <cmd>Telescope live_grep hidden=true<CR>
-      '';
-    };
-
-    treesitter = {
-      plugin = nvim-treesitter.withPlugins (
-          plugins: pkgs.tree-sitter.allGrammars # maybe on a per language basis?
-      );
-      config = ''
-        lua <<EOF
-        require'nvim-treesitter.configs'.setup {
-          highlight = {
-            enable = true,
-          },
-          indent = {
-            enable = true,
-          }
-        }
-        EOF
-      '';
-      # runtime = ( builtins.listToAttrs (
-      #  lib.mapAttrsToList
-      #      (name: value: {
-      #      name = "parser/${lib.lists.last (lib.strings.splitString "-" name)}.so";
-      #      value = { source = "${value}/parser"; };
-      #      })
-      #      pkgs.tree-sitter.builtGrammars
-      # ));
-    };
-
-    ts-autotag = {
-      plugin = nvim-ts-autotag; # maintained by me
-        config = ''
-        lua <<EOF
-          require('nvim-ts-autotag').setup()
-        EOF
       '';
     };
 
