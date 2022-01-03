@@ -1,12 +1,8 @@
 {pkgs, vimPlugins ? pkgs.vimPlugins}:
 with vimPlugins; {
     colorscheme = {
-      plugin = ayu-vim;
-      config = ''
-        set termguicolors
-        let ayucolor="mirage"
-        colorscheme ayu
-      '';
+      plugin = neovim-ayu;
+      config = ./configs/colorscheme.lua;
     };
 
     nerdtree = {
