@@ -13,11 +13,23 @@ let
   # The configured plugins I actually want to use.
   plugins = with configuredPlugins; [
     colorscheme
+
+    telescope
+    nerdtree
+
+    treesitter
+    ts-autotag
   ];
 
   # Extra plugins that either don't need configuration or I haven't configured yet.
   unconfiguredPlugins = with vimPlugins; [
+    vim-gitgutter
+    vim-repeat
+    auto-pairs
+    vim-surround
+    vim-nix
 
+    vim-wakatime
   ];
 
   # '"path/to/plugin_a.lua", "path/to/plugin_b.lua"'
