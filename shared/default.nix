@@ -45,6 +45,7 @@ in
     unzip
     neofetch
     tree
+    parallel
 
     # C & C++
     gcc10
