@@ -19,6 +19,10 @@ let
 
     treesitter
     ts-autotag
+
+    lspconfig
+    compe
+    rust
   ];
 
   # Extra plugins that either don't need configuration or I haven't configured yet.
