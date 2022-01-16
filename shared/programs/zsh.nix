@@ -117,7 +117,20 @@
     alias git-home="git config user.email oliverstrik@gmail.com && git config user.name Kranex && git config -l | grep user"
     alias git-work="git config user.email oliver@klippa.com && git config user.name 'Oliver Strik' && git config -l | grep user"
 
+    ################################
+    ## Fuzzy completion
+
+
+    # 0 -- vanilla completion (abc => abc)
+    # 1 -- smart case completion (abc => Abc)
+    # 2 -- word flex completion (abc => A-big-Car)
+    # 3 -- full flex completion (abc => ABraCadabra)
+    zstyle ':completion:*' matcher-list "" \
+      'm:{a-z\-}={A-Z\_}' \
+      'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
+      'r:|?=** m:{a-z\-}={A-Z\_}'
     '';
+
     promptInit = ''
       eval "$(starship init zsh)"
     '';
