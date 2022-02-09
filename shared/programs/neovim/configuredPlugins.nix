@@ -59,7 +59,7 @@ with vimPlugins; {
     };
   
     rust = {
-      requires = with pkgs; [ rust-analyzer ];
+      requires = with pkgs; [  ];
       config = ./configs/rust.vim;
     };
 }
