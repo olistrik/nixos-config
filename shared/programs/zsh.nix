@@ -108,6 +108,8 @@
     }
     compdef _git grb=git-rebase
 
+    alias gg="git-graph"
+    alias gcs="git commit"
     alias gsw="git switch"
     alias gaa="git add -A"
     alias gca="git add -A && git commit"
