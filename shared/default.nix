@@ -36,6 +36,7 @@ in
   environment.systemPackages = with pkgs; [
     # General
     git
+    kranex.git-graph
     wget
     gnumake
 

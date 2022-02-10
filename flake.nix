@@ -91,12 +91,14 @@
         rubocop-sdv = final.callPackage ./pkgs/programs/rubocop-sdv {};
         screencapture-scripts = final.callPackage ./pkgs/scripts/screencapture {};
         code-with-me = final.callPackage ./pkgs/programs/code-with-me {};
+        git-graph = final.callPackage ./pkgs/programs/git-graph {};
 
         vimPlugins = {
           nvim-ts-autotag = final.callPackage ./pkgs/vimPlugins/nvim-ts-autotag {};
         };
 
         nodePackages = final.callPackage ./pkgs/node-packages {};
+
       })
     ]; # ++ map import (./overlays)
 
