@@ -40,6 +40,8 @@ in
     wget
     gnumake
 
+    unstable.steam
+
     # misc
     killall
     zip

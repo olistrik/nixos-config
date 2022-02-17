@@ -2,64 +2,54 @@
 with vimPlugins; {
     colorscheme = {
       plugin = neovim-ayu;
-      config = ./configs/colorscheme.lua;
+      config = ./config/plugin/colorscheme.lua;
     };
 
     telescope = {
       plugin = telescope-nvim;
       extras = [ popup-nvim plenary-nvim ];
       requires = with pkgs; [ ripgrep ];
-      config = ./configs/telescope.lua;
+      config = ./config/plugin/telescope.lua;
     };
 
     nerdtree = {
       plugin = nerdtree;
       extras = [ nerdtree-git-plugin ];
-      config = ./configs/nerdtree.vim;
+      config = ./config/plugin/nerdtree.vim;
     };
 
     treesitter = {
       plugin = nvim-treesitter.withPlugins (
           plugins: pkgs.tree-sitter.allGrammars # maybe on a per language basis?
       );
-      config = ./configs/treesitter.lua;
+      config = ./config/plugin/treesitter.lua;
     };
 
     ts-autotag = {
       plugin = nvim-ts-autotag; # maintained by me
-        config = ./configs/ts-autotag.lua;
-    };
-
-    YouCompleteMe = {
-      plugin = YouCompleteMe;
-      config = ''
-        let g:ycm_min_num_of_chars_for_completion = 3
-        let g:ycm_show_diagnostics_ui = 0
-      '';
-    };
-
-    fzf = {
-      plugin = fzf-vim;
-      config = ''
-        let $FZF_DEFAULT_COMMAND = "find -L -not -path '*/\.git/*'"
-        nnoremap <silent> <C-p> :FZF<CR>
-      '';
+      config = ./config/plugin/ts-autotag.lua;
     };
 
     compe = {
       plugin = nvim-compe;
       extras = [];
-      config = ./configs/compe.vim;
+      config = ./config/plugin/compe.vim;
     };
 
     lspconfig = {
       plugin = nvim-lspconfig;
       extras = [ lsp_extensions-nvim ];
-      config = ./configs/lspconfig.vim;
+      config = ./config/plugin/lspconfig.vim;
     };
-  
+
+    nix = {
+      requires = with pkgs; [ rnix-lsp ];
+      extras = [ vim-nix ];
+      config = ./config/plugin/nix.lua;
+    };
+
     rust = {
       requires = with pkgs; [  ];
-      config = ./configs/rust.vim;
+      config = ./config/plugin/rust.vim;
     };
 }
