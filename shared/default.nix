@@ -32,6 +32,8 @@ in
     };
   };
 
+  programs.steam.enable = true;
+
   # programs that don't need "much" configuration.
   environment.systemPackages = with pkgs; [
     # General
@@ -39,8 +41,6 @@ in
     kranex.git-graph
     wget
     gnumake
-
-    unstable.steam
 
     # misc
     killall
