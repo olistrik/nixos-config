@@ -22,6 +22,8 @@ let
 
     lspconfig
     compe
+
+    nix
     rust
   ];
 
@@ -59,7 +61,8 @@ in {
         # Merge the configs from all the configured plugins and the main neovim
         # config.
         customRC = ''
-        source ${./configs/init.lua}
+        set runtimepath^=${./config}
+        source ${./config/init.vim}
         ${sourcePluginConfigs}
         '';
       };

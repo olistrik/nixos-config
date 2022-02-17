@@ -11,7 +11,7 @@ lua <<EOF
 -- Enable diagnostics
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
+  vim.diagnostic.get, {
     virtual_text = true,
     signs = true,
     update_in_insert = true,
@@ -19,7 +19,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 )
 
 _G.open_diagnostics = function()
-  local popup_buf, winnr = vim.lsp.diagnostic.show_line_diagnostics()
+  local popup_buf, winnr = vim.diagnostic.open_float
   if popup_buf ~= nil then
     vim.api.nvim_buf_set_keymap(popup_buf, 'n', '<ESC>', '<CMD>bdelete<CR>', {noremap = true})
   end
