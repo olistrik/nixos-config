@@ -11,6 +11,7 @@
 
       ../../shared/personal.nix
       ../../shared/work.nix
+      ../../shared/yubikey.nix
       ../../shared/wm/sway
     ];
 
