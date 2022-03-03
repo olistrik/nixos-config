@@ -56,7 +56,13 @@ in {
       export MOZ_ENABLE_WAYLAND=1
       export _JAVA_AWT_WM_NONREPARENTING=1
       systemctl --user import-environment
-    '';
+      ${
+        if config.services.gnome.gnome-keyring.enable then ''
+        eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh);
+        export SSH_AUTH_SOCK;
+        '' else ""
+      }
+      '';
   };
 
   environment = {
