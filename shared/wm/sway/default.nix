@@ -18,6 +18,9 @@ in {
     };
   };
 
+  security.pam.services.gdm.enableGnomeKeyring =
+    config.services.gnome.gnome-keyring.enable;
+
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
