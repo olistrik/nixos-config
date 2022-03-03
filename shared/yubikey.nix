@@ -4,7 +4,11 @@ let
 in {
   environment.systemPackages = with pkgs; [
     yubikey-personalization
+    yubikey-manager
     yubico-pam
+    pinentry-curses
+    pinentry-qt
+    pinentry-gtk2
   ];
 
   programs = {
@@ -16,7 +20,7 @@ in {
       agent = {
         enable = true;
         enableSSHSupport = true;
-        pinentryFlavor = "curses";
+        pinentryFlavor = "gtk2";
       };
     };
   };
