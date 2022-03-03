@@ -17,5 +17,7 @@ in {
       mode = "challenge-response";
     };
   };
+
+  services.gnome.gnome-keyring.enable = true;
 }
 
