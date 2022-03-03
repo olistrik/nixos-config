@@ -18,9 +18,6 @@ in {
     };
   };
 
-  security.pam.services.gdm.enableGnomeKeyring =
-    config.services.gnome.gnome-keyring.enable;
-
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
@@ -56,12 +53,6 @@ in {
       export MOZ_ENABLE_WAYLAND=1
       export _JAVA_AWT_WM_NONREPARENTING=1
       systemctl --user import-environment
-      ${
-        if config.services.gnome.gnome-keyring.enable then ''
-        eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh);
-        export SSH_AUTH_SOCK;
-        '' else ""
-      }
       '';
   };
 
@@ -202,11 +193,9 @@ in {
       ##########################
       ## Background Programs
 
-      exec waybar
-      exec_always killall kanshi
-      exec_always kanshi
-      exec_always killall swayidle
-      exec_always swayidle -w \
+      exec_always pkill waybar; exec waybar
+      exec_always pkill kanshi; exec kanshi
+      exec_always pkill swayidle; exec swayidle -w \
         timeout 300 'lock --grace 5 --fade-in 4' \
         timeout 600 'swaymsg "output * dpms off"' \
               resume 'swaymsg "output * dpms on"' \
