@@ -7,8 +7,17 @@ in {
     yubico-pam
   ];
 
-  programs.ssh = {
-    startAgent = true;
+  programs = {
+    ssh = {
+      startAgent = false;
+    };
+    gnupg = {
+      package = pkgs.unstable.gnupg;
+      agent = {
+        enable = true;
+        enableSSHSupport = true;
+      };
+    };
   };
 
   security.pam = {
