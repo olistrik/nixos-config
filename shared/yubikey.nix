@@ -7,12 +7,8 @@ in {
     yubico-pam
   ];
 
-
-  programs = {
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
+  programs.ssh = {
+    startAgent = true;
   };
 
   security.pam = {
@@ -21,7 +17,5 @@ in {
       mode = "challenge-response";
     };
   };
-
-  services.gnome.gnome-keyring.enable = true;
 }
 

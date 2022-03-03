@@ -24,7 +24,6 @@ in
   # Every pc needs this.
   programs = {
     ssh = {
-      startAgent = false;
       extraConfig = ''
       Host gitlab.com
         UpdateHostKeys no
