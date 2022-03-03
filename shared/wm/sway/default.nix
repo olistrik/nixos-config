@@ -193,9 +193,9 @@ in {
       ##########################
       ## Background Programs
 
-      exec_always pkill waybar; exec waybar
-      exec_always pkill kanshi; exec kanshi
-      exec_always pkill swayidle; exec swayidle -w \
+      exec waybar
+      exec kanshi
+      exec swayidle -w \
         timeout 300 'lock --grace 5 --fade-in 4' \
         timeout 600 'swaymsg "output * dpms off"' \
               resume 'swaymsg "output * dpms on"' \
