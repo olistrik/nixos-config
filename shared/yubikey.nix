@@ -13,12 +13,12 @@ in {
 
   programs = {
     ssh = {
-      startAgent = false;
+      startAgent = true;
     };
     gnupg = {
       package = pkgs.unstable.gnupg;
       agent = {
-        enable = true;
+        enable = false;
         enableSSHSupport = true;
         pinentryFlavor = "gtk2";
       };
