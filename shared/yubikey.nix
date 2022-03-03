@@ -15,9 +15,11 @@ in {
     };
   };
 
-  security.pam.yubico = {
-    enable = true;
-    mode = "challenge-response";
+  security.pam = {
+    yubico = {
+      enable = false;
+      mode = "challenge-response";
+    };
   };
 }
 

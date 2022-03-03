@@ -63,7 +63,7 @@ in {
     binutils
 
     # Go
-    go
+    unstable.go
     air
 
     #Web Browsers

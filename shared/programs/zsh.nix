@@ -109,11 +109,12 @@
     compdef _git grb=git-rebase
 
     alias gg="git-graph"
-    alias gcs="git commit"
     alias gsw="git switch"
     alias gaa="git add -A"
     alias gca="git add -A && git commit"
     alias gci="git add -i && git commit"
+    alias gcs="git commit"
+    alias gcm="git commit -m"
     alias grc="git rebase --continue"
     alias gra="git rebase --abort"
     alias git-home="git config user.email oliverstrik@gmail.com && git config user.name Kranex && git config -l | grep user"
