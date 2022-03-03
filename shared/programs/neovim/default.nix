@@ -2,7 +2,7 @@
 {pkgs, lib, ...}:
 let
   # the set of plugins to use.
-  vimPlugins = pkgs.vimPlugins // pkgs.unstable.vimPlugins // pkgs.kranex.vimPlugins;
+  vimPlugins = pkgs.vimPlugins // pkgs.kranex.vimPlugins;
 
   # Plugins that have configurations attached.
   configuredPlugins = import ./configuredPlugins.nix {inherit pkgs; inherit vimPlugins;};
@@ -49,7 +49,7 @@ in {
   # TODO: I want to use a wrapper for this so they don't all endup on my path.
   environment.variables.EDITOR = "nvim";
   environment.systemPackages = with pkgs; [
-    (unstable.neovim.override {
+    (neovim.override {
       configure = {
         # Merge the selected configured plugins, any extras from them and the
         # unconfigured plugins.

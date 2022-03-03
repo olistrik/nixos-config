@@ -6,50 +6,61 @@ set shortmess+=c
 " Always show signcolumn so that it doesnt (dis)appear when a new error happens
 set signcolumn=yes
 
-lua <<EOF
--- vim.lsp.set_log_level("debug")
--- Enable diagnostics
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.diagnostic.get, {
-    virtual_text = true,
-    signs = true,
-    update_in_insert = true,
-  }
-)
-
-_G.open_diagnostics = function()
-  local popup_buf, winnr = vim.diagnostic.open_float
-  if popup_buf ~= nil then
-    vim.api.nvim_buf_set_keymap(popup_buf, 'n', '<ESC>', '<CMD>bdelete<CR>', {noremap = true})
-  end
-end
-EOF
-
-" Code navigation shortcuts
-nnoremap <silent> gd         <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> K          <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gD         <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> <c-k>      <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> 0gD        <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> gr         <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> g-1        <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <silent> gW         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-nnoremap <silent> <c-]>      <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent> <Leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap <silent> ga         <cmd>lua vim.lsp.buf.code_action()<CR>
-nnoremap <silent> <Leader>fm <cmd>lua vim.lsp.buf.formatting()<CR>
-
 " Set updatetime for CursorHold
 " 300ms of no cursor movement to trigger CursorHold
 set updatetime=300
 
-" Show diagnostic popup on cursor hold
-autocmd CursorHold * lua _G.open_diagnostics()
+lua <<EOF
 
-" Goto previous/next diagnostic warning/error
-nnoremap <silent> g[ <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <silent> g] <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+  local opts = { noremap=true, silent=true }
+  local nnoremap = function(map, cmd)
+    vim.api.nvim_set_keymap('n', map, cmd, opts)
+  end
+  local bufnnoremap = function(bufnr, map, cmd)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', map, cmd, opts)
+  end
+
+
+  nnoremap('K',   '<cmd>lua vim.diagnostic.open_float()')
+  nnoremap('g[',  '<cmd>lua vim.diagnostic.goto_prev()')
+  nnoremap('g]',  '<cmd>lua vim.diagnostic.goto_next()')
+
+
+  local on_attach = function(client, bufnr)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+    bufnnoremap('gd',         '<cmd>lua vim.diagnostic.definition()')
+    -- bufnnoremap('K',          '<cmd>lua vim.diagnostic.hover()')
+    bufnnoremap('gD',         '<cmd>lua vim.diagnostic.implementation()')
+    bufnnoremap('<C-k>',      '<cmd>lua vim.diagnostic.signature_help()')
+    bufnnoremap('0gD',        '<cmd>lua vim.diagnostic.type_definition()')
+    bufnnoremap('gr',         '<cmd>lua vim.diagnostic.references()')
+    bufnnoremap('g-1',        '<cmd>lua vim.diagnostic.document_symbol()')
+    bufnnoremap('gW',         '<cmd>lua vim.diagnostic.workspace_symbol()')
+    bufnnoremap('<c-]>',      '<cmd>lua vim.diagnostic.declaration()')
+    bufnnoremap('<Leader>rn', '<cmd>lua vim.diagnostic.rename()')
+    bufnnoremap('ga',         '<cmd>lua vim.diagnostic.code_action()')
+    bufnnoremap('<Leader>fm', '<cmd>lua vim.diagnostic.formatting()')
+  end
+
+-- vim.lsp.set_log_level("debug")
+-- Enable diagnostics
+
+-- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+--  vim.diagnostic.get, {
+--    virtual_text = true,
+--    signs = true,
+--    update_in_insert = true,
+--  }
+-- )
+
+-- _G.open_diagnostics = function()
+--   local popup_buf, winnr = vim.diagnostic.open_float()
+--   if popup_buf ~= nil then
+--     vim.api.nvim_buf_set_keymap(popup_buf, 'n', '<ESC>', '<CMD>bdelete<CR>', {noremap = true})
+--   end
+-- end
+EOF
 
 " autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
 "  \ lua require'lsp_extensions'.inlay_hints{ prefix = "", highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }

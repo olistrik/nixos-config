@@ -11,12 +11,16 @@ in {
     libinput.enable = true;
     displayManager = {
       defaultSession = "sway";
-      sddm.enable = true;
+      gdm = {
+        enable = true;
+        wayland = true;
+      };
     };
   };
 
   programs.sway = {
     enable = true;
+    wrapperFeatures.gtk = true;
     extraPackages = with pkgs; [
       swayidle
       swaylock-effects
