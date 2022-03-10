@@ -9,7 +9,7 @@ in {
     pinentry-curses
     pinentry-qt
     pinentry-gtk2
-    x11-ssh-askpass
+    # x11-ssh-askpass
   ];
 
   programs = {
