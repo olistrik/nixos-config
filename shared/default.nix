@@ -54,6 +54,9 @@ in
     gdb
     valgrind
     binutils
+
+    # USB utils
+    ventoy-bin
   ];
 }
 
