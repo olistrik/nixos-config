@@ -14,7 +14,7 @@
   '';
 
   environment.pathsToLink = [
-    "share/nix-direnv"
+    "/share/nix-direnv"
   ];
 
   nixpkgs.overlays = [
