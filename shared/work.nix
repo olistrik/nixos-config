@@ -46,6 +46,7 @@ in {
     (wrapEnv jetbrains.webstorm       "webstorm"       jetbrainsVars)
     (wrapEnv jetbrains.idea-community "idea-community" jetbrainsVars)
     unstable.poedit
+    vscode
 
     # Docker
     docker-compose
