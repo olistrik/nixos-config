@@ -29,9 +29,10 @@
     # browsers
     google-chrome
 
+    # coms
+    tdesktop
+
     # keyboard
-    unstable.qmk
-    gcc-arm-embedded
     dfu-util
   ];
 
