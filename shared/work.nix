@@ -34,6 +34,8 @@ in {
     postman
     httpie
 
+    kranex.klippa.mkdocs-klippa
+
     # communications
     unstable.discord
     zoom-us
@@ -85,7 +87,12 @@ in {
   environment.variables.WAKATIME_BIN = "${pkgs.wakatime}/bin/wakatime";
 
   # Docker
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    package = (pkgs.docker.override(args: { buildxSupport = true; }));
+  };
+
+
   users.users.kranex.extraGroups = [ "docker" ];
 }
 
