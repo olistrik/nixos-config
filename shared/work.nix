@@ -26,7 +26,9 @@ in {
     127.0.0.1 ckan
     127.0.0.1 s3
     188.166.115.59 klippacraft
-  '';
+  ''; 
+
+  programs.adb.enable = true;
 
   # programs that don't need "much" configuration.
   environment.systemPackages = with pkgs; [
