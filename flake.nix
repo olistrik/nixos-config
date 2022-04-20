@@ -8,10 +8,7 @@
     # Unstable nixpkgs
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # nvim 0.5
-    neovim = {
-      url = "github:neovim/neovim?dir=contrib#";
-    };
+    mkdocs-klippa.url = "git+ssh://git@git.hub.klippa.com/klippa/MkDocs.git?ref=development";
 
     flake-utils.url = "github:numtide/flake-utils";
   };
@@ -87,18 +84,20 @@
     # My overlays, see nixpkgsConfig for usage.
     overlays = with inputs; [
       (final: prev: {
-        neovim-nightly = neovim.packages.${prev.system}.neovim;
         rubocop-sdv = final.callPackage ./pkgs/programs/rubocop-sdv {};
         screencapture-scripts = final.callPackage ./pkgs/scripts/screencapture {};
         code-with-me = final.callPackage ./pkgs/programs/code-with-me {};
         git-graph = final.callPackage ./pkgs/programs/git-graph {};
+
+        klippa = {
+          mkdocs-klippa = mkdocs-klippa.packages.${prev.system}.mkdocs-klippa;
+        };
 
         vimPlugins = {
           nvim-ts-autotag = final.callPackage ./pkgs/vimPlugins/nvim-ts-autotag {};
         };
 
         nodePackages = final.callPackage ./pkgs/node-packages {};
-
       })
     ]; # ++ map import (./overlays)
 

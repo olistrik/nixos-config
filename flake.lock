@@ -15,49 +15,33 @@
         "type": "github"
       }
     },
-    "flake-utils_2": {
-      "locked": {
-        "lastModified": 1629481132,
-        "narHash": "sha256-JHgasjPR0/J1J3DRm4KxM4zTyAj4IOJY8vIl75v/kPI=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "997f7efcb746a9c140ce1f13c72263189225f482",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "neovim": {
+    "mkdocs-klippa": {
       "inputs": {
-        "flake-utils": "flake-utils_2",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "utils": "utils"
       },
       "locked": {
-        "dir": "contrib",
-        "lastModified": 1644393120,
-        "narHash": "sha256-t79OIOtAxGg8WHCToDp27XOInds+mjAxs5BHmbTmX4A=",
-        "owner": "neovim",
-        "repo": "neovim",
-        "rev": "01b748f28f0412c13ae9c5365dbd362fca0d93f6",
-        "type": "github"
+        "lastModified": 1650362580,
+        "narHash": "sha256-r/pNjZBh9blCPumKXM9vinIGXX8jV6TngzvoLgmNZW8=",
+        "ref": "development",
+        "rev": "99fd1aec4cf2aa4f858b0738f9d5e700766d0dff",
+        "revCount": 3,
+        "type": "git",
+        "url": "ssh://git@git.hub.klippa.com/klippa/MkDocs.git"
       },
       "original": {
-        "dir": "contrib",
-        "owner": "neovim",
-        "repo": "neovim",
-        "type": "github"
+        "ref": "development",
+        "type": "git",
+        "url": "ssh://git@git.hub.klippa.com/klippa/MkDocs.git"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1630074300,
-        "narHash": "sha256-BFM7OiXRs0RvSUZd6NCGAKWVPn3VodgYQ4TUQXxbMBU=",
+        "lastModified": 1649225869,
+        "narHash": "sha256-u1zLtPmQzhT9mNXyM8Ey9pk7orDrIKdwooeGDEXm5xM=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "21c937f8cb1e6adcfeb36dfd6c90d9d9bfab1d28",
+        "rev": "b6966d911da89e5a7301aaef8b4f0a44c77e103c",
         "type": "github"
       },
       "original": {
@@ -102,9 +86,24 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "neovim": "neovim",
+        "mkdocs-klippa": "mkdocs-klippa",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable"
+      }
+    },
+    "utils": {
+      "locked": {
+        "lastModified": 1648297722,
+        "narHash": "sha256-W+qlPsiZd8F3XkzXOzAoR+mpFqzm3ekQkJNa+PIh1BQ=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "0f8662f1319ad6abf89b3380dd2722369fc51ade",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
       }
     }
   },
