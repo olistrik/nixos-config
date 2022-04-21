@@ -21,26 +21,26 @@ lua <<EOF
   end
 
 
-  nnoremap('K',   '<cmd>lua vim.diagnostic.open_float()')
-  nnoremap('g[',  '<cmd>lua vim.diagnostic.goto_prev()')
-  nnoremap('g]',  '<cmd>lua vim.diagnostic.goto_next()')
+  nnoremap('K',   '<cmd>lua vim.diagnostic.open_float()<CR>')
+  nnoremap('g[',  '<cmd>lua vim.diagnostic.goto_prev()<CR>')
+  nnoremap('g]',  '<cmd>lua vim.diagnostic.goto_next()<CR>')
 
 
   local on_attach = function(client, bufnr)
     -- vim.api.nvim_buf_set_keymap(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    bufnnoremap('gd',         '<cmd>lua vim.diagnostic.definition()')
+    bufnnoremap('gd',         '<cmd>lua vim.diagnostic.definition()<CR>')
     -- bufnnoremap('K',          '<cmd>lua vim.diagnostic.hover()')
-    bufnnoremap('gD',         '<cmd>lua vim.diagnostic.implementation()')
-    bufnnoremap('<C-k>',      '<cmd>lua vim.diagnostic.signature_help()')
-    bufnnoremap('0gD',        '<cmd>lua vim.diagnostic.type_definition()')
-    bufnnoremap('gr',         '<cmd>lua vim.diagnostic.references()')
-    bufnnoremap('g-1',        '<cmd>lua vim.diagnostic.document_symbol()')
-    bufnnoremap('gW',         '<cmd>lua vim.diagnostic.workspace_symbol()')
-    bufnnoremap('<c-]>',      '<cmd>lua vim.diagnostic.declaration()')
-    bufnnoremap('<Leader>rn', '<cmd>lua vim.diagnostic.rename()')
-    bufnnoremap('ga',         '<cmd>lua vim.diagnostic.code_action()')
-    bufnnoremap('<Leader>fm', '<cmd>lua vim.diagnostic.formatting()')
+    bufnnoremap('gD',         '<cmd>lua vim.diagnostic.implementation()<CR>')
+    bufnnoremap('<C-k>',      '<cmd>lua vim.diagnostic.signature_help()<CR>')
+    bufnnoremap('0gD',        '<cmd>lua vim.diagnostic.type_definition()<CR>')
+    bufnnoremap('gr',         '<cmd>lua vim.diagnostic.references()<CR>')
+    bufnnoremap('g-1',        '<cmd>lua vim.diagnostic.document_symbol()<CR>')
+    bufnnoremap('gW',         '<cmd>lua vim.diagnostic.workspace_symbol()<CR>')
+    bufnnoremap('<c-]>',      '<cmd>lua vim.diagnostic.declaration()<CR>')
+    bufnnoremap('<Leader>rn', '<cmd>lua vim.diagnostic.rename()<CR>')
+    bufnnoremap('ga',         '<cmd>lua vim.diagnostic.code_action()<CR>')
+    bufnnoremap('<Leader>fm', '<cmd>lua vim.diagnostic.formatting()<CR>')
   end
 
 -- vim.lsp.set_log_level("debug")
