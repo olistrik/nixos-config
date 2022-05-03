@@ -21,6 +21,8 @@ in
     ./programs/direnv.nix
   ];
 
+  nix.autoOptimiseStore = true;
+
   # Every pc needs this.
   programs = {
     ssh = {
