@@ -29,9 +29,6 @@
     # browsers
     google-chrome
 
-    # coms
-    tdesktop
-
     # keyboard
     dfu-util
   ];

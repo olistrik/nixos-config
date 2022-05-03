@@ -46,13 +46,13 @@ lua <<EOF
 -- vim.lsp.set_log_level("debug")
 -- Enable diagnostics
 
-   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.diagnostic.get, {
-      virtual_text = true,
-      signs = true,
-      update_in_insert = true,
-    }
-   )
+--   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+--    vim.diagnostic.get, {
+--      virtual_text = true,
+--      signs = true,
+--      update_in_insert = true,
+--    }
+--   )
 
 -- _G.open_diagnostics = function()
 --   local popup_buf, winnr = vim.diagnostic.open_float()
