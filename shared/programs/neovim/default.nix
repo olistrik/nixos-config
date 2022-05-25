@@ -1,98 +1,63 @@
 # Install and configure neovim + plugins.
-{pkgs, lib, ...}:
+{ pkgs, lib, ... }:
 let
   # the set of plugins to use.
-  vimPlugins = pkgs.vimPlugins // pkgs.kranex.vimPlugins;
-
+  vimPlugins = pkgs.unstable.vimPlugins // pkgs.kranex.vimPlugins;
   # Plugins that have configurations attached.
-  configuredPlugins = import ./configuredPlugins.nix {inherit pkgs; inherit vimPlugins;};
+  configuredPlugins = import ./plugins.nix { inherit (pkgs.unstable) pkgs; inherit vimPlugins;};
 
   # Language support configurations and plugins.
   # languages = import ./languages.nix {inherit pkgs; inherit vimPlugins; inherit lib;};
 
   # The configured plugins I actually want to use.
-  plugins = with configuredPlugins; [
-    colorscheme
+  plugins = builtins.attrValues configuredPlugins;
 
-    telescope
-    nerdtree
+  pluginPkgs = let
+    plugs = builtins.catAttrs "plugin" plugins;
+    transitiveClosure = plugin:
+    [ plugin ] ++
+    ( lib.unique ( builtins.concatLists ( map transitiveClosure
+    plugin.dependencies or [])));
 
-    treesitter
-    ts-autotag
+    deps = lib.concatMap transitiveClosure plugs;
+    pkgs = lib.unique (plugs ++ deps);
+  in pkgs;
 
-    lspconfig
-    compe
+  sourceStr = with builtins; concatStringsSep "\n" (map (x:
+  "require('kranexconf.${x}')") (catAttrs "config" plugins));
 
-    nix
-    rust
-  ];
+  externals = with pkgs; [
+    xclip
+  ] ++ builtins.concatLists (builtins.catAttrs "extern" plugins);
 
   # Extra plugins that either don't need configuration or I haven't configured yet.
-  unconfiguredPlugins = with vimPlugins; [
-    vim-gitgutter
-    vim-repeat
-    auto-pairs
-    vim-surround
-    vim-nix
+  # unconfiguredPlugins = with vimPlugins; [
+  #   vim-gitgutter
+  #   vim-repeat
+  #   auto-pairs
+  #   vim-surround
+  #   vim-nix
 
-    vim-wakatime
-  ];
+  #   # vim-wakatime
+  # ];
 
-  # '"path/to/plugin_a.lua", "path/to/plugin_b.lua"'
-  sourcePluginConfigs = builtins.concatStringsSep "\n" (
-      builtins.map (x: "source ${x}") (builtins.catAttrs "config" plugins)
-  );
-
-in {
-  # Add in all the dependencies that some languages have (also some plugins have
-  # "optional?" dependencies that nix won't add).
-  # TODO: I want to use a wrapper for this so they don't all endup on my path.
-  environment.variables.EDITOR = "nvim";
-  environment.systemPackages = with pkgs; [
-    (neovim.override {
+  nvim = (pkgs.unstable.neovim.override {
       configure = {
-        # Merge the selected configured plugins, any extras from them and the
-        # unconfigured plugins.
-        plug.plugins = (
-          builtins.catAttrs "plugin" plugins ++
-          builtins.concatLists (builtins.catAttrs "extras" plugins) ++
-          unconfiguredPlugins
-        );
-        # Merge the configs from all the configured plugins and the main neovim
-        # config.
+        plug.plugins = pluginPkgs;
         customRC = ''
         set runtimepath^=${./config}
-        source ${./config/init.vim}
-        ${sourcePluginConfigs}
+        source ${./config/lua/init.lua}
+
+        lua <<EOF
+        ${sourceStr}
+        EOF
         '';
       };
-    })
-  ] ++ builtins.concatLists (builtins.catAttrs "requires" plugins);
-
-
-  # environment.systemPackages = builtins.concatLists (builtins.catAttrs "requires" plugins);
-  # programs.neovim = {
-  #   enable = true;
-  #   package = pkgs.unstable.neovim-unwrapped;
-
-  #   defaultEditor = true;
-  #   viAlias = true; # vi is actually useful when neovim breaks.
-  #   vimAlias = true;
-
-  #   # Merge all the runtime attrsets from all the selected configuredPlugins.
-  #   runtime = lib.fold (x: y: lib.mergeAttrs x y ) {} (builtins.catAttrs "runtime" plugins);
-
-  #   configure = {
-  #     packages.myPlugins = {
-  #       opt = [];
-  #       start =
-  #         builtins.catAttrs "plugin" plugins ++
-  #         builtins.concatLists (builtins.catAttrs "extras" plugins) ++
-  #         unconfiguredPlugins;
-  #     };
-  #     customRC =
-  #       (builtins.concatStringsSep "\n" (builtins.catAttrs "config" plugins)) +
-  #       builtins.readFile ./config.vim;
-  #   };
-  # };
+    }).overrideAttrs (_: {
+      passthru.additionalPackages = externals;
+    });
+in {
+  environment.variables.EDITOR = "nvim";
+  environment.systemPackages = [ nvim ] ++ nvim.additionalPackages;
 }
+
