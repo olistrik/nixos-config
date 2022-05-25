@@ -31,7 +31,6 @@ in {
     127.0.0.1 db
     127.0.0.1 redis
     127.0.0.1 killbill
-    188.166.115.59 klippacraft
   '';
 
   programs.adb.enable = true;
@@ -41,8 +40,6 @@ in {
     # utility
     postman
     httpie
-
-    kranex.klippa.mkdocs-klippa
 
     # communications
     unstable.discord
