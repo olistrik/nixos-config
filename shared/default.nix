@@ -4,11 +4,9 @@
 
 { config, lib, pkgs, ... }:
 
-let
-  inherit (lib.modules) mkDefault;
-in
+let inherit (lib.modules) mkDefault;
 
-{
+in {
 
   imports = [
     ./audio.nix # explicitly disable that plague called pulseaudio
@@ -27,8 +25,8 @@ in
   programs = {
     ssh = {
       extraConfig = ''
-      Host gitlab.com
-        UpdateHostKeys no
+        Host gitlab.com
+          UpdateHostKeys no
       '';
     };
   };
@@ -40,6 +38,7 @@ in
     # General
     git
     kranex.git-graph
+    kranex.git-igitt
     wget
     gnumake
 
@@ -61,4 +60,3 @@ in
     ventoy-bin
   ];
 }
-

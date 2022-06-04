@@ -90,7 +90,7 @@
               final.callPackage ./pkgs/scripts/screencapture { };
             code-with-me = final.callPackage ./pkgs/programs/code-with-me { };
             git-graph = final.callPackage ./pkgs/programs/git-graph { };
-
+            git-igitt = final.callPackage ./pkgs/programs/git-igitt { };
             vimPlugins = {
               nvim-ts-autotag =
                 final.callPackage ./pkgs/vimPlugins/nvim-ts-autotag { };
