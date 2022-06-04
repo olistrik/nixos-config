@@ -22,7 +22,7 @@ vim.cmd [[
   autocmd BufEnter,BufWritePost <buffer> :lua require('lsp_extensions.inlay_hints').request {aligned = true, prefix = " » "}
 ]]
 
-vim.opt.completeopt:append({ 'menu', 'menuone', 'noselect' })
+vim.opt.completeopt:append({ 'menu', 'menuone', 'preview' })
 
 -- View references in telescope instead of quickfixlist
 local has_telescope, telescope_builtin = pcall(require, "telescope.builtin")
@@ -46,9 +46,9 @@ cmp.setup({
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.close(),
-    ['<Tab>'] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Insert }),
-    ['<C-j>'] = cmp.mapping.select_next_item(),
-    ['<C-k>'] = cmp.mapping.select_prev_item(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Insert }),
+    ['<Tab>'] = cmp.mapping.select_next_item(),
+    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
   },
   sources = {
     { name = 'nvim_lsp' },
