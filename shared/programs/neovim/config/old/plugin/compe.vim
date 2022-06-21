@@ -4,7 +4,7 @@
 " menuone: popup even when there's only one match
 " noinsert: Do not insert text until a selection is made
 " noselect: Do not select, force user to select one from the menu
-set completeopt=menuone,noinsert,noselect
+set completeopt=menuone, preview
 
 lua <<EOF
 
@@ -22,8 +22,7 @@ require'compe'.setup {
 
 EOF
 
-" TODO: Keybindings
-
+" TODO: Keybinding
 inoremap <silent><expr> <C-Space> compe#complete()
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 inoremap <silent><expr> <C-e>     compe#close('<C-e>')
