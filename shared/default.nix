@@ -59,6 +59,8 @@ in
 
     # USB utils
     ventoy-bin
+
+    kranex.via
   ];
 }
 

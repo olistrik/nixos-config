@@ -31,6 +31,8 @@
               inherit (prev) system; inherit config;
             };
 
+            via = final.callPackage ./pkgs/programs/via {};
+
             # pkgs.kranex
             kranex = import nixpkgs {
               inherit (prev) system; inherit config; inherit (self) overlays;
