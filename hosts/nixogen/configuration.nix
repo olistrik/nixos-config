@@ -19,6 +19,8 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  boot.binfmt.emulatedSystems = [ "armv6l-linux" ];
+
   ##################
   ## Work specific
 

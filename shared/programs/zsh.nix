@@ -88,6 +88,16 @@
       alias dce="docker-compose exec"
       alias dcl="docker-compose logs -f"
 
+      dcp() {
+        cmd="docker-compose"
+        for profile in $@; do
+          cmd="$cmd --profile $profile"
+        done
+        cmd="$cmd up -d"
+
+        eval $cmd
+      }
+
       #################################
       ## Git specials
 
