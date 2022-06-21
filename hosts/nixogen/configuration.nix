@@ -1,19 +1,14 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
 
-      ../../shared/personal.nix
-      ../../shared/work.nix
-      ../../shared/yubikey.nix
-      ../../shared/wm/sway
-    ];
+    ../../shared/personal.nix
+    ../../shared/work.nix
+    ../../shared/yubikey.nix
+    ../../shared/wm/sway
+  ];
 
   nix = {
     package = pkgs.nixFlakes;
@@ -23,7 +18,9 @@
   };
 
   nixpkgs.config.allowUnfree = true;
-  
+
+  boot.binfmt.emulatedSystems = [ "armv6l-linux" ];
+
   ##################
   ## Work specific
 
@@ -43,23 +40,24 @@
       };
 
     };
-    kernel.sysctl = {
-      "fs.inotify.max_user_watches" = "1048576";
-    };
+    kernel.sysctl = { "fs.inotify.max_user_watches" = "1048576"; };
     ## Mark /dev/nvme2 as luks.
     initrd.luks.devices = {
       root = {
-       device = "/dev/disk/by-uuid/affa3eb4-7e3f-4a0e-9c7e-bdcd46777c51";
-       preLVM = true;
+        device = "/dev/disk/by-uuid/affa3eb4-7e3f-4a0e-9c7e-bdcd46777c51";
+        preLVM = true;
       };
     };
   };
-  
+
   ####################
   ## Laptop Specific
+  boot.kernelPackages = pkgs.unstable.linuxPackages_5_17;
+
   nixpkgs.config.packageOverrides = pkgs: {
     vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
   };
+
   hardware.opengl = {
     enable = true;
     driSupport = true;
@@ -69,9 +67,7 @@
   hardware.bluetooth.enable = true;
 
   # Enable laptop touchpad.
-  services.xserver.libinput.mouse = {
-      accelSpeed = "-0.85";
-  };
+  services.xserver.libinput.mouse = { accelSpeed = "-0.85"; };
 
   # Enables wireless support via wpa_supplicant.
   networking.wireless = {
@@ -134,4 +130,3 @@
   system.stateVersion = "21.05"; # Did you read the comment?
 
 }
-
