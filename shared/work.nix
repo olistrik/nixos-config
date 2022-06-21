@@ -73,6 +73,7 @@ in {
     # Go
     unstable.go_1_18
     air
+    altair
 
     #Web Browsers
     google-chrome

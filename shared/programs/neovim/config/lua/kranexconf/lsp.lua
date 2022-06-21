@@ -108,7 +108,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- Register all the language servers
-local servers = { 'rnix', 'rust_analyzer', 'gopls' }
+local servers = { 'rnix', 'gopls' }
 
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
@@ -116,3 +116,15 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities,
   }
 end
+
+nvim_lsp.rust_analyzer.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+	settings = {
+		["rust-analyzer"] = {
+			procMacro = {
+				enable = true;
+			}
+		}
+	}
+}
