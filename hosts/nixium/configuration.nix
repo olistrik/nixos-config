@@ -1,4 +1,4 @@
-#############################
+# ############################
 ## AMD 5950X + NVIDIA 3080 ##
 #############################
 ## Partitions:             ##
@@ -19,11 +19,13 @@
   ];
 
   nix = {
-    package=pkgs.nixFlakes;
-    extraOptions=''
+    package = pkgs.nixFlakes;
+    extraOptions = ''
       experimental-features = nix-command flakes
     '';
   };
+
+  boot.binfmt.emulatedSystems = [ "armv6l-linux" ];
 
   nixpkgs.config.allowUnfree = true;
 
@@ -47,11 +49,7 @@
   ## Home/Work Specific
 
   # Set up refind for dual boot
-  environment.systemPackages = with pkgs; [
-    efibootmgr
-    refind
-    sl
-  ];
+  environment.systemPackages = with pkgs; [ efibootmgr refind sl ];
 
   # Use the systemd-boot EFI boot loader.
   boot = {
@@ -70,7 +68,10 @@
   networking.hostName = "nixium";
 
   # Make the CRG9 readable.
-  services.xserver.resolutions = [{ x = 5120; y = 1440; }];
+  services.xserver.resolutions = [{
+    x = 5120;
+    y = 1440;
+  }];
   environment.variables.WINIT_X11_SCALE_FACTOR = "1.25";
 
   programs.alacritty = {
@@ -114,7 +115,6 @@
   systemd.services.systemd-udev-settle.enable = false;
   systemd.services.NetworkManager-wait-online.enable = false;
 
-
   ################
   ## Theming WIP
 
@@ -137,4 +137,3 @@
   system.stateVersion = "20.09"; # Did you read the comment?
 
 }
-
