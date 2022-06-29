@@ -49,9 +49,9 @@ in {
 
     # editors
 
-    (wrapEnv jetbrains.goland "goland" jetbrainsVars)
-    (wrapEnv jetbrains.webstorm "webstorm" jetbrainsVars)
-    (wrapEnv jetbrains.idea-community "idea-community" jetbrainsVars)
+    (wrapEnv unstable.jetbrains.goland "goland" jetbrainsVars)
+    (wrapEnv unstable.jetbrains.webstorm "webstorm" jetbrainsVars)
+    (wrapEnv unstable.jetbrains.idea-community "idea-community" jetbrainsVars)
     unstable.poedit
     vscode
 
