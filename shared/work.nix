@@ -49,7 +49,7 @@ in {
 
     # editors
 
-    (wrapEnv unstable.jetbrains.goland "goland" jetbrainsVars)
+    unstable.jetbrains.goland
     (wrapEnv unstable.jetbrains.webstorm "webstorm" jetbrainsVars)
     (wrapEnv unstable.jetbrains.idea-community "idea-community" jetbrainsVars)
     unstable.poedit
