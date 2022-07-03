@@ -3,7 +3,7 @@
 
   inputs = {
     # Normal nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-21.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.05";
 
     # Unstable nixpkgs
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -30,7 +30,7 @@
               inherit config;
             };
 
-            via = final.callPackage ./pkgs/programs/via {};
+            via = final.callPackage ./pkgs/programs/via { };
 
             # pkgs.kranex
             kranex = import nixpkgs {
