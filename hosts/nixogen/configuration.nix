@@ -118,7 +118,7 @@
   programs.alacritty = {
     font.size = "10.0";
     theme = config.system.themer.theme;
-    backgroundOpacity = "0.95";
+    window.opacity = "0.95";
   };
 
   # This value determines the NixOS release from which the default
