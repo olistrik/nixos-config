@@ -1,4 +1,4 @@
-{config, lib, pkgs, ...}:
+{ config, lib, pkgs, ... }:
 
 with lib;
 
@@ -8,127 +8,130 @@ let
 
   cfg = config.programs.alacritty;
 
-in
+in {
+  options = {
 
-  {
-    options = {
+    programs.alacritty = {
 
-      programs.alacritty = {
+      enable = mkOption {
+        type = types.bool;
+        default = false;
+        description = ''
+          enable or disable alacritty.
+        '';
+      };
 
-        enable = mkOption {
-          type = types.bool;
-          default = false;
-          description = ''
-            enable or disable alacritty.
-          '';
-        };
-
-        font = {
-          normal = {
-            family = mkOption {
-              type = types.str;
-              default = "monospace";
-              description = ''
-                Sets the font used by alacritty.
-                Make sure it is accepted by fc-match.
-              '';
-            };
-
-            style = mkOption {
-              type = types.str;
-              default = "Regular";
-              description = ''
-                Can be used to pick a specific face.
-              '';
-            };
+      font = {
+        normal = {
+          family = mkOption {
+            type = types.str;
+            default = "monospace";
+            description = ''
+              Sets the font used by alacritty.
+              Make sure it is accepted by fc-match.
+            '';
           };
 
-          size = mkOption {
+          style = mkOption {
             type = types.str;
-            default = "11.0";
+            default = "Regular";
             description = ''
-              The point size of the font.
+              Can be used to pick a specific face.
             '';
           };
         };
 
-        brightBold = mkOption {
-          type = types.bool;
-          default = false;
+        size = mkOption {
+          type = types.str;
+          default = "11.0";
           description = ''
-            If true, bold text is drawn using the bright color variants.
+            The point size of the font.
           '';
         };
+      };
 
-        backgroundOpacity = mkOption {
+      brightBold = mkOption {
+        type = types.bool;
+        default = false;
+        description = ''
+          If true, bold text is drawn using the bright color variants.
+        '';
+      };
+
+      window = {
+        opacity = mkOption {
           type = types.str;
           default = "1.0";
           description = ''
             the background opacity of alacritty 0.0 to 1.0.
           '';
         };
+      };
 
-        theme = mkOption {
-          type = types.attrs;
-          default = {
-            primary = {
-              background = "#1d1f21";
-              foreground = "#c5c8c6";
-            };
-            cursor = {
-              text = "#000000";
-              cursor = "#ffffff";
-            };
-            selection = {
-              text = "#eaeaea";
-              background = "#404040";
-            };
-            normal = {
-              black = "#1d1f21";
-              red = "#cc6666";
-              green = "#b5bd68";
-              yellow = "#f0c678";
-              blue = "#81a2be";
-              magenta = "#b294bb";
-              cyan = "#8abeb7";
-              white = "#c5c8c6";
-            };
-            bright = {
-              black = "#666666";
-              red = "#d54e53";
-              green = "#b9ac4a";
-              yellow = "#e7c547";
-              blue = "#7aa6da";
-              magenta = "#c397d8";
-              cyan = "#70c0b1";
-              white = "#eaeaea";
-            };
+      theme = mkOption {
+        type = types.attrs;
+        default = {
+          primary = {
+            background = "#1d1f21";
+            foreground = "#c5c8c6";
+          };
+          cursor = {
+            text = "#000000";
+            cursor = "#ffffff";
+          };
+          selection = {
+            text = "#eaeaea";
+            background = "#404040";
+          };
+          normal = {
+            black = "#1d1f21";
+            red = "#cc6666";
+            green = "#b5bd68";
+            yellow = "#f0c678";
+            blue = "#81a2be";
+            magenta = "#b294bb";
+            cyan = "#8abeb7";
+            white = "#c5c8c6";
+          };
+          bright = {
+            black = "#666666";
+            red = "#d54e53";
+            green = "#b9ac4a";
+            yellow = "#e7c547";
+            blue = "#7aa6da";
+            magenta = "#c397d8";
+            cyan = "#70c0b1";
+            white = "#eaeaea";
           };
         };
       };
     };
+  };
 
-    config = mkIf cfg.enable {
-      environment.systemPackages = [
-        (pkgs.symlinkJoin {
-          name = "alacritty";
-          paths = [ pkgs.alacritty ];
-          buildInputs = [ pkgs.makeWrapper ];
-          postBuild = ''
-            wrapProgram $out/bin/alacritty \
-              --add-flags "--config-file /etc/alacritty/alacritty.yml"
-          '';
-        })
-      ];
-      environment.etc."alacritty/alacritty.yml".text = ''
+  config = mkIf cfg.enable {
+    environment.systemPackages = [
+      (pkgs.symlinkJoin {
+        name = "alacritty";
+        paths = [ pkgs.alacritty ];
+        buildInputs = [ pkgs.makeWrapper ];
+        postBuild = ''
+          wrapProgram $out/bin/alacritty \
+            --add-flags "--config-file /etc/alacritty/alacritty.yml"
+        '';
+      })
+    ];
+    environment.etc."alacritty/alacritty.yml".text = ''
       #Font configuration
         font:
           normal:
             family: "${cfg.font.normal.family}"
             style: ${cfg.font.normal.style}
           size: ${cfg.font.size}
-        draw_bold_text_with_bright_colors: ${if cfg.brightBold then "true" else "false"}
-        background_opacity: ${cfg.backgroundOpacity}
+        draw_bold_text_with_bright_colors: ${
+          if cfg.brightBold then "true" else "false"
+        }
+        window:
+          opacity: ${cfg.window.opacity}
         colors:
           primary:
             background: '${cfg.theme.primary.background}'
@@ -163,6 +166,6 @@ in
             - { key: -, mods: Control, action: DecreaseFontSize }
             - { key: =, mods: Control, action: IncreaseFontSize }
             - { key: _, mods: Control, action: DecreaseFontSize }
-      '';
-    };
-  }
+    '';
+  };
+}
