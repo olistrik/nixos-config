@@ -87,7 +87,6 @@
       overlays = with inputs;
         [
           (final: prev: {
-            rubocop-sdv = final.callPackage ./pkgs/programs/rubocop-sdv { };
             screencapture-scripts =
               final.callPackage ./pkgs/scripts/screencapture { };
             code-with-me = final.callPackage ./pkgs/programs/code-with-me { };
