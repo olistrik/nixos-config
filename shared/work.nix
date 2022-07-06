@@ -48,10 +48,10 @@ in {
     minecraft
 
     # editors
-
     jetbrains.goland
-    jetbrains.datagrip
     jetbrains.webstorm
+
+    beekeeper-studio
 
     unstable.poedit
     vscode
