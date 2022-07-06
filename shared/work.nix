@@ -50,6 +50,7 @@ in {
     # editors
 
     jetbrains.goland
+    jetbrains.datagrip
     jetbrains.webstorm
 
     unstable.poedit
