@@ -9,7 +9,11 @@ require 'telescope'.setup {
         ["<C-j>"] = "move_selection_next",
         ["<C-k>"] = "move_selection_previous"
       }
-    }
+    },
+	file_ignore_patterns = {
+		"^.git/",
+		"^vendor/"
+	}
   },
 
   extensions = {
