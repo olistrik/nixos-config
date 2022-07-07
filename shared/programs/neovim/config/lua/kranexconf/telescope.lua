@@ -11,9 +11,14 @@ require 'telescope'.setup {
       }
     },
 	file_ignore_patterns = {
-		"^.git/",
-		"^vendor/"
-	}
+		"^vendor/",
+		"^%.git/",
+	},
+  },
+  pickers = {
+	  find_files = {
+		  find_command = { "fd", "--type", "f", "--strip-cwd-prefix"},
+	  },
   },
 
   extensions = {
