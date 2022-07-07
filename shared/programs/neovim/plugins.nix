@@ -1,9 +1,9 @@
-{pkgs, vimPlugins ? pkgs.vimPlugins, ...}:
+{ pkgs, vimPlugins ? pkgs.vimPlugins, ... }:
 with vimPlugins;
 let
   addDeps = plugin: deps:
     plugin.overrideAttrs
-    (old: { dependencies = (old.dependencies or []) ++ deps; });
+    (old: { dependencies = (old.dependencies or [ ]) ++ deps; });
 
 in {
   colorscheme = {
@@ -30,14 +30,14 @@ in {
   };
 
   treesitter = {
-    plugin = addDeps (nvim-treesitter.withPlugins (_:
-    pkgs.tree-sitter.allGrammars)) [
-      nvim-autopairs
-      nvim-treesitter-textobjects
-      nvim-ts-autotag
-      vim-nix
-      playground
-    ];
+    plugin =
+      addDeps (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars)) [
+        nvim-autopairs
+        nvim-treesitter-textobjects
+        nvim-ts-autotag
+        vim-nix
+        playground
+      ];
     config = "treesitter";
   };
 
@@ -58,11 +58,7 @@ in {
 
     ];
 
-    extern = with pkgs; [
-      rnix-lsp
-      rust-analyzer
-      gopls
-    ];
+    extern = with pkgs; [ rnix-lsp rust-analyzer gopls ];
 
     config = "lsp";
   };
@@ -105,11 +101,17 @@ in {
   neoformat = {
     plugin = neoformat;
     config = "neoformat";
-    extern = with pkgs; [
-      nixfmt
-      # custom.nodePackages.standard
-      # custom.nodePackages.vscode-langservers-extracted
-    ];
+    extern = with pkgs;
+      [
+        nixfmt
+        # custom.nodePackages.standard
+        # custom.nodePackages.vscode-langservers-extracted
+      ];
+  };
+
+  todo-comments = {
+    plugin = todo-comments-nvim;
+    config = "todo-comments";
   };
 
   luasnip.plugin = luasnip;
