@@ -60,9 +60,10 @@ in {
     docker-compose
 
     # JavaScript
-    yarn
-    nodejs
-    nodePackages."@angular/cli"
+    cookiecutter
+    nodejs-14_x
+    (yarn.override { nodejs = nodejs-14_x; })
+    unstable.nodePackages."@angular/cli"
     nodePackages.prettier
 
     # C & C++
