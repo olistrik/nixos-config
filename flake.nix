@@ -10,6 +10,9 @@
 
     # Flake utils
     flake-utils.url = "github:numtide/flake-utils";
+
+    # templates
+    templates.url = "github:nixos/templates";
   };
 
   outputs = { self, nixpkgs, flake-utils, ... }@inputs:
@@ -98,7 +101,7 @@
       # My modules, see commonModules for usage.
       modules = { programs.alacritty = import ./modules/programs/alacritty; };
 
-      templates = {
+      templates = inputs.templates.templates // {
         devshell = {
           path = ./templates/devshell;
           description =
