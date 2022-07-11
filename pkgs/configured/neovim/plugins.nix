@@ -17,13 +17,13 @@ in {
   };
 
   telescope = {
-    plugin = addDeps telescope-nvim [
+    # plugin = addDeps telescope-nvim [
+    plugin = addDeps telescope-fzy-native-nvim [
       nvim-web-devicons
       # telescope-fzf-native-nvim
-      telescope-fzy-native-nvim
       telescope-file-browser-nvim
-      # popup-nvim
-      # plenary-nvim
+      popup-nvim
+      plenary-nvim
     ];
     extern = with pkgs; [ ripgrep fd ];
     config = "telescope";
