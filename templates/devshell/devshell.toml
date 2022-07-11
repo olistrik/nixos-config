@@ -1,0 +1,33 @@
+
+[devshell]
+# This is the name of your environment. It should usually map to the project
+# name.
+name = "devshell"
+
+# Message Of The Day (MOTD) is displayed when entering the environment with an
+# interactive shell. By default it will show the project name.
+#
+# motd = ""
+
+# Add packages from nixpkgs here. Use `nix search nixpkgs <term>` to find the
+# package that you need.
+#
+# NOTE: don't forget to put commas between items! :)
+packages = [ ]
+
+# Declare commands that are available in the environment.
+# [[commands]]
+# help = "prints hello"
+# name = "hello"
+# command = "echo hello"
+# 
+# [[commands]]
+# package = "nixpkgs-fmt"
+# category = "formatters"
+
+
+### Environment variables
+
+# [[env]]
+# name = "GO11MODULE"
+# value = "on"
