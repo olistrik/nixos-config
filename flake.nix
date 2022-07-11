@@ -49,7 +49,6 @@
       pin-flake-reg = with inputs; {
         nix.registry.nixpkgs.flake = nixpkgs;
         nix.registry.unstable.flake = nixpkgs-unstable;
-        nix.registry.kranex.flake = self;
       };
 
       # modules that are shared between all hosts.
