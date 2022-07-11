@@ -15,6 +15,42 @@
         "type": "github"
       }
     },
+    "flake-utils_2": {
+      "locked": {
+        "lastModified": 1656928814,
+        "narHash": "sha256-RIFfgBuKz6Hp89yRr7+NR5tzIAbn52h8vT6vXkYjZoM=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "7e2a3b3dfd9af950a856d66b0a7d01e3c18aa249",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "nix2vim": {
+      "inputs": {
+        "flake-utils": "flake-utils_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1657129045,
+        "narHash": "sha256-ITEGB3BxGhIooFcTAzc4fmxDCxWCTJltbAuBbaovwks=",
+        "owner": "gytis-ivaskevicius",
+        "repo": "nix2vim",
+        "rev": "ea690d1da48664030bc0c934ac8894c9b0292534",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gytis-ivaskevicius",
+        "repo": "nix2vim",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1656433693,
@@ -50,6 +86,7 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
+        "nix2vim": "nix2vim",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "templates": "templates"
