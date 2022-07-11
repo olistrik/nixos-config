@@ -36,7 +36,8 @@
             kranex = import nixpkgs {
               inherit (prev) system;
               inherit config;
-              inherit (self) overlays;
+
+              overlays = [ self.overlay ];
             };
 
             # Packages to be on bleeding edge. TODO: when unstable is fixed.
@@ -84,25 +85,25 @@
       };
 
       # My overlays, see nixpkgsConfig for usage.
-      overlays = with inputs;
-        [
-          (final: prev: {
-            screencapture-scripts =
-              final.callPackage ./pkgs/scripts/screencapture { };
-            code-with-me = final.callPackage ./pkgs/programs/code-with-me { };
-            git-graph = final.callPackage ./pkgs/programs/git-graph { };
-            git-igitt = final.callPackage ./pkgs/programs/git-igitt { };
-            vimPlugins = {
-              nvim-ts-autotag =
-                final.callPackage ./pkgs/vimPlugins/nvim-ts-autotag { };
-            };
-
-            nodePackages = final.callPackage ./pkgs/node-packages { };
-          })
-        ]; # ++ map import (./overlays)
+      overlay = final: prev: {
+        screencapture-scripts =
+          final.callPackage ./pkgs/scripts/screencapture { };
+        code-with-me = final.callPackage ./pkgs/programs/code-with-me { };
+        git-graph = final.callPackage ./pkgs/programs/git-graph { };
+        git-igitt = final.callPackage ./pkgs/programs/git-igitt { };
+        nodePackages = final.callPackage ./pkgs/node-packages { };
+      };
 
       # My modules, see commonModules for usage.
       modules = { programs.alacritty = import ./modules/programs/alacritty; };
+
+      templates = {
+        devshell = {
+          path = ./templates/devshell;
+          description =
+            "A simple flake development shell using numtide/devshell";
+        };
+      };
     } // flake-utils.lib.eachDefaultSystem (system: {
       legacyPackages = (import nixpkgs {
         inherit system;
