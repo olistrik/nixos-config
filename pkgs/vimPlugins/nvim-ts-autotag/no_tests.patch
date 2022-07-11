@@ -1,8 +1,0 @@
-diff --git a/Makefile b/Makefile
-deleted file mode 100644
-index 19494a6..0000000
---- a/Makefile
-+++ /dev/null
-@@ -1,2 +0,0 @@
--test:
--	nvim --headless --noplugin -u tests/minimal.vim -c "PlenaryBustedDirectory tests/ {minimal_init = 'tests/minimal.vim'}"
