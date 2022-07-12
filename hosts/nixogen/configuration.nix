@@ -52,7 +52,7 @@
 
   ####################
   ## Laptop Specific
-  boot.kernelPackages = pkgs.unstable.linuxPackages_5_17;
+  boot.kernelPackages = pkgs.linuxPackages_5_18;
 
   nixpkgs.config.packageOverrides = pkgs: {
     vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
