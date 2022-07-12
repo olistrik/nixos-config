@@ -10,7 +10,7 @@
 
     # nix2vim
     nix2vim = {
-      url = "github:gytis-ivaskevicius/nix2vim";
+      url = "github:kranex/nix2vim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
