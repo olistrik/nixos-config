@@ -35,7 +35,6 @@ in {
         nvim-autopairs
         nvim-treesitter-textobjects
         nvim-ts-autotag
-        vim-nix
         playground
       ];
     config = "treesitter";
@@ -56,6 +55,8 @@ in {
       cmp-buffer
       cmp-path
 
+      vim-nix
+      vim-go
     ];
 
     extern = with pkgs; [ rnix-lsp rust-analyzer gopls ];
