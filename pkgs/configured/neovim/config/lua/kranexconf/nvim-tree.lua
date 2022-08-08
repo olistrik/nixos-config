@@ -6,9 +6,9 @@ require 'nvim-tree'.setup {
 	open_on_tab         = false,
 	hijack_cursor       = true,
 	update_cwd          = false,
-	update_to_buf_dir   = {
-		enable = true,
-		auto_open = true,
+    hijack_directories = {
+      enable = true,
+      auto_open = true,
 	},
 	renderer = {
 		special_files = {
@@ -52,6 +52,7 @@ require 'nvim-tree'.setup {
 	},
 	actions = {
 		open_file = {
+			resize_window = true,
 			window_picker = {
 				exclude = {
 					filetype = {
@@ -97,7 +98,6 @@ require 'nvim-tree'.setup {
 		height = 30,
 		hide_root_folder = false,
 		side = 'left',
-		auto_resize = true,
 		mappings = {
 			custom_only = false,
 			list = {}
