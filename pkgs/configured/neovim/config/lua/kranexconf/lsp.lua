@@ -122,8 +122,21 @@ nvim_lsp.rust_analyzer.setup {
     capabilities = capabilities,
 	settings = {
 		["rust-analyzer"] = {
+			diagnostics = {
+				disabled = {
+					"unresolved-proc-macro"
+				}
+			},
+			cargo = {
+				buildScripts = {
+					enable = true;
+				}
+			},
 			procMacro = {
 				enable = true;
+				attributes = {
+					enable = true;
+				}
 			}
 		}
 	}
