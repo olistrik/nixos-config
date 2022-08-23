@@ -49,7 +49,15 @@ in {
 
     # editors
     jetbrains.goland
-    jetbrains.webstorm
+    (jetbrains.webstorm.overrideAttrs (old: {
+      version = "2022.2.1";
+      src = fetchurl {
+        url =
+          "https://download.jetbrains.com/webstorm/WebStorm-2022.2.1.tar.gz";
+        sha256 =
+          "508fe7272dd049875d848b52a2908e4d228ce576d4dde5f56f51a8c346b12a2c";
+      };
+    }))
 
     beekeeper-studio
 
