@@ -1,10 +1,7 @@
-{config, lib, pkgs, ...}:
-let
-  themer = config.system.themer;
+{ config, lib, pkgs, ... }:
+let themer = config.system.themer;
 in {
-  imports = [
-    ../programs/waybar
-  ];
+  imports = [ ../programs/waybar ];
 
   services.xserver = {
     enable = true;
@@ -53,7 +50,7 @@ in {
       export MOZ_ENABLE_WAYLAND=1
       export _JAVA_AWT_WM_NONREPARENTING=1
       systemctl --user import-environment
-      '';
+    '';
   };
 
   environment = {
@@ -142,7 +139,7 @@ in {
       # screencrop
       bindsym $mod+Shift+p exec grim -g "$(slurp)" - | wl-copy -t image/png
       bindsym $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy -t image/png
- 
+
       # windowshot
       bindsym $mod+Ctrl+p exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')" - | wl-copy -t image/png
 
@@ -186,6 +183,7 @@ in {
       set $opacity 0.8
 
       for_window [class=".*"] opacity $solid
+      for_window [app_id="firefox" title="Picture-in-Picture"] floating enable
       # for_window [app_id=".*"] opacity $opacity
 
       output * bg $HOME/wallpaper fill
