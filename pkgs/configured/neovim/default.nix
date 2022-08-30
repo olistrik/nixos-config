@@ -48,7 +48,7 @@ let
 in (basePackages.neovim.override {
   configure = {
     packages.default.start =
-      builtins.trace "${builtins.foldl' (x: y: x + y + "\n") "" pluginPkgs}"
+      # builtins.trace "${builtins.foldl' (x: y: x + y + "\n") "" pluginPkgs}"
       pluginPkgs;
     customRC = ''
       set runtimepath^=${./config}

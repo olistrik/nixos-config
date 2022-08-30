@@ -42,7 +42,7 @@ in {
     httpie
 
     # communications
-    unstable.discord
+    (unstable.discord.override { nss = nss_latest; })
     zoom-us
     teams
     minecraft
