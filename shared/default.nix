@@ -42,6 +42,9 @@ in {
     wget
     gnumake
 
+    #coms
+    signal-desktop
+
     # misc
     killall
     zip
