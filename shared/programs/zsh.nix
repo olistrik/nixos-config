@@ -119,6 +119,7 @@
       alias gci="git add -i && git commit"
       alias gcs="git commit"
       alias gcm="git commit -m"
+      alias gcam="git commit --amend --no-edit"
       alias grc="git rebase --continue"
       alias gra="git rebase --abort"
       alias git-home="git config user.email oliverstrik@gmail.com && git config user.name Kranex && git config -l | grep user"
