@@ -4,7 +4,8 @@ let
   basePackages = pkgs;
   # the set of plugins to use.
   vimPlugins = basePackages.vimPlugins
-    // (lib.getAttrs [ "nvim-tree-lua" ] pkgs.unstable.vimPlugins);
+    // (lib.getAttrs [ "nvim-tree-lua" ] pkgs.unstable.vimPlugins)
+    // ({ kranex = pkgs.kranex.vimPlugins; });
 
   # Plugins that have configurations attached.
   configuredPlugins = import ./plugins.nix {

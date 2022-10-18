@@ -8,5 +8,5 @@ with pkgs; {
   nvim2 = callPackage ./configured/neovim2 { };
 
   nodePackages = callPackage ./node-packages { };
-  vimPlugins = { };
+  vimPlugins = callPackage ./vimPlugins { };
 }
