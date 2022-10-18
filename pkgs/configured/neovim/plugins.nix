@@ -41,7 +41,15 @@ in {
   };
 
   nvim-tree = {
-    plugin = nvim-tree-lua;
+    plugin = nvim-tree-lua.overrideAttrs (previousAttrs: {
+      src = pkgs.fetchFromGitHub {
+        owner = "kyazdani42";
+        repo = "nvim-tree.lua";
+        rev =
+          "7282f7de8aedf861fe0162a559fc2b214383c51c"; # OMG STOP WITH THE FUCKING CONFIG CHANGES.
+        sha256 = "1x8alllrhd1ns2gghv8cl0lra9f9rk0qy3h4z4b6rj2dq6if3jx9";
+      };
+    });
     config = "nvim-tree";
   };
 
@@ -55,8 +63,7 @@ in {
       cmp-buffer
       cmp-path
 
-      vim-nix
-      vim-go
+      kranex.go-nvim
     ];
 
     extern = with pkgs; [ rnix-lsp rust-analyzer gopls ];
@@ -126,4 +133,5 @@ in {
   vim-surround.plugin = vim-surround;
   vim-repeat.plugin = vim-repeat;
   vim-fugitive.plugin = vim-fugitive;
+  abolish.plugin = vim-abolish;
 }
