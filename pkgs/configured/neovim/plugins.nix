@@ -64,9 +64,17 @@ in {
       cmp-path
 
       kranex.go-nvim
+      kranex.scss-syntax-vim
     ];
 
-    extern = with pkgs; [ rnix-lsp rust-analyzer gopls ];
+    extern = with pkgs;
+      with nodePackages; [
+        rnix-lsp
+        rust-analyzer
+        gopls
+        typescript-language-server
+        vscode-langservers-extracted
+      ];
 
     config = "lsp";
   };

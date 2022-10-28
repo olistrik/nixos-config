@@ -108,14 +108,43 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- Register all the language servers
-local servers = { 'rnix', 'gopls' }
 
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-  }
-end
+nvim_lsp.rnix.setup {
+	on_attach = on_attach,
+	capabilities = capabilities,
+}
+
+nvim_lsp.gopls.setup {
+	on_attach = on_attach,
+	capabilities = capabilities,
+}
+
+nvim_lsp.tsserver.setup {
+	on_attach = on_attach,
+	capabilities = capabilities,
+}
+
+nvim_lsp.cssls.setup {
+	on_attach = on_attach,
+	capabilities = capabilities,
+}
+
+nvim_lsp.html.setup {
+	on_attach = on_attach,
+	capabilities = capabilities,
+}
+
+
+local cmd = {"./node_modules/.bin/ngserver", "--stdio", "--tsProbeLocations", "node_modules", "--ngProbeLocations", "node_modules"}
+
+nvim_lsp.angularls.setup {
+	on_attach = on_attach,
+	capabilities = capabilities,
+	cmd = cmd,
+	on_new_config = function(new_config,new_root_dir)
+		new_config.cmd = cmd
+	end,
+}
 
 nvim_lsp.rust_analyzer.setup {
     on_attach = on_attach,
