@@ -68,7 +68,8 @@ in {
     ];
 
     extern = with pkgs;
-      with nodePackages; [
+      with nodePackages;
+      with kranex.nodePackages; [
         rnix-lsp
         rust-analyzer
         gopls

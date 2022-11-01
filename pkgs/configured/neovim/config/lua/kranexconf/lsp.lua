@@ -134,8 +134,15 @@ nvim_lsp.html.setup {
 	capabilities = capabilities,
 }
 
+nvim_lsp.graphql.setup {
+	on_attach = on_attach,
+	capabilities = capabilities,
+	cmd = {"graphql-lsp", "server", "-m", "stream" },
+	root_pattern = nvim_lsp.util.root_pattern('codegen.ya?ml', '.git', '.graphqlrc*', '.graphql.config.*', 'graphql.config.*'),
+	filetypes = {"graphql", "typescript"}
+}
 
-local cmd = {"./node_modules/.bin/ngserver", "--stdio", "--tsProbeLocations", "node_modules", "--ngProbeLocations", "node_modules"}
+local cmd = {"ngserver", "--stdio", "--tsProbeLocations", "node_modules", "--ngProbeLocations", "node_modules"}
 
 nvim_lsp.angularls.setup {
 	on_attach = on_attach,

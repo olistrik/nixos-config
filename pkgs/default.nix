@@ -9,4 +9,5 @@ in with pkgs; {
   nvim2 = callPackage ./configured/neovim2 { };
 
   vimPlugins = callPackage ./vimPlugins { };
+  nodePackages = callPackage ./nodePackages { };
 }
