@@ -40,6 +40,7 @@ in {
     # utility
     postman
     httpie
+    ngrok
 
     # communications
     (unstable.discord.override { nss = nss_latest; })
