@@ -19,7 +19,7 @@ in {
     ./programs/direnv.nix
   ];
 
-  nix.autoOptimiseStore = true;
+  nix.settings.auto-optimise-store = true;
 
   # Every pc needs this.
   programs = {
