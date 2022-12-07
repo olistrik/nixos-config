@@ -5,8 +5,9 @@ in with pkgs; {
   code-with-me = callPackage ./programs/code-with-me { };
   git-graph = callPackage ./programs/git-graph { };
   git-igitt = callPackage ./programs/git-igitt { };
+  atlas = callPackage ./programs/atlas { };
   nvim = callPackage ./configured/neovim { };
-  nvim2 = callPackage ./configured/neovim2 { };
+  # nvim2 = callPackage ./configured/neovim2 { };
 
   vimPlugins = callPackage ./vimPlugins { };
   nodePackages = callPackage ./nodePackages { };

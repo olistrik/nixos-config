@@ -3,16 +3,16 @@
 
   inputs = {
     # Normal nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
 
     # Unstable nixpkgs
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # nix2vim
-    nix2vim = {
-      url = "github:kranex/nix2vim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    #nix2vim = {
+    #  url = "github:kranex/nix2vim";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
 
     # Flake utils
     flake-utils.url = "github:numtide/flake-utils";
@@ -42,7 +42,7 @@
             # pkgs.kranex
             kranex = final.callPackage ./pkgs { };
           })
-          inputs.nix2vim.overlay
+          # inputs.nix2vim.overlay
         ];
       };
 

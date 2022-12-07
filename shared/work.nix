@@ -82,9 +82,10 @@ in {
     binutils
 
     # Go
-    unstable.go_1_18
+    unstable.go_1_19
     air
     altair
+    # kranex.atlas
 
     #Web Browsers
     google-chrome
