@@ -35,3 +35,11 @@ map('n', 'Y', 'yg$', opt)
 
 map('n', '<leader>d', '"_d', opt)
 map('v', '<leader>d', '"_d', opt)
+
+vim.api.nvim_create_autocmd (
+	"FileType",
+	{ 
+		pattern = { "graphql", "tmpl", "gohtmltmpl" },
+		command = [[ setlocal noexpandtab tabstop=4 softtabstop=4 shiftwidth=4 smarttab ]],
+	}
+) 

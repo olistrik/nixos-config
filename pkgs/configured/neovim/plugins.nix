@@ -30,13 +30,10 @@ in {
   };
 
   treesitter = {
-    plugin =
-      addDeps (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars)) [
-        nvim-autopairs
-        nvim-treesitter-textobjects
-        nvim-ts-autotag
-        playground
-      ];
+    plugin = addDeps (nvim-treesitter.withAllGrammars) [
+      nvim-treesitter-textobjects
+      playground
+    ];
     config = "treesitter";
   };
 
@@ -62,7 +59,8 @@ in {
       cmp-nvim-lsp
       cmp-buffer
       cmp-path
-
+      nvim-autopairs
+      # nvim-ts-autotag
       kranex.go-nvim
       kranex.scss-syntax-vim
     ];
