@@ -91,7 +91,7 @@ local on_attach = function(client, bufnr)
   map('n', 'g]', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 
   -- highlight word under cursor
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.document_highlight then
     vim.cmd([[
       augroup lsp_document_highlight
         autocmd! * <buffer>
