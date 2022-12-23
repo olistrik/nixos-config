@@ -9,6 +9,8 @@ let inherit (lib.modules) mkDefault;
 in {
 
   imports = [
+    ../cachix.nix
+
     ./audio.nix # explicitly disable that plague called pulseaudio
     ./themer.nix
     ./users.nix
@@ -52,6 +54,10 @@ in {
     neofetch
     tree
     parallel
+
+    # development
+    cachix
+    devenv
 
     # C & C++
     gcc10
