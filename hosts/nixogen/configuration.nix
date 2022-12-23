@@ -28,9 +28,6 @@
   # Nixos + Nitrogen = Nixogen.
   networking.hostName = "nixogen";
 
-  networking.firewall.allowedTCPPorts = [ 1883 ];
-  networking.firewall.allowedUDPPorts = [ 1883 ];
-
   # Use the systemd-boot EFI boot loader.
   boot = {
     loader = {

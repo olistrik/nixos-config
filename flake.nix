@@ -2,6 +2,7 @@
   description = "Nix is love. Nix is life.";
 
   inputs = {
+
     # Normal nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
 
@@ -13,6 +14,11 @@
     #  url = "github:kranex/nix2vim";
     #  inputs.nixpkgs.follows = "nixpkgs";
     #};
+
+    devenv = {
+      url = "github:cachix/devenv/v0.5";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Flake utils
     flake-utils.url = "github:numtide/flake-utils";
@@ -41,6 +47,7 @@
             };
             # pkgs.kranex
             kranex = final.callPackage ./pkgs { };
+            devenv = devenv.packages."${prev.system}".devenv;
           })
           # inputs.nix2vim.overlay
         ];
