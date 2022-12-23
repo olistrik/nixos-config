@@ -9,7 +9,6 @@ let inherit (lib.modules) mkDefault;
 in {
 
   imports = [
-    ../cachix.nix
 
     ./audio.nix # explicitly disable that plague called pulseaudio
     ./themer.nix
@@ -56,7 +55,6 @@ in {
     parallel
 
     # development
-    cachix
     devenv
 
     # C & C++
