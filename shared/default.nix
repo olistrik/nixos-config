@@ -55,7 +55,6 @@ in {
     parallel
 
     # development
-    devenv
 
     # C & C++
     gcc10
