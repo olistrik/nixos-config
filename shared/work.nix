@@ -44,6 +44,7 @@ in {
 
     # communications
     (unstable.discord.override { nss = nss_latest; })
+    slack-dark
     zoom-us
     teams
     minecraft
