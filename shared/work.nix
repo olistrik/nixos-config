@@ -105,9 +105,12 @@ in {
   environment.variables.WAKATIME_BIN = "${pkgs.wakatime}/bin/wakatime";
 
   # Docker
-  virtualisation.docker = {
-    enable = true;
-    package = (pkgs.docker.override (args: { buildxSupport = true; }));
+  virtualisation = {
+    docker = {
+      enable = true;
+      package = (pkgs.docker.override (args: { buildxSupport = true; }));
+    };
+    lxd.enable = true;
   };
 
   users.users.kranex.extraGroups = [ "docker" ];

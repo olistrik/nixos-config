@@ -61,6 +61,7 @@ in {
       cmp-path
       nvim-autopairs
       # nvim-ts-autotag
+      # vim-go
       kranex.go-nvim
       kranex.scss-syntax-vim
     ];
