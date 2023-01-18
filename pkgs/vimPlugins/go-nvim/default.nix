@@ -1,12 +1,12 @@
 { vimUtils, fetchFromGitHub }:
 vimUtils.buildVimPluginFrom2Nix rec {
   name = "go.nvim";
-  version = "v0.2.1";
+  version = "v0.2.2-281b51a";
 
   src = fetchFromGitHub {
     owner = "ray-x";
     repo = name;
-    rev = version;
-    sha256 = "azO+Eay3V9aLyJyP1hmKiEAtr6Z3OqlWVu4v2GEoUdo=";
+    rev = "281b51a";
+    sha256 = "sha256-euIkt78R27CDmlCqMUIROhw5cgFbwPw5LZy3ak1kq7w=";
   };
 }
