@@ -66,6 +66,7 @@
 
   # Enable laptop touchpad.
   services.xserver.libinput.mouse = { accelSpeed = "-0.85"; };
+  services.xserver.videoDrivers = [ "displaylink" "modesetting" ];
 
   # Enables wireless support via wpa_supplicant.
   networking.wireless = {

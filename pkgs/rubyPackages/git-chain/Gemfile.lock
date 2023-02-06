@@ -1,0 +1,63 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    ansi (1.5.0)
+    ast (2.4.2)
+    builder (3.2.3)
+    metaclass (0.0.4)
+    minitest (5.13.0)
+    minitest-reporters (1.4.2)
+      ansi
+      builder
+      minitest (>= 5.0)
+      ruby-progressbar
+    mocha (1.9.0)
+      metaclass (~> 0.0.1)
+    parallel (1.20.1)
+    parser (3.0.0.0)
+      ast (~> 2.4.1)
+    rainbow (3.0.0)
+    rake (13.0.0)
+    regexp_parser (2.1.1)
+    rexml (3.2.5)
+    rubocop (1.11.0)
+      parallel (~> 1.10)
+      parser (>= 3.0.0.0)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.8, < 3.0)
+      rexml
+      rubocop-ast (>= 1.2.0, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 1.4.0, < 3.0)
+    rubocop-ast (1.4.1)
+      parser (>= 2.7.1.5)
+    rubocop-minitest (0.11.0)
+      rubocop (>= 0.90, < 2.0)
+    rubocop-performance (1.5.0)
+      rubocop (>= 0.71.0)
+    rubocop-rake (0.5.1)
+      rubocop
+    rubocop-shopify (2.0.1)
+      rubocop (~> 1.11)
+    ruby-progressbar (1.11.0)
+    unicode-display_width (2.0.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  minitest (>= 5.0.0)
+  minitest-reporters
+  mocha
+  rake
+  rubocop
+  rubocop-minitest
+  rubocop-performance
+  rubocop-rake
+  rubocop-shopify
+
+RUBY VERSION
+   ruby 2.7.2p137
+
+BUNDLED WITH
+   2.2.22

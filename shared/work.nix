@@ -88,6 +88,9 @@ in {
     altair
     # kranex.atlas
 
+    # git
+    kranex.rubyPackages.git-chain
+
     #Web Browsers
     google-chrome
     firefox
