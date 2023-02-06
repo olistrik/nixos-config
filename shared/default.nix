@@ -42,6 +42,7 @@ in {
     kranex.git-igitt
     wget
     gnumake
+    htop
 
     #coms
     signal-desktop
