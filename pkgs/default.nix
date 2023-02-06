@@ -11,4 +11,5 @@ in with pkgs; {
 
   vimPlugins = callPackage ./vimPlugins { };
   nodePackages = callPackage ./nodePackages { };
+  rubyPackages = callPackage ./rubyPackages { };
 }
