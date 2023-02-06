@@ -17,6 +17,8 @@
     '';
   };
 
+  boot.kernelModules = [ "evdi" ];
+
   nixpkgs.config.allowUnfree = true;
 
   boot.binfmt.emulatedSystems = [ "armv6l-linux" "aarch64-linux" ];
