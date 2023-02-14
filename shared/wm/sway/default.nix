@@ -53,7 +53,6 @@ in {
       export MOZ_ENABLE_WAYLAND=1
       export _JAVA_AWT_WM_NONREPARENTING=1
       systemctl --user import-environment
-      ssh-add-all
     '';
   };
 
@@ -203,6 +202,7 @@ in {
       	resume 'swaymsg "output * dpms on"' \
       	before-sleep 'lock'
 
+      exec ssh-add-all
     '';
   };
 }
