@@ -17,8 +17,6 @@
     '';
   };
 
-  boot.kernelModules = [ "evdi" ];
-
   nixpkgs.config.allowUnfree = true;
 
   boot.binfmt.emulatedSystems = [ "armv6l-linux" "aarch64-linux" ];
@@ -68,7 +66,6 @@
 
   # Enable laptop touchpad.
   services.xserver.libinput.mouse = { accelSpeed = "-0.85"; };
-  services.xserver.videoDrivers = [ "displaylink" "modesetting" ];
 
   # Enables wireless support via wpa_supplicant.
   networking.wireless = {
