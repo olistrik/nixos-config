@@ -1,13 +1,13 @@
 { stdenv, bundlerEnv, ruby, bundix, fetchFromGitHub }:
 let
   name = "git-chain";
-  version = "9dea3fa";
+  version = "e1c0ef1";
 
   src = fetchFromGitHub {
     owner = "Shopify";
     repo = name;
     rev = "${version}";
-    sha256 = "sha256-vLqvWlliTimBHuCwwzDOe4+1zli1lhd1LX4ReGQraIU=";
+    sha256 = "sha256-5OUUf5nC++IHZ9TwXhdkLC1IkfhWmwoqCK8kRKYjlNc=";
   };
 
   gems = bundlerEnv {
