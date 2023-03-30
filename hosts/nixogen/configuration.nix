@@ -20,6 +20,7 @@
   nixpkgs.config.allowUnfree = true;
 
   boot.binfmt.emulatedSystems = [ "armv6l-linux" "aarch64-linux" ];
+  boot.supportedFilesystems = [ "ntfs" ];
 
   ##################
   ## Work specific
