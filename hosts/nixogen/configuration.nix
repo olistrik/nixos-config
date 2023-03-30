@@ -63,7 +63,13 @@
     extraPackages = with pkgs; [ vaapiVdpau libvdpau-va-gl ];
   };
 
-  hardware.bluetooth.enable = true;
+  hardware.bluetooth = {
+    enable = true;
+    settings.General = {
+      Enable = "Source,Sink,Media,Socket";
+      Disable = "Headset";
+    };
+  };
 
   # Enable laptop touchpad.
   services.xserver.libinput.mouse = { accelSpeed = "-0.85"; };
