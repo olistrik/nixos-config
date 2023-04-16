@@ -18,6 +18,7 @@ in {
     ./programs/zsh.nix
     ./programs/neovim
     ./programs/direnv.nix
+    ../cachix.nix
   ];
 
   nix.settings.auto-optimise-store = true;
