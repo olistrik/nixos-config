@@ -68,5 +68,6 @@ in {
     ventoy-bin
 
     cachix
+    devenv
   ];
 }
