@@ -15,6 +15,7 @@
         "osboxes"
         "adbusers"
         "lxd"
+        "openvpn"
       ];
     };
   };

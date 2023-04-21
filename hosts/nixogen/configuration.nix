@@ -126,9 +126,7 @@
     window.opacity = "0.95";
   };
 
-  services.openvpn.servers = {
-    workVPN = { config = "config /openvpn/work.ovpn "; };
-  };
+  programs.openvpn3.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
