@@ -9,6 +9,7 @@ let inherit (lib.modules) mkDefault;
 in {
 
   imports = [
+    ./cachix
 
     ./audio.nix # explicitly disable that plague called pulseaudio
     ./themer.nix
@@ -18,7 +19,6 @@ in {
     ./programs/zsh.nix
     ./programs/neovim
     ./programs/direnv.nix
-    ../cachix.nix
   ];
 
   nix.settings.auto-optimise-store = true;
@@ -57,6 +57,7 @@ in {
     parallel
 
     # development
+    devenv
 
     # C & C++
     gcc10
@@ -66,8 +67,5 @@ in {
 
     # USB utils
     ventoy-bin
-
-    cachix
-    devenv
   ];
 }
