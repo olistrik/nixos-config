@@ -15,9 +15,10 @@
     #  inputs.nixpkgs.follows = "nixpkgs";
     #};
 
+    # devenv
     devenv = {
       url = "github:cachix/devenv/latest";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     # Flake utils
