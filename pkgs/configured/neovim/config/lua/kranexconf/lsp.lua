@@ -150,6 +150,7 @@ nvim_lsp.graphql.setup {
 local cmd = {"ngserver", "--stdio", "--tsProbeLocations", "node_modules", "--ngProbeLocations", "node_modules"}
 
 nvim_lsp.angularls.setup {
+	filetypes = {"html"},
 	on_attach = on_attach,
 	capabilities = capabilities,
 	cmd = cmd,
