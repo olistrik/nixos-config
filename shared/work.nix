@@ -30,7 +30,6 @@ in {
   networking.extraHosts = ''
     127.0.0.1 db
     127.0.0.1 redis
-    127.0.0.1 killbill
   '';
 
   programs.adb.enable = true;
@@ -38,16 +37,15 @@ in {
   # programs that don't need "much" configuration.
   environment.systemPackages = with pkgs; [
     # utility
-    postman
-    httpie
-    ngrok
+    # postman
+    # httpie
+    # ngrok
 
     # communications
     (unstable.discord.override { nss = nss_latest; })
     slack-dark
     zoom-us
     teams
-    minecraft
 
     # editors
     jetbrains.goland
@@ -61,32 +59,21 @@ in {
       };
     }))
 
-    beekeeper-studio
+    # beekeeper-studio
 
-    unstable.poedit
+    # unstable.poedit
+
     vscode
 
     # Docker
     docker-compose
 
     # JavaScript
-    cookiecutter
-    nodejs-14_x
-    (yarn.override { nodejs = nodejs-18_x; })
-    unstable.nodePackages."@angular/cli"
-    nodePackages.prettier
-
-    # C & C++
-    gcc10
-    gdb
-    valgrind
-    binutils
-
-    # Go
-    unstable.go_1_19
-    air
-    altair
-    # kranex.atlas
+    # cookiecutter
+    # nodejs-14_x
+    # (yarn.override { nodejs = nodejs-18_x; })
+    # unstable.nodePackages."@angular/cli"
+    # nodePackages.prettier
 
     # git
     kranex.rubyPackages.git-chain
@@ -95,17 +82,7 @@ in {
     google-chrome
     firefox
 
-    # Database cli's
-    mycli
-    pgcli
-    litecli
-
-    # Time Keeping
-    wakatime
   ];
-
-  # wakatime variables
-  environment.variables.WAKATIME_BIN = "${pkgs.wakatime}/bin/wakatime";
 
   # Docker
   virtualisation = {
