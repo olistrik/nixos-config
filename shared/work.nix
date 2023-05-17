@@ -70,9 +70,6 @@ in {
 
     # JavaScript
     # cookiecutter
-    # nodejs-14_x
-    # (yarn.override { nodejs = nodejs-18_x; })
-    # unstable.nodePackages."@angular/cli"
     # nodePackages.prettier
 
     # git

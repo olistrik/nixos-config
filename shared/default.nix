@@ -11,15 +11,14 @@ in {
   imports = [
     ./cachix
 
-    ./audio.nix # explicitly disable that plague called pulseaudio
-    ./themer.nix
-    ./users.nix
-
     # install programs with my configurations
     ./programs/zsh.nix
     ./programs/neovim
     ./programs/direnv.nix
   ];
+
+  nixpkgs.config.allowUnfree = true;
+  boot.supportedFilesystems = [ "ntfs" ];
 
   nix.settings.auto-optimise-store = true;
 
@@ -33,37 +32,31 @@ in {
     };
   };
 
-  programs.steam.enable = true;
-
   # programs that don't need "much" configuration.
   environment.systemPackages = with pkgs; [
-    # General
+    # Fetchers
     git
-    kranex.git-graph
-    kranex.git-igitt
     wget
+    curl
+
+    # Build Tools
     gnumake
+
+    # Monitoring
     htop
 
-    #coms
-    signal-desktop
+    # Packaging
+    zip
+    unzip
 
     # misc
     killall
-    zip
-    unzip
     neofetch
     tree
     parallel
 
     # development
     devenv
-
-    # C & C++
-    gcc10
-    gdb
-    valgrind
-    binutils
 
     # USB utils
     ventoy-bin

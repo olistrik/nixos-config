@@ -26,9 +26,15 @@
 
     # templates
     templates.url = "github:nixos/templates";
+
+    # iso generator
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... }@inputs:
+  outputs = { self, nixpkgs, flake-utils, nixos-generators, ... }@inputs:
     with flake-utils.lib;
     let
       # might want these in the future.
@@ -83,11 +89,19 @@
       nixosConfigurations = {
         ## Work Lenovo E15
         nixogen = linux64 "nixogen";
-        ## Home Desktop
-        nixium = linux64 "nixium";
-        ## WSL 2
-        winix = linux64 "winix";
       };
+
+      packages.x86_64-linux = {
+        ## Live USB
+        liveUsb = nixos-generators.nixosGenerate {
+          system = "x86_64-linux";
+          modules = commonModules ++ [ ./hosts/live-usb/configuration.nix ];
+          format = "install-iso";
+        };
+      } // flattenTree (import nixpkgs {
+        inherit (nixpkgsConfig) config overlays;
+        system = "x86_64-linux";
+      }).kranex;
 
       # My modules, see commonModules for usage.
       modules = import ./modules;
@@ -95,11 +109,5 @@
       templates = inputs.templates.templates // import ./templates;
       defaultTemplate = self.templates.devshell;
 
-    } // eachDefaultSystem (system: {
-      # My packages, see nixpkgsConfig for usage.
-      packages = flattenTree (import nixpkgs {
-        inherit system;
-        inherit (nixpkgsConfig) config overlays;
-      }).kranex;
-    });
+    };
 }

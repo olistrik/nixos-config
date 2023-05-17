@@ -19,6 +19,9 @@ perms:
 update:
 	sudo nix flake update
 
+iso:
+	sudo nix build .#liveUsb
+
 _new_key:
 	scripts/new_key.sh
 
