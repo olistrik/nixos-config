@@ -4,6 +4,7 @@
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
+    ../../shared/desktop.nix
     ../../shared/personal.nix
     ../../shared/work.nix
     ../../shared/yubikey.nix
@@ -16,11 +17,6 @@
       experimental-features = nix-command flakes
     '';
   };
-
-  nixpkgs.config.allowUnfree = true;
-
-  boot.binfmt.emulatedSystems = [ "armv6l-linux" "aarch64-linux" ];
-  boot.supportedFilesystems = [ "ntfs" ];
 
   ##################
   ## Work specific
@@ -83,8 +79,6 @@
   networking.useDHCP = false;
   networking.interfaces.enp0s31f6.useDHCP = true;
   networking.interfaces.wlp60s0.useDHCP = true;
-
-  services.autorandr.enable = true;
 
   # environment.variables.WINIT_X11_SCALE_FACTOR = "1.25";
 
