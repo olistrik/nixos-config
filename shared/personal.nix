@@ -3,11 +3,7 @@
 { config, lib, pkgs, ... }: {
   imports = [ ./programs/alacritty.nix ];
 
-  # disable mouse acceleration
-  services.xserver.libinput = {
-    enable = true;
-    mouse = { accelProfile = "flat"; };
-  };
+  programs.adb.enable = true;
 
   environment.systemPackages = with pkgs; [
     steam-run # for shit software

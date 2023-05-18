@@ -4,7 +4,7 @@
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
-    ../../shared/desktop.nix
+    ../../shared/workstation.nix
     ../../shared/personal.nix
     ../../shared/work.nix
     ../../shared/yubikey.nix

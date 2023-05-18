@@ -37,11 +37,6 @@
   outputs = { self, nixpkgs, flake-utils, nixos-generators, ... }@inputs:
     with flake-utils.lib;
     let
-      # might want these in the future.
-      # inherit (builtins) toPath;
-      # inherit (nixpkgs) lib;
-      # inherit (lib) genAttrs;
-
       # overlays on nixpkgs.
       nixpkgsConfig = with inputs; rec {
         config = { allowUnfree = true; };
@@ -74,7 +69,7 @@
 
         ./shared/default.nix # default programs and config for all systems.
 
-        programs.alacritty
+        programs.alacritty # wtf is this.
       ];
 
       # shortcut for x86-64 linux systems.
@@ -89,6 +84,9 @@
       nixosConfigurations = {
         ## Work Lenovo E15
         nixogen = linux64 "nixogen";
+
+        ## Home Server
+        hestia = linux64 "hestia";
       };
 
       packages.x86_64-linux = {
