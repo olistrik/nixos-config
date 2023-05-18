@@ -11,13 +11,6 @@
     ../../shared/wm/sway
   ];
 
-  nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
-
   ##################
   ## Work specific
 
