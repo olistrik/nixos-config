@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ./audio.nix ./themer.nix ./users.nix ];
+  imports = [ ./audio.nix ./themer.nix ./users.nix ./programs/docker.nix ];
   # programs that don't need "much" configuration.
   environment.systemPackages = with pkgs; [
     # Git helpers

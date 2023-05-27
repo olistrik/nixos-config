@@ -8,17 +8,64 @@ let
 
   cfg = config.programs.alacritty;
 
+  mkSubModule = attrs: types.attrsOf (types.submodule attrs);
 in {
   options = {
-
     programs.alacritty = {
-
       enable = mkOption {
         type = types.bool;
         default = false;
         description = ''
           enable or disable alacritty.
         '';
+      };
+      config = with types; {
+        env = mkOption {
+          type = attrsOf str;
+          default = { };
+          description = ''
+            Any items in the `env` entry below will be added as
+            environment variables. Some entries may override variables
+            set by alacritty itself.
+          '';
+        };
+
+        window = {
+          dimensions = mkOption {
+            description = ''
+              Number of lines/columns (not pixels) in the terminal. Both lines and columns
+              must be non-zero for this to take effect. The number of columns must be at
+              least `2`, while using a value of `0` for columns and lines will fall back
+              to the window manager's recommended size
+            '';
+            type = nullOr mkSubModule {
+              columns = mkOption { type = int; };
+              lines = mkOption { type = int; };
+            };
+          };
+
+          position = mkOption {
+            description = ''
+              Specified in number of pixels.
+              If the position is not set, the window manager will handle the placement.
+            '';
+            type = nullOr mkSubModule {
+              x = mkOption { type = int; };
+              y = mkOption { type = int; };
+            };
+          };
+
+          padding = mkOption {
+            description = ''
+              Blank space added around the window in pixels. This padding is scaled
+              by DPI and the specified value is always added at both opposing sides.
+            '';
+            type = nullOr mkSubModule {
+              x = mkOption { type = int; };
+              y = mkOption { type = int; };
+            };
+          };
+        };
       };
 
       font = {

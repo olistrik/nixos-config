@@ -18,11 +18,11 @@
     zoom-us
     teams
 
-    # Docker
-    docker-compose
-
-    #Web Browsers
+    # Web Browsers
     google-chrome
+
+    # The worst software in the world
+    vscode
     firefox
   ];
 }
