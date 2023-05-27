@@ -106,6 +106,14 @@ end
 local nvim_lsp = require'lspconfig'
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    "documentation",
+    "detail",
+    "additionalTextEdits",
+  },
+}
 
 -- Register all the language servers
 
@@ -132,9 +140,20 @@ nvim_lsp.eslint.setup {
 nvim_lsp.cssls.setup {
 	on_attach = on_attach,
 	capabilities = capabilities,
+	single_file_support = false,
 }
 
 nvim_lsp.html.setup {
+	on_attach = on_attach,
+	capabilities = capabilities,
+}
+
+nvim_lsp.dartls.setup {
+	on_attach = on_attach,
+	capabilities = capabilities,
+}
+
+nvim_lsp.csharp_ls.setup {
 	on_attach = on_attach,
 	capabilities = capabilities,
 }

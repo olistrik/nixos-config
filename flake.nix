@@ -63,13 +63,12 @@
       };
 
       # modules that are shared between all hosts.
-      commonModules = with self.modules; [
+      commonModules = [
         ({ nixpkgs = nixpkgsConfig; })
         pin-flake-reg # pin the pkgs.
 
+        self.modules
         ./shared/default.nix # default programs and config for all systems.
-
-        programs.alacritty # wtf is this.
       ];
 
       # shortcut for x86-64 linux systems.
