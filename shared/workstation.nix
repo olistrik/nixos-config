@@ -11,5 +11,8 @@
 
     # USB utils
     ventoy-bin
+
+    # Unpackers
+    unrar
   ];
 }
