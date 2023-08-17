@@ -130,7 +130,7 @@
                                     alias gcam="git commit --amend --no-edit"
                                     alias grc="git rebase --continue"
                                     alias gra="git rebase --abort"
-                                    alias git-home="git config user.email oliverstrik@gmail.com && git config user.name Kranex && git config -l | grep user"
+                                    alias git-home="git config user.email oliverstrik@gmail.com && git config user.name olistrik && git config -l | grep user"
                                     alias git-work="git config user.email oliver@klippa.com && git config user.name 'Oliver Strik' && git config -l | grep user"
 
                                     alias titty="go mod tidy"
