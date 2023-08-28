@@ -16,7 +16,7 @@
                                     #################################
                                     ## source and install zplug
 
-                                    source ${pkgs.zplug}/init.zsh
+                                    source ${pkgs.zplug}/share/zplug/init.zsh
 
                                     zplug "agkozak/zsh-z"
 
