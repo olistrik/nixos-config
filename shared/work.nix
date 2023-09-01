@@ -24,5 +24,6 @@
     # The worst software in the world
     vscode
     firefox
+    postman
   ];
 }
