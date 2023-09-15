@@ -25,7 +25,7 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.kranex = {
+  users.users.olistrik = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };

@@ -46,7 +46,7 @@ systemctl start wpa_supplicant
     nixos-generate-config --root /mnt
     cd /mnt/etc
     mv nixos nixos-old
-    git clone git@github.com:kranex/nixos-config.git nixos
+    git clone git@github.com:olistrik/nixos-config.git nixos
     mv nixos-old nixos/hosts/[NEW_HOSTNAME]
     ```
 
@@ -58,7 +58,7 @@ systemctl start wpa_supplicant
 
     ```
     cd /mnt/etc
-    git clone git@github.com:kranex/nixos-config.git nixos
+    git clone git@github.com:olistrik/nixos-config.git nixos
     ```
 
 

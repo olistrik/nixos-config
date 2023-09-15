@@ -1,15 +1,13 @@
-{ pkgs, fetchFromGitHub }:
-let angularls = fetchFromGitHub { };
-in with pkgs; {
-  screencapture-scripts = callPackage ./scripts/screencapture { };
-  code-with-me = callPackage ./programs/code-with-me { };
-  git-graph = callPackage ./programs/git-graph { };
-  git-igitt = callPackage ./programs/git-igitt { };
-  atlas = callPackage ./programs/atlas { };
-  nvim = callPackage ./configured/neovim { };
-  # nvim2 = callPackage ./configured/neovim2 { };
+{ callPackage }:
+builtins.mapAttrs (name: deriv: callPackage deriv { }) {
+  screencapture-scripts = ./scripts/screencapture;
+  code-with-me = ./programs/code-with-me;
+  git-graph = ./programs/git-graph;
+  git-igitt = ./programs/git-igitt;
+  atlas = ./programs/atlas;
+  nvim = ./configured/neovim;
 
-  vimPlugins = callPackage ./vimPlugins { };
-  nodePackages = callPackage ./nodePackages { };
-  rubyPackages = callPackage ./rubyPackages { };
+  vimPlugins = ./vimPlugins;
+  nodePackages = ./nodePackages;
+  rubyPackages = ./rubyPackages;
 }

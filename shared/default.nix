@@ -62,9 +62,6 @@ in {
     tree
     parallel
 
-    # development
-    devenv
-
     # USB utils
     ventoy-bin
   ];

@@ -24,7 +24,7 @@
       defaultSession = "none+bspwm";
       lightdm.greeters.mini = {
         enable = true;
-        user = "kranex";
+        user = "olistrik";
         extraConfig = ''
           [greeter]
           show-password-label = false
