@@ -57,7 +57,7 @@ in
           defaultSession = "none+i3";
           lightdm.greeters.mini = {
             enable = true;
-            user = "kranex";
+            user = "olistrik";
             extraConfig = ''
               [greeter]
               show-password-label = false
@@ -81,7 +81,7 @@ in
             i3blocks
             xcwd
             playerctl
-            kranex.screencapture-scripts
+            olistrik.screencapture-scripts
           ];
 
           configFile = (

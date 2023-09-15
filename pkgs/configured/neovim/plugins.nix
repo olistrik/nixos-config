@@ -62,13 +62,12 @@ in {
       nvim-autopairs
       # nvim-ts-autotag
       # vim-go
-      kranex.go-nvim
-      kranex.scss-syntax-vim
+      olistrik.go-nvim
     ];
 
     extern = with pkgs;
       with nodePackages;
-      with kranex.nodePackages; [
+      with olistrik.nodePackages; [
         rnix-lsp
         rust-analyzer
         gopls

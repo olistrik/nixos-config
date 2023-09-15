@@ -3,8 +3,8 @@
   # programs that don't need "much" configuration.
   environment.systemPackages = with pkgs; [
     # Git helpers
-    kranex.git-graph
-    kranex.git-igitt
+    olistrik.git-graph
+    olistrik.git-igitt
 
     # Communications
     signal-desktop
