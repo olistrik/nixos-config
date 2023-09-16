@@ -30,7 +30,7 @@
       });
 
       overlay-olistrik =
-        (final: prev: { olistrik = final.callPackage ./pkgs { }; });
+        (final: prev: { olistrik = final.callPackage ./packages { }; });
 
       modules-olistrik = import ./modules;
 
