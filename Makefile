@@ -21,23 +21,3 @@ update:
 
 iso:
 	sudo nix build .#liveUsb
-
-_new_key:
-	scripts/new_key.sh
-
-_update_keys:
-	scripts/update_keys.sh
-	
-_edit_sops:
-	sops ./secrets/secrets.enc.yml
-
-_decrypt:
-	sudo sops \
-		--output secrets/secrets.json \
-		--output-type json \
-		-d secrets/secrets.enc.yml
-	sudo scripts/update_inputs.sh secrets
-
-new_key: _new_key _update_keys
-
-sops: _edit_sops _decrypt
