@@ -25,7 +25,7 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.olistrik = {
+  users.users.oli = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
