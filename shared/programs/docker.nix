@@ -10,5 +10,5 @@
     };
   };
 
-  users.users.olistrik.extraGroups = [ "docker" ];
+  users.users.oli.extraGroups = [ "docker" ];
 }
