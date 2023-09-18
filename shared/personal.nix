@@ -22,6 +22,9 @@
 
     # keyboard
     dfu-util
+
+    bitwarden
+    bitwarden-cli
   ];
 
   services.udev.extraRules = ''
