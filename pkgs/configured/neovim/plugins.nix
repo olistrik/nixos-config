@@ -71,7 +71,6 @@ in {
       with kranex.nodePackages; [
         rnix-lsp
         rust-analyzer
-        gopls
         typescript-language-server
         vscode-langservers-extracted
       ];
