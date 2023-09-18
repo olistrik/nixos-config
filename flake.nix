@@ -16,10 +16,7 @@
     #};
 
     # devenv
-    devenv = {
-      url = "github:cachix/devenv/latest";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    devenv.url = "github:cachix/devenv/latest";
 
     # Flake utils
     flake-utils.url = "github:numtide/flake-utils";
@@ -28,10 +25,7 @@
     templates.url = "github:nixos/templates";
 
     # iso generator
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixos-generators.url = "github:nix-community/nixos-generators";
   };
 
   outputs = { self, nixpkgs, flake-utils, nixos-generators, ... }@inputs:
