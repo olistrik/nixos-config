@@ -25,6 +25,7 @@
 
     bitwarden
     bitwarden-cli
+    unstable.bws
   ];
 
   services.udev.extraRules = ''
