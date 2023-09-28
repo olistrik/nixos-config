@@ -14,7 +14,6 @@
 
     # communications
     (unstable.discord.override { nss = nss_latest; })
-    slack-dark
     zoom-us
     teams
 
@@ -25,5 +24,10 @@
     vscode
     firefox
     postman
+
+    (writeShellScriptBin "slack"
+      "exec ${google-chrome}/bin/google-chrome-stable https://www.youtube.com/watch?v=qdrs3gr_GAs")
+
+    (writeShellScriptBin "cake" "exec ${slack-dark}/bin/slack")
   ];
 }
