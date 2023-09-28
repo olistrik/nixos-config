@@ -98,7 +98,5 @@
       modules = import ./modules;
 
       templates = inputs.templates.templates // import ./templates;
-      defaultTemplate = self.templates.devshell;
-
     };
 }
