@@ -207,3 +207,7 @@ nvim_lsp.rust_analyzer.setup {
 		}
 	}
 }
+
+nvim_lsp.cssmodules_ls.setup {
+    on_attach = custom_on_attach,
+}
