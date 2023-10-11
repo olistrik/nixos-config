@@ -15,7 +15,6 @@
     # communications
     (unstable.discord.override { nss = nss_latest; })
     zoom-us
-    teams
 
     # Web Browsers
     google-chrome
