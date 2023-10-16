@@ -4,7 +4,7 @@ let
   basePackages = pkgs;
   # the set of plugins to use.
   vimPlugins = basePackages.vimPlugins
-    // (lib.getAttrs [ "nvim-tree-lua" ] pkgs.unstable.vimPlugins)
+    // (lib.getAttrs [ "nvim-tree-lua" "nvim-lspconfig" ] pkgs.unstable.vimPlugins)
     // ({ olistrik = pkgs.olistrik.vimPlugins; });
 
   # Plugins that have configurations attached.
