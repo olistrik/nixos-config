@@ -74,6 +74,7 @@ in {
     systemd.services = {
       nixwarden = {
         description = "Nixwarden";
+        before = wantedBy;
         after = [ "network-online.target" ];
         wants = [ "network-online.target" ];
         wantedBy = [ "multi-user.target" ] ++ wantedBy;
