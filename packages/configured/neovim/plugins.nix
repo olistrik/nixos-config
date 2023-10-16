@@ -68,7 +68,7 @@ in {
     extern = with pkgs;
       with nodePackages;
       with olistrik.nodePackages; [
-        rnix-lsp
+        unstable.nixd
         rust-analyzer
         gopls
         typescript-language-server
@@ -112,17 +112,6 @@ in {
   #   plugin = indent-blankline-nvim;
   #   config = "indent-blankline";
   # };
-
-  neoformat = {
-    plugin = neoformat;
-    config = "neoformat";
-    extern = with pkgs;
-      [
-        nixfmt
-        # custom.nodePackages.standard
-        # custom.nodePackages.vscode-langservers-extracted
-      ];
-  };
 
   todo-comments = {
     plugin = todo-comments-nvim;

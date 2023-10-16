@@ -117,7 +117,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 
 -- Register all the language servers
 
-nvim_lsp.rnix.setup {
+nvim_lsp.nixd.setup {
 	on_attach = on_attach,
 	capabilities = capabilities,
 }

@@ -15,6 +15,7 @@ in {
     ./programs/zsh.nix
     ./programs/neovim
     ./programs/direnv.nix
+    ./programs/tailscale.nix
   ];
 
   nix = {
