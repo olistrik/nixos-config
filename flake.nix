@@ -63,7 +63,12 @@
         ## Home Server
         hestia = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          modules = commonModules ++ [ ./hosts/hestia/configuration.nix ];
+          modules = commonModules ++ [
+            (nixpkgs-unstable + /nixos/modules/services/audio/wyoming/piper.nix)
+            (nixpkgs-unstable + /nixos/modules/services/audio/wyoming/faster-whisper.nix)
+            (nixpkgs-unstable + /nixos/modules/services/audio/wyoming/openwakeword.nix)
+            ./hosts/hestia/configuration.nix
+          ];
         };
 
         ## Live USB

@@ -1,9 +1,19 @@
 { pkgs, ... }: {
-
   services.home-assistant = {
     enable = true;
-    extraComponents = [ "default_config" ];
-    extraPackages = py: with py; [ psycopg2 ];
+  package = pkgs.unstable.home-assistant;
+    extraComponents = [ 
+    "default_config" 
+    "met"
+    "esphome"
+    "piper"
+    "whisper"
+    "wake_word"
+    "wyoming"
+  ];
+    extraPackages = py: with py; with pkgs; [ 
+    psycopg2
+  ];
     config = {
       default_config = { };
       recorder = { db_url = "postgresql://@/hass"; };
@@ -20,6 +30,35 @@
         unit_system = "metric";
         time_zone = "Europe/Amsterdam";
       };
+      wake_word = {};
+    };
+  };
+
+  services.wyoming = {
+    piper = {
+      package = pkgs.unstable.wyoming-piper;
+      servers.hestia = {
+        piper = pkgs.unstable.piper-tts;
+        voice = "en_GB-southern_english_female-low";
+        uri = "tcp://0.0.0.0:10200";
+      };
+    };
+
+    faster-whisper = {
+      package = pkgs.unstable.wyoming-faster-whisper;
+      servers.hestia = {
+        model = "tiny-int8";
+        uri = "tcp://0.0.0.0:10300";
+        device = "cpu"; # I need my 1060 back >.<
+        beamSize = 5;
+        language = "en";
+      };
+    };
+
+    openwakeword = {
+      enable = true;
+      package = pkgs.unstable.wyoming-openwakeword;
+      uri = "tcp://0.0.0.0:10400";
     };
   };
 
