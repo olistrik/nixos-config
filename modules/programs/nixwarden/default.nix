@@ -1,7 +1,6 @@
 { config, lib, pkgs,  ... }:
 with lib;
 let
-  cfe = config.environment;
   cfg = config.services.nixwarden;
 in {
   options.services.nixwarden = {
