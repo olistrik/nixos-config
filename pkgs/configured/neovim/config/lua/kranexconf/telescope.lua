@@ -49,4 +49,4 @@ require('telescope').load_extension('file_browser')
 
 map('n', '<C-p>', '<cmd>Telescope find_files<CR>', opts)
 map('n', '<C-f>', '<cmd>Telescope live_grep<CR>', opts)
-map('n', '<Leader><Tab>', '<cmd>Telescope file_browser<CR>', opts)
+map('n', '<Leader><Tab>', '<cmd>Telescope file_browser path=%:p:h select_buffer=true<CR>', opts)

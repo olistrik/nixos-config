@@ -113,6 +113,8 @@
     window.opacity = "0.95";
   };
 
+  services.tailscale.enable = true;
+
   programs.openvpn3.enable = true;
 
   # This value determines the NixOS release from which the default
