@@ -1,5 +1,6 @@
 result
 .envrc
+.direnv
 *.iso
 
 # secrets
