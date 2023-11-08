@@ -12,7 +12,7 @@
     "wyoming"
 	"wiz"
   ];
-    extraPackages = py: with py; with pkgs; [ 
+    extraPackages = py: with py; with pkgs.unstable; [ 
     psycopg2
   ];
     config = {
