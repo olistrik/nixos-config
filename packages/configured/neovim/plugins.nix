@@ -62,14 +62,13 @@ in {
       nvim-autopairs
       # nvim-ts-autotag
       # vim-go
-      kranex.go-nvim
-      kranex.scss-syntax-vim
+      olistrik.go-nvim
     ];
 
     extern = with pkgs;
       with nodePackages;
-      with kranex.nodePackages; [
-        rnix-lsp
+      with olistrik.nodePackages; [
+        unstable.nixd
         rust-analyzer
         typescript-language-server
         vscode-langservers-extracted
@@ -112,17 +111,6 @@ in {
   #   plugin = indent-blankline-nvim;
   #   config = "indent-blankline";
   # };
-
-  neoformat = {
-    plugin = neoformat;
-    config = "neoformat";
-    extern = with pkgs;
-      [
-        nixfmt
-        # custom.nodePackages.standard
-        # custom.nodePackages.vscode-langservers-extracted
-      ];
-  };
 
   todo-comments = {
     plugin = todo-comments-nvim;

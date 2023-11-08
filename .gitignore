@@ -1,3 +1,6 @@
 result
 .envrc
 *.iso
+
+# secrets
+.nixwarden.key

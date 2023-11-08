@@ -8,6 +8,7 @@
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../shared/server.nix
+    ./home-assistant.nix
   ];
 
   networking.hostName = "hestia";
@@ -25,19 +26,25 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.kranex = {
+  users.users.oli = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
 
   # List packages installed in system profile. To search, run:
-  environment.systemPackages = with pkgs; [ ];
+  environment.systemPackages = with pkgs; [ unstable.bws ];
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  # Enable Nixwarden
+  services.nixwarden = {
+    package = pkgs.unstable.bws;
+    accessTokenFile = "/nixos/.nixwarden.key";
+  };
+
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 32400 ];
+  networking.firewall.allowedTCPPorts = [ 32400 8123 80 443 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;

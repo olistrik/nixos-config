@@ -1,30 +1,22 @@
-{config, pkgs, ...}:
+{ config, pkgs, ... }:
 
 {
 
-  imports = [
-    ./programs/picom.nix
-  ];
+  imports = [ ./programs/picom.nix ];
 
-  environment.systemPackages = with pkgs; [
-    polybar
-    dmenu
-    sxhkd
-  ];
+  environment.systemPackages = with pkgs; [ polybar dmenu sxhkd ];
 
   ## Enable X + SDDM + BSPWM.
   services.xserver = {
     enable = true;
 
-    desktopManager = {
-      xterm.enable = false;
-    };
+    desktopManager = { xterm.enable = false; };
 
     displayManager = {
       defaultSession = "none+bspwm";
       lightdm.greeters.mini = {
         enable = true;
-        user = "kranex";
+        user = "oli";
         extraConfig = ''
           [greeter]
           show-password-label = false
@@ -36,8 +28,6 @@
       };
     };
 
-    windowManager.bspwm = {
-      enable = true;
-    };
+    windowManager.bspwm = { enable = true; };
   };
 }

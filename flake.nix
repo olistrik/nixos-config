@@ -9,18 +9,6 @@
     # Unstable nixpkgs
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # nix2vim
-    #nix2vim = {
-    #  url = "github:kranex/nix2vim";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
-
-    # devenv
-    devenv.url = "github:cachix/devenv/latest";
-
-    # Flake utils
-    flake-utils.url = "github:numtide/flake-utils";
-
     # templates
     templates.url = "github:nixos/templates";
 
@@ -28,75 +16,74 @@
     nixos-generators.url = "github:nix-community/nixos-generators";
   };
 
-  outputs = { self, nixpkgs, flake-utils, nixos-generators, ... }@inputs:
-    with flake-utils.lib;
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-generators, ... }@inputs:
     let
       # overlays on nixpkgs.
-      nixpkgsConfig = with inputs; rec {
-        config = { allowUnfree = true; };
-        overlays = [
-          (final: prev: {
-            # pkgs.unstable
-            unstable = import nixpkgs-unstable {
-              inherit (prev) system;
-              inherit config;
-            };
-            # pkgs.kranex
-            kranex = final.callPackage ./pkgs { };
-            devenv = devenv.packages."${prev.system}".devenv;
-          })
-          # inputs.nix2vim.overlay
-        ];
-      };
+      overlay-unstable = (final: prev: {
+        unstable = import nixpkgs-unstable {
+          inherit (final) system;
+          config.allowUnfree = true;
+        };
+      });
 
-      pin-flake-reg = with inputs; {
-        nix.registry.nixpkgs.flake = nixpkgs;
-        nix.registry.unstable.flake = nixpkgs-unstable;
-        nix.registry.kranex.flake = self;
-        nix.registry.templates.flake = self;
-      };
+      overlay-olistrik =
+        (final: prev: { olistrik = final.callPackage ./packages { }; });
+
+      modules-olistrik = import ./modules;
 
       # modules that are shared between all hosts.
       commonModules = [
-        ({ nixpkgs = nixpkgsConfig; })
-        pin-flake-reg # pin the pkgs.
+        ({ ... }: {
+          nixpkgs.overlays = [ overlay-unstable self.overlays.default ];
+          nixpkgs.config.allowUnfree = true;
 
-        self.modules
+          nix.registry.nixpkgs.flake = nixpkgs;
+          nix.registry.unstable.flake = nixpkgs-unstable;
+          nix.registry.olistrik.flake = self;
+          nix.registry.templates.flake = self;
+        })
+
+        modules-olistrik
+
         ./shared/default.nix # default programs and config for all systems.
       ];
 
-      # shortcut for x86-64 linux systems.
-      linux64 = host:
-        nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = commonModules
-            ++ [ (./. + "/hosts/${host}/configuration.nix") ];
-        };
     in {
       # My systems.
       nixosConfigurations = {
         ## Work Lenovo E15
-        nixogen = linux64 "nixogen";
+        nixogen = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = commonModules ++ [ ./hosts/nixogen/configuration.nix ];
+        };
 
         ## Home Server
-        hestia = linux64 "hestia";
-      };
+        hestia = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = commonModules ++ [
+            (nixpkgs-unstable + /nixos/modules/services/audio/wyoming/piper.nix)
+            (nixpkgs-unstable
+              + /nixos/modules/services/audio/wyoming/faster-whisper.nix)
+            (nixpkgs-unstable
+              + /nixos/modules/services/audio/wyoming/openwakeword.nix)
+            ./hosts/hestia/configuration.nix
+          ];
+        };
 
-      packages.x86_64-linux = {
         ## Live USB
         liveUsb = nixos-generators.nixosGenerate {
           system = "x86_64-linux";
           modules = commonModules ++ [ ./hosts/live-usb/configuration.nix ];
           format = "install-iso";
         };
-      } // flattenTree (import nixpkgs {
-        inherit (nixpkgsConfig) config overlays;
-        system = "x86_64-linux";
-      }).kranex;
+      };
 
-      # My modules, see commonModules for usage.
-      modules = import ./modules;
+      overlays = {
+        default = overlay-olistrik;
+        olistrik = overlay-olistrik;
+      };
 
       templates = inputs.templates.templates // import ./templates;
+      defaultTemplate = self.templates.devshell;
     };
 }
