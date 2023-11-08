@@ -1,7 +1,7 @@
 { pkgs ? import <nixpkgs> { } }:
 with pkgs;
 mkShell {
-  name = "util scripts";
+  name = "util-scripts";
   buildInputs = lib.mapAttrsToList (name: value: (writeScriptBin name value)) {
     build = ''
       git add -A
