@@ -10,6 +10,7 @@
     "whisper"
     "wake_word"
     "wyoming"
+	"wiz"
   ];
     extraPackages = py: with py; with pkgs; [ 
     psycopg2
@@ -34,6 +35,22 @@
     };
   };
 
+  # virtualisation.oci-containers.containers = {
+  #   wyoming-whisper = {
+  #   	image = "rhasspy/wyoming-whisper";
+  #   	ports = ["0.0.0.0:10300:10300"];
+  #   	volumes = [
+  #   		"/root/wyoming-whisper:/data"
+  #   	];
+  #   	cmd = [
+  #   		"--model"
+  #   		"base-int8"
+  #   		"--language"
+  #   		"en"
+  #   	];
+  #   };
+  # };
+
   services.wyoming = {
     piper = {
       package = pkgs.unstable.wyoming-piper;
@@ -44,16 +61,16 @@
       };
     };
 
-    faster-whisper = {
-      package = pkgs.unstable.wyoming-faster-whisper;
-      servers.hestia = {
-        model = "tiny-int8";
-        uri = "tcp://0.0.0.0:10300";
-        device = "cpu"; # I need my 1060 back >.<
-        beamSize = 5;
-        language = "en";
-      };
-    };
+    # faster-whisper = {
+    #   package = pkgs.unstable.wyoming-faster-whisper;
+    #   servers.hestia = {
+    #     model = "tiny-int8";
+    #     uri = "tcp://0.0.0.0:10300";
+    #     device = "cpu"; # I need my 1060 back >.<
+    #     beamSize = 1;
+    #     language = "en";
+    #   };
+    # };
 
     openwakeword = {
       enable = true;
