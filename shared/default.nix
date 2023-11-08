@@ -15,6 +15,7 @@ in {
     ./programs/zsh.nix
     ./programs/neovim
     ./programs/direnv.nix
+    ./programs/tailscale.nix
   ];
 
   nix = {
@@ -61,9 +62,6 @@ in {
     neofetch
     tree
     parallel
-
-    # development
-    devenv
 
     # USB utils
     ventoy-bin

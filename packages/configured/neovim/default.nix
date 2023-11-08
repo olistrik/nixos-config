@@ -4,8 +4,8 @@ let
   basePackages = pkgs;
   # the set of plugins to use.
   vimPlugins = basePackages.vimPlugins
-    // (lib.getAttrs [ "nvim-tree-lua" ] pkgs.unstable.vimPlugins)
-    // ({ kranex = pkgs.kranex.vimPlugins; });
+    // (lib.getAttrs [ "nvim-tree-lua" "nvim-lspconfig" ] pkgs.unstable.vimPlugins)
+    // ({ olistrik = pkgs.olistrik.vimPlugins; });
 
   # Plugins that have configurations attached.
   configuredPlugins = import ./plugins.nix {
@@ -31,7 +31,7 @@ let
 
   sourceStr = with builtins;
     concatStringsSep "\n"
-    (map (x: "require('kranexconf.${x}')") (catAttrs "config" plugins));
+    (map (x: "require('olistrikconf.${x}')") (catAttrs "config" plugins));
 
   externals = with pkgs;
     [ xclip ] ++ builtins.concatLists (builtins.catAttrs "extern" plugins);

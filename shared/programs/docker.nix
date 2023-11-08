@@ -10,5 +10,5 @@
     };
   };
 
-  users.users.kranex.extraGroups = [ "docker" ];
+  users.users.oli.extraGroups = [ "docker" ];
 }
