@@ -9,6 +9,9 @@
     # Unstable nixpkgs
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    # Home manager
+    home-manager.url = "github:nix-community/home-manager";
+
     # templates
     templates.url = "github:nixos/templates";
 
@@ -16,7 +19,7 @@
     nixos-generators.url = "github:nix-community/nixos-generators";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-generators, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nixos-generators, ... }@inputs:
     let
       # overlays on nixpkgs.
       overlay-unstable = (final: prev: {
@@ -44,6 +47,8 @@
         })
 
         modules-olistrik
+
+		home-manager.nixosModules.home-manager
 
         ./shared/default.nix # default programs and config for all systems.
       ];
