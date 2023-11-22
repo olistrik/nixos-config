@@ -9,6 +9,7 @@
     ../../shared/work.nix
     ../../shared/yubikey.nix
     ../../shared/wm/sway
+    ../../shared/wm/hyprland
   ];
 
   ##################
