@@ -22,7 +22,6 @@
     # The worst software in the world
     vscode
     firefox
-    postman
 
     (writeShellScriptBin "slack"
       "exec ${google-chrome}/bin/google-chrome-stable https://www.youtube.com/watch?v=qdrs3gr_GAs")

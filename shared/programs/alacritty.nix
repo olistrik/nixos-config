@@ -4,7 +4,7 @@ let
   inherit (lib.modules) mkDefault;
 in {
   # add fonts for polybar and Alacritty.
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     hermit
     (unstable.nerdfonts.override { fonts = ["Hermit" "JetBrainsMono"]; })
   ];

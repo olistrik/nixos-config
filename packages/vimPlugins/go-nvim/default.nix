@@ -1,5 +1,5 @@
 { vimUtils, fetchFromGitHub }:
-vimUtils.buildVimPluginFrom2Nix rec {
+vimUtils.buildVimPlugin rec {
   name = "go.nvim";
   version = "v0.2.2-281b51a";
 

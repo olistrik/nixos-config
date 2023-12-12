@@ -1,5 +1,5 @@
 { vimUtils, fetchFromGitHub }:
-vimUtils.buildVimPluginFrom2Nix rec {
+vimUtils.buildVimPlugin rec {
   name = "scss-syntax.vim";
   version = "bda22a93d1dcfcb8ee13be1988560d9bb5bd0fef";
 
