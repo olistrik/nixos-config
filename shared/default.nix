@@ -30,11 +30,6 @@ in {
 
   nix.settings.auto-optimise-store = true;
 
-  home-manager = {
-    useGlobalPkgs = true;
-	useUserPackages = true;
-  };
-
   # Every pc needs this.
   programs = {
     ssh = {
