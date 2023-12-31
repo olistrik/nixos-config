@@ -5,15 +5,15 @@ let
 in {
   options.services.nixwarden = {
     package = mkOption {
-      type = types.nullOr types.package;
-      default = null;
+      type = types.package;
+      default = pkgs.bws;
     };
     accessTokenFile = mkOption {
-      type = types.nullOr types.string;
+      type = types.nullOr types.str;
       default = null;
     };
     project = mkOption {
-      type = types.string;
+      type = types.str;
       default = "nixwarden";
     };
     secrets = mkOption {
@@ -60,11 +60,6 @@ in {
     secretKeys = mapAttrsToList (name: value: name) cfg.secrets; 
   in mkIf (length secretKeys > 0) {
     assertions = [
-      {
-        assertion = cfg.package != null;
-        message =
-          "until bws is merged into stable nixpkgs you must provide your own.";
-      }
       {
         assertion = cfg.accessTokenFile != null;
         message = "an access token file is required for nixwarden.";

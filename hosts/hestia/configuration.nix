@@ -39,7 +39,6 @@
 
   # Enable Nixwarden
   services.nixwarden = {
-    package = pkgs.unstable.bws;
     accessTokenFile = "/nixos/.nixwarden.key";
   };
 

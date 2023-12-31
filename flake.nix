@@ -9,9 +9,6 @@
     # Unstable nixpkgs
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # Home manager
-    home-manager.url = "github:nix-community/home-manager";
-
     # templates
     templates.url = "github:nixos/templates";
 
@@ -19,7 +16,7 @@
     nixos-generators.url = "github:nix-community/nixos-generators";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nixos-generators, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-generators, ... }@inputs:
     let
       # overlays on nixpkgs.
       overlay-unstable = (final: prev: {
@@ -48,8 +45,6 @@
 
         modules-olistrik
 
-		home-manager.nixosModules.home-manager
-
         ./shared/default.nix # default programs and config for all systems.
       ];
 
@@ -65,14 +60,7 @@
         ## Home Server
         hestia = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          modules = commonModules ++ [
-            (nixpkgs-unstable + /nixos/modules/services/audio/wyoming/piper.nix)
-            (nixpkgs-unstable
-              + /nixos/modules/services/audio/wyoming/faster-whisper.nix)
-            (nixpkgs-unstable
-              + /nixos/modules/services/audio/wyoming/openwakeword.nix)
-            ./hosts/hestia/configuration.nix
-          ];
+          modules = commonModules ++ [ ./hosts/hestia/configuration.nix ];
         };
 
         ## Live USB
