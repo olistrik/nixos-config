@@ -35,7 +35,7 @@
       };
       wake_word = {};
 	  automation = "!include automations.yaml";
-	  esphome = {};
+	  api = {};
     };
   };
 
@@ -71,6 +71,11 @@
         userGroup = "hass:hass";
       };
     };
+  };
+
+  services.esphome = {
+	enable = true;
+	openFirewall = true;
   };
 
   services.postgresql = {
