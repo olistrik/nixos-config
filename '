@@ -47,7 +47,7 @@
   };
 
   mode = {
-    name = "sway/mode";
+    name = "hyprland/mode";
     config = ''
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
