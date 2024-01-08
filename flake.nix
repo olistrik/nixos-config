@@ -14,9 +14,11 @@
 
     # iso generator
     nixos-generators.url = "github:nix-community/nixos-generators";
+
+	hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-generators, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-generators, hyprland, ... }@inputs:
     let
       # overlays on nixpkgs.
       overlay-unstable = (final: prev: {
@@ -41,9 +43,17 @@
           nix.registry.unstable.flake = nixpkgs-unstable;
           nix.registry.olistrik.flake = self;
           nix.registry.templates.flake = self;
+
+		  nix.settings = {
+			  substituters = [ "https://hyprland.cachix.org" ];
+			  trusted-public-keys = [
+				"hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+			  ];
+		  };
         })
 
-        modules-olistrik
+        modules-olistrik 
+		hyprland.nixosModules.default
 
         ./shared/default.nix # default programs and config for all systems.
       ];
