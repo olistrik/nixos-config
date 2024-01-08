@@ -15,7 +15,7 @@
     # iso generator
     nixos-generators.url = "github:nix-community/nixos-generators";
 
-	hyprland.url = "github:hyprwm/Hyprland";
+	hyprland.url = "github:hyprwm/Hyprland/v0.34.0";
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, nixos-generators, hyprland, ... }@inputs:
