@@ -267,8 +267,8 @@ let
             "height": 30, // Waybar height (to be removed for auto height)
 
             // Choose the order of the modules
-            "modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
-            "modules-center": ["sway/window"],
+            "modules-left": ["sway/workspaces", "hyprland/workspaces", sway/mode", "custom/media"],
+            "modules-center": ["sway/window", "hyprland/window"],
             "modules-right": ["pulseaudio", "network", "battery", "clock"],
             "sway/mode": {
                 "format": "<span style=\"italic\">{}</span>"
