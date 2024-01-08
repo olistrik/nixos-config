@@ -32,7 +32,6 @@ in {
 
       (pkgs.writeScriptBin "lock" ''
                 ${swaylock-effects}/bin/swaylock -f --image "$HOME/screensaver" 
-        		--clock \
                 --indicator-radius 100 \
                 --indicator-thickness 7 \
                 --ring-color 455a64 \
