@@ -7,7 +7,7 @@ in {
     enable = true;
     libinput.enable = true;
     displayManager = {
-      defaultSession = "sway";
+      defaultSession = "hyprland";
       gdm = {
         enable = true;
         wayland = true;
