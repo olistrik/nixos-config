@@ -46,8 +46,6 @@ in {
     git
     wget
     curl
-
-    # Build Tools
     gnumake
 
     # Monitoring

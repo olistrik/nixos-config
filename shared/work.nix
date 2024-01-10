@@ -12,6 +12,8 @@
     # httpie
     # ngrok
 
+	foot
+
     # communications
     (unstable.discord.override { nss = nss_latest; })
     zoom-us
@@ -23,9 +25,13 @@
     vscode
     firefox
 
-    (writeShellScriptBin "slack"
-      "exec ${google-chrome}/bin/google-chrome-stable https://www.youtube.com/watch?v=qdrs3gr_GAs")
+    (writeShellScriptBin "slack" ''
+	  if ${ksshaskpass}/bin/ksshaskpass | sudo -k -S true; then
+		  exec ${slack-dark}/bin/slack
+	  else
+		  exec xdg-open "https://www.youtube.com/watch?v=qdrs3gr_GAs"
+	  fi
+	'')
 
-    (writeShellScriptBin "cake" "exec ${slack-dark}/bin/slack")
   ];
 }
