@@ -6,6 +6,8 @@ in {
 		swaylock
 	];
 
+	environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
 	programs.hyprland.enable = true;
 
 	security.rtkit.enable = true;
@@ -14,5 +16,14 @@ in {
 		alsa.enable = true;
 		alsa.support32Bit = true;
 		pulse.enable = true;
+	};
+
+	xdg.portal = {
+		enable = true;
+		extraPortals = with pkgs; [
+			xdg-desktop-portal-wlr
+			xdg-desktop-portal-gtk
+		];
+		gtkUsePortal = true;
 	};
 }
