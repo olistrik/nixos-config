@@ -44,8 +44,13 @@
           nix.registry.unstable.flake = nixpkgs-unstable;
           nix.registry.olistrik.flake = self;
           nix.registry.templates.flake = self;
+					
+					nix.extraOptions = ''
+						experimental-features = nix-command flakes
+					'';
 
           nix.settings = {
+						auto-optimise-store = true;
             substituters = [
               "https://cache.nixos.org/"
               "https://hyprland.cachix.org"

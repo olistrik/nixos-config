@@ -1,13 +1,7 @@
 # These are programs and their configs that I want on personal systems but are
 # not needed on servers etc.
 { config, lib, pkgs, ... }: {
-  imports = [ ./programs/alacritty.nix ];
-
-  programs.adb.enable = true;
-
   environment.systemPackages = with pkgs; [
-    steam-run # for shit software
-
     # media
     spotify
     feh
@@ -19,13 +13,6 @@
 
     # browsers
     google-chrome
-
-    # keyboard
-    dfu-util
-
-    bitwarden
-    bitwarden-cli
-    unstable.bws
   ];
 
   services.udev.extraRules = ''

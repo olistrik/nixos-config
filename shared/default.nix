@@ -2,15 +2,9 @@
 # May need to be further divided in the future to allow for easier control
 # of different kinds of systems.
 
-{ config, lib, pkgs, ... }:
-
-let inherit (lib.modules) mkDefault;
-
-in {
+{ config, lib, pkgs, ... }: {
 
   imports = [
-    ./cachix
-
     # install programs with my configurations
     ./programs/zsh.nix
     ./programs/neovim
@@ -18,18 +12,6 @@ in {
     ./programs/tailscale.nix
   ];
 
-  nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-
-    settings = {
-      auto-optimise-store = true;
-    };
-  };
-
-  nixpkgs.config.allowUnfree = true;
   boot.supportedFilesystems = [ "ntfs" ];
 
   # Every pc needs this.
@@ -48,7 +30,6 @@ in {
     git
     wget
     curl
-    gnumake
 
     # Monitoring
     htop
@@ -56,6 +37,7 @@ in {
     # Packaging
     zip
     unzip
+    unrar
 
     # misc
     killall

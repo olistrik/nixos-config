@@ -7,19 +7,9 @@
   '';
 
   environment.systemPackages = with pkgs; [
-    # utility
-    # postman
-    # httpie
-    # ngrok
-
-    foot
-
     # communications
     (unstable.discord.override { nss = nss_latest; })
     zoom-us
-
-    # Web Browsers
-    google-chrome
 
     # The worst software in the world
     vscode
