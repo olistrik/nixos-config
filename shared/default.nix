@@ -23,12 +23,14 @@ in {
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+
+    settings = {
+      auto-optimise-store = true;
+    };
   };
 
   nixpkgs.config.allowUnfree = true;
   boot.supportedFilesystems = [ "ntfs" ];
-
-  nix.settings.auto-optimise-store = true;
 
   # Every pc needs this.
   programs = {

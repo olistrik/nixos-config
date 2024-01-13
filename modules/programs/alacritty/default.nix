@@ -9,7 +9,8 @@ let
   cfg = config.programs.alacritty;
 
   mkSubModule = attrs: types.attrsOf (types.submodule attrs);
-in {
+in
+{
   options = {
     programs.alacritty = {
       enable = mkOption {
@@ -66,6 +67,13 @@ in {
             };
           };
         };
+        opacity = mkOption {
+          type = types.str;
+          default = "1.0";
+          description = ''
+            the background opacity of alacritty 0.0 to 1.0.
+          '';
+        };
       };
 
       font = {
@@ -103,16 +111,6 @@ in {
         description = ''
           If true, bold text is drawn using the bright color variants.
         '';
-      };
-
-      window = {
-        opacity = mkOption {
-          type = types.str;
-          default = "1.0";
-          description = ''
-            the background opacity of alacritty 0.0 to 1.0.
-          '';
-        };
       };
 
       theme = mkOption {

@@ -14,7 +14,8 @@ let
     inherit name ruby;
     gemdir = ./.;
   };
-in stdenv.mkDerivation {
+in
+stdenv.mkDerivation {
   inherit name version src;
   buildInputs = [ gems ruby ];
   installPhase = ''

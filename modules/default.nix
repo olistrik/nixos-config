@@ -9,4 +9,5 @@ let
     lib.filterAttrs (key: value: isModule (path + ("/" + key))) (readDirs path);
   children = path:
     lib.mapAttrsToList (key: value: path + ("/" + key)) (readModules path);
-in { imports = children ./.; }
+in
+{ imports = children ./.; }

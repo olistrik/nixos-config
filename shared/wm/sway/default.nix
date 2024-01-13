@@ -31,17 +31,17 @@ in {
       playerctl
 
       (pkgs.writeScriptBin "lock" ''
-                ${swaylock-effects}/bin/swaylock -f --image "$HOME/screensaver" 
-                --indicator-radius 100 \
-                --indicator-thickness 7 \
-                --ring-color 455a64 \
-                --key-hl-color be5046 \
-                --text-color ffc107 \
-                --line-color 00000000 \
-                --inside-color 00000088 \
-                --separator-color 00000000 \
-                --fade-in 0.1
-                "$@"
+        ${swaylock-effects}/bin/swaylock -f --image "$HOME/screensaver" 
+        --indicator-radius 100 \
+        --indicator-thickness 7 \
+        --ring-color 455a64 \
+        --key-hl-color be5046 \
+        --text-color ffc107 \
+        --line-color 00000000 \
+        --inside-color 00000088 \
+        --separator-color 00000000 \
+        --fade-in 0.1
+        "$@"
       '')
       (pkgs.writeScriptBin "ssh-add-all" ''
         exec ls -d ~/.ssh/* | grep -vE 'known_hosts|.pub$'| xargs ssh-add

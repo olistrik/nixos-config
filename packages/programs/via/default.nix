@@ -9,7 +9,7 @@ appimageTools.wrapType2 rec {
     sha256 = "sha256-0s1z0oCiZRSf7bJBYex8V1UjWWxNMImK1rWHXgmz80o=";
   };
 
-  extraPkgs = pkgs: with pkgs; [lxqt.lxqt-policykit];
+  extraPkgs = pkgs: with pkgs; [ lxqt.lxqt-policykit ];
 
   extraInstallCommands = ''
     # PATCHING RUN AS SUDO

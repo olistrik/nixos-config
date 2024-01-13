@@ -1,6 +1,6 @@
 # Install and configure R and Rmarkdown
 
-{pkgs, ...}:
+{ pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
     (pkgs.rWrapper.override {

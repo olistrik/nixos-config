@@ -1,12 +1,8 @@
-{config, lib, pkgs, ...}:
-
-let
-  inherit (lib.modules) mkDefault;
-in {
+{ config, lib, pkgs, ... }: {
   # add fonts for polybar and Alacritty.
   fonts.packages = with pkgs; [
     hermit
-    (unstable.nerdfonts.override { fonts = ["Hermit" "JetBrainsMono"]; })
+    (unstable.nerdfonts.override { fonts = [ "Hermit" "JetBrainsMono" ]; })
   ];
 
   # configure alacritty
@@ -16,5 +12,7 @@ in {
     font = {
       normal.family = "JetBrainsMono NerdFont";
     };
+    theme = config.system.themer.theme;
+    window.opacity = "0.95";
   };
 }

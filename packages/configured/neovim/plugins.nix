@@ -3,9 +3,10 @@ with vimPlugins;
 let
   addDeps = plugin: deps:
     plugin.overrideAttrs
-    (old: { dependencies = (old.dependencies or [ ]) ++ deps; });
+      (old: { dependencies = (old.dependencies or [ ]) ++ deps; });
 
-in {
+in
+{
   colorscheme = {
     plugin = neovim-ayu;
     config = "colorscheme";

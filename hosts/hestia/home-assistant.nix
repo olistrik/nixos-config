@@ -1,22 +1,22 @@
 { pkgs, ... }: {
   services.home-assistant = {
     enable = true;
-    extraComponents = [ 
-    "default_config" 
-    "met"
-    "esphome"
-    "piper"
-    "whisper"
-    "wake_word"
-    "wyoming"
-	"wiz"
-	"hue"
-	"zha"
-  ];
-  extraPackages = py: with py; with pkgs.unstable; [ 
-	# postgres
-    psycopg2
-  ];
+    extraComponents = [
+      "default_config"
+      "met"
+      "esphome"
+      "piper"
+      "whisper"
+      "wake_word"
+      "wyoming"
+      "wiz"
+      "hue"
+      "zha"
+    ];
+    extraPackages = py: with py; with pkgs.unstable; [
+      # postgres
+      psycopg2
+    ];
     config = {
       default_config = { };
       recorder = { db_url = "postgresql://@/hass"; };
@@ -33,9 +33,9 @@
         unit_system = "metric";
         time_zone = "Europe/Amsterdam";
       };
-      wake_word = {};
-	  automation = "!include automations.yaml";
-	  api = {};
+      wake_word = { };
+      automation = "!include automations.yaml";
+      api = { };
     };
   };
 
@@ -74,8 +74,8 @@
   };
 
   services.esphome = {
-	enable = true;
-	openFirewall = true;
+    enable = true;
+    openFirewall = true;
   };
 
   services.postgresql = {
@@ -84,7 +84,7 @@
     ensureDatabases = [ "hass" ];
     ensureUsers = [{
       name = "hass";
-	  ensureDBOwnership = true;
+      ensureDBOwnership = true;
     }];
   };
 

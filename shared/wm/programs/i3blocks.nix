@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  imports = [];
+  imports = [ ];
 
   config = {
     environment.systemPackages = with pkgs; [

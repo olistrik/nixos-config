@@ -15,7 +15,8 @@
     # iso generator
     nixos-generators.url = "github:nix-community/nixos-generators";
 
-	hyprland.url = "github:hyprwm/Hyprland/v0.34.0";
+    # Hyprland WM
+    hyprland.url = "github:hyprwm/Hyprland/v0.34.0";
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, nixos-generators, hyprland, ... }@inputs:
@@ -44,21 +45,26 @@
           nix.registry.olistrik.flake = self;
           nix.registry.templates.flake = self;
 
-		  nix.settings = {
-			  substituters = [ "https://hyprland.cachix.org" ];
-			  trusted-public-keys = [
-				"hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-			  ];
-		  };
+          nix.settings = {
+            substituters = [
+              "https://cache.nixos.org/"
+              "https://hyprland.cachix.org"
+            ];
+            trusted-public-keys = [
+              "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+              "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+            ];
+          };
         })
 
-        modules-olistrik 
-		hyprland.nixosModules.default
+        modules-olistrik
+        hyprland.nixosModules.default
 
         ./shared/default.nix # default programs and config for all systems.
       ];
 
-    in {
+    in
+    {
       # My systems.
       nixosConfigurations = {
         ## Work Lenovo E15
@@ -88,5 +94,7 @@
 
       templates = inputs.templates.templates // import ./templates;
       defaultTemplate = self.templates.devshell;
+
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
     };
 }
