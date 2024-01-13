@@ -1,10 +1,10 @@
-{ config, lib, pkgs, programs, ... }: {
+{ config, ... }: {
 	services.greetd = {
 		enable = true;
 		settings = rec {
 			initial_session = {
-				command = "${programs.hyprland.package}/bin/Hyprland";
-				user = "myuser";
+				command = "${config.programs.hyprland.package}/bin/Hyprland";
+				user = "oli";
 			};
 			default_session = initial_session;
 		};

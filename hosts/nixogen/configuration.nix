@@ -9,7 +9,7 @@
     ../../shared/workstation.nix
     ../../shared/work.nix
     ../../shared/yubikey.nix
-    ../../shared/wm/hyprland
+    ../../shared/wm
   ];
 
   ##################
