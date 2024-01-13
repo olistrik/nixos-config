@@ -93,7 +93,7 @@
     xkbOptions = "eurosign:5";
   };
 
-  programs.alacritty.font.size = "10.0";
+  programs.alacritty.font.size = "14.0";
   programs.openvpn3.enable = true;
 
   # This value determines the NixOS release from which the default
