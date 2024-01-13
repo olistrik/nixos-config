@@ -32,9 +32,6 @@
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
 
-  # List packages installed in system profile. To search, run:
-  environment.systemPackages = with pkgs; [ unstable.bws ];
-
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
