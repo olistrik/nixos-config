@@ -12,7 +12,7 @@
     # httpie
     # ngrok
 
-	foot
+    foot
 
     # communications
     (unstable.discord.override { nss = nss_latest; })
@@ -26,12 +26,12 @@
     firefox
 
     (writeShellScriptBin "slack" ''
-	  if ${ksshaskpass}/bin/ksshaskpass | sudo -k -S true; then
-		  exec ${slack-dark}/bin/slack
-	  else
-		  exec xdg-open "https://www.youtube.com/watch?v=qdrs3gr_GAs"
-	  fi
-	'')
+      	  if ${ksshaskpass}/bin/ksshaskpass | sudo -k -S true; then
+      		  exec ${slack-dark}/bin/slack
+      	  else
+      		  exec xdg-open "https://www.youtube.com/watch?v=qdrs3gr_GAs"
+      	  fi
+      	'')
 
   ];
 }

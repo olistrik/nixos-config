@@ -28,7 +28,7 @@ let
     ${imagemagick}/bin/import "$LOC/screenshot_$FILE.$COUNT.png"
     ${xclip}/bin/xclip -selection clipboard -t image/png -i "$LOC/screenshot_$FILE.$COUNT.png"
   '';
-  windowshot= writeScriptBin "windowshot" ''
+  windowshot = writeScriptBin "windowshot" ''
     #!${stdenv.shell}
     LOC="."
     if [ "$#" == 1 ]; then
@@ -44,7 +44,8 @@ let
     ${imagemagick}/bin/import -window $WINDOW "$LOC/screenshot_$FILE.$COUNT.png"
     ${xclip}/bin/xclip -selection clipboard -t image/png -i "$LOC/screenshot_$FILE.$COUNT.png"
   '';
-in symlinkJoin {
+in
+symlinkJoin {
   name = "screencapture-scripts";
   paths = [ screenshot screencrop windowshot ];
 }

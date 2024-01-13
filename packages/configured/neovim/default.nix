@@ -19,19 +19,21 @@ let
   # The configured plugins I actually want to use.
   plugins = builtins.attrValues configuredPlugins;
 
-  pluginPkgs = let
-    plugs = builtins.catAttrs "plugin" plugins;
-    transitiveClosure = plugin:
-      [ plugin ] ++ (lib.unique (builtins.concatLists
-        (map transitiveClosure plugin.dependencies or [ ])));
+  pluginPkgs =
+    let
+      plugs = builtins.catAttrs "plugin" plugins;
+      transitiveClosure = plugin:
+        [ plugin ] ++ (lib.unique (builtins.concatLists
+          (map transitiveClosure plugin.dependencies or [ ])));
 
-    deps = lib.concatMap transitiveClosure plugs;
-    pkgs = lib.unique (plugs ++ deps);
-  in pkgs;
+      deps = lib.concatMap transitiveClosure plugs;
+      pkgs = lib.unique (plugs ++ deps);
+    in
+    pkgs;
 
   sourceStr = with builtins;
     concatStringsSep "\n"
-    (map (x: "require('olistrikconf.${x}')") (catAttrs "config" plugins));
+      (map (x: "require('olistrikconf.${x}')") (catAttrs "config" plugins));
 
   externals = with pkgs;
     [ xclip ] ++ builtins.concatLists (builtins.catAttrs "extern" plugins);
@@ -46,7 +48,8 @@ let
 
   #   # vim-wakatime
   # ];
-in (basePackages.neovim.override {
+in
+(basePackages.neovim.override {
   configure = {
     packages.default.start =
       # builtins.trace "${builtins.foldl' (x: y: x + y + "\n") "" pluginPkgs}"

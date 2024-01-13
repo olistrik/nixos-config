@@ -17,6 +17,6 @@ rustPlatform.buildRustPackage rec {
     description = "Command line tool to show clear git graphs arranged for your branching model.";
     homepage = "https://github.com/mlange-42/git-graph";
     licence = licences.mit;
-    maintainers = [];
+    maintainers = [ ];
   };
 }

@@ -1,11 +1,12 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
-    ../../shared/workstation.nix
     ../../shared/personal.nix
+    ../../shared/workstation.nix
     ../../shared/work.nix
     ../../shared/yubikey.nix
     ../../shared/wm/sway
@@ -74,8 +75,6 @@
   networking.interfaces.enp0s31f6.useDHCP = true;
   networking.interfaces.wlp60s0.useDHCP = true;
 
-  # environment.variables.WINIT_X11_SCALE_FACTOR = "1.25";
-
   #################
   ## Localisation
 
@@ -95,27 +94,7 @@
     xkbOptions = "eurosign:5";
   };
 
-  ################
-  ## Theming WIP
-
-  system.themer = {
-    theme = import ../../shared/themes/ayu-mirage.nix;
-    wm = {
-      gaps = {
-        inner = 5;
-        outer = -4;
-      };
-    };
-  };
-
-  programs.alacritty = {
-    font.size = "10.0";
-    theme = config.system.themer.theme;
-    window.opacity = "0.95";
-  };
-
-  services.tailscale.enable = true;
-
+  programs.alacritty.font.size = "10.0";
   programs.openvpn3.enable = true;
 
   # This value determines the NixOS release from which the default

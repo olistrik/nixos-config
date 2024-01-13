@@ -1,7 +1,8 @@
-{config, lib, pkgs, ...}:
+{ config, lib, pkgs, ... }:
 let
   package = pkgs.greetd.dlm;
-in {
+in
+{
   services.greetd = {
     enable = true;
     package = package;

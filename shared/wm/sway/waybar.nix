@@ -324,7 +324,8 @@ let
   '';
 
   modules = [ ];
-in {
+in
+{
   environment.systemPackages = with pkgs; [ waybar ];
 
   programs.waybar.enable = true;

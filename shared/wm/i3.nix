@@ -5,7 +5,8 @@ with lib;
 let
   themer = config.system.themer;
   cfg = config.services.xserver.windowManager.i3;
-in {
+in
+{
   imports =
     [ ./programs/picom.nix ./programs/i3lock.nix ./programs/i3blocks.nix ];
 
@@ -77,131 +78,133 @@ in {
           olistrik.screencapture-scripts
         ];
 
-        configFile = (pkgs.writeText "i3-config" (''
-          ################################################
-          ##  i3 cnfig   #################################
-          ################################################
+        configFile = (pkgs.writeText "i3-config" (
+          ''
+            ################################################
+            ##  i3 cnfig   #################################
+            ################################################
 
-          # Set modifier key to windows
-          set $mod Mod4
+            # Set modifier key to windows
+            set $mod Mod4
 
-          # focus following is really annoying
-          focus_follows_mouse no
+            # focus following is really annoying
+            focus_follows_mouse no
 
-          # set gaps
-          gaps inner ${builtins.toString themer.wm.gaps.inner}
-          gaps outer ${builtins.toString themer.wm.gaps.outer}
-          gaps top -4
+            # set gaps
+            gaps inner ${builtins.toString themer.wm.gaps.inner}
+            gaps outer ${builtins.toString themer.wm.gaps.outer}
+            gaps top -4
 
-          # Set font
-          font pango:JetBrains Mono NerdFont 10
+            # Set font
+            font pango:JetBrains Mono NerdFont 10
 
-          # Move floating windows with Mouse + MOD
-          floating_modifier $mod
+            # Move floating windows with Mouse + MOD
+            floating_modifier $mod
 
-          # hide window titles
-          for_window [class="^.*"] border pixel 2
+            # hide window titles
+            for_window [class="^.*"] border pixel 2
 
-          # auto split orientation
-          # default_orientation auto
+            # auto split orientation
+            # default_orientation auto
 
-          ################################################
-          ## Workspaces  #################################
-          ################################################
+            ################################################
+            ## Workspaces  #################################
+            ################################################
 
-          ${cfg.workspaces}
+            ${cfg.workspaces}
 
-          ################################################
-          ## Keybindings #################################
-          ################################################
+            ################################################
+            ## Keybindings #################################
+            ################################################
 
-          #############
-          ## General
+            #############
+            ## General
 
-          # kill focus window
-          bindsym $mod+Shift+q kill
+            # kill focus window
+            bindsym $mod+Shift+q kill
 
-          # reload the config
-          bindsym $mod+Shift+c reload
+            # reload the config
+            bindsym $mod+Shift+c reload
 
-          # restart i3
-          bindsym $mod+Shift+r restart
+            # restart i3
+            bindsym $mod+Shift+r restart
 
-          # exit i3 (logs you out of your X session)
-          bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+            # exit i3 (logs you out of your X session)
+            bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-          # lock i3
-          bindsym $mod+Shift+l exec xautolock -locknow
+            # lock i3
+            bindsym $mod+Shift+l exec xautolock -locknow
 
-          #############
-          ## Programs
+            #############
+            ## Programs
 
-          # Alacritty Terminal
-          bindsym $mod+Return exec alacritty
-          bindsym $mod+Shift+Return exec alacritty --working-directory $(xcwd)
+            # Alacritty Terminal
+            bindsym $mod+Return exec alacritty
+            bindsym $mod+Shift+Return exec alacritty --working-directory $(xcwd)
 
-          # dmenu
-          bindsym $mod+space exec rofi -theme Arc-Dark -show run
+            # dmenu
+            bindsym $mod+space exec rofi -theme Arc-Dark -show run
 
-          # screenshot
-          bindsym $mod+p exec screenshot $HOME/Pictures
+            # screenshot
+            bindsym $mod+p exec screenshot $HOME/Pictures
 
-          # screencrop
-          bindsym --release $mod+Shift+p exec screencrop $HOME/Pictures
-          bindsym --release $mod+Shift+s exec screencrop $HOME/Pictures
+            # screencrop
+            bindsym --release $mod+Shift+p exec screencrop $HOME/Pictures
+            bindsym --release $mod+Shift+s exec screencrop $HOME/Pictures
 
-          # screencrop
-          bindsym --release $mod+Ctrl+p exec windowshot $HOME/Pictures
+            # screencrop
+            bindsym --release $mod+Ctrl+p exec windowshot $HOME/Pictures
 
-          #######################
-          ## container Controls
+            #######################
+            ## container Controls
 
-          # change layout
-          bindsym $mod+e layout toggle stacking tabbed split
-          bindsym $mod+f layout floating toggle
+            # change layout
+            bindsym $mod+e layout toggle stacking tabbed split
+            bindsym $mod+f layout floating toggle
 
-          # split controls
-          bindsym $mod+apostrophe split toggle
+            # split controls
+            bindsym $mod+apostrophe split toggle
 
-          bindsym $mod+j resize shrink width 20
-          bindsym $mod+k resize shrink height 20
-          bindsym $mod+l resize grow height 20
-          bindsym $mod+semicolon resize grow width 20
+            bindsym $mod+j resize shrink width 20
+            bindsym $mod+k resize shrink height 20
+            bindsym $mod+l resize grow height 20
+            bindsym $mod+semicolon resize grow width 20
 
-          bindsym $mod+Up focus up
-          bindsym $mod+Down focus down
-          bindsym $mod+Left focus left
-          bindsym $mod+Right focus right
+            bindsym $mod+Up focus up
+            bindsym $mod+Down focus down
+            bindsym $mod+Left focus left
+            bindsym $mod+Right focus right
 
-          bindsym $mod+Shift+Up move up
-          bindsym $mod+Shift+Down move down
-          bindsym $mod+Shift+Left move left
-          bindsym $mod+Shift+Right move right
+            bindsym $mod+Shift+Up move up
+            bindsym $mod+Shift+Down move down
+            bindsym $mod+Shift+Left move left
+            bindsym $mod+Shift+Right move right
 
-          #####################
-          ## Audio Controls
+            #####################
+            ## Audio Controls
 
-          bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer -q sset Master,0 5%+ unmute"
-          bindsym XF86AudioLowerVolume exec --no-startup-id "amixer -q sset Master,0 5%- unmute"
-          bindsym XF86AudioMute exec --no-startup-id "amixer -q sset Master,0 toggle"
-          bindsym XF86AudioPlay exec playerctl play-pause
-          bindsym XF86AudioNext exec playerctl next
+            bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer -q sset Master,0 5%+ unmute"
+            bindsym XF86AudioLowerVolume exec --no-startup-id "amixer -q sset Master,0 5%- unmute"
+            bindsym XF86AudioMute exec --no-startup-id "amixer -q sset Master,0 toggle"
+            bindsym XF86AudioPlay exec playerctl play-pause
+            bindsym XF86AudioNext exec playerctl next
 
-          ###############################################
+            ###############################################
 
-          bar {
-            position top
-            tray_output none
-            status_command i3blocks -c /etc/i3blocks.conf
-            colors {
-              background #3c3b3a
+            bar {
+              position top
+              tray_output none
+              status_command i3blocks -c /etc/i3blocks.conf
+              colors {
+                background #3c3b3a
+              }
             }
-          }
 
-          exec ${pkgs.feh}/bin/feh --bg-scale $HOME/wallpaper
+            exec ${pkgs.feh}/bin/feh --bg-scale $HOME/wallpaper
 
-          #exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-        ''));
+            #exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+          ''
+        ));
       };
     };
   };

@@ -1,4 +1,4 @@
-{config, lib, pkgs, ...}:
+{ config, lib, pkgs, ... }:
 let
   concatStrAttrs = sep: name: list:
     builtins.concatStringsSep sep (builtins.catAttrs name list);
@@ -34,19 +34,19 @@ let
   modules2str = mods: "[${builtins.concatStringsSep ", " (wrapNames (builtins.catAttrs "name" mods))}]";
 
   config = ''
-  {
-      "layer": "top", // Waybar at top layer
-      "position": "top", // Waybar position (top|bottom|left|right)
-      "height": 30, // Waybar height (to be removed for auto height)
+    {
+        "layer": "top", // Waybar at top layer
+        "position": "top", // Waybar position (top|bottom|left|right)
+        "height": 30, // Waybar height (to be removed for auto height)
 
-      // Choose the order of the modules
-      "modules-left": ${modules2str modulesLeft},
-      "modules-center": ${modules2str modulesCenter},
-      "modules-right": ${modules2str modulesRight},
+        // Choose the order of the modules
+        "modules-left": ${modules2str modulesLeft},
+        "modules-center": ${modules2str modulesCenter},
+        "modules-right": ${modules2str modulesRight},
 
-      // Generated Module configuration
-      ${concatStrAttrs "\n" "config" modules}
-  }
+        // Generated Module configuration
+        ${concatStrAttrs "\n" "config" modules}
+    }
   '';
 
   style = ''
@@ -83,12 +83,13 @@ let
     }
 
     ${concatStrAttrs "\n" "style" modules}
-    '';
+  '';
 
-in {
+in
+{
   environment.systemPackages = with pkgs; [
     waybar
-    (unstable.nerdfonts.override { fonts = ["Hermit" "JetBrainsMono"]; })
+    (unstable.nerdfonts.override { fonts = [ "Hermit" "JetBrainsMono" ]; })
   ] ++ builtins.concatLists (builtins.catAttrs "requires" modules);
 
   programs.waybar.enable = true;

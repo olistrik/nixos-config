@@ -3,92 +3,92 @@
   workspaces = {
     name = "hyprland/workspaces";
     style = ''
-    #workspaces {
-        margin: 4px 2px;
-        padding: 0px 0px;
-        background-color: rgba(43, 48, 59, 0.8);
-        border-radius: 4px;
-    }
+      #workspaces {
+          margin: 4px 2px;
+          padding: 0px 0px;
+          background-color: rgba(43, 48, 59, 0.8);
+          border-radius: 4px;
+      }
 
-    #workspaces button:first-child {
-      border-radius: 4px 0 0 4px;
-    }
+      #workspaces button:first-child {
+        border-radius: 4px 0 0 4px;
+      }
 
-    #workspaces button:last-child {
-      border-radius: 0 4px 4px 0;
-    }
+      #workspaces button:last-child {
+        border-radius: 0 4px 4px 0;
+      }
 
-    #workspaces button {
-        padding: 0 5px;
-        background-color: transparent;
-        color: #ffffff;
-        box-shadow: inset 0 -3px transparent;
-    }
+      #workspaces button {
+          padding: 0 5px;
+          background-color: transparent;
+          color: #ffffff;
+          box-shadow: inset 0 -3px transparent;
+      }
 
-    #workspaces button:hover {
-        background: rgba(0, 0, 0, 0.2);
-        box-shadow: inset 0 -1px #ffffff;
-    }
+      #workspaces button:hover {
+          background: rgba(0, 0, 0, 0.2);
+          box-shadow: inset 0 -1px #ffffff;
+      }
 
-    #workspaces button.visible {
-        background-color: rgba(255, 255, 255, 0.1);
-        box-shadow: inset 0 -1px #cccccc;
-    }
+      #workspaces button.visible {
+          background-color: rgba(255, 255, 255, 0.1);
+          box-shadow: inset 0 -1px #cccccc;
+      }
 
-    #workspaces button.current_output.focused {
-      background-color: #64727D;
-        box-shadow: inset 0 -1px #ffffff;
-    }
+      #workspaces button.current_output.focused {
+        background-color: #64727D;
+          box-shadow: inset 0 -1px #ffffff;
+      }
 
-    #workspaces button.urgent {
-        background-color: #eb4d4b;
-    }
+      #workspaces button.urgent {
+          background-color: #eb4d4b;
+      }
     '';
   };
 
   mode = {
     name = "sway/mode";
     config = ''
-    "sway/mode": {
-        "format": "<span style=\"italic\">{}</span>"
-    },
+      "sway/mode": {
+          "format": "<span style=\"italic\">{}</span>"
+      },
     '';
     style = ''
-    #mode {
-        background-color: #64727D;
-        /* border-bottom: 3px solid #ffffff; */
-    }
+      #mode {
+          background-color: #64727D;
+          /* border-bottom: 3px solid #ffffff; */
+      }
     '';
   };
 
   window = {
     name = "hyprland/window";
     style = ''
-    #window {
-      margin: 4px 2px;
-      min-width: 200px;
-      padding: 0 20px;
-      background-color: rgba(43, 48, 59, 0.8);
-      border-radius: 4px;
-    }
-    window#waybar.empty #window {
-      background-color: rgba(0,0,0,0);
-    }
+      #window {
+        margin: 4px 2px;
+        min-width: 200px;
+        padding: 0 20px;
+        background-color: rgba(43, 48, 59, 0.8);
+        border-radius: 4px;
+      }
+      window#waybar.empty #window {
+        background-color: rgba(0,0,0,0);
+      }
     '';
   };
 
   clock = {
     name = "clock";
     config = ''
-    "clock": {
-        // "timezone": "america/new_york",
-        "tooltip-format": "<big>{:%y %b}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%y-%m-%d}"
-    },
+      "clock": {
+          // "timezone": "america/new_york",
+          "tooltip-format": "<big>{:%y %b}</big>\n<tt><small>{calendar}</small></tt>",
+          "format-alt": "{:%y-%m-%d}"
+      },
     '';
     style = ''
-    #clock {
-    }
+      #clock {
+      }
     '';
 
   };
@@ -96,108 +96,108 @@
   battery = {
     name = "battery";
     config = ''
-    "battery": {
-        "states": {
-            // "good": 95,
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{icon} {capacity}%",
-        "format-charging": " {capacity}%",
-        "format-plugged": "  {capacity}%",
-        "format-alt": "{time} {icon}",
-        // "format-good": "", // An empty format will hide the module
-        "format-full": "",
-        "format-icons": ["", "", "", "", ""]
-    },
+      "battery": {
+          "states": {
+              // "good": 95,
+              "warning": 30,
+              "critical": 15
+          },
+          "format": "{icon} {capacity}%",
+          "format-charging": " {capacity}%",
+          "format-plugged": "  {capacity}%",
+          "format-alt": "{time} {icon}",
+          // "format-good": "", // An empty format will hide the module
+          "format-full": "",
+          "format-icons": ["", "", "", "", ""]
+      },
     '';
     style = ''
-    #battery {
-    }
+      #battery {
+      }
 
-    #battery.charging, #battery.plugged {
-    }
+      #battery.charging, #battery.plugged {
+      }
 
-    @keyframes blink {
-        to {
-            background-color: white;
-            color: black;
-        }
-    }
+      @keyframes blink {
+          to {
+              background-color: white;
+              color: black;
+          }
+      }
 
-    #battery.critical:not(.charging) {
-        background-color: #f53c3c;
-        color: #ffffff;
-        animation-name: blink;
-        animation-duration: 0.5s;
-        animation-timing-function: linear;
-        animation-iteration-count: infinite;
-        animation-direction: alternate;
-    }
+      #battery.critical:not(.charging) {
+          background-color: #f53c3c;
+          color: #ffffff;
+          animation-name: blink;
+          animation-duration: 0.5s;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+          animation-direction: alternate;
+      }
     '';
   };
 
   network = {
     name = "network";
     config = ''
-    "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "  {essid} ({signalStrength}%)",
-        "format-ethernet": "  {ifname}: {ipaddr}/{cidr}",
-        "format-linked": "  {ifname} (No IP)",
-        "format-disconnected": "⚠ Disconnected",
-        "format-alt": "{ifname} {ipaddr}/{cidr}"
-    },
+      "network": {
+          // "interface": "wlp2*", // (Optional) To force the use of this interface
+          "format-wifi": "  {essid} ({signalStrength}%)",
+          "format-ethernet": "  {ifname}: {ipaddr}/{cidr}",
+          "format-linked": "  {ifname} (No IP)",
+          "format-disconnected": "⚠ Disconnected",
+          "format-alt": "{ifname} {ipaddr}/{cidr}"
+      },
     '';
     style = ''
-    #network {
-    }
+      #network {
+      }
 
-    #network.disconnected {
-    }
+      #network.disconnected {
+      }
     '';
   };
 
   pulseaudio = {
     name = "pulseaudio";
     config = ''
-    "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
-        "format": "{icon}  {volume}% {format_source}",
-        "format-bluetooth": "{icon}  {volume}% {format_source}",
-        "format-bluetooth-muted": " {icon}  {format_source}",
-        "format-muted": "  {format_source}",
-        "format-source": "",
-        "format-source-muted": "",
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        },
-        "on-click": "pavucontrol"
-    },
+      "pulseaudio": {
+          // "scroll-step": 1, // %, can be a float
+          "format": "{icon}  {volume}% {format_source}",
+          "format-bluetooth": "{icon}  {volume}% {format_source}",
+          "format-bluetooth-muted": " {icon}  {format_source}",
+          "format-muted": "  {format_source}",
+          "format-source": "",
+          "format-source-muted": "",
+          "format-icons": {
+              "headphone": "",
+              "hands-free": "",
+              "headset": "",
+              "phone": "",
+              "portable": "",
+              "car": "",
+              "default": ["", "", ""]
+          },
+          "on-click": "pavucontrol"
+      },
     '';
     style = ''
-    #pulseaudio {
-    }
+      #pulseaudio {
+      }
 
-    #pulseaudio.muted {
-    }
+      #pulseaudio.muted {
+      }
     '';
   };
 
   idleInhibitor = {
     name = "idle_inhibitor";
     style = ''
-    #idle_inhibitor {
-    }
+      #idle_inhibitor {
+      }
 
-    #idle_inhibitor.activated {
-    }
+      #idle_inhibitor.activated {
+      }
     '';
   };
 }
