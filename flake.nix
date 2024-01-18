@@ -17,9 +17,15 @@
 
     # Hyprland WM
     hyprland.url = "github:hyprwm/Hyprland/v0.34.0";
+
+    # Nixvim
+    nixvim = {
+      url = "github:nix-community/nixvim/nixos-23.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-generators, hyprland, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-generators, hyprland, nixvim, ... }@inputs:
     let
       # overlays on nixpkgs.
       overlay-unstable = (final: prev: {
@@ -44,13 +50,11 @@
           nix.registry.unstable.flake = nixpkgs-unstable;
           nix.registry.olistrik.flake = self;
           nix.registry.templates.flake = self;
-					
-					nix.extraOptions = ''
-						experimental-features = nix-command flakes
-					'';
+
+          nix.extraOptions = "experimental-features = nix-command flakes";
 
           nix.settings = {
-						auto-optimise-store = true;
+            auto-optimise-store = true;
             substituters = [
               "https://cache.nixos.org/"
               "https://hyprland.cachix.org"
@@ -64,6 +68,7 @@
 
         modules-olistrik
         hyprland.nixosModules.default
+        nixvim.nixosModules.nixvim
 
         ./shared/default.nix # default programs and config for all systems.
       ];

@@ -2,7 +2,7 @@
 # May need to be further divided in the future to allow for easier control
 # of different kinds of systems.
 
-{ config, lib, pkgs, ... }: {
+{ pkgs, ... }: {
 
   imports = [
     # install programs with my configurations
@@ -30,7 +30,7 @@
     git
     wget
     curl
-
+    
     # Monitoring
     htop
 
@@ -44,6 +44,7 @@
     neofetch
     tree
     parallel
+    ripgrep
 
     # USB utils
     ventoy-bin
