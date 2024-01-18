@@ -1,8 +1,8 @@
 { pkgs, ... }: {
-	imports = [
-		./hyprland
-		./greetd
-	];
+  imports = [
+    ./hyprland
+    ./greetd
+  ];
 
   xdg.portal = {
     enable = true;
