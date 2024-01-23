@@ -1,9 +1,9 @@
-{ pkgs, ... }: {
+{ ... }: {
   imports = [
     ./colorscheme.nix
     ./lualine.nix
     ./telescope.nix
-		./treesitter.nix
+    ./treesitter.nix
     ./lsp.nix
   ];
 }

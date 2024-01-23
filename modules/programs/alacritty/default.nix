@@ -1,11 +1,6 @@
 { config, lib, pkgs, ... }:
-
 with lib;
-
 let
-
-  cfge = config.environment;
-
   cfg = config.programs.alacritty;
 
   mkSubModule = attrs: types.attrsOf (types.submodule attrs);
