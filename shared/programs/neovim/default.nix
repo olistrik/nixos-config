@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   imports = [ ./plugins ./autocmds ];
 
   environment.variables.EDITOR = "nvim";

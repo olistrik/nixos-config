@@ -10,4 +10,5 @@ builtins.mapAttrs (name: deriv: callPackage deriv { }) {
   vimPlugins = ./vimPlugins;
   nodePackages = ./nodePackages;
   rubyPackages = ./rubyPackages;
+  tree-sitter-grammars = ./tree-sitter-grammars;
 }
