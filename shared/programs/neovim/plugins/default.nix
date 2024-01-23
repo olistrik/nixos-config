@@ -5,5 +5,7 @@
     ./telescope.nix
     ./treesitter.nix
     ./lsp.nix
+    # easy align
+    ./gitblame.nix
   ];
 }

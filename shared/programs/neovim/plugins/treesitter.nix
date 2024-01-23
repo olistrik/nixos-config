@@ -1,9 +1,9 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   plugins = config.programs.nixvim.plugins;
 in
 {
-  programs.nixvim.plugins = {
+  programs.nixvim.plugins = lib.mkIf plugins.treesitter.enable {
     treesitter = {
       indent = true;
       grammarPackages = with pkgs.olistrik.tree-sitter-grammars;
@@ -15,14 +15,17 @@ in
 
 
     ts-autotag = {
-      enable = plugins.treesitter.enable;
+      enable = true;
     };
+
     nvim-autopairs = {
-      checkTs = plugins.treesitter.enable;
+      extraOptions = {
+        check_ts = true;
+      };
     };
 
     treesitter-textobjects = {
-      enable = plugins.treesitter.enable;
+      enable = true;
 
       select = {
         enable = true;

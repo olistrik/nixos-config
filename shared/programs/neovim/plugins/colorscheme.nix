@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }: {
+{ ... }: {
   programs.nixvim = {
     colorschemes.ayu = {
       extraOptions = {
