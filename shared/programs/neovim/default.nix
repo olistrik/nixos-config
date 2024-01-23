@@ -1,4 +1,8 @@
-{ pkgs, ... }: {
+{ lib, ... }:
+let
+  enablePlugins = plugins: lib.genAttrs plugins (_: { enable = true; });
+in
+{
   imports = [ ./plugins ./autocmds ];
 
   environment.variables.EDITOR = "nvim";
@@ -24,14 +28,26 @@
       hlsearch = false;
       mouse = "nvchr";
       signcolumn = "yes";
-      exrc = true;
     };
 
-    plugins = {
-      lualine.enable = true;
-      telescope.enable = true;
-      treesitter.enable = true;
-      lsp.enable = true;
-    };
+    plugins = enablePlugins [
+      "lualine"
+      "telescope"
+      "treesitter"
+      "lsp"
+      "luasnip"
+      "gitsigns"
+      "gitblame"
+      "nvim-autopairs"
+      "nvim-colorizer"
+      "comment-nvim"
+      #"harpoon"
+      "todo-comments"
+      "surround"
+      "fugitive"
+      # "abolish"
+      # "easy-align"
+      # "vim-repeat"
+    ];
   };
 }
