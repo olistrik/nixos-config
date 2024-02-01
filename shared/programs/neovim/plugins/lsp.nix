@@ -15,6 +15,7 @@ in
           };
           gopls.enable = lsp.enable;
           eslint.enable = lsp.enable;
+          tsserver.enable = lsp.enable;
         };
 
         keymaps = {
