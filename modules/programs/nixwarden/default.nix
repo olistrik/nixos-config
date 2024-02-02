@@ -52,6 +52,7 @@ in
     let
       bws = "${cfg.package}/bin/bws";
       jq = "${pkgs.jq}/bin/jq";
+      host = "${pkgs.dig.host}/bin/host";
 
       wantedBy =
         lib.unique (concatMap (secret: secret.wantedBy) (attrValues cfg.secrets));
@@ -80,14 +81,21 @@ in
             ExecStart = pkgs.writeScript "nixwarden-sync" ''
               #!/bin/sh
               token=$(cat ${cfg.accessTokenFile})  
+              until ${host} example.com > /dev/null; do sleep 1; done
+            
+              echo fetching secrets...
               secrets=$(${bws} --access-token $token secret list)
 
               function getSecret() {
                   echo $secrets | ${jq} ".[] | select(.key == \"$1\").value"
               }
 
+              echo writing secrets...
               function writeSecret() {
+                echo "writing secret \"$1\" to \"$2\""
                 getSecret $1 | xargs printf > $2
+
+                echo "setting ownership to \"$3\" with permissions \"$4\"" 
                 chown $3 $2
                 chmod $4 $2
               }
