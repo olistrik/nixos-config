@@ -19,7 +19,7 @@ in
     };
     secrets = mkOption {
       type = with types;
-        attrsOf (submodule {
+        attrsOf (listOf (submodule {
           options = {
             location = mkOption {
               type = nullOr str;
@@ -42,7 +42,7 @@ in
               description = "";
             };
           };
-        });
+        }));
       default = { };
       description = "";
     };
@@ -54,15 +54,22 @@ in
       jq = "${pkgs.jq}/bin/jq";
       host = "${pkgs.dig.host}/bin/host";
 
-      wantedBy =
-        lib.unique (concatMap (secret: secret.wantedBy) (attrValues cfg.secrets));
+      # {foo: [{wantedBy}], bar: [{wantedBy}, {wantedBy}]}
+      # attrValues: [[{wantedBy}], [{wantedBy}, {wantedBy}]]
+      # concatLists: [{wantedBy}{wantedBy}{wantedBy}]
+      # 
 
-      writeSecret = name: secret: "writeSecret ${name} ${secret.location} ${secret.userGroup} ${secret.permissions}";
+      writeSecret = name: file: "writeSecret ${name} ${file.location} ${file.userGroup} ${file.permissions}";
 
-      writeSecrets = concatStringsSep "\n" (mapAttrsToList writeSecret cfg.secrets);
-      secretKeys = mapAttrsToList (name: value: name) cfg.secrets;
+
+      keys = attrNames cfg.secrets;
+      files = concatLists (attrValues cfg.secrets);
+      wantedBy = lib.unique (concatMap (file: file.wantedBy) files);
+      writeSecrets = concatStringsSep "\n"
+        (concatLists
+          (mapAttrsToList (name: files: (map (file: (writeSecret name file)) files)) cfg.secrets));
     in
-    mkIf (length secretKeys > 0) {
+    mkIf (length keys > 0) {
       assertions = [
         {
           assertion = cfg.accessTokenFile != null;

@@ -10,6 +10,7 @@
     ./hardware-configuration.nix
     ../../shared/server.nix
     ./home-assistant.nix
+    ./home-control.nix
   ];
 
   networking.hostName = "hestia";
