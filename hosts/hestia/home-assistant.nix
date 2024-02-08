@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   services.home-assistant = {
-    enable = true;
+    enable = false;
     extraComponents = [
       "default_config"
       "met"
@@ -65,11 +65,11 @@
 
   services.nixwarden = {
     secrets = {
-      "home-assistant.secrets.yaml" = {
+      "home-assistant.secrets.yaml" = [{
         location = "/var/lib/hass/secrets.yaml";
         wantedBy = [ "home-assistant.service" ];
         userGroup = "hass:hass";
-      };
+      }];
     };
   };
 
