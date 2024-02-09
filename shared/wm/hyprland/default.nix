@@ -1,6 +1,7 @@
-{ config, lib, pkgs, ... }: {
+{ pkgs, ... }: {
   imports = [
     ../programs/waybar
+    ../programs/way-displays
   ];
 
   programs.hyprland.enable = true;
@@ -18,7 +19,6 @@
     swayidle
     wofi
     xwayland
-    way-displays
     grim
     jq
     slurp
