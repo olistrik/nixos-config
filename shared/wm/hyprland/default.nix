@@ -18,8 +18,7 @@
     swayidle
     wofi
     xwayland
-    # kanshi
-    shikane
+    way-displays
     grim
     jq
     slurp
