@@ -14,6 +14,8 @@ in
   networking.extraHosts = ''
     127.0.0.1 db
     127.0.0.1 redis
+    127.0.0.1 minio
+    127.0.0.1 lago-api
   '';
 
   environment.systemPackages = with pkgs; [
