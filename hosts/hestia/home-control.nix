@@ -62,8 +62,8 @@
       recommendedProxySettings = true;
       virtualHosts = {
         "zigbee.olii.nl" = {
-          # forceSSL = true;
-          # enableACME = true;
+          forceSSL = true;
+          useACMEHost = "olii.nl";
           extraConfig = ''
             proxy_buffering off;
           '';
@@ -79,8 +79,8 @@
           };
         };
         "node-red.olii.nl" = {
-          # forceSSL = true;
-          # enableACME = true;
+          forceSSL = true;
+          useACMEHost = "olii.nl";
           extraConfig = ''
             proxy_buffering off;
           '';
@@ -92,8 +92,8 @@
           };
         };
         "home.olii.nl" = {
-          # forceSSL = true;
-          # enableACME = true;
+          forceSSL = true;
+          useACMEHost = "olii.nl";
           extraConfig = ''
             proxy_buffering off;
           '';
