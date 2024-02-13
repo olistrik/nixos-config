@@ -11,6 +11,8 @@
     ../../shared/server.nix
     ./home-assistant.nix
     ./home-control.nix
+    ./palworld.nix
+    ./acme.nix
   ];
 
   networking.hostName = "hestia";

@@ -23,9 +23,14 @@
       url = "github:nix-community/nixvim/nixos-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    steam-fetcher = {
+      url = "github:nix-community/steam-fetcher";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-generators, hyprland, nixvim, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-generators, hyprland, nixvim, steam-fetcher, ... }@inputs:
     let
       # overlays on nixpkgs.
       overlay-unstable = (final: prev: {
@@ -43,7 +48,11 @@
       # modules that are shared between all hosts.
       commonModules = [
         ({ ... }: {
-          nixpkgs.overlays = [ overlay-unstable self.overlays.default ];
+          nixpkgs.overlays = [
+            overlay-unstable
+            self.overlays.default
+            steam-fetcher.overlays.default
+          ];
           nixpkgs.config.allowUnfree = true;
 
           nix.registry.nixpkgs.flake = nixpkgs;
