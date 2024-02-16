@@ -1,8 +1,0 @@
-[
-	"graphql-language-service-cli",
-	"node-red-contrib-zigbee2mqtt",
-	"node-red-contrib-toggle",
-	"node-red-contrib-wiz-local-control",
-	"@flowfuse/node-red-dashboard",
-	"node-red-contrib-esphome"
-]
