@@ -38,6 +38,7 @@ in
 
       # Monitoring
       htop
+      ncdu
 
       # Packaging
       zip
