@@ -16,6 +16,11 @@ in
           gopls.enable = lsp.enable;
           eslint.enable = lsp.enable;
           tsserver.enable = lsp.enable;
+          rust-analyzer = {
+            enable = lsp.enable;
+            installRustc = true;
+            installCargo = true;
+          };
         };
 
         keymaps = {
