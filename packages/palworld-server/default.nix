@@ -20,7 +20,7 @@ let
 in
 stdenv.mkDerivation rec {
   name = "palworld-server";
-  version = "6370735655629434989";
+  version = "3750364703337203431";
 
   src = fetchSteam
     {
@@ -28,7 +28,7 @@ stdenv.mkDerivation rec {
       appId = "2394010";
       depotId = "2394012";
       manifestId = version;
-      hash = "sha256-CQprrt8KO40QabW0F3V6UsFDf32CA+U9C5HkLQenlQQ=";
+      hash = "sha256-xywzbb5AqZPjGmLv+16I0Yi21pMfphvVPycDPsuv0mo=";
     };
   nativeBuildInputs = [ autoPatchelfHook ];
 
