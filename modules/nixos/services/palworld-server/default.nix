@@ -5,42 +5,32 @@
 , lib
 , ...
 }:
+with lib;
+with lib.olistrik;
 let
   cfg = config.olistrik.services.palworld-server;
 in
 {
-  options.olistrik.services.palworld-server = {
-    enable = lib.mkEnableOption "Palworld server";
+  options.olistrik.services.palworld-server = with lib.types; {
+    enable = mkEnableOption "Palworld server";
 
-    autostart = lib.mkOption {
-      type = lib.types.bool;
-      default = true;
-      description = "Automatically start the server.";
-    };
+    autostart = mkOpt bool true
+      "Automatically start the server.";
 
-    port = lib.mkOption {
-      type = lib.types.port;
-      default = 8211;
-      description = "The port to run the server on.";
-    };
+    autorestart = mkOpt bool true
+      "Automatically restart the server at 2am.";
 
-    openFirewall = lib.mkOption {
-      type = lib.types.bool;
-      default = true;
-      description = "Wether to open the firewall or not";
-    };
+    port = mkOpt port 8211
+      "The port to run the server on.";
 
-    user = lib.mkOption {
-      type = lib.types.str;
-      default = "palworld";
-      description = "The user to run the server as";
-    };
+    openFirewall = mkOpt bool true
+      "Wether to open the firewall or not.";
 
-    group = lib.mkOption {
-      type = lib.types.str;
-      default = "palworld";
-      description = "The group to run the server as";
-    };
+    user = mkOpt str "palworld"
+      "The user to run the server as.";
+
+    group = mkOpt str "palworld"
+      "The group to run the server as.";
   };
 
   config = lib.mkIf cfg.enable {
@@ -65,6 +55,20 @@ in
       };
     };
 
+    # restart nightly because memory leaks.
+    systemd.timers.palworld-server-nightly-restart = mkIf cfg.autorestart {
+      wantedBy = [ "timers.target" ];
+      timerConfig = {
+        OnCalendar = "*-*-* 02:00:00";
+        AccuracySec = "10min";
+      };
+    };
+    systemd.services.palworld-server-nightly-restart = mkIf cfg.autorestart {
+      serviceConfig = {
+        ExecStart = "${pkgs.systemd}/bin/systemctl restart palworld-server.service";
+        Type = "oneshot";
+      };
+    };
 
     # systemd.tmpfiles.rules = [
     #   "d ${user-home}/.steam 0755 ${cfg.user.name} ${cfg.user.group} - -"

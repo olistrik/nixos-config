@@ -3,6 +3,8 @@
     ./node-red/extra-nodes.nix
   ];
 
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
+
   olistrik.services.nixwarden.secrets = {
     "zigbee@mqtt.pass" = [{
       location = "/var/lib/mosquitto/zigbee@mqtt.pass";
