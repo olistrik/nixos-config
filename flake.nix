@@ -23,8 +23,7 @@
 
     # Nixvim
     nixvim = {
-      url = "github:nix-community/nixvim/nixos-23.11";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nixvim";
     };
 
     steam-fetcher = {
@@ -34,29 +33,37 @@
   };
 
   outputs = inputs:
-    inputs.snowfall-lib.mkFlake {
-      inherit inputs;
+    let
+      lib = inputs.snowfall-lib.mkLib {
+        inherit inputs;
 
-      src = ./.;
+        src = ./.;
 
-      snowfall = {
-        namespace = "olistrik";
-        meta = {
-          name = "olistrik";
-          title = "Flake stuff from Oli Strik 😊";
+        snowfall = {
+          namespace = "olistrik";
+          meta = {
+            name = "olistrik";
+            title = "Flake stuff from Oli Strik 😊";
+          };
+        };
+
+        channels-config = {
+          allowUnfree = true;
+
+          config = {
+            # vaapiIntel.enableHybridCodec = true;
+          };
         };
       };
-
-      channels-config = {
-        allowUnfree = true;
-
-        config = {
-          # vaapiIntel.enableHybridCodec = true;
-        };
+    in
+    lib.mkFlake rec {
+      nixvimModules = lib.snowfall.module.create-modules {
+        src = "${./modules/nixvim}";
       };
 
       overlays = with inputs; [
         steam-fetcher.overlays.default
+        nixvim.overlays.default
       ];
 
       systems.modules.nixos = with inputs; [
@@ -83,10 +90,11 @@
         })
       ];
 
-      output-builder = channels: with inputs; {
-        templates = inputs.templates.templates // import ./templates;
-        defaultTemplate = self.templates.devshell;
-        formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
+      outputs-builder = channels: {
+        packages.nixvim = channels.unstable.callPackage ./packages/nixvim {
+          nixvim = channels.nixpkgs.nixvim;
+          nixvimModules = builtins.attrValues nixvimModules;
+        };
       };
     };
 }

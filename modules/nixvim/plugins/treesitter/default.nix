@@ -1,18 +1,20 @@
 { config, pkgs, lib, ... }:
 let
-  plugins = config.programs.nixvim.plugins;
+  allGrammars = config.plugins.treesitter.package.passthru.allGrammars;
 in
-{
-  programs.nixvim.plugins = lib.mkIf plugins.treesitter.enable {
+with lib;
+with lib.olistrik;
+with lib.olistrik.nixvim;
+mkPlugin "treesitter" {
+  inherit config;
+  plugins = {
     treesitter = {
+      enable = true;
       indent = true;
-      grammarPackages = with pkgs.olistrik;
-        plugins.treesitter.package.passthru.allGrammars ++
-        [
-          tree-sitter-go-template
-        ];
+      grammarPackages = with pkgs.olistrik; allGrammars ++ [
+        tree-sitter-go-template
+      ];
     };
-
 
     ts-autotag = {
       enable = true;
