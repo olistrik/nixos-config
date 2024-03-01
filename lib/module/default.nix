@@ -13,6 +13,8 @@ with lib; rec {
     inherit type default description;
   };
 
+  mkBool = default: description: mkOpt types.bool default description;
+
   ## Quickly enable an option.
   ##
   ## ```nix

@@ -1,8 +1,17 @@
-{ pkgs, lib, ... }: with lib; {
-  programs.nixvim.plugins.lualine = {
+{ lib, config, ... }:
+with lib;
+with lib.olistrik;
+with lib.olistrik.nixvim;
+mkPlugin "lualine" {
+  inherit config;
+
+  plugins.lualine = {
+    enable = true;
     alwaysDivideMiddle = true;
     globalstatus = true;
     iconsEnabled = true;
+
+    theme = "ayu_mirage";
 
     sections = {
       lualine_a = [ "mode" ];
