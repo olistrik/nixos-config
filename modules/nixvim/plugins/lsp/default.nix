@@ -6,6 +6,7 @@ mkPlugin "lsp" {
   inherit config;
   plugins = {
     lsp = {
+      enable = true;
       servers = {
         nil_ls = {
           extraOptions.settings.nil = {
