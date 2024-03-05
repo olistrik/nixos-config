@@ -9,6 +9,6 @@ in
 
   config = mkIf cfg.enable {
     environment.variables.EDITOR = "nvim";
-    environment.systemPackages = with pkgs; [ nixvim ];
+    environment.systemPackages = with pkgs; [ olistrik.nixvim ];
   };
 }

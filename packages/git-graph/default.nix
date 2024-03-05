@@ -1,5 +1,4 @@
 { lib, fetchFromGitHub, rustPlatform }:
-
 rustPlatform.buildRustPackage rec {
   pname = "git-graph";
   version = "0.5.0";
