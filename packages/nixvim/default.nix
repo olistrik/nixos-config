@@ -1,7 +1,8 @@
-{ lib, pkgs, nixvim, nixvimModules ? [ ] }:
+{ lib, channels, nixvim }:
 let
-  enabled = { enable = true; };
+  modules = lib.snowfall.module.create-modules { src = "${./../../modules/nixvim}"; };
 
+  enabled = { enable = true; };
   autoCmd = {
     indentOverride = pattern: expandTab: spaces: {
       inherit pattern;
@@ -18,9 +19,9 @@ let
 
 in
 nixvim.makeNixvimWithModule {
-  inherit pkgs;
+  pkgs = channels.unstable;
   module = {
-    imports = nixvimModules;
+    imports = lib.attrValues modules;
 
     config = {
       olistrik.plugins = {

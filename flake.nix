@@ -24,6 +24,7 @@
     # Nixvim
     nixvim = {
       url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "unstable";
     };
 
     steam-fetcher = {
@@ -47,16 +48,13 @@
           };
         };
 
-        channels-config = {
-          allowUnfree = true;
-
-          config = {
-            # vaapiIntel.enableHybridCodec = true;
-          };
-        };
       };
     in
-    lib.mkFlake rec {
+    lib.mkFlake {
+      channels-config = {
+        allowUnfree = true;
+      };
+
       nixvimModules = lib.snowfall.module.create-modules {
         src = "${./modules/nixvim}";
       };
@@ -68,7 +66,6 @@
 
       systems.modules.nixos = with inputs; [
         hyprland.nixosModules.default
-        nixvim.nixosModules.nixvim
         # until I work out where to put this.
         ({ ... }: {
           nix.registry.nixpkgs.flake = nixpkgs;
@@ -89,12 +86,5 @@
           };
         })
       ];
-
-      outputs-builder = channels: {
-        packages.nixvim = channels.unstable.callPackage ./packages/nixvim {
-          nixvim = channels.nixpkgs.nixvim;
-          nixvimModules = builtins.attrValues nixvimModules;
-        };
-      };
     };
 }
