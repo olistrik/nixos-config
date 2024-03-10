@@ -9,6 +9,7 @@ mkPlugin "lsp" {
       enable = true;
       servers = {
         nil_ls = {
+          enable = true;
           extraOptions.settings.nil = {
             formatting.command = [ "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt" ];
           };
