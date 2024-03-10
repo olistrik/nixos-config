@@ -53,6 +53,7 @@ in
 
       # maintainance tools
       gen-package-lock
+      mk-installer
     ];
   };
 }
