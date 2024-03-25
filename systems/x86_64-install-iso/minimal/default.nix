@@ -18,6 +18,7 @@ in
   ];
 
   services = {
+    tailscale.enable = true;
     openssh.settings = {
       PermitRootLogin = "yes";
       PasswordAuthentication = false;

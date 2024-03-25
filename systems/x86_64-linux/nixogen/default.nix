@@ -19,6 +19,12 @@ with lib.olistrik;
     wm.hyperland = enabled;
   };
 
+  environment.systemPackages = with pkgs; [
+    sigrok-cli
+    pulseview
+    greatfet
+  ];
+
   ##################
   ## Work specific
 
