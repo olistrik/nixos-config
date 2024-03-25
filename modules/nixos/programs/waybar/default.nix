@@ -19,6 +19,8 @@ let
   ];
 
   modulesRight = with configuredModules; [
+    gitlab-issues
+    gitlab-merge-requests
     pulseaudio
     network
     battery

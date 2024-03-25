@@ -103,12 +103,12 @@
               "critical": 15
           },
           "format": "{icon} {capacity}%",
-          "format-charging": " {capacity}%",
+          "format-charging": "󰂄 {capacity}%",
           "format-plugged": "  {capacity}%",
           "format-alt": "{time} {icon}",
           // "format-good": "", // An empty format will hide the module
           "format-full": "",
-          "format-icons": ["", "", "", "", ""]
+          "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰂂"]
       },
     '';
     style = ''
@@ -142,9 +142,9 @@
     config = ''
       "network": {
           // "interface": "wlp2*", // (Optional) To force the use of this interface
-          "format-wifi": "  {essid} ({signalStrength}%)",
-          "format-ethernet": "  {ifname}: {ipaddr}/{cidr}",
-          "format-linked": "  {ifname} (No IP)",
+          "format-wifi": "  {signalStrength}%",
+          "format-ethernet": "󰈀  {ipaddr}/{cidr}",
+          "format-linked": "  {ifname} (No IP)",
           "format-disconnected": "⚠ Disconnected",
           "format-alt": "{ifname} {ipaddr}/{cidr}"
       },
@@ -198,6 +198,27 @@
 
       #idle_inhibitor.activated {
       }
+    '';
+  };
+
+  gitlab-issues = {
+    name = "custom/gitlab-issues";
+    config = ''
+      "custom/gitlab-issues": {
+        "return-type": "json",
+        "exec": "${pkgs.olistrik.waybar-gitlab}/bin/waybar-gitlab issues",
+        "on-click": "${pkgs.olistrik.waybar-gitlab}/bin/waybar-gitlab issues open"
+      },
+    '';
+  };
+  gitlab-merge-requests = {
+    name = "custom/gitlab-merge-requests";
+    config = ''
+      "custom/gitlab-merge-requests": {
+        "return-type": "json",
+        "exec": "${pkgs.olistrik.waybar-gitlab}/bin/waybar-gitlab merge-requests",
+        "on-click": "${pkgs.olistrik.waybar-gitlab}/bin/waybar-gitlab merge-requests open"
+      },
     '';
   };
 }
