@@ -4,18 +4,22 @@ with lib.olistrik;
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./node-red.nix
+      ./palworld.nix
+      ./acme.nix
     ];
 
   olistrik.collections.server = enabled;
   
   # Enable Nixwarden
   olistrik.services.nixwarden = {
-    accessTokenFile = "/nixos/.nixwarden.key";
+    accessTokenFile = "/var/lib/nixwarden/.nixwarden.key";
   };
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.efiSysMountPoint = "/efi";
 
   # Select internationalisation properties.
   time.timeZone = "Europe/Amsterdam";
