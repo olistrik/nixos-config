@@ -25,11 +25,6 @@ in
     };
   };
 
-  users.users.root = {
-    initialPassword = "olistrik";
-    openssh.authorizedKeys.keys = [ ssh-key ];
-  };
-
   # use the latest Linux kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 

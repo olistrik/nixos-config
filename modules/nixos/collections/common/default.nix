@@ -9,8 +9,8 @@ in
     enable = mkOpt bool true "Whether to install common programs and configurations.";
   };
   config = mkIf cfg.enable {
-
     olistrik = {
+      user = enabled;
       programs = {
         neovim = enabled;
         zsh = enabled;
@@ -22,10 +22,13 @@ in
 
     boot.supportedFilesystems = [ "ntfs" ];
 
-    programs.ssh.extraConfig = ''
-      Host gitlab.com
-      UpdateHostKeys no
-    '';
+    programs.ssh = {
+      startAgent = true;
+      extraConfig = ''
+        Host gitlab.com
+        UpdateHostKeys no
+      '';
+    };
 
     # TODO: extract to own module with nixwarden secrets.
     services.tailscale.enable = true;
