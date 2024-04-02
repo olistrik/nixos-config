@@ -1,0 +1,36 @@
+#!/usr/bin/env zsh
+
+# for compdef if I ever work it out.
+# hosts=($(tailscale status | grep -v 'offline' | awk '{print $2}'))
+# configurations=($(nix flake show --json 2> /dev/null | jq '.nixosConfigurations' | jq -r 'keys' | tr -d '[], "'))
+# 
+# configured_hosts=(${hosts:*configurations})
+# configured_hosts=(${configured_hosts#$(hostname)})
+
+zmodload zsh/zutil
+zparseopts -D -E - \
+	t:=target  -target:=target \
+	b:=builder -builder:=builder \
+	c:=config  -configuration:=config \
+	|| exit 1
+
+if [[ ! -z $target ]]; then
+	target[1]='--target-host'
+fi
+
+if [[ ! -z $builder ]]; then
+	builder[1]='--build-host'
+elif [[ ! -z $target ]]; then
+	builder=( '--build-host' "${target[2]}" )
+fi
+
+if [[ ! -z $config ]]; then
+	config=('--flake' ".#${config[2]}")
+elif [[ ! -z $target ]]; then
+	config=('--flake' ".#${target[2]}")
+else 
+	config=('--flake' ".")
+fi
+
+export NIX_SSHOPTS="-A"
+ssh-agent nixos-rebuild $config $target $builder --use-remote-sudo $@

@@ -25,7 +25,9 @@ in
     programs.ssh = {
       startAgent = true;
       extraConfig = ''
-        Host gitlab.com
+      AddKeysToAgent yes
+
+      Host gitlab.com
         UpdateHostKeys no
       '';
     };
