@@ -1,17 +1,19 @@
 { pkgs, lib, ... }: 
 with lib;
 with lib.olistrik;
-let
- ssh-key = builtins.getEnv "SSH_AUTH_KEY"; 
-in 
 {
   networking.hostName = mkForce "nixos-installer";
 
-  olistrik.programs = {
-    neovim = enabled;
-    zsh = enabled;
+  olistrik = {
+    user = enabled;
+    collections = {
+     server = enabled;
+    };
+    programs = {
+      neovim = enabled;
+      zsh = enabled;
+    };
   };
-
 
   environment.systemPackages = with pkgs; [ 
     git 
@@ -19,10 +21,6 @@ in
 
   services = {
     tailscale.enable = true;
-    openssh.settings = {
-      PermitRootLogin = "yes";
-      PasswordAuthentication = false;
-    };
   };
 
   # use the latest Linux kernel
