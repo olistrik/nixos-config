@@ -37,6 +37,10 @@
       url = "github:nix-community/steam-fetcher";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    valheim-server = {
+      url = "github:olistrik/valheim-server-flake";
+    };
   };
 
   outputs = inputs:
@@ -66,12 +70,15 @@
       };
 
       overlays = with inputs; [
+        valheim-server.overlays.default
         steam-fetcher.overlays.default
         nixvim.overlays.default
       ];
 
       systems.modules.nixos = with inputs; [
         hyprland.nixosModules.default
+        valheim-server.nixosModules.default
+
         # until I work out where to put this.
         ({ ... }: {
           nix.registry.nixpkgs.flake = nixpkgs;

@@ -341,6 +341,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1712437997,
+        "narHash": "sha256-g0whLLwRvgO2FsyhY8fNk+TWenS3jg5UdlWL4uqgFeo=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "e38d7cb66ea4f7a0eb6681920615dfcc30fc2920",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-23.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixvim": {
       "inputs": {
         "devshell": "devshell",
@@ -404,7 +420,8 @@
         "snowfall-lib": "snowfall-lib",
         "steam-fetcher": "steam-fetcher",
         "templates": "templates",
-        "unstable": "unstable"
+        "unstable": "unstable",
+        "valheim-server": "valheim-server"
       }
     },
     "snowfall-lib": {
@@ -432,6 +449,27 @@
     "steam-fetcher": {
       "inputs": {
         "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1703704267,
+        "narHash": "sha256-X44wqMWyaMsymcrgxwlnEWDplcop54e3eopfJ/p+S3s=",
+        "owner": "nix-community",
+        "repo": "steam-fetcher",
+        "rev": "aa223d3d03fd60a7b9f20831a06776ca0f1b3630",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "steam-fetcher",
+        "type": "github"
+      }
+    },
+    "steam-fetcher_2": {
+      "inputs": {
+        "nixpkgs": [
+          "valheim-server",
           "nixpkgs"
         ]
       },
@@ -537,6 +575,25 @@
         "owner": "nixos",
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "valheim-server": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3",
+        "steam-fetcher": "steam-fetcher_2"
+      },
+      "locked": {
+        "lastModified": 1712572709,
+        "narHash": "sha256-k0CWFDM3BQYH+pQ2GmpSZuPEoy5HJsE5uTdDwiSfvHE=",
+        "owner": "olistrik",
+        "repo": "valheim-server-flake",
+        "rev": "b25a78fd922f29c51ea17bcad1af9927aeb562fa",
+        "type": "github"
+      },
+      "original": {
+        "owner": "olistrik",
+        "repo": "valheim-server-flake",
         "type": "github"
       }
     },

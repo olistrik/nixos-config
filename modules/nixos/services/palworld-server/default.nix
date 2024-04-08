@@ -1,3 +1,6 @@
+# Huge thanks to @jakehamilton for creating the module I based this on.
+# https://github.com/jakehamilton/config/blob/main/modules/nixos/services/palworld/default.nix
+
 # Huge thanks to @Zumorica for creating the initial module:
 # https://github.com/Zumorica/GradientOS/blob/main/hosts/asiyah/palworld-server.nix
 { config
