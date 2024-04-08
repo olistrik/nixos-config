@@ -4,9 +4,10 @@ with lib.olistrik;
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./node-red.nix
-      ./palworld.nix
       ./acme.nix
+      ./node-red.nix
+      ./palworld-server.nix
+      ./valheim-server.nix
     ];
 
   olistrik.collections.server = enabled;
