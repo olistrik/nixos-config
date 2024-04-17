@@ -7,7 +7,8 @@ with lib.olistrik;
       ./acme.nix
       ./node-red.nix
       ./palworld-server.nix
-      ./valheim-server.nix
+
+      ./valheim-server
     ];
 
   olistrik.collections.server = enabled;

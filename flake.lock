@@ -341,22 +341,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
-      "locked": {
-        "lastModified": 1712437997,
-        "narHash": "sha256-g0whLLwRvgO2FsyhY8fNk+TWenS3jg5UdlWL4uqgFeo=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "e38d7cb66ea4f7a0eb6681920615dfcc30fc2920",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-23.11",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixvim": {
       "inputs": {
         "devshell": "devshell",
@@ -380,6 +364,22 @@
       "original": {
         "owner": "nix-community",
         "repo": "nixvim",
+        "type": "github"
+      }
+    },
+    "oldpkgs": {
+      "locked": {
+        "lastModified": 1704290814,
+        "narHash": "sha256-LWvKHp7kGxk/GEtlrGYV68qIvPHkU9iToomNFGagixU=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "70bdadeb94ffc8806c0570eb5c2695ad29f0e421",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-23.05",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },
@@ -417,6 +417,7 @@
         "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs_2",
         "nixvim": "nixvim",
+        "oldpkgs": "oldpkgs",
         "snowfall-lib": "snowfall-lib",
         "steam-fetcher": "steam-fetcher",
         "templates": "templates",
@@ -449,40 +450,19 @@
     "steam-fetcher": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "oldpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1703704267,
-        "narHash": "sha256-X44wqMWyaMsymcrgxwlnEWDplcop54e3eopfJ/p+S3s=",
-        "owner": "nix-community",
+        "lastModified": 1713116566,
+        "narHash": "sha256-uVJbXj52X7OibwSqnmkByWjMVqYsAbVdtK3X+0a0tCM=",
+        "owner": "olistrik",
         "repo": "steam-fetcher",
-        "rev": "aa223d3d03fd60a7b9f20831a06776ca0f1b3630",
+        "rev": "1023e7f85e34fa7697da0068b2709ad4619f73d6",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
-        "repo": "steam-fetcher",
-        "type": "github"
-      }
-    },
-    "steam-fetcher_2": {
-      "inputs": {
-        "nixpkgs": [
-          "valheim-server",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1703704267,
-        "narHash": "sha256-X44wqMWyaMsymcrgxwlnEWDplcop54e3eopfJ/p+S3s=",
-        "owner": "nix-community",
-        "repo": "steam-fetcher",
-        "rev": "aa223d3d03fd60a7b9f20831a06776ca0f1b3630",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
+        "owner": "olistrik",
         "repo": "steam-fetcher",
         "type": "github"
       }
@@ -580,15 +560,19 @@
     },
     "valheim-server": {
       "inputs": {
-        "nixpkgs": "nixpkgs_3",
-        "steam-fetcher": "steam-fetcher_2"
+        "nixpkgs": [
+          "oldpkgs"
+        ],
+        "steam-fetcher": [
+          "steam-fetcher"
+        ]
       },
       "locked": {
-        "lastModified": 1712572709,
-        "narHash": "sha256-k0CWFDM3BQYH+pQ2GmpSZuPEoy5HJsE5uTdDwiSfvHE=",
+        "lastModified": 1713122820,
+        "narHash": "sha256-1jTz59qgmFYaPDQk4FuFst3BWZPAcLfws0NA4P8wNIk=",
         "owner": "olistrik",
         "repo": "valheim-server-flake",
-        "rev": "b25a78fd922f29c51ea17bcad1af9927aeb562fa",
+        "rev": "1c8954f345209519c958982b82a5e712efb7bd6a",
         "type": "github"
       },
       "original": {
