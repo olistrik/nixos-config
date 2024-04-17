@@ -36,7 +36,7 @@ nixvim.makeNixvimWithModule {
         gitsigns = enabled;
         nvim-autopairs = enabled;
         nvim-colorizer = enabled;
-        comment-nvim = enabled;
+        comment = enabled;
         # harpoon = enabled;
         todo-comments = enabled;
         surround = enabled;
@@ -60,7 +60,7 @@ nixvim.makeNixvimWithModule {
 
       globals.mapleader = " ";
 
-      options = {
+      opts = {
         number = true;
         relativenumber = true;
         laststatus = 1;

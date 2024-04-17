@@ -21,7 +21,7 @@ mkPlugin "treesitter" {
     };
 
     nvim-autopairs = {
-      extraOptions = {
+      settings = {
         check_ts = true;
       };
     };

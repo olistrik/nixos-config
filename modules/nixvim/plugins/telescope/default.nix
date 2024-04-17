@@ -22,47 +22,52 @@ mkPlugin "telescope" {
   ];
 
   plugins.telescope = {
-    defaults = {
-      file_ignore_patterns = [
-        "^vendor/"
-        "^node_modules/"
-        "^.git/"
-      ];
-      vimgrep_arguments = [
-        "${pkgs.ripgrep}/bin/rg"
-        "--color=never"
-        "--no-heading"
-        "--with-filename"
-        "--line-number"
-        "--column"
-        "--smart-case"
-        "--trim"
-      ];
+    settings = {
+      defaults = {
+        file_ignore_patterns = [
+          "^vendor/"
+          "^node_modules/"
+          "^.git/"
+        ];
+        vimgrep_arguments = [
+          "${pkgs.ripgrep}/bin/rg"
+          "--color=never"
+          "--no-heading"
+          "--with-filename"
+          "--line-number"
+          "--column"
+          "--smart-case"
+          "--trim"
+        ];
+      };
+      pickers = {
+        find_files = {
+          find_command = [
+            "${pkgs.fd}/bin/fd"
+            "--type"
+            "f"
+            "--strip-cwd-prefix"
+            "-uu"
+            "--ignore-file=.vimignore"
+          ];
+        };
+      };
     };
 
     extensions = {
-      file_browser = {
+      file-browser = {
         enable = true;
-        theme = "ivy";
+        settings = {
+          theme = "ivy";
+        };
       };
 
       fzy-native = {
         enable = true;
-        overrideGenericSorter = true;
-        overrideFileSorter = true;
-      };
-    };
-
-    extraOptions.pickers = {
-      find_files = {
-        find_command = [
-          "${pkgs.fd}/bin/fd"
-          "--type"
-          "f"
-          "--strip-cwd-prefix"
-          "-uu"
-          "--ignore-file=.vimignore"
-        ];
+        settings = {
+          override_generic_sorter = true;
+          override_file_sorter = true;
+        };
       };
     };
   };
