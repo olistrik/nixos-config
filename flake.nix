@@ -2,6 +2,8 @@
   description = "Nix is love. Nix is life.";
 
   inputs = {
+    # Normal nixpkgs
+    oldpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
 
     # Normal nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
@@ -34,12 +36,16 @@
     };
 
     steam-fetcher = {
-      url = "github:nix-community/steam-fetcher";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:olistrik/steam-fetcher";
+      inputs.nixpkgs.follows = "oldpkgs";
     };
 
     valheim-server = {
       url = "github:olistrik/valheim-server-flake";
+      inputs = {
+        nixpkgs.follows = "oldpkgs";
+        steam-fetcher.follows =  "steam-fetcher";
+      };
     };
   };
 
@@ -89,7 +95,7 @@
           nix.settings = {
             auto-optimise-store = true;
             substituters = [
-              "https://cache.nixos.org/"
+              "https://cache.nixos.org"
               "https://hyprland.cachix.org"
             ];
             trusted-public-keys = [
