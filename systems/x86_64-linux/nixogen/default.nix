@@ -74,11 +74,9 @@ with lib.olistrik;
   # Enable laptop touchpad.
   services.xserver.libinput.mouse = { accelSpeed = "-0.85"; };
 
-  # Enables wireless support via wpa_supplicant.
-  networking.wireless = {
-    enable = true;
-    interfaces = [ "wlp60s0" ];
-  };
+  # Enable network manager as wpa_supplicant was too unstable.
+  networking.networkmanager.enable = true;
+  olistrik.user.extraGroups = [ "networkmanager" ];
 
   networking.useDHCP = false;
   networking.interfaces.enp0s31f6.useDHCP = true;
