@@ -72,7 +72,7 @@ with lib.olistrik;
   };
 
   # Enable laptop touchpad.
-  services.xserver.libinput.mouse = { accelSpeed = "-0.85"; };
+  services.libinput.mouse = { accelSpeed = "-0.85"; };
 
   # Enable network manager as wpa_supplicant was too unstable.
   networking.networkmanager.enable = true;
@@ -96,9 +96,9 @@ with lib.olistrik;
   };
 
   ## set X11 localisation
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "us";
-    xkbOptions = "eurosign:5";
+    options = "eurosign:5";
   };
 
   # programs.alacritty.font.size = "12.0";

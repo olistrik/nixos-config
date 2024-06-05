@@ -1,6 +1,6 @@
-{ lib, channels, nixvim }:
+{ inputs, lib, channels, nixvim, ...}:
 let
-  modules = lib.snowfall.module.create-modules { src = "${./../../modules/nixvim}"; };
+  modules = inputs.self.nixvimModules;
 
   enabled = { enable = true; };
   autoCmd = {

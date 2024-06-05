@@ -3,10 +3,11 @@
 
   inputs = {
     # Normal nixpkgs
+
     oldpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
 
     # Normal nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
 
     # Unstable nixpkgs
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -27,7 +28,10 @@
     templates.url = "github:nixos/templates";
 
     # Hyprland WM
-    hyprland.url = "github:hyprwm/Hyprland/v0.34.0";
+    hyprland = {
+      url = "github:hyprwm/Hyprland/v0.40.0";
+      inputs.nixpkgs.follows = "unstable";
+    };
 
     # Nixvim
     nixvim = {
@@ -60,11 +64,12 @@
           namespace = "olistrik";
           meta = {
             name = "olistrik";
-            title = "Flake stuff from Oli Strik 😊";
+            title = "Flake stuff by Oli 😊";
           };
         };
-
       };
+
+      user-modules-root = lib.fs.get-snowfall-file "modules";
     in
     lib.mkFlake {
       channels-config = {
@@ -72,7 +77,7 @@
       };
 
       nixvimModules = lib.snowfall.module.create-modules {
-        src = "${./modules/nixvim}";
+        src = ./modules/nixvim;
       };
 
       overlays = with inputs; [
