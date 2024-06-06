@@ -28,12 +28,15 @@ in
     # configure alacritty
     olistrik.programs.alacritty = {
       enable = true;
-      brightBold = true;
-      font = {
-        normal.family = "JetBrainsMono NerdFont";
+      settings = {
+        colors = config.olistrik.system.theme.theme // {
+          draw_bold_text_with_bright_colors = true;
+        };
+        font = {
+          normal.family = "JetBrainsMono NerdFont";
+        };
+        window.opacity = 0.95;
       };
-      theme = config.olistrik.system.theme.theme;
-      window.opacity = "0.95";
     };
 
     sound.enable = true;
