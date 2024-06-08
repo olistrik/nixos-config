@@ -1,4 +1,4 @@
-{ inputs, lib, channels, nixvim, ...}:
+{ inputs, lib, channels, nixvim, ... }:
 let
   modules = inputs.self.nixvimModules;
 
@@ -25,6 +25,7 @@ nixvim.makeNixvimWithModule {
 
     config = {
       olistrik.plugins = {
+        lsp = enabled;
         gitblame = enabled;
         lualine = enabled;
         telescope = enabled;

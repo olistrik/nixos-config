@@ -8,16 +8,12 @@ mkPlugin "lsp" {
     lsp = {
       enable = true;
       servers = {
-        nil_ls = {
+        nil-ls = {
           enable = true;
           extraOptions.settings.nil = {
             formatting.command = [ "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt" ];
           };
         };
-        # gopls = enabled;
-        # eslint = enabled;
-        # tsserver = enabled;
-        # rust-analyzer = enabled;
       };
 
       keymaps = {
