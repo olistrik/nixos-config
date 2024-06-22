@@ -109,6 +109,9 @@ in
         alias zzz="systemctl suspend"
         alias zura="zathura --fork"
 
+        # expand xargs to match other aliases
+        alias xargs="xargs "
+
         alias dc="docker-compose"
         alias dcu="docker-compose up -d"
         alias dcd="docker-compose down"
@@ -127,11 +130,29 @@ in
           eval $cmd
         }
 
+        git-chain-from() {
+          if [ $# -ne 1 ]; then
+            echo "git-chain-from <source>"
+            return 1
+          fi
+          branches=$(git rev-list --first-parent --ancestry-path --format='%D' $1..HEAD \
+            | grep -v commit \
+            | sed -E "s;HEAD -> ;;g" \
+            | sed -E "s;, ;\n;g" \
+            | grep -v "^origin/")
+
+          if [ -z "$branches" ]; then
+            return 1
+          fi
+          echo "$branches"
+        }
+
         #################################
         ## Git specials
 
         alias gg="git-graph"
         alias igg="git-igitt"
+
         alias gsw="git switch"
         alias gaa="git add -A"
         alias gci="git add -i && git commit"
@@ -140,6 +161,9 @@ in
         alias gcam="git commit --amend --no-edit"
         alias grc="git rebase --continue"
         alias gra="git rebase --abort"
+        alias gri="git rebase -i"
+        alias gp="git push"
+        alias gpf="git push --force-with-lease"
         alias git-home="git config user.email oliverstrik@gmail.com && git config user.name olistrik && git config -l | grep user"
         alias git-work="git config user.email oliver@klippa.com && git config user.name 'Oliver Strik' && git config -l | grep user"
 

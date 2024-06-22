@@ -10,15 +10,21 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      (writeScriptBin
+      (writeShellScriptBin
         "way-displays"
         ''
-          #/bin/sh
+          LOG_FILE="way-displays.$XDG_VTNR.log"
+          
+          if [ -z "$XDG_VTNR" ]; then
+            VT="$(tty | sed -E 's,(^/dev|/),,g')"
+            LOG_FILE="way-displays.$VT.log"
+          fi
+
+          echo "way-displays logging to $LOG_FILE"
 
           if [ $# -eq 0 ]; then 
             sleep 1 # give Hyprland a moment to set its defaults
-
-            ${way-displays}/bin/way-displays > "/tmp/way-displays.''${XDG_VTNR}.''${USER}.log" 2>&1
+            ${way-displays}/bin/way-displays -L debug > "/tmp/$LOG_FILE" 2>&1
           else
             ${way-displays}/bin/way-displays $@
           fi

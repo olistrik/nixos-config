@@ -8,7 +8,10 @@ in
   options.olistrik.wm.hyperland = basicOptions "Hyprland";
 
   config = mkIf cfg.enable {
-    programs.hyprland = enabled;
+    programs.hyprland = {
+      enable = true;
+    };
+
     olistrik.programs = {
       waybar = enabled;
       way-displays = enabled;
@@ -18,11 +21,8 @@ in
 
     xdg.portal = {
       enable = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-wlr
-        xdg-desktop-portal-gtk
-      ];
       xdgOpenUsePortal = true;
+      # hyprland installs it's own portal.
     };
 
     services.greetd = {
@@ -36,24 +36,33 @@ in
       };
     };
 
-    # FROM SWAY:
-    # extraSessionCommands = ''
-    #		export MOZ_ENABLE_WAYLAND=1
-    #		export _JAVA_AWT_WM_NONREPARENTING=1
-    #		systemctl --user import-environment
-    # '';
-
     environment.systemPackages = with pkgs; [
+      # wallpaper, lockscreen, and idler.
       hyprpaper
-      swaylock
-      swayidle
+      hyprlock
+      hypridle
+
+      # notifications.
+      dunst
+
+      # program launcher.
       wofi
-      xwayland
+
+      # screensharing.
       grim
       jq
       slurp
-      wl-clipboard
+
+      # media controls, etc.
       playerctl
+      wl-clipboard
+
+      # cross support (hyprland installs xwayland).
+      xwaylandvideobridge
+
+      # remove
+      swaylock
+      swayidle
     ];
 
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
