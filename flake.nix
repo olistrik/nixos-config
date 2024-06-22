@@ -18,7 +18,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-     # In order to build system images and artifacts supported by nixos-generators.
+    # In order to build system images and artifacts supported by nixos-generators.
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,8 +29,8 @@
 
     # Hyprland WM
     hyprland = {
-      url = "github:hyprwm/Hyprland/v0.40.0";
-      inputs.nixpkgs.follows = "unstable";
+      url = "git+https://github.com/hyprwm/Hyprland?ref=v0.41.1&submodules=1";
+      # inputs.nixpkgs.follows = "unstable";
     };
 
     # Nixvim
@@ -48,7 +48,7 @@
       url = "github:olistrik/valheim-server-flake";
       inputs = {
         nixpkgs.follows = "oldpkgs";
-        steam-fetcher.follows =  "steam-fetcher";
+        steam-fetcher.follows = "steam-fetcher";
       };
     };
   };
@@ -68,8 +68,6 @@
           };
         };
       };
-
-      user-modules-root = lib.fs.get-snowfall-file "modules";
     in
     lib.mkFlake {
       channels-config = {
@@ -87,8 +85,8 @@
       ];
 
       systems.modules.nixos = with inputs; [
-        hyprland.nixosModules.default
         valheim-server.nixosModules.default
+        hyprland.nixosModules.default
 
         # until I work out where to put this.
         ({ ... }: {
