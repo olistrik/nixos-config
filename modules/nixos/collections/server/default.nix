@@ -16,8 +16,8 @@ in
         PasswordAuthentication = false;
       };
       authorizedKeysFiles = lib.mkForce [
-        "/etc/ssh/authorized_keys.d/%u" 
-      ];   
+        "/etc/ssh/authorized_keys.d/%u"
+      ];
     };
 
     olistrik.user.authorizedKeys = [
@@ -26,7 +26,7 @@ in
 
     # Allow sudo for nixos-rebuild --use-remote-sudo, without passwordless sudo.
     # security.pam.sshAgentAuth.authorizedKeysFiles = lib.mkForce [ "/etc/ssh/authorized_keys.d/%u" ];   
-    security.pam.enableSSHAgentAuth = true;
+    security.pam.sshAgentAuth.enable = true;
     security.pam.services.sudo.sshAgentAuth = true;
   };
 }

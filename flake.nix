@@ -29,7 +29,7 @@
 
     # Hyprland WM
     hyprland = {
-      url = "git+https://github.com/hyprwm/Hyprland?ref=v0.41.1&submodules=1";
+      url = "git+https://github.com/hyprwm/Hyprland?ref=v0.41.2&submodules=1";
       # inputs.nixpkgs.follows = "unstable";
     };
 
