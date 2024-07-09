@@ -1,4 +1,4 @@
-{ channels, ... }: 
+{ channels, ... }:
 with channels.unstable.python3Packages;
 final: prev: {
   greatfet = greatfet.overrideAttrs (prev: rec {

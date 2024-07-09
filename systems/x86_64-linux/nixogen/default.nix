@@ -16,7 +16,12 @@ with lib.olistrik;
       workstation = enabled;
       work = enabled;
     };
-    wm.hyperland = enabled;
+    # wm.hyperland = enabled;
+    wayland = {
+      niri = enabled;
+      # way-displays = enabled;
+      ags = enabled;
+    };
   };
 
   environment.systemPackages = with pkgs; [
@@ -103,6 +108,12 @@ with lib.olistrik;
 
   # programs.alacritty.font.size = "12.0";
   programs.openvpn3.enable = true;
+
+  programs.nix-ld = {
+    enable = true;
+    libraries = pkgs.steam-run.fhsenv.args.multiPkgs pkgs;
+  };
+
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

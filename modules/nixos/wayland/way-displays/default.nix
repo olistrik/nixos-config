@@ -3,10 +3,13 @@ with lib;
 with lib.olistrik;
 let
   # TODO: modularize
-  cfg = config.olistrik.programs.way-displays;
+  cfg = config.olistrik.wayland.way-displays;
 in
 {
-  options.olistrik.programs.way-displays = basicOptions "way-displays";
+  options.olistrik.wayland.way-displays = {
+    enable = mkOpt types.bool false "Whether to enable way-displays.";
+    package = mkOpt types.package pkgs.way-displays "Which way-displays package to use.";
+  };
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
@@ -24,9 +27,9 @@ in
 
           if [ $# -eq 0 ]; then 
             sleep 1 # give Hyprland a moment to set its defaults
-            ${way-displays}/bin/way-displays -L debug > "/tmp/$LOG_FILE" 2>&1
+            ${cfg.package}/bin/way-displays -L debug > "/tmp/$LOG_FILE" 2>&1
           else
-            ${way-displays}/bin/way-displays $@
+            ${cfg.package}/bin/way-displays $@
           fi
         '')
     ];

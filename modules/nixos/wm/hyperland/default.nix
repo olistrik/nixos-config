@@ -14,14 +14,14 @@ in
 
     olistrik.programs = {
       waybar = enabled;
-      way-displays = enabled;
+      # way-displays = enabled;
     };
 
     security.pam.services.swaylock = { };
 
     xdg.portal = {
       enable = true;
-      xdgOpenUsePortal = true;
+      # wxdgOpenUsePortal = true;
       # hyprland installs it's own portal.
     };
 
