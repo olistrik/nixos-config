@@ -4,7 +4,8 @@ with lib.olistrik;
 let
   cfg = config.olistrik.user;
   authorizedKeys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIL0q7NgpGYIG6vQqzJTD64jUASuDWxw7DNKsrw+j3G/ oli@nixogen" ];
+    "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIMcvHSxN1mFGgB6r19eHIqGKvhNOwddvVe43NwhKHmWzAAAABHNzaDo= oli@yubikey"
+  ];
 in
 {
   options.olistrik.user = with types; {
@@ -12,7 +13,7 @@ in
     name = mkOpt str "oli" "The name of the standard account";
     initialPassword = mkOpt str "password" "The initial password for the standard account";
     extraGroups = mkOpt (listOf str) [ ] "Any extra groups the default account should have";
-    authorizedKeys = mkOpt (listOf str) [] "";
+    authorizedKeys = mkOpt (listOf str) [ ] "";
   };
 
   config.users.users.${cfg.name} = {
@@ -35,7 +36,7 @@ in
       "lxd"
       "openvpn"
     ] ++ cfg.extraGroups;
-    
+
     openssh.authorizedKeys.keys = authorizedKeys;
   };
 }

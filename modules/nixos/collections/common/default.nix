@@ -24,11 +24,13 @@ in
 
     programs.ssh = {
       startAgent = true;
+      enableAskPassword = true;
+      askPassword = "${pkgs.gnome.seahorse}/libexec/seahorse/ssh-askpass";
       extraConfig = ''
-      AddKeysToAgent yes
+        AddKeysToAgent yes
 
-      Host gitlab.com
-        UpdateHostKeys no
+        Host gitlab.com
+          UpdateHostKeys no
       '';
     };
 
