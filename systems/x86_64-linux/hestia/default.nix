@@ -2,17 +2,18 @@
 with lib.olistrik;
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./acme.nix
       ./node-red.nix
-      ./palworld-server.nix
+      # ./palworld-server.nix
 
-      ./valheim-server
+      # ./valheim-server
     ];
 
   olistrik.collections.server = enabled;
-  
+
   # Enable Nixwarden
   olistrik.services.nixwarden = {
     accessTokenFile = "/var/lib/nixwarden/.nixwarden.key";
@@ -29,6 +30,18 @@ with lib.olistrik;
   console = {
     font = "Lat2-Terminus16";
     keyMap = "us";
+  };
+
+  hardware.opengl = {
+    enable = true;
+  };
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    nvidiaSettings = true;
+    open = false;
   };
 
   # NEVER CHANGE.

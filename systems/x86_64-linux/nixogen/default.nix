@@ -28,6 +28,11 @@ with lib.olistrik;
     sigrok-cli
     pulseview
     greatfet
+
+    winbox
+    steam-run
+
+    yubikey-manager
   ];
 
   ##################
@@ -58,6 +63,12 @@ with lib.olistrik;
       };
     };
   };
+
+  services.udev.packages = [ pkgs.yubikey-personalization ];
+  services.pcscd.enable = true;
+
+
+
 
   ####################
   ## Laptop Specific
