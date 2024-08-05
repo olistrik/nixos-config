@@ -1,28 +1,39 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
+{ lib, pkgs, ... }:
+with lib;
+with lib.olistrik;
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
+
+  networking.hostName = "thoth"; # Define your hostname.
+
+  olistrik = {
+    collections = {
+      personal = enabled;
+      workstation = enabled;
+      work = enabled; # WARN: Remove. I'm a student now. We don't do work.
+    };
+    wayland = {
+      niri = enabled;
+      ags = enabled;
+    };
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  networking.hostName = "thoth"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  # boot.loader.efi.efiSysMountPoint = "/boot/efi"; # TODO:  This is preferred.
+  # boot.kernel.sysctl = { "fs.inotify.max_user_watches" = "1048576"; };
 
   # Enable networking
   networking.networkmanager.enable = true;
+  olistrik.user.extraGroups = [ "networkmanager" ];
+
+  # Enable bluetooth
+  hardware.bluetooth.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
@@ -43,50 +54,10 @@
   };
 
   # Configure keymap in X11
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "us";
-    xkbVariant = "euro";
+    variant = "euro";
   };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.oli = {
-    isNormalUser = true;
-    description = "oli";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
-  };
-
-  # Enable automatic login for the user.
-  services.getty.autologinUser = "oli";
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-  vim 
-  #  wget
-  ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
