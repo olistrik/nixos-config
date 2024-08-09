@@ -1,50 +1,50 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 with lib.olistrik;
 {
   imports =
     [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./acme.nix
-      ./node-red.nix
-      # ./palworld-server.nix
+      # Provided here for now. Later it'll be global.
+      inputs.disko.nixosModules.default
 
+      ./hardware-configuration.nix
+      ./disko-configuration.nix
+      ./persistence-configuration.nix
+
+      # ./acme.nix
+      # ./node-red.nix
+      # ./palworld-server.nix
       # ./valheim-server
     ];
 
-  olistrik.collections.server = enabled;
+  # Required for ZFS.
+  networking.hostId = "1a75b647";
+
+  olistrik.collections = {
+    common = enabled;
+    # server = enabled;
+  };
 
   # Enable Nixwarden
   olistrik.services.nixwarden = {
-    accessTokenFile = "/var/lib/nixwarden/.nixwarden.key";
+    # accessTokenFile = "/var/lib/nixwarden/.nixwarden.key";
   };
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot = enabled;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/efi";
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
   # Select internationalisation properties.
   time.timeZone = "Europe/Amsterdam";
-  i18n.defaultLocale = "en_US.UTF-8";
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_GB.UTF-8";
   console = {
     font = "Lat2-Terminus16";
     keyMap = "us";
   };
 
-  hardware.opengl = {
-    enable = true;
-  };
-
-  services.xserver.videoDrivers = [ "nvidia" ];
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    nvidiaSettings = true;
-    open = false;
-  };
-
   # NEVER CHANGE.
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05"; # Did you read the comment?
 }
 
