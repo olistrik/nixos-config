@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }:
+{ lib, inputs, ... }:
 with lib.olistrik;
 {
   imports =
@@ -10,8 +10,8 @@ with lib.olistrik;
       ./disko-configuration.nix
       ./persistence-configuration.nix
 
-      # ./acme.nix
-      # ./node-red.nix
+      ./acme.nix
+      ./node-red.nix
       # ./palworld-server.nix
       # ./valheim-server
     ];
@@ -21,12 +21,17 @@ with lib.olistrik;
 
   olistrik.collections = {
     common = enabled;
-    # server = enabled;
+    server = enabled;
   };
+
+  # Impermanence. Get rekt python.
+  boot.initrd.postDeviceCommands = lib.mkAfter ''
+    zfs rollback -r zroot/local/root@blank
+  '';
 
   # Enable Nixwarden
   olistrik.services.nixwarden = {
-    # accessTokenFile = "/var/lib/nixwarden/.nixwarden.key";
+    accessTokenFile = "/var/lib/nixwarden/.nixwarden.key";
   };
 
   # Use the systemd-boot EFI boot loader.

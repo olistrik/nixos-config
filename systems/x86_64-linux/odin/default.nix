@@ -5,8 +5,8 @@ with lib.olistrik;
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./acme.nix
-      ./node-red.nix
+      # ./acme.nix
+      # ./node-red.nix
       # ./palworld-server.nix
 
       # ./valheim-server
