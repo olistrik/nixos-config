@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }: 
+{ pkgs, lib, inputs, ... }:
 with lib;
 with lib.olistrik;
 {
@@ -6,22 +6,23 @@ with lib.olistrik;
 
   olistrik = {
     user = enabled;
-    collections = {
-     server = enabled;
-    };
+    # collections = {
+    #   server = enabled;
+    # };
     programs = {
       neovim = enabled;
       zsh = enabled;
     };
   };
 
-  environment.systemPackages = with pkgs; [ 
-    git 
+  environment.systemPackages = with pkgs; [
+    git
+    inputs.disko.packages.x86_64-linux.default
   ];
 
-  services = {
-    tailscale.enable = true;
-  };
+  # services = {
+  #   tailscale.enable = true;
+  # };
 
   # use the latest Linux kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
