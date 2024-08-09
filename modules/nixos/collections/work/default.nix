@@ -23,13 +23,6 @@ in
 
       # Inferior build tools
       docker-compose
-
-      # The worst software in the world
-      vscode
-      firefox
-      bruno
-      goland
-      webstorm
     ];
 
     # Docker
