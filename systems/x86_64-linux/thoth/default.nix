@@ -1,14 +1,19 @@
-{ lib, pkgs, ... }:
+{ inputs, lib, pkgs, ... }:
 with lib;
 with lib.olistrik;
 {
   imports =
     [
-      # Include the results of the hardware scan.
+      # Provided here for now. Later it'll be global.
+      inputs.disko.nixosModules.default
+
       ./hardware-configuration.nix
+      ./disko-configuration.nix
+      ./persistence-configuration.nix
     ];
 
   networking.hostName = "thoth"; # Define your hostname.
+	networking.hostId = "8177229e";
 
   olistrik = {
     collections = {
@@ -22,10 +27,15 @@ with lib.olistrik;
     };
   };
 
+  # Impermanence. Get rekt python.
+  boot.initrd.postDeviceCommands = lib.mkAfter ''
+    zfs rollback -r zroot/local/root@blank
+  '';
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  # boot.loader.efi.efiSysMountPoint = "/boot/efi"; # TODO:  This is preferred.
+  boot.loader.efi.efiSysMountPoint = "/boot/efi"; 
   # boot.kernel.sysctl = { "fs.inotify.max_user_watches" = "1048576"; };
 
   # Enable networking
@@ -59,12 +69,6 @@ with lib.olistrik;
     variant = "euro";
   };
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  # NEVER CHANGE.
   system.stateVersion = "24.05"; # Did you read the comment?
-
 }
