@@ -7,12 +7,10 @@
 { lib, ... }:
 with lib.olistrik;
 {
-  assertions = [
-    {
-      assertions = false;
-      message = "Odin is not fully configured.";
-    }
-  ];
+  assertions = [{
+    assertion = false;
+    message = "Odin is not fully configured.";
+  }];
 
   imports = [ ./hardware-configuration.nix ];
 

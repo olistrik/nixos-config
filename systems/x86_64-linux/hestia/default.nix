@@ -1,3 +1,6 @@
+# Hestia is my home server responsible for managing all of my ZigBee and
+# EspHome devices.
+
 { lib, ... }:
 with lib.olistrik;
 {

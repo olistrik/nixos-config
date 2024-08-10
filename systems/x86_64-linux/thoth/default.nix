@@ -1,3 +1,6 @@
+# Thoth is my personal laptop as it is used primarily for university work and
+# provisioning my other nixos hosts.
+
 { lib, ... }:
 with lib;
 with lib.olistrik;
