@@ -1,16 +1,20 @@
-{ config, lib, pkgs, ... }:
+# Odin was previously Hestia (Not canon mythology) but was renamed for
+# migration to a less power hungry PC.
+#
+# I don't yet know if Hestia will be powerful enough to host a valheim server
+# so I may need setup Odin again one day.
+
+{ lib, ... }:
 with lib.olistrik;
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      # ./acme.nix
-      # ./node-red.nix
-      # ./palworld-server.nix
+  assertions = [
+    {
+      assertions = false;
+      message = "Odin is not fully configured.";
+    }
+  ];
 
-      # ./valheim-server
-    ];
+  imports = [ ./hardware-configuration.nix ];
 
   olistrik.collections.server = enabled;
 
@@ -22,22 +26,12 @@ with lib.olistrik;
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/efi";
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
-  # Select internationalisation properties.
-  time.timeZone = "Europe/Amsterdam";
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "us";
-  };
 
-  hardware.opengl = {
-    enable = true;
-  };
-
+  # Enable the GPU so that it will actually go to sleep.
+  hardware.opengl.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
-
   hardware.nvidia = {
     modesetting.enable = true;
     nvidiaSettings = true;
