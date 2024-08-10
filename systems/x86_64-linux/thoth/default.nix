@@ -13,7 +13,7 @@ with lib.olistrik;
     ];
 
   networking.hostName = "thoth"; # Define your hostname.
-	networking.hostId = "8177229e";
+  networking.hostId = "8177229e";
 
   olistrik = {
     collections = {
@@ -27,9 +27,9 @@ with lib.olistrik;
     };
   };
 
-	# impermanence wipes out password changes, and binding /etc/shadow doesn't seem to fix that.
-	olistrik.user.hashedPasswordFile = "/persist/secret/user.password";
-	users.mutableUsers = false;
+  # impermanence wipes out password changes, and binding /etc/shadow doesn't seem to fix that.
+  olistrik.user.hashedPasswordFile = "/persist/secret/user.password";
+  users.mutableUsers = false;
 
   # Impermanence. Get rekt python.
   boot.initrd.postDeviceCommands = lib.mkAfter ''
@@ -39,7 +39,7 @@ with lib.olistrik;
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi"; 
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
   # boot.kernel.sysctl = { "fs.inotify.max_user_watches" = "1048576"; };
 
   # Enable networking
@@ -48,6 +48,10 @@ with lib.olistrik;
 
   # Enable bluetooth
   hardware.bluetooth.enable = true;
+
+  # Enable laptop powersaving features
+  services.thermald.enable = true;
+  services.tlp.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
