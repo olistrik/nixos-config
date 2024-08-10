@@ -1,16 +1,12 @@
-{ inputs, lib, ... }:
+{ lib, ... }:
 with lib;
 with lib.olistrik;
 {
-  imports =
-    [
-      # Provided here for now. Later it'll be global.
-      inputs.disko.nixosModules.default
-
-      ./hardware-configuration.nix
-      ./disko-configuration.nix
-      ./persistence-configuration.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ./disko-configuration.nix
+    ./persistence-configuration.nix
+  ];
 
   # Shared configurations.
   olistrik = {

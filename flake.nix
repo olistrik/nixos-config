@@ -2,8 +2,8 @@
   description = "Nix is love. Nix is life.";
 
   inputs = {
-		##########################
-		# nix package sets
+    ##########################
+    # nix package sets
 
     # Previous nixpkgs
     oldpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
@@ -14,8 +14,8 @@
     # Unstable nixpkgs
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-		##########################
-		# flake and system support
+    ##########################
+    # flake and system support
 
     snowfall-lib = {
       url = "github:snowfallorg/lib";
@@ -27,17 +27,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-		disko = {
-			url = "github:nix-community/disko";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-		impermanence.url = "github:nix-community/impermanence";
+    impermanence.url = "github:nix-community/impermanence";
 
     templates.url = "github:nixos/templates";
 
-		##########################
-		# extras
+    ##########################
+    # extras
 
     nixvim = {
       url = "github:nix-community/nixvim";
@@ -56,8 +56,6 @@
         steam-fetcher.follows = "steam-fetcher";
       };
     };
-
-
   };
 
   outputs = inputs:
@@ -92,9 +90,8 @@
       ];
 
       systems.modules.nixos = with inputs; [
-				# not sure if I can provide it for all, or if I can only provided it for disko systems.
-				# disko.nixosModules.default 
-				impermanence.nixosModules.impermanence
+        disko.nixosModules.default
+        impermanence.nixosModules.impermanence
 
         valheim-server.nixosModules.default
 

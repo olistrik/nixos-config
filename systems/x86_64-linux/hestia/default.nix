@@ -1,20 +1,16 @@
-{ lib, inputs, ... }:
+{ lib, ... }:
 with lib.olistrik;
 {
-  imports =
-    [
-      # Provided here for now. Later it'll be global.
-      inputs.disko.nixosModules.default
+  imports = [
+    ./hardware-configuration.nix
+    ./disko-configuration.nix
+    ./persistence-configuration.nix
 
-      ./hardware-configuration.nix
-      ./disko-configuration.nix
-      ./persistence-configuration.nix
-
-      ./acme.nix
-      ./node-red.nix
-      # ./palworld-server.nix
-      # ./valheim-server
-    ];
+    ./acme.nix
+    ./node-red.nix
+    # ./palworld-server.nix
+    # ./valheim-server
+  ];
 
   # Shared configurations.
   olistrik.collections = {
