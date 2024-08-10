@@ -16,22 +16,20 @@ with lib.olistrik;
       # ./valheim-server
     ];
 
-  # Required for ZFS.
-  networking.hostId = "1a75b647";
-
+  # Shared configurations.
   olistrik.collections = {
     common = enabled;
     server = enabled;
   };
 
-  # impermanence wipes out password changes, and binding /etc/shadow doesn't seem to fix that.
-  olistrik.user.hashedPasswordFile = "/persist/secret/user.password";
-  users.mutableUsers = false;
+  # Required for ZFS.
+  networking.hostId = "1a75b647";
 
   # Impermanence. Get rekt python.
-  boot.initrd.postDeviceCommands = lib.mkAfter ''
-    zfs rollback -r zroot/local/root@blank
-  '';
+  olistrik.impermanence.enable = true;
+  users.mutableUsers = false;
+  olistrik.user.hashedPasswordFile = "/persist/secret/user.password";
+  olistrik.impermanence.zfs.snapshots = [ "zroot/local/root@blank" ];
 
   # Enable Nixwarden
   olistrik.services.nixwarden = {
@@ -39,19 +37,9 @@ with lib.olistrik;
   };
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot = enabled;
+  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
-
-  # Select internationalisation properties.
-  time.timeZone = "Europe/Amsterdam";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_GB.UTF-8";
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "us";
-  };
 
   # NEVER CHANGE.
   system.stateVersion = "24.05"; # Did you read the comment?

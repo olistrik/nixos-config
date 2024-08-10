@@ -13,6 +13,13 @@ with lib; rec {
     inherit type default description;
   };
 
+  mkSub = description: options: mkOption {
+    inherit description;
+    type = types.submodule {
+      inherit options;
+    };
+  };
+
   mkBool = default: description: mkOpt types.bool default description;
 
   ## Quickly enable an option.
