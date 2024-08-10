@@ -34,6 +34,11 @@ in
       '';
     };
 
+    # Disable the sudoers lecture. I've read it.
+    security.sudo.extraConfig = ''
+      Defaults lecture = never
+    '';
+
     # TODO: extract to own module with nixwarden secrets.
     services.tailscale.enable = true;
 

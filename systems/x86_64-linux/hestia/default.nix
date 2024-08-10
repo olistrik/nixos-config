@@ -24,6 +24,10 @@ with lib.olistrik;
     server = enabled;
   };
 
+  # impermanence wipes out password changes, and binding /etc/shadow doesn't seem to fix that.
+  olistrik.user.hashedPasswordFile = "/persist/secret/user.password";
+  users.mutableUsers = false;
+
   # Impermanence. Get rekt python.
   boot.initrd.postDeviceCommands = lib.mkAfter ''
     zfs rollback -r zroot/local/root@blank
