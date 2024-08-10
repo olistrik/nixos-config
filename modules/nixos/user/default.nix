@@ -11,13 +11,13 @@ in
   options.olistrik.user = with types; {
     enable = mkOpt bool false "Whether to enable my user settings";
     name = mkOpt str "oli" "The name of the standard account";
-    initialPassword = mkOpt str "password" "The initial password for the standard account";
+		hashedPasswordFile = mkOpt (nullOr str) null "A file containing the users hashed password, useful for impermanence";
     extraGroups = mkOpt (listOf str) [ ] "Any extra groups the default account should have";
     authorizedKeys = mkOpt (listOf str) [ ] "";
   };
 
   config.users.users.${cfg.name} = {
-    inherit (cfg) name initialPassword;
+    inherit (cfg) name hashedPasswordFile;
 
     isNormalUser = true;
     extraGroups = [
