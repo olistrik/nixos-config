@@ -21,7 +21,8 @@ in
     };
 
     olistrik.user.authorizedKeys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIL0q7NgpGYIG6vQqzJTD64jUASuDWxw7DNKsrw+j3G/ oli@nixogen"
+      "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIMcvHSxN1mFGgB6r19eHIqGKvhNOwddvVe43NwhKHmWzAAAABHNzaDo= oli@yubikey"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHwyuoI18ZEoo/c38XvI6HwvRlxigxd3lPzshi7RtVw2 oli@thoth"
     ];
 
     # Allow sudo for nixos-rebuild --use-remote-sudo, without passwordless sudo.
