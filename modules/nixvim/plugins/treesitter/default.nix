@@ -10,7 +10,9 @@ mkPlugin "treesitter" {
   plugins = {
     treesitter = {
       enable = true;
-      indent = true;
+      settings = {
+        indent = true;
+      };
       grammarPackages = with pkgs.olistrik; allGrammars ++ [
         tree-sitter-go-template
       ];
