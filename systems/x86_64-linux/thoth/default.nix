@@ -48,6 +48,14 @@ with lib.olistrik;
   services.thermald.enable = true;
   services.tlp.enable = true;
 
+  # Enable printing service
+  services.printing.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
   # NEVER CHANGE.
   system.stateVersion = "24.05"; # Did you read the comment?
 }
