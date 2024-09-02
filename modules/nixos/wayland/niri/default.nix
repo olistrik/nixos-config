@@ -12,6 +12,9 @@ in
 
 
   config = mkIf cfg.enable {
+    olistrik.wayland = {
+      way-displays.enable = true;
+    };
 
     environment.systemPackages = with pkgs; [
       cfg.package
