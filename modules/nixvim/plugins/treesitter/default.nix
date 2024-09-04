@@ -11,6 +11,7 @@ mkPlugin "treesitter" {
     treesitter = {
       enable = true;
       settings = {
+        highlight.enable = true;
         indent.enable = true;
       };
       grammarPackages = with pkgs.olistrik; allGrammars ++ [
