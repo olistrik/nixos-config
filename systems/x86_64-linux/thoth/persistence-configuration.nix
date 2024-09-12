@@ -4,14 +4,18 @@
     hideMounts = true;
     directories = [
       # system
-			"/etc/NetworkManager/system-connections"
+      "/etc/NetworkManager/system-connections"
       "/var/log"
       "/var/lib/nixos"
       "/var/lib/systemd/coredump"
-			"/var/lib/bluetooth"
+      "/var/lib/bluetooth"
 
       # services
       "/var/lib/tailscale"
+    ];
+    files = [
+      # machine-id
+      "/etc/machine-id"
     ];
   };
 }
