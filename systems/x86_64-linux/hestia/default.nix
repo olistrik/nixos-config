@@ -11,6 +11,7 @@ with lib.olistrik;
 
     ./acme.nix
     ./node-red.nix
+    ./immich.nix
     # ./palworld-server.nix
     # ./valheim-server
   ];

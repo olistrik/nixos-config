@@ -14,6 +14,9 @@
     # Unstable nixpkgs
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    # Immich nixpkgs (until https://github.com/NixOS/nixpkgs/pull/324127 is merged)
+    immich.url = "github:jvanbruegge/nixpkgs/immich";
+
     ##########################
     # flake and system support
 
@@ -94,6 +97,9 @@
         impermanence.nixosModules.impermanence
 
         valheim-server.nixosModules.default
+
+        # Temporary; requires overlay.
+        "${immich}/nixos/modules/services/web-apps/immich.nix"
 
         # until I work out where to put this.
         ({ ... }: {

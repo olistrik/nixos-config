@@ -21,8 +21,15 @@
       # game servers
       "/var/lib/valheim"
       "/var/lib/palworld-server"
+
+      # storage servers
+      "/var/lib/immich"
+      "/var/lib/postgresql"
     ];
     files = [
+      # machine-id
+      "/etc/machine-id"
+
       # ssh host keys
       "/etc/ssh/ssh_host_ed25519_key"
       "/etc/ssh/ssh_host_ed25519_key.pub"
