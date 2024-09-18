@@ -59,6 +59,11 @@
         steam-fetcher.follows = "steam-fetcher";
       };
     };
+
+    nix-matlab = {
+      url = "gitlab:doronbehar/nix-matlab";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs:
@@ -90,6 +95,7 @@
         valheim-server.overlays.default
         steam-fetcher.overlays.default
         nixvim.overlays.default
+        nix-matlab.overlay # why.
       ];
 
       systems.modules.nixos = with inputs; [
