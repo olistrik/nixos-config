@@ -13,27 +13,31 @@ in
     authorizedKeys = mkOpt (listOf str) [ ] "";
   };
 
-  config.users.users.${cfg.name} = {
-    inherit (cfg) name hashedPasswordFile;
 
-    isNormalUser = true;
-    extraGroups = [
-      "wheel"
-      "audio"
-      "sound"
-      "video"
-      "input"
-      "tty"
+  config = {
+    nix.settings.trusted-users = [ cfg.name ];
+    users.users.${cfg.name} = {
+      inherit (cfg) name hashedPasswordFile;
 
-      # TODO: Move to a better place
-      "dialout"
-      "plugdev"
-      "osboxes"
-      "adbusers"
-      "lxd"
-      "openvpn"
-    ] ++ cfg.extraGroups;
+      isNormalUser = true;
+      extraGroups = [
+        "wheel"
+        "audio"
+        "sound"
+        "video"
+        "input"
+        "tty"
 
-    openssh.authorizedKeys.keys = cfg.authorizedKeys;
+        # TODO: Move to a better place
+        "dialout"
+        "plugdev"
+        "osboxes"
+        "adbusers"
+        "lxd"
+        "openvpn"
+      ] ++ cfg.extraGroups;
+
+      openssh.authorizedKeys.keys = cfg.authorizedKeys;
+    };
   };
 }

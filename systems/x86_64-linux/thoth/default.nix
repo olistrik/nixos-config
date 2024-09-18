@@ -18,6 +18,10 @@ with lib.olistrik;
       workstation = enabled;
     };
 
+    virtualisation = {
+      docker = enabled;
+    };
+
     wayland = {
       niri = enabled;
       ags = enabled;
@@ -55,6 +59,46 @@ with lib.olistrik;
     nssmdns4 = true;
     openFirewall = true;
   };
+
+  # Configure audio priority
+  # headphones ? bluetooth > HDMI > Speaker 
+  services.pipewire.wireplumber.extraConfig."10-sink-priority" = {
+    "monitor.alsa.rules" = [
+      {
+        matches = [
+          {
+            "node.name" = "~alsa_output.*";
+            "device.profile.description" = "Speaker + Headphones";
+            # With / Without headphones?
+          }
+        ];
+        actions = {
+          update-props = {
+            "priority.driver" = "1000";
+            "priority.session" = "1000";
+          };
+        };
+      }
+      {
+        matches = [
+          {
+            "node.name" = "~alsa_output.*";
+            "device.profile.description" = "HDMI / DisplayPort 1 Output";
+          }
+        ];
+        actions = {
+          update-props = {
+            "priority.driver" = "500";
+            "priority.session" = "500";
+          };
+        };
+      }
+      # bluetooth? monitor.bluez.rules
+    ];
+  };
+
+  # matlab is a piece of sh*t
+  environment.systemPackages = with pkgs; [ matlab ];
 
   # NEVER CHANGE.
   system.stateVersion = "24.05"; # Did you read the comment?
