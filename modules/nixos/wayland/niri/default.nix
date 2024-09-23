@@ -6,7 +6,7 @@ let
 in
 {
   options.olistrik.wayland.niri = {
-    enable = mkOpt types.bool false "Whether to enable the Niri compositor.";
+    enable = mkEnableOption "niri";
     package = mkOpt types.package pkgs.niri "Which Niri package to use.";
   };
 
@@ -90,8 +90,6 @@ in
 
     # systemd.packages = [ pkgs.niri ];
     # systemd.user.services.niri.wantedBy = [ "default.target" ];
-
-    hardware.opengl.package = pkgs.unstable-mesa.drivers;
 
     programs.dconf = {
       enable = true;

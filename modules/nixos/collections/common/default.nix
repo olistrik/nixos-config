@@ -6,7 +6,7 @@ let
 in
 {
   options.olistrik.collections.common = {
-    enable = mkEnableOption "common configuration";
+    enable = mkEnableOption "common configuration" // { default = true; };
   };
   config = mkIf cfg.enable {
     olistrik = {
@@ -65,7 +65,6 @@ in
 
       # maintainance tools
       gen-package-lock
-      mk-installer
     ];
   };
 }
