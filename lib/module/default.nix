@@ -43,8 +43,4 @@ with lib; rec {
   disabled = {
     enable = false;
   };
-
-  basicOptions = module: {
-    enable = mkOpt types.bool false "Whether to enable ${module}.";
-  };
 }

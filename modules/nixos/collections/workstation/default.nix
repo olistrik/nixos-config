@@ -5,14 +5,15 @@ let
   cfg = config.olistrik.collections.workstation;
 in
 {
-  options.olistrik.collections.workstation = basicOptions "workstation configuration and programs";
+  options.olistrik.collections.workstation = {
+    enable = mkEnableOption "common workstation configuration";
+  };
 
   config = mkIf cfg.enable {
     # programs that don't need "much" configuration.
     environment.systemPackages = with pkgs; [
       # Git helpers
-      # olistrik.git-graph
-      # olistrik.git-igitt
+      git-igitt
 
       pavucontrol
     ];

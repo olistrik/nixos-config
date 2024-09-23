@@ -5,11 +5,11 @@ let
   cfg = config.olistrik.virtualisation.docker;
 in
 {
-  options.olistrik.virtualisation.docker = with types;
-    basicOptions "Docker" // {
-      rootless = mkOpt types.bool false "Use docker in rootless mode.";
-      buildx = mkOpt types.bool false "Enable buildx support.";
-    };
+  options.olistrik.virtualisation.docker = with types; {
+    enable = mkEnableOption "docker";
+    rootless = mkEnableOption "rootless mode";
+    buildx = mkEnableOption "buildx support";
+  };
   config = mkIf cfg.enable {
     environment.systemPackages = [ pkgs.docker-compose ];
 

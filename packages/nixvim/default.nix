@@ -1,4 +1,4 @@
-{ inputs, lib, channels, nixvim, ... }:
+{ inputs, lib, nixvim, ... }:
 let
   modules = inputs.self.nixvimModules;
 
@@ -19,13 +19,13 @@ let
 
 in
 nixvim.makeNixvimWithModule {
-  pkgs = channels.unstable;
   module = {
     imports = lib.attrValues modules;
 
     config = {
       olistrik.plugins = {
         lsp = enabled;
+        copilot = enabled;
         gitblame = enabled;
         lualine = enabled;
         telescope = enabled;

@@ -5,7 +5,9 @@ let
   cfg = config.olistrik.collections.work;
 in
 {
-  options.olistrik.collections.work = basicOptions "work programs";
+  options.olistrik.collections.work = {
+    enable = mkEnableOption "common work configuraion";
+  };
 
   config = mkIf cfg.enable {
     networking.extraHosts = ''

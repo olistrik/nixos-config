@@ -14,6 +14,7 @@ let
     });
 in
 {
+  # TODO: remove this and refactor nixvim.
   nixvim = {
     mkPlugin = _mk "plugin";
     mkPreset = _mk "preset";

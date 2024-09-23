@@ -5,7 +5,8 @@ with lib.olistrik.nixvim;
 mkPlugin "gitblame" {
   inherit config;
 
-  plugins.gitblame.settings = {
+  plugins.gitblame = {
+    enable = true;
     delay = 1000;
   };
 }
