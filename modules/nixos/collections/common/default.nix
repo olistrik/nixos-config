@@ -5,8 +5,8 @@ let
   cfg = config.olistrik.collections.common;
 in
 {
-  options.olistrik.collections.common = with types; {
-    enable = mkOpt bool true "Whether to install common programs and configurations.";
+  options.olistrik.collections.common = {
+    enable = mkEnableOption "common configuration";
   };
   config = mkIf cfg.enable {
     olistrik = {

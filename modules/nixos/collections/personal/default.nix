@@ -8,7 +8,7 @@ let
 in
 {
   options.olistrik.collections.personal = with types; {
-    enable = mkOpt bool true "Whether to install common programs and configurations.";
+    enable = mkEnableOption "personal configuration";
   };
 
   config = mkIf cfg.enable {
@@ -19,6 +19,7 @@ in
         feh
         mplayer
         zathura
+        discord
 
         # editing
         gimp

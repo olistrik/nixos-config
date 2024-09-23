@@ -1,6 +1,7 @@
 { channels, ... }:
 with channels.unstable.python3Packages;
 final: prev: {
+  inherit (channels.unstable) pulseview sigrok-cli;
   greatfet = greatfet.overrideAttrs (prev: rec {
     version = "2021.2.1";
     src = final.fetchFromGitHub {

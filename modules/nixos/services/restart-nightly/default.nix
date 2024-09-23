@@ -9,7 +9,9 @@ let
   cfg = config.olistrik.services.restart-nightly;
 in
 {
-  options.olistrik.services.restart-nightly = basicOptions "the restart-nightly service";
+  options.olistrik.services.restart-nightly = {
+    enable = mkEnableOption "restart-nightly service";
+  };
 
   config = lib.mkIf cfg.enable {
     systemd.timers."restart-nightly@" = {

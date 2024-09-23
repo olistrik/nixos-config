@@ -5,7 +5,10 @@ let
   cfg = config.olistrik.tools.direnv;
 in
 {
-  options.olistrik.tools.direnv = basicOptions "direnv";
+  options.olistrik.tools.direnv = {
+    enable = mkEnableOption "direnv";
+  };
+
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ direnv nix-direnv ];
 

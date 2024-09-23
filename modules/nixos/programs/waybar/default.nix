@@ -40,7 +40,9 @@ let
 
 in
 {
-  options.olistrik.programs.waybar = basicOptions "Waybar";
+  options.olistrik.programs.waybar = {
+    enable = mkEnableOption "waybar";
+  };
 
   config = mkIf cfg.enable {
     programs.waybar.enable = true;

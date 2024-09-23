@@ -4,15 +4,37 @@ with lib.olistrik;
 with lib.olistrik.nixvim;
 mkPlugin "lsp" {
   inherit config;
+
   plugins = {
+    # TODO: Move to it's own module?
+    none-ls = {
+      enable = true;
+      sources.diagnostics = {
+        glslc.enable = true;
+      };
+    };
+
     lsp = {
       enable = true;
       servers = {
+        # TODO: Extract to seperate locations.
         nil-ls = {
           enable = true;
           extraOptions.settings.nil = {
             formatting.command = [ "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt" ];
           };
+        };
+        matlab-ls = {
+          enable = true;
+          settings = {
+            installPath = "${pkgs.matlab}"; # _without_ /bin/matlab, the lsp adds that.
+          };
+        };
+        cmake = {
+          enable = true;
+        };
+        ccls = {
+          enable = true;
         };
       };
 

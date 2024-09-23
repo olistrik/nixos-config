@@ -7,13 +7,21 @@ with lib.olistrik;
 with lib.olistrik.nixvim;
 mkPlugin "treesitter" {
   inherit config;
+
+  # TODO: move to some glsl package.
+  filetype =
+    let
+      extensionsToAttrs = exts: ft: builtins.listToAttrs
+        (map (ext: { name = ext; value = ft; }) exts);
+    in
+    {
+      extension = extensionsToAttrs [ "vert" "tesc" "tese" "geom" "frag" "comp" ] "glsl";
+    };
+
   plugins = {
     treesitter = {
       enable = true;
-      settings = {
-        highlight.enable = true;
-        indent.enable = true;
-      };
+      indent = true;
       grammarPackages = with pkgs.olistrik; allGrammars ++ [
         tree-sitter-go-template
       ];

@@ -5,7 +5,10 @@ let
   cfg = config.olistrik.programs.zsh;
 in
 {
-  options.olistrik.programs.zsh = basicOptions "zsh";
+  options.olistrik.programs.zsh = {
+    enable = mkEnableOption "zsh";
+  };
+
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ thefuck fzf starship direnv zplug ];
 
@@ -150,7 +153,6 @@ in
         #################################
         ## Git specials
 
-        alias gg="git-graph"
         alias igg="git-igitt"
 
         alias gsw="git switch"
@@ -164,10 +166,6 @@ in
         alias gri="git rebase -i"
         alias gp="git push"
         alias gpf="git push --force-with-lease"
-        alias git-home="git config user.email oliverstrik@gmail.com && git config user.name olistrik && git config -l | grep user"
-        alias git-work="git config user.email oliver@klippa.com && git config user.name 'Oliver Strik' && git config -l | grep user"
-
-        alias titty="go mod tidy"
 
         ################################
         ## Fuzzy completion

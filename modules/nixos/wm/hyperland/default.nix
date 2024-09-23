@@ -5,7 +5,9 @@ let
   cfg = config.olistrik.wm.hyperland;
 in
 {
-  options.olistrik.wm.hyperland = basicOptions "Hyprland";
+  options.olistrik.wm.hyperland = {
+    enable = mkEnableOption "hyprland";
+  };
 
   config = mkIf cfg.enable {
     programs.hyprland = {

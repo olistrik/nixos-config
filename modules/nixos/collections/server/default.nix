@@ -5,7 +5,9 @@ let
   cfg = config.olistrik.collections.server;
 in
 {
-  options.olistrik.collections.server = basicOptions "server configuration";
+  options.olistrik.collections.server = {
+    enable = mkEnableOption "common server configuration";
+  };
 
   config = mkIf cfg.enable {
     # Enable the OpenSSH daemon.
