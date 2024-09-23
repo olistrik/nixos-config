@@ -3,18 +3,11 @@
 with lib;
 let
   cfg = config.olistrik.programs.alacritty;
-  mkSubModule = attrs: types.attrsOf (types.submodule attrs);
   tomlFormat = pkgs.formats.toml { };
 in
 {
   options.olistrik.programs.alacritty = {
-    enable = mkOption {
-      type = types.bool;
-      default = false;
-      description = ''
-        enable or disable alacritty.
-      '';
-    };
+    enable = mkEnableOption "alacritty";
     settings = mkOption {
       type = tomlFormat.type;
       default = { };
