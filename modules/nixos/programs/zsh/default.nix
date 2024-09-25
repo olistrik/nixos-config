@@ -5,12 +5,13 @@ let
   cfg = config.olistrik.programs.zsh;
 in
 {
-  options.olistrik.programs.zsh = {
+  options.olistrik.programs.zsh = with types; {
     enable = mkEnableOption "zsh";
+    extraConfig = mkOpt lines "" "Extra configuration to be added to zshrc";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ thefuck fzf starship direnv zplug ];
+    environment.systemPackages = with pkgs; [ thefuck fzf starship ];
 
     users.defaultUserShell = pkgs.zsh;
 
@@ -20,22 +21,6 @@ in
       syntaxHighlighting.enable = true;
       autosuggestions.enable = true;
       interactiveShellInit = ''
-        #################################
-        ## Hook direnv
-        eval "$(direnv hook zsh)"
-
-        #################################
-        ## source and install zplug
-
-        source ${pkgs.zplug}/share/zplug/init.zsh
-
-        zplug "agkozak/zsh-z"
-
-        if ! zplug check; then
-          zplug install
-        fi
-        zplug load
-
         #################################
         ## Magic Shit
 
@@ -179,7 +164,7 @@ in
           'm:{a-z\-}={A-Z\_}' \
           'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
           'r:|?=** m:{a-z\-}={A-Z\_}'
-      '';
+      '' + cfg.extraConfig;
 
       promptInit = ''
         eval "$(starship init zsh)"
