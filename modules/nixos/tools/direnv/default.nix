@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, ... }:
 with lib;
 with lib.olistrik;
 let
@@ -7,18 +7,22 @@ in
 {
   options.olistrik.tools.direnv = {
     enable = mkEnableOption "direnv";
+    # TODO: lib this for all shells, etc.
+    shellHooks = mkSub "config for shell hooks" {
+      zsh = mkSub "config for zsh" {
+        enable = mkEnableOption "zsh hook" // {
+          default = config.olistrik.programs.zsh.enable;
+        };
+      };
+    };
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ direnv nix-direnv ];
+    programs.direnv.enable = true;
 
-    # Configure direnv, also requires `eval ${direnv hook zsh)` in zsh.
-    # TODO move direnv to it's own module and make it set that hook somehow.
-    nix.settings = {
-      keep-outputs = true;
-      keep-derivations = true;
+    olistrik.programs.zsh = mkIf cfg.shellHooks.zsh.enable {
+      extraConfig = ''eval "$(${config.programs.direnv.package}/bin/direnv hook zsh)"'';
     };
-
-    environment.pathsToLink = [ "/share/nix-direnv" ];
   };
 }
+

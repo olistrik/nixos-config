@@ -15,6 +15,7 @@ with lib; rec {
 
   mkSub = description: options: mkOption {
     inherit description;
+    default = { };
     type = types.submodule {
       inherit options;
     };

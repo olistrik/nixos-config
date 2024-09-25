@@ -14,6 +14,7 @@ in
       programs = {
         neovim = enabled;
         zsh = enabled;
+        zoxide = enabled;
       };
       tools = {
         direnv = enabled;
