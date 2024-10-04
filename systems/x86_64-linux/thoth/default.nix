@@ -98,7 +98,9 @@ with lib.olistrik;
   };
 
   # matlab is a piece of sh*t
-  environment.systemPackages = with pkgs; [ matlab ];
+  environment.systemPackages = with pkgs; [
+    matlab
+  ];
 
   # NEVER CHANGE.
   system.stateVersion = "24.05"; # Did you read the comment?
