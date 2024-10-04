@@ -25,7 +25,7 @@ nixvim.makeNixvimWithModule {
     config = {
       olistrik.plugins = {
         lsp = enabled;
-        copilot = enabled;
+        # copilot = enabled; # temp; until I can make it a little less intrusive.
         gitblame = enabled;
         lualine = enabled;
         telescope = enabled;

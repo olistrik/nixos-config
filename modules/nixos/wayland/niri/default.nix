@@ -14,6 +14,9 @@ in
   config = mkIf cfg.enable {
     olistrik.wayland = {
       way-displays.enable = true;
+      xwayland-satellite.enable = true;
+      swayidle.enable = true;
+      wbg.enable = true;
     };
 
     environment.systemPackages = with pkgs; [
@@ -35,9 +38,6 @@ in
 
       # auth agent. plasma-polkit-agent. Can be started with systemd.
       pantheon.pantheon-agent-polkit
-
-      # legacy support
-      xwayland-satellite
     ];
 
     security.pam.services.swaylock = { };
@@ -108,9 +108,6 @@ in
     environment.sessionVariables = {
       NIXOS_OZONE_WL = "1";
       _JAVA_AWT_WM_NONREPARENTING = "1";
-
-      # TODO: this should be synced by xwayland-satellite
-      DISPLAY = ":0";
     };
   };
 }

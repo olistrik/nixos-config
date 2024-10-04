@@ -2,36 +2,35 @@
 with lib;
 with lib.olistrik;
 let
-  # TODO: modularize
   cfg = config.olistrik.wayland.way-displays;
 in
 {
-  options.olistrik.wayland.way-displays = {
-    enable = mkOpt types.bool false "Whether to enable way-displays.";
-    package = mkOpt types.package pkgs.way-displays "Which way-displays package to use.";
+  options.olistrik.wayland.way-displays = with types; {
+    enable = mkEnableOption "way-displays service";
+    package = mkOpt package pkgs.way-displays "Which way-displays package to use.";
+    logLevel = mkOpt (enum [ "debug" "info" "warning" "error" ]) "debug" "The log level for way-displays";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      (writeShellScriptBin
-        "way-displays"
-        ''
-          LOG_FILE="way-displays.$XDG_VTNR.log"
-          
-          if [ -z "$XDG_VTNR" ]; then
-            VT="$(tty | sed -E 's,(^/dev|/),,g')"
-            LOG_FILE="way-displays.$VT.log"
-          fi
+    systemd.user.services.way-displays = {
+      description = "Wayland Display Manager";
 
-          echo "way-displays logging to $LOG_FILE"
+      partOf = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      requisite = [ "graphical-session.target" ];
+      wantedBy = [ "graphical-session.target" ];
 
-          if [ $# -eq 0 ]; then 
-            sleep 1 # give Hyprland a moment to set its defaults
-            ${cfg.package}/bin/way-displays -L debug > "/tmp/$LOG_FILE" 2>&1
-          else
-            ${cfg.package}/bin/way-displays $@
-          fi
-        '')
-    ];
+      startLimitIntervalSec = 10;
+      startLimitBurst = 5;
+
+      serviceConfig = {
+        ExecStart = lib.escapeShellArgs [
+          "${cfg.package}/bin/way-displays"
+          "-L${cfg.logLevel}"
+        ];
+
+        Restart = "on-failure";
+      };
+    };
   };
 }
