@@ -12,6 +12,7 @@
       "/var/lib/nixwarden"
       "/var/lib/tailscale"
       "/var/lib/acme"
+      "/var/lib/nix-serve"
 
       # home assistant
       "/var/lib/mosquitto"

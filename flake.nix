@@ -5,17 +5,11 @@
     ##########################
     # nix package sets
 
-    # Previous nixpkgs
-    oldpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
-
     # Normal nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
 
     # Unstable nixpkgs
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    # Immich nixpkgs (until https://github.com/NixOS/nixpkgs/pull/324127 is merged)
-    immich.url = "github:jvanbruegge/nixpkgs/immich";
 
     ##########################
     # flake and system support
@@ -44,6 +38,8 @@
 
     niri-flake = {
       url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "unstable";
+      inputs.nixpkgs-stable.follows = "nixpkgs";
     };
 
     nixvim = {
@@ -52,14 +48,14 @@
     };
 
     steam-fetcher = {
-      url = "github:olistrik/steam-fetcher";
-      inputs.nixpkgs.follows = "oldpkgs";
+      url = "github:nix-community/steam-fetcher";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     valheim-server = {
-      url = "github:olistrik/valheim-server-flake";
+      url = "github:aidalgol/valheim-server-flake";
       inputs = {
-        nixpkgs.follows = "oldpkgs";
+        nixpkgs.follows = "nixpkgs";
         steam-fetcher.follows = "steam-fetcher";
       };
     };
@@ -109,8 +105,8 @@
 
         valheim-server.nixosModules.default
 
-        # Temporary; requires overlay.
-        "${immich}/nixos/modules/services/web-apps/immich.nix"
+        # Temporary.
+        "${unstable}/nixos/modules/services/web-apps/immich.nix"
 
         # until I work out where to put this.
         ({ ... }: {
@@ -122,9 +118,11 @@
           nix.settings = {
             auto-optimise-store = true;
             substituters = [
+              "https://cache.olii.nl"
               "https://cache.nixos.org"
             ];
             trusted-public-keys = [
+              "cache.olii.nl:/eobpj1e29xJJ4r2ixYFR4E0t0zNDqu2g9/3ryaRa60="
               "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
             ];
           };
