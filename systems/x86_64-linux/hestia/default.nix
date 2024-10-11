@@ -8,10 +8,12 @@ with lib.olistrik;
     ./hardware-configuration.nix
     ./disko-configuration.nix
     ./persistence-configuration.nix
+    ./build-all-systems.nix
 
     ./acme.nix
     ./node-red.nix
     ./immich.nix
+    ./nix-serve.nix
     # ./palworld-server.nix
     # ./valheim-server
   ];
