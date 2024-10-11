@@ -8,16 +8,28 @@ mkPlugin "copilot" {
   plugins = {
     copilot-lua = {
       enable = true;
-      panel.enabled = false;
-      suggestion.enabled = false;
+      panel.keymap.open = "<A-CR>";
+      panel.layout.position = "right";
+      # panel.enabled = false;
+      # suggestion.enabled = false;
     };
 
-    copilot-cmp.enable = true;
-    cmp.settings.sources = [
-      { name = "copilot"; }
-      { name = "nvim_lsp"; }
-      { name = "buffer"; }
-      { name = "path"; }
-    ];
+    copilot-lualine = {
+      enable = true;
+    };
+
+    lualine = {
+      sections = {
+        lualine_x = lib.mkBefore [ "copilot" ];
+      };
+    };
+
+    # copilot-cmp.enable = true;
+    # cmp.settings.sources = [
+    #   { name = "copilot"; }
+    #   { name = "nvim_lsp"; }
+    #   { name = "buffer"; }
+    #   { name = "path"; }
+    # ];
   };
 }
