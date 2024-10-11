@@ -30,6 +30,11 @@ mkPlugin "lsp" {
             installPath = "${pkgs.matlab}"; # _without_ /bin/matlab, the lsp adds that.
           };
         };
+
+        pylsp = {
+          enable = true;
+        };
+
         cmake = {
           enable = true;
         };

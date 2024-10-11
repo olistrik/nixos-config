@@ -45,6 +45,11 @@ with lib.olistrik;
 
   # Enable wireless.
   hardware.bluetooth.enable = true;
+  hardware.bluetooth.settings = {
+    General = {
+      Enable = "Source,Sink,Media,Socket";
+    };
+  };
   networking.networkmanager.enable = true;
   olistrik.user.extraGroups = [ "networkmanager" ];
 
