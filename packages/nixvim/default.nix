@@ -42,6 +42,15 @@ nixvim.makeNixvimWithModule {
         todo-comments = enabled;
         surround = enabled;
         fugitive = enabled;
+
+        dressing = {
+          enable = true;
+          settings = {
+            input = {
+              insert_only = false;
+            };
+          };
+        };
         # abolish = enabled;
         # easy-align = enabled;
         # vim-repeat = enabled;
