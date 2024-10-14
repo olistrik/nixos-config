@@ -24,7 +24,7 @@ in
           echo "starting build of all system configurations..."
           for system in ''${SYSTEMS}; do
             echo "building ''${system}..." 
-            nix build ''${FLAKE_URI}#nixosConfigurations.''${system}.config.system.build.toplevel
+            nix build --no-link ''${FLAKE_URI}#nixosConfigurations.''${system}.config.system.build.toplevel
           done
           echo "done!"
         '';
