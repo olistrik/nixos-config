@@ -102,6 +102,8 @@ with lib.olistrik;
     ];
   };
 
+  hardware.opentabletdriver.enable = true;
+
   # matlab is a piece of sh*t
   environment.systemPackages = with pkgs; [
     matlab
@@ -118,31 +120,12 @@ with lib.olistrik;
 # services.udev.packages = [ pkgs.yubikey-personalization ];
 # services.pcscd.enable = true;
 
-#### Angular bullshit probably:
-# boot.loader.kernel.sysctl = { "fs.inotify.max_user_watches" = "1048576"; };
-
 #### wut?:
 # hardware.opengl = {
 #   enable = true;
 #   driSupport = true;
 #   extraPackages = with pkgs; [ vaapiVdpau libvdpau-va-gl ];
 # };
-
-#### wut?:
-# hardware.bluetooth.settings.General = {
-#   Enable = "Source,Sink,Media,Socket";
-#   Disable = "Headset";
-# };
-
-#### sus:
-# # Enable laptop touchpad.
-# services.libinput.mouse = { accelSpeed = "-0.85"; };
-
-
-#### docker bullshit?:
-# networking.useDHCP = false;
-# networking.interfaces.enp0s31f6.useDHCP = true;
-# networking.interfaces.wlp60s0.useDHCP = true;
 
 #### @max wut?:
 # programs.nix-ld = {

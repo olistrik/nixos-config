@@ -23,7 +23,7 @@ in
       cfg.package
 
       # Theming
-      adw-gtk3
+      yaru-theme
 
       # Wallpaper utility
       wbg
@@ -42,15 +42,17 @@ in
 
     security.pam.services.swaylock = { };
 
-    environment.etc = {
-      "xdg/gtk-2.0/gtkrc".text = ''
-        gtk-theme-name = "adw-gtk3-dark"
-      '';
-      "xdg/gtk-3.0/settings.ini".text = ''
-        [Settings]
-        gtk-theme-name = adw-gtk3-dark
-      '';
-    };
+    # environment.etc = {
+    #   "xdg/gtk-2.0/gtkrc".text = ''
+    #     gtk-theme-name = "Yaru-dark"
+    #     gtk-icon-theme-name = "Yaru-dark"
+    #   '';
+    #   "xdg/gtk-3.0/settings.ini".text = ''
+    #     [Settings]
+    #     gtk-theme-name = Yaru-dark
+    #     gtk-icon-theme-name = Yaru-dark
+    #   '';
+    # };
 
     xdg.portal = {
       enable = true;
@@ -88,9 +90,6 @@ in
       };
     };
 
-    # systemd.packages = [ pkgs.niri ];
-    # systemd.user.services.niri.wantedBy = [ "default.target" ];
-
     programs.dconf = {
       enable = true;
       profiles = {
@@ -98,7 +97,8 @@ in
           settings = {
             "org/gnome/desktop/interface" = {
               color-scheme = "prefer-dark";
-              gtk-theme = "adw-gtk3-dark";
+              gtk-theme = "Yaru-dark";
+              gtk-icon-theme = "Yaru-dark";
             };
           };
         }];
