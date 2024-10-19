@@ -3,6 +3,5 @@
   inherit (channels.unstable)
     # Not yet in 24.05.
     git-igitt
-    # xwayland-satellite
     ;
 }

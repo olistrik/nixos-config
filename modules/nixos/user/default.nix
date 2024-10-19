@@ -30,7 +30,6 @@ in
 
         # TODO: Move to a better place
         "dialout"
-        "plugdev"
         "osboxes"
         "adbusers"
         "lxd"

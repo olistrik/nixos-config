@@ -23,6 +23,8 @@ in
 
         # editing
         gimp
+        inkscape
+        obsidian
 
         # browsers
         google-chrome
