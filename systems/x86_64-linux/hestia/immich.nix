@@ -1,4 +1,4 @@
-{ ... }: {
+{ config, ... }: {
 
   services.immich = {
     enable = true;
@@ -18,7 +18,7 @@
         '';
         locations = {
           "/" = {
-            proxyPass = "http://localhost:3001";
+            proxyPass = with config.services.immich; "http://${host}:${toString port}";
             proxyWebsockets = true;
           };
         };
