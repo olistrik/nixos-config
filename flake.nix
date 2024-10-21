@@ -99,17 +99,27 @@
         nix-matlab.overlay # why.
       ];
 
+      # Temporary, immich is not in 24.05
+      systems.hosts.hestia.modules = with inputs; [
+        ({ ... }: {
+          disabledModules = [ "services/databases/redis.nix" ];
+          imports = [
+            "${unstable}/nixos/modules/services/web-apps/immich.nix"
+            "${unstable}/nixos/modules/services/databases/redis.nix"
+          ];
+        })
+      ];
+
       systems.modules.nixos = with inputs; [
         disko.nixosModules.default
         impermanence.nixosModules.impermanence
 
         valheim-server.nixosModules.default
 
-        # Temporary.
-        "${unstable}/nixos/modules/services/web-apps/immich.nix"
 
         # until I work out where to put this.
         ({ ... }: {
+
           nix.registry.nixpkgs.flake = nixpkgs;
           nix.registry.unstable.flake = unstable;
           nix.registry.olistrik.flake = self;
