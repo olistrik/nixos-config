@@ -14,6 +14,10 @@ mkPlugin "lsp" {
       };
     };
 
+    typescript-tools = {
+      enable = true;
+    };
+
     lsp = {
       enable = true;
       servers = {
@@ -38,9 +42,12 @@ mkPlugin "lsp" {
         cmake = {
           enable = true;
         };
+
         ccls = {
           enable = true;
         };
+
+
       };
 
       keymaps = {
