@@ -43,11 +43,9 @@ mkPlugin "lsp" {
           enable = true;
         };
 
-        ccls = {
+        clangd = {
           enable = true;
         };
-
-
       };
 
       keymaps = {
@@ -70,6 +68,11 @@ mkPlugin "lsp" {
           "g]" = "goto_next";
         };
       };
+    };
+
+    clangd-extensions = {
+      enable = true;
+      enableOffsetEncodingWorkaround = true; # clangd and copilot fight apparently.
     };
 
     cmp = {
