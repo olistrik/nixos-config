@@ -7,12 +7,13 @@ in
 {
   options.olistrik.wayland.ags = {
     enable = mkOpt types.bool false "Whether to enable AGS widgets.";
-    package = mkOpt types.package pkgs.ags "Which AGS package to use.";
+    package = mkOpt types.package pkgs.ags2 "Which AGS package to use.";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [
+    environment.systemPackages = with pkgs; [
       cfg.package
+      brightnessctl
     ];
   };
 }
