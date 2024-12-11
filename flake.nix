@@ -6,7 +6,7 @@
     # nix package sets
 
     # Normal nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
 
     # Unstable nixpkgs
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
