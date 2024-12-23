@@ -40,7 +40,7 @@ nixvim.makeNixvimWithModule {
         comment = enabled;
         # harpoon = enabled;
         todo-comments = enabled;
-        surround = enabled;
+        vim-surround = enabled;
         fugitive = enabled;
 
         dressing = {

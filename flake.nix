@@ -48,7 +48,7 @@
     };
 
     nixvim = {
-      url = "github:nix-community/nixvim/nixos-24.05";
+      url = "github:nix-community/nixvim/nixos-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -105,15 +105,15 @@
       ];
 
       # Temporary, immich is not in 24.05
-      systems.hosts.hestia.modules = with inputs; [
-        ({ ... }: {
-          disabledModules = [ "services/databases/redis.nix" ];
-          imports = [
-            "${unstable}/nixos/modules/services/web-apps/immich.nix"
-            "${unstable}/nixos/modules/services/databases/redis.nix"
-          ];
-        })
-      ];
+      # systems.hosts.hestia.modules = with inputs; [
+      #   ({ ... }: {
+      #     disabledModules = [ "services/databases/redis.nix" ];
+      #     imports = [
+      #       "${unstable}/nixos/modules/services/web-apps/immich.nix"
+      #       "${unstable}/nixos/modules/services/databases/redis.nix"
+      #     ];
+      #   })
+      # ];
 
       systems.modules.nixos = with inputs; [
         disko.nixosModules.default

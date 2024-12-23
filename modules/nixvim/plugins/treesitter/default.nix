@@ -21,10 +21,12 @@ mkPlugin "treesitter" {
   plugins = {
     treesitter = {
       enable = true;
-      indent = true;
       grammarPackages = with pkgs.olistrik; allGrammars ++ [
         tree-sitter-go-template
       ];
+      settings = {
+        indent.enable = true;
+      };
     };
 
     ts-autotag = {

@@ -22,18 +22,18 @@ mkPlugin "lsp" {
       enable = true;
       servers = {
         # TODO: Extract to seperate locations.
-        nil-ls = {
+        nil_ls = {
           enable = true;
           extraOptions.settings.nil = {
             formatting.command = [ "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt" ];
           };
         };
-        matlab-ls = {
-          enable = true;
-          settings = {
-            installPath = "${pkgs.matlab}"; # _without_ /bin/matlab, the lsp adds that.
-          };
-        };
+        # matlab-ls = {
+        #   enable = true;
+        #   settings = {
+        #     installPath = "${pkgs.matlab}"; # _without_ /bin/matlab, the lsp adds that.
+        #   };
+        # };
 
         pylsp = {
           enable = true;

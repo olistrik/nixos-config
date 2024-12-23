@@ -7,6 +7,8 @@ mkPlugin "gitblame" {
 
   plugins.gitblame = {
     enable = true;
-    delay = 1000;
+    settings = {
+      delay = 1000;
+    };
   };
 }

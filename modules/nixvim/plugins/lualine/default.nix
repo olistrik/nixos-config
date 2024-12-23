@@ -7,24 +7,27 @@ mkPlugin "lualine" {
 
   plugins.lualine = {
     enable = true;
-    alwaysDivideMiddle = true;
-    globalstatus = true;
-    iconsEnabled = true;
+    settings = {
+      sections = {
+        lualine_a = [ "mode" ];
+        lualine_b = [ "branch" "diff" "diagnostics" ];
+        lualine_c = [ "filename" ];
+        lualine_x = [ "encoding" "fileformat" "filetype" ];
+        lualine_y = [ "location" ];
+        lualine_z = [ "progress" ];
+      };
+      inactive_section = {
+        lualine_c = [ "filename" ];
+        lualine_x = [ "location" ];
+      };
+      options = {
+        theme = "ayu_mirage";
 
-    theme = "ayu_mirage";
-
-    sections = {
-      lualine_a = [ "mode" ];
-      lualine_b = [ "branch" "diff" "diagnostics" ];
-      lualine_c = [ "filename" ];
-      lualine_x = [ "encoding" "fileformat" "filetype" ];
-      lualine_y = [ "location" ];
-      lualine_z = [ "progress" ];
+        always_divide_middle = true;
+        globalstatus = true;
+        icons_enabled = true;
+      };
     };
 
-    inactiveSections = {
-      lualine_c = [ "filename" ];
-      lualine_x = [ "location" ];
-    };
   };
 }

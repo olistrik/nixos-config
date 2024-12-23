@@ -19,9 +19,9 @@ in
       wbg.enable = true;
     };
 
-    environment.systemPackages = with pkgs; [
-      cfg.package
+    programs.niri.enable = true;
 
+    environment.systemPackages = with pkgs; [
       # Theming
       yaru-theme
 
@@ -37,10 +37,12 @@ in
       mako # temp until I get ags doing this.
 
       # auth agent. plasma-polkit-agent. Can be started with systemd.
-      pantheon.pantheon-agent-polkit
+      # provided by niri-flake
+      # pantheon.pantheon-agent-polkit
     ];
 
-    security.pam.services.swaylock = { };
+    # done by niri-flake
+    # security.pam.services.swaylock = { };
 
     # environment.etc = {
     #   "xdg/gtk-2.0/gtkrc".text = ''
@@ -54,30 +56,31 @@ in
     #   '';
     # };
 
-    xdg.portal = {
-      enable = true;
-      xdgOpenUsePortal = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-gtk
-        xdg-desktop-portal-gnome
-      ];
-
-      config = {
-        common = {
-          default = [ "gtk" ];
-        };
-        niri = {
-          default = [ "gnome" "gtk" ];
-          "org.freedesktop.impl.portal.Secret" = [
-            "gnome-keyring"
-          ];
-        };
-      };
-    };
-
-    services.gnome.gnome-keyring = {
-      enable = true;
-    };
+    # Provided by niri-flake?
+    # xdg.portal = {
+    #   enable = true;
+    #   xdgOpenUsePortal = true;
+    #   extraPortals = with pkgs; [
+    #     xdg-desktop-portal-gtk
+    #     xdg-desktop-portal-gnome
+    #   ];
+    #
+    #   config = {
+    #     common = {
+    #       default = [ "gtk" ];
+    #     };
+    #     niri = {
+    #       default = [ "gnome" "gtk" ];
+    #       "org.freedesktop.impl.portal.Secret" = [
+    #         "gnome-keyring"
+    #       ];
+    #     };
+    #   };
+    # };
+    #
+    # services.gnome.gnome-keyring = {
+    #   enable = true;
+    # };
 
     services.greetd = {
       enable = true;
