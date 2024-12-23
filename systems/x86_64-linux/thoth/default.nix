@@ -102,7 +102,7 @@ with lib.olistrik;
     ];
   };
 
-  hardware.opentabletdriver.enable = true;
+  # hardware.opentabletdriver.enable = true;
 
   # matlab is a piece of sh*t
   environment.systemPackages = with pkgs; [
