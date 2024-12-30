@@ -22,7 +22,7 @@ in
       }
     ];
 
-    boot.initrd.postDeviceCommands = mkAfter (
+    boot.initrd.postResumeCommands = mkAfter (
       builtins.concatStringsSep "/n" (
         map (snapshot: "zfs rollback -r ${snapshot}") cfg.zfs.snapshots
       )
