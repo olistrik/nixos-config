@@ -51,6 +51,14 @@ nixvim.makeNixvimWithModule {
             };
           };
         };
+
+        avante = {
+          enable = true;
+          settings = {
+            provider = "copilot";
+            auto_suggestion_provider = "copilot";
+          };
+        };
         # abolish = enabled;
         # easy-align = enabled;
         # vim-repeat = enabled;
