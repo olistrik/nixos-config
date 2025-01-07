@@ -12,6 +12,7 @@
 
       # services
       "/var/lib/tailscale"
+      "/var/lib/docker"
     ];
     files = [
       # machine-id
