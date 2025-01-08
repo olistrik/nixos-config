@@ -56,6 +56,7 @@ with lib.olistrik;
   # Enable laptop powersaving features
   services.thermald.enable = true;
   services.tlp.enable = true;
+  services.upower.enable = true;
 
   # Enable printing service
   services.printing.enable = true;

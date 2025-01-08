@@ -15,6 +15,7 @@ in
         neovim = enabled;
         zsh = enabled;
         zoxide = enabled;
+        tmux = enabled;
       };
       tools = {
         direnv = enabled;
@@ -63,6 +64,7 @@ in
       tree
       parallel
       ripgrep
+      tmux
 
       # maintainance tools
       gen-package-lock
