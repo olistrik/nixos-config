@@ -46,6 +46,10 @@ mkPlugin "lsp" {
         clangd = {
           enable = true;
         };
+
+        arduino_language_server = {
+          enable = true;
+        };
       };
 
       keymaps = {
