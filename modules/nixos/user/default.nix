@@ -34,6 +34,7 @@ in
         "adbusers"
         "lxd"
         "openvpn"
+        "plugdev"
       ] ++ cfg.extraGroups;
 
       openssh.authorizedKeys.keys = cfg.authorizedKeys;
