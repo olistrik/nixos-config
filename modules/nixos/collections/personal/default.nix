@@ -30,6 +30,10 @@ in
         google-chrome
       ];
 
+    services.udev.extraRules = ''
+      ACTION="add", SUBSYSTEM=="usb", ATTR{idVendor}=="2886", ATTR{idProduct}=="0062", MODE="0666", GROUP="plugdev"
+    '';
+
     # TODO: add this to some keyboard module
     # services.udev.extraRules = ''
     #       ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", MODE="664", GROUP="plugdev"
