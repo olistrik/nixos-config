@@ -15,7 +15,7 @@ mkPlugin "treesitter" {
         (map (ext: { name = ext; value = ft; }) exts);
     in
     {
-      extension = extensionsToAttrs [ "vert" "tesc" "tese" "geom" "frag" "comp" ] "glsl";
+      extension = extensionsToAttrs [ "vert" "tes" "tesc" "tese" "geom" "frag" "comp" ] "glsl";
     };
 
   plugins = {
