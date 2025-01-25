@@ -48,7 +48,7 @@ mkPlugin "lsp" {
         };
 
         arduino_language_server = {
-          enable = true;
+          # enable = true;
         };
       };
 

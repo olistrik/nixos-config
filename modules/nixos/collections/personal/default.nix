@@ -25,14 +25,23 @@ in
         gimp
         inkscape
         obsidian
+        vscode
 
         # browsers
         google-chrome
       ];
 
-    services.udev.extraRules = ''
-      ACTION="add", SUBSYSTEM=="usb", ATTR{idVendor}=="2886", ATTR{idProduct}=="0062", MODE="0666", GROUP="plugdev"
-    '';
+    services.udev.packages = [
+      (pkgs.writeTextFile
+        {
+          name = "arduino-udev-rules";
+          text = ''
+            SUBSYSTEMS=="usb", ATTRS{idVendor}=="2886", ATTRS{idProduct}=="0062", MODE="0664", TAG+="uaccess"
+            KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0664", TAG+="uaccess"
+          '';
+          destination = "/etc/udev/rules.d/70-arduino.rules";
+        })
+    ];
 
     # TODO: add this to some keyboard module
     # services.udev.extraRules = ''
