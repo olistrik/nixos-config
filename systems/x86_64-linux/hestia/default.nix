@@ -43,6 +43,23 @@ with lib.olistrik;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
+  # Internal redirect for microtik portals.
+  nginx = {
+    virtualHosts = {
+      "router.olii.nl" = {
+        forceSSL = true;
+        useACMEHost = "olii.nl";
+        locations = {
+          "/" = {
+            proxyPass = "http://192.168.88.1";
+            recommendedProxySettings = true;
+          };
+        };
+      };
+    };
+  };
+
+
   # NEVER CHANGE.
   system.stateVersion = "24.05"; # Did you read the comment?
 }
