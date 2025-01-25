@@ -25,9 +25,13 @@
 
       # storage servers
       "/var/lib/immich"
+      "/var/lib/redis-immich"
       "/var/lib/postgresql"
     ];
     files = [
+      #log-rotate status
+      "/var/lib/logrotate.status"
+
       # machine-id
       "/etc/machine-id"
 

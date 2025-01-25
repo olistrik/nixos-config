@@ -44,7 +44,7 @@ with lib.olistrik;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
   # Internal redirect for microtik portals.
-  nginx = {
+  services.nginx = {
     virtualHosts = {
       "router.olii.nl" = {
         forceSSL = true;
