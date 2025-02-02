@@ -10,7 +10,12 @@ mkPlugin "lsp" {
     none-ls = {
       enable = true;
       sources.diagnostics = {
-        glslc.enable = true;
+        glslc = {
+          enable = true;
+          settings = {
+            extra_args = [ "--target-env=opengl" ];
+          };
+        };
       };
     };
 
