@@ -1,7 +1,9 @@
 # Temporary overlay for unstable packages.
 { channels, ... }: final: prev: {
-  inherit (channels.unstable)
-    # Not yet in 24.05.
-    git-igitt
-    ;
+  # inherit (channels.unstable) ...;
+
+  vimPlugins = prev.vimPlugins // {
+    inherit (channels.unstable.vimPlugins)
+      codecompanion-nvim;
+  };
 }
