@@ -73,6 +73,14 @@ in
           arduino_language_server = {
             # enable = true;
           };
+
+          eslint = {
+            enable = true;
+          };
+
+          ts_ls = {
+            enable = true;
+          };
         };
 
         keymaps = {
