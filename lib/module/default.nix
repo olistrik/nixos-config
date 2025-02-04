@@ -2,6 +2,17 @@
 { lib, ... }:
 with lib; rec {
 
+  mkModule = name: { namespace, config ? { }, options ? { }, ... }@args:
+    let
+      cfg = config.${namespace}.${name};
+    in
+    {
+      options.${namespace}.${name} = {
+        enable = mkEnableOption name;
+      } // options;
+      config = mkIf cfg.enable config;
+    } // removeAttrs [ "config" "options" ] args;
+
   ## Create a NixOS module option.
   ##
   ## ```nix
