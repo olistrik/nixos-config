@@ -23,6 +23,20 @@ in
         };
       };
 
+      conform-nvim = {
+        enable = true;
+        settings = {
+          formatOnSave = {
+            timeoutMs = 500;
+            lspFallback = true;
+          };
+          formattersByFt = {
+            "javascript" = [ "prettier" ];
+            "typescript" = [ "prettier" ];
+          };
+        };
+      };
+
       typescript-tools = {
         enable = true;
       };
