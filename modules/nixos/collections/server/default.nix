@@ -22,6 +22,16 @@ in
       ];
     };
 
+    # Tailscale setup 
+    services.tailscale = {
+      enable = true;
+      useRoutingFeatures = "server"; # Enable IP Forwarding for exit node.
+      extraSetFlags = [ "--advertise-exit-node" ]; # Enable exit node.
+      # authKeyFile = ...; # TODO: via Nixwarden.
+    };
+
+
+
     olistrik.user.authorizedKeys = [
       "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIMcvHSxN1mFGgB6r19eHIqGKvhNOwddvVe43NwhKHmWzAAAABHNzaDo= oli@yubikey"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHwyuoI18ZEoo/c38XvI6HwvRlxigxd3lPzshi7RtVw2 oli@thoth"
