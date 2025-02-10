@@ -42,7 +42,10 @@ in
     '';
 
     # TODO: extract to own module with nixwarden secrets.
-    services.tailscale.enable = true;
+    services.tailscale = {
+      enable = true;
+      useRoutingFeatures = mkDefault "client";
+    };
 
     environment.systemPackages = with pkgs; with olistrik; [
       # Fetchers
