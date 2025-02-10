@@ -107,7 +107,9 @@ with lib.olistrik;
 
   # matlab is a piece of sh*t
   environment.systemPackages = with pkgs; [
-    matlab
+    (writeShellScriptBin "matlab" ''
+      ${pkgs.matlab}/bin/matlab -nodesktop -nosplash $@
+    '')
   ];
 
   # NEVER CHANGE.
