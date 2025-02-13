@@ -29,7 +29,9 @@ in
 
         # browsers
         google-chrome
+        thunderbird
       ];
+
 
     services.udev.packages = [
       (pkgs.writeTextFile
