@@ -28,8 +28,7 @@ in
         vscode
 
         # browsers
-        # google-chrome # Fuck you Google.
-        chromium # By Nix do I wish firefox was better.
+        firefox # Fuck you Google.
         thunderbird
       ];
 
