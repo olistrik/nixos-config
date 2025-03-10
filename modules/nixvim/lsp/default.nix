@@ -81,6 +81,10 @@ in
           ts_ls = {
             enable = true;
           };
+
+          tinymist = {
+            enable = true;
+          };
         };
 
         keymaps = {
