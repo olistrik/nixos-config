@@ -107,10 +107,17 @@ with lib.olistrik;
 
   # matlab is a piece of sh*t
   environment.systemPackages = with pkgs; [
-    (writeShellScriptBin "matlab" ''
-      ${pkgs.matlab}/bin/matlab -nodesktop -nosplash $@
+    matlab
+    (writeShellScriptBin "matlab-cli" ''
+      ${matlab}/bin/matlab -nodesktop -nosplash $@
     '')
+
+    rtl-sdr
+    sdrpp
+    noaa-apt
   ];
+
+  hardware.rtl-sdr.enable = true;
 
   # NEVER CHANGE.
   system.stateVersion = "24.05"; # Did you read the comment?
