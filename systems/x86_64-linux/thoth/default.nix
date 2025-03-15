@@ -120,6 +120,8 @@ with lib.olistrik;
   hardware.rtl-sdr.enable = true;
   programs.adb.enable = true;
 
+  programs.nix-ld.enable = true;
+
   # NEVER CHANGE.
   system.stateVersion = "24.05"; # Did you read the comment?
 }
