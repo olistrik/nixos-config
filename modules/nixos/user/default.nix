@@ -35,6 +35,7 @@ in
         "lxd"
         "openvpn"
         "plugdev"
+        "i2c"
       ] ++ cfg.extraGroups;
 
       openssh.authorizedKeys.keys = cfg.authorizedKeys;

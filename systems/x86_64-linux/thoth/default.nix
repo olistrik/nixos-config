@@ -122,6 +122,9 @@ with lib.olistrik;
 
   programs.nix-ld.enable = true;
 
+  # enable i2c for ddc/ci monitor control.
+  hardware.i2c.enable = true;
+
   # NEVER CHANGE.
   system.stateVersion = "24.05"; # Did you read the comment?
 }
