@@ -8,26 +8,26 @@
         (pkgs.fetchValheimThunderstoreMod {
           owner = "blacks7ar";
           name = "WieldEquipmentWhileSwimming";
-          version = "1.0.8";
-          hash = "sha256-pRqkD5Yonw5OGeGMJFoRax5gxRhdUSa1+2FT0znBleQ=";
+          version = "1.1.2";
+          hash = "sha256-UotiInuJAZsR1sL9aquTBQf7sw5kzG+2fG8QlFl+2Fc=";
         })
         (pkgs.fetchValheimThunderstoreMod {
           owner = "Azumatt";
           name = "AzuMiscPatches";
-          version = "1.2.2";
-          hash = "sha256-DnDVpfNZVO87Xv6bYxFHjTmwwEHu9wjImiRSgGXlQZA=";
+          version = "1.2.6";
+          hash = "sha256-kl2/dTgViBkEAp75GJEdLFKaJPHI8vEVFOIUCBkoaCA=";
         })
         (pkgs.fetchValheimThunderstoreMod {
           owner = "Azumatt";
           name = "AzuExtendedPlayerInventory";
-          version = "1.3.12";
-          hash = "sha256-AZvDYlo+VM5NXBgqiKS5MHANMLEmZqqQxXL2stI/F2c=";
+          version = "1.4.9";
+          hash = "sha256-Xd7KdUm3c14iQBST31DAqs+bQF9hwYhUxE66o3lusrA=";
         })
         (pkgs.fetchValheimThunderstoreMod {
           owner = "Azumatt";
           name = "AzuCraftyBoxes";
-          version = "1.2.9";
-          hash = "sha256-d7T+M/Zij7n2lDUEv7pJZyIcQWfbxToEsvnfjMDbjcs=";
+          version = "1.7.2";
+          hash = "sha256-Omzdh6p3xz2HSq0WlbMFzFcgBINwTthMqF7fkgWKweE=";
         })
         # ...
       ];
