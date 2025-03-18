@@ -15,7 +15,7 @@ with lib.olistrik;
     ./immich.nix
     ./nix-serve.nix
     # ./palworld-server.nix
-    # ./valheim-server
+    ./valheim-server
   ];
 
   # Shared configurations.
