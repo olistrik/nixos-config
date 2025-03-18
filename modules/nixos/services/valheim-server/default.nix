@@ -1,5 +1,4 @@
 { config
-, pkgs
 , lib
 , ...
 }:
@@ -19,13 +18,13 @@ in
       "The password for the server.";
     openFirewall = mkOpt bool true
       "Whether to open the firewall or not.";
-    extraOptions = mkOpt (attrsOf anything) {} 
+    extraOptions = mkOpt (attrsOf anything) { }
       "Extra options for upstream valheim server module.";
   };
 
   config = lib.mkIf cfg.enable {
     services.valheim = {
       inherit (cfg) enable serverName worldName password openFirewall;
-    } // cfg.extraOptions; 
+    } // cfg.extraOptions;
   };
 }
