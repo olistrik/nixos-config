@@ -109,7 +109,7 @@ with lib.olistrik;
   environment.systemPackages = with pkgs; [
     matlab
     (writeShellScriptBin "matlab-cli" ''
-      ${matlab}/bin/matlab -nodesktop -nosplash $@
+      (trap "" INT; ${matlab}/bin/matlab -nodesktop -nosplash $@)
     '')
 
     rtl-sdr
