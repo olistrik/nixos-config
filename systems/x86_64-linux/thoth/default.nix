@@ -1,7 +1,7 @@
 # Thoth is my personal laptop as it is used primarily for university work and
 # provisioning my other nixos hosts.
 
-{ lib, pkgs, ... }:
+{ lib, pkgs, inputs, ... }:
 with lib;
 with lib.olistrik;
 {
@@ -108,9 +108,17 @@ with lib.olistrik;
   # matlab is a piece of sh*t
   environment.systemPackages = with pkgs; [
     matlab
+    matlab-shell
     (writeShellScriptBin "matlab-cli" ''
       (trap "" INT; ${matlab}/bin/matlab -nodesktop -nosplash $@)
     '')
+    (buildFHSEnv {
+      name = "matlab-auth";
+      targetPkgs = ps: (inputs.nix-matlab.targetPkgs ps);
+      runScript = pkgs.writeShellScript "matlab-auth" (inputs.nix-matlab.shellHooksCommon + ''
+        exec $MATLAB_INSTALL_DIR/bin/glnxa64/MathWorksProductAuthorizer
+      '');
+    })
 
     rtl-sdr
     sdrpp
