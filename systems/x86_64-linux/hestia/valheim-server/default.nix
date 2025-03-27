@@ -1,16 +1,26 @@
 { pkgs, ... }: {
+  olistrik.services.nixwarden.secrets = {
+    "valheim.adminlist.txt" = [{
+      location = "/var/lib/valheim/adminlist.txt";
+      wantedBy = [ "valheim.service" ];
+      userGroup = "valheim:valheim";
+    }];
+  };
+
   olistrik.services.valheim-server = {
     enable = true;
     extraOptions = {
+      adminListFile = "/var/lib/valheim/adminlist.txt";
+
       bepinexMods = [
         # This does NOT fetch mod dependencies.  
         # You need to add those manually, if there are any (besides BepInEx).
-        (pkgs.fetchValheimThunderstoreMod {
-          owner = "blacks7ar";
-          name = "WieldEquipmentWhileSwimming";
-          version = "1.1.2";
-          hash = "sha256-UotiInuJAZsR1sL9aquTBQf7sw5kzG+2fG8QlFl+2Fc=";
-        })
+        # (pkgs.fetchValheimThunderstoreMod {
+        #   owner = "blacks7ar";
+        #   name = "WieldEquipmentWhileSwimming";
+        #   version = "1.1.2";
+        #   hash = "sha256-UotiInuJAZsR1sL9aquTBQf7sw5kzG+2fG8QlFl+2Fc=";
+        # })
         (pkgs.fetchValheimThunderstoreMod {
           owner = "Azumatt";
           name = "AzuMiscPatches";
@@ -33,7 +43,7 @@
       ];
       bepinexConfigs = [
         # ./Azumatt_and_ValheimPlusDevs.PerfectPlacement.cfg
-        ./blacks7ar.WieldEquipmentWhileSwimming.cfg
+        # ./blacks7ar.WieldEquipmentWhileSwimming.cfg
         ./Azumatt.AzuMiscPatches.cfg
         ./Azumatt.AzuExtendedPlayerInventory.cfg
         ./Azumatt.AzuCraftyBoxes.cfg
