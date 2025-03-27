@@ -21,6 +21,20 @@ in
 
     programs.niri.enable = true;
 
+    xdg.portal = {
+      config.niri = {
+        # Fix for chromium based apps getting upset because I don't use Nautilus
+        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+
+        # Apparently messing with this unsets the Niri defaults. Not sure why.
+        # https://github.com/YaLTeR/niri/blob/7cfecf4b1b9b8c11c80061fb31926f888228499d/resources/niri-portals.conf#L3
+        default = [ "gnome" "gtk" ];
+        "org.freedesktop.impl.portal.Access" = [ "gtk" ];
+        "org.freedesktop.impl.portal.Notification" = [ "gtk" ];
+        "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
+      };
+    };
+
     environment.systemPackages = with pkgs; [
       # Theming
       yaru-theme
