@@ -1,0 +1,216 @@
+# Below you can find example groups. Groups are used to exclude or includeOverride quickly. They are reusable lists! 
+# Please note that some of these groups/container limitations are kinda pointless but are here for example.
+# Make sure to follow the format of the example below. If you have any questions, please ask in my discord.
+
+# Full vanilla prefab name list: https://valheim-modding.github.io/Jotunn/data/prefabs/prefab-list.html
+# Item prefab name list: https://valheim-modding.github.io/Jotunn/data/objects/item-list.html
+
+# There are several predefined groups set up for you that are not listed. You can use these just like you would any group you create yourself.
+# These are the "All", "Food", "Potion", "Fish", "Swords", "Bows", "Crossbows", "Axes", "Clubs", "Knives", "Pickaxes", "Polearms", "Spears", "Equipment", "Boss Trophy", "Trophy", "Crops", "Seeds", "Ores", "Metals", and "Woods" groups.
+# The criteria for these groups are as follows:
+# groups:
+#   Food:
+#     - Criteria: Both of the following properties must have a value greater than 0.0 on the sharedData property of the ItemDrop script:
+#         - food
+#         - foodStamina
+#   Potion:
+#     - Criteria: The following properties must meet the specified conditions on the sharedData property of the ItemDrop script:
+#         - 'food' > 0.0
+#         - 'foodStamina' == 0.0
+#         - Any status effect names/categories contain "potion"
+#   Fish:
+#     - itemType: Fish
+#   Swords, Bows, Crossbows, Axes, Clubs, Knives, Pickaxes, Polearms, Spears:
+#     - itemType: OneHandedWeapon, TwoHandedWeapon, TwoHandedWeaponLeft, Bow
+#     - Criteria: Items in these groups have a specific skillType on the sharedData property of the ItemDrop script. Each group corresponds to the skillType as follows:
+#         - Swords: skillType == Skills.SkillType.Swords
+#         - Bows: skillType == Skills.SkillType.Bows
+#         - Crossbows: skillType == Skills.SkillType.Crossbows
+#         - Axes: skillType == Skills.SkillType.Axes
+#         - Clubs: skillType == Skills.SkillType.Clubs
+#         - Knives: skillType == Skills.SkillType.Knives
+#         - Pickaxes: skillType == Skills.SkillType.Pickaxes
+#         - Polearms: skillType == Skills.SkillType.Polearms
+#         - Spears: skillType == Skills.SkillType.Spears
+#            Example:   An item with itemType set to OneHandedWeapon and skillType set to Skills.SkillType.Swords would belong to the Swords group.
+#   Armor:
+#     - itemType: Chest, Legs, Shoulder, Helmet
+#   Equipment:
+#     - itemType: Torch, Bow, OneHandedWeapon, TwoHandedWeapon, TwoHandedWeaponLeft, Helmet, Chest, Legs, Shoulder, Utility, Shield
+#   Weapons:
+#     - itemType: OneHandedWeapon, TwoHandedWeapon, TwoHandedWeaponLeft, Bows, Swords, Crossbows, Axes, Clubs, Knives, Pickaxes, Polearms, Spears
+#   Shield:
+#     - itemType: Shield
+#   Round Shield:
+#     - itemType: Shield
+#     - Criteria: sharedData.m_timedBlockBonus > 0.0 "round"
+#   Tower Shield:
+#     - itemType: Shield
+#     - Criteria: sharedData.m_timedBlockBonus <= 0.0 "tower"
+#   Chest:
+#     - itemType: Chest
+#   Legs:
+#     - itemType: Legs
+#   Shoulder:
+#     - itemType: Shoulder
+#   Helmet:
+#     - itemType: Helmet
+#   Utility:
+#     - itemType: Utility
+#   Ammo:
+#     - itemType: Ammo
+#   Arrows:
+#     - itemType: Ammo
+#     - Criteria: sharedData.m_ammoType == "$ammo_arrows"
+#   Bolts:
+#     - itemType: Ammo
+#     - Criteria: sharedData.m_ammoType == "$ammo_bolts"
+#   ElementalMagic:
+#     - itemType: ElementalMagic
+#   BloodMagic:
+#     - itemType: BloodMagic
+#   Boss Trophy:
+#     - itemType: Trophy
+#     - Criteria: sharedData.m_name ends with any of the following boss names:
+#         - eikthyr, elder, bonemass, dragonqueen, goblinking, SeekerQueen
+#   Trophy:
+#     - itemType: Trophy
+#     - Criteria: sharedData.m_name does not end with any boss names
+#   Crops:
+#     - itemType: Material
+#     - Criteria: Can be cultivated and grown into a pickable object with an amount greater than 1
+#   Seeds:
+#     - itemType: Material
+#     - Criteria: Can be cultivated and grown into a pickable object with an amount equal to 1
+#   Ores:
+#     - itemType: Material
+#     - Criteria: Can be processed by any of the following smelters:
+#         - smelter
+#         - blastfurnace
+#   Metals:
+#     - itemType: Material
+#     - Criteria: Is the result of processing an ore in any of the following smelters:
+#         - smelter
+#         - blastfurnace
+#   Woods:
+#     - itemType: Material
+#     - Criteria: Can be processed by the charcoal_kiln smelter
+#   All:
+#     - Criteria: Item has an ItemDrop script and all needed fields are populated. (all items)
+
+
+
+
+groups:
+  BronzeGear: # Group name
+    - ArmorBronzeChest # Item prefab name, note that this is case sensitive and must be the prefab name
+    - ArmorBronzeLegs
+    - ArmorBronzeHelmet
+  Tier 2 Items:
+    - Bronze
+    - PickaxeBronze
+    - ArmorBronzeChest
+    - ArmorBronzeLegs
+
+
+# By default, if you don't specify a container below, it will be considered as you want to allow storing all objects into it.
+# If you are having issues with a container, please make sure you have the full prefab name of the container. Additionally, make sure you have range and exclude or includeOverride set up correctly.
+# Worst case you can define a container like this. This will allow everything to be pulled from the container within a range of 30.
+# rk_barrel:  
+#   range: 30
+#  includeOverride: []
+
+## Please note that the below containers are just examples. You can add as many containers as you want.
+## If you want to add a new container, just copy and paste the below example and change the name of the container to the prefab name of the container you want to add.
+## The values are set up to include everything by using the includeOverride (aside from things that aren't really a part of vanilla recipes, like Swords or Bows). 
+## This is to give you examples on how it's done, but still allow everything to be stored into the container.
+
+Player_tombstone: # This is to exclude the tombstone from randomly picking up items that fall near it.
+  range: 10
+  exclude:
+    - All
+
+Player: # This is to exclude backpacks from randomly storing items into them.
+  range: 10
+  exclude:
+    - All
+
+piece_chest:
+  range: 10 # This is the range that the container will store items. This overrides the global range set in the config.
+  exclude: # Exclude these items from being able to be stored into the container
+    #- Food # Exclude all in group
+    - PickaxeBronze # Allow prefab names as well, in this case we will use something that isn't a food
+  includeOverride:
+    # - Food # This would not work, you cannot includeOverride a group that is excluded. You can only override prefabs from that group.
+    - PickaxeBronze # You can however, be weird, and override a prefab name you have excluded.
+
+# It's highly unlikely that you will need the armor, swords, bows, etc. groups below. These are just in case you want to use them. 
+# They were also easy ways for me to show you how to use the groups without actually excluding something you might want to always pull by default.
+
+piece_chest_wood:
+  range: 10
+  exclude:
+    - Swords # Exclude all in group
+    - Tier 2 Items # Exclude all in group
+    - Bows # Exclude all in group
+  includeOverride: # If the item is in the groups above, say, you were using a predefined group but want to override just one item to be ignored and allow pulling it
+    - BowFineWood
+    - Wood
+    - Bronze
+    - PickaxeBronze
+    - ArmorBronzeChest
+    - ArmorBronzeLegs
+
+piece_chest_private:
+  range: 10
+  exclude:
+    - All # Exclude everything
+
+piece_chest_blackmetal:
+  range: 10
+  exclude:
+    - Swords # Exclude all in group
+    - Tier 2 Items # Exclude all in group
+    - Bows # Exclude all in group
+  includeOverride: # If the item is in the groups above, say, you were using a predefined group but want to override just one item to be ignored and allow storing it
+    - BowFineWood
+    - Wood
+    - Bronze
+
+rk_cabinet: # rk_ is typically the prefix for containers coming from RockerKitten's mods
+  range: 10
+  exclude:
+    - Food
+  includeOverride:
+    - Food
+
+rk_cabinet2:
+  range: 10
+  exclude:
+    - Food
+  includeOverride:
+    - Food
+
+rk_barrel:
+  range: 10
+  exclude:
+    - Armor
+    - Swords
+
+rk_barrel2:
+  range: 10
+  exclude:
+    - Armor
+    - Swords
+
+rk_crate:
+  range: 10
+  exclude:
+    - Armor
+    - Swords
+
+rk_crate2:
+  range: 10
+  exclude:
+    - Armor
+    - Swords
