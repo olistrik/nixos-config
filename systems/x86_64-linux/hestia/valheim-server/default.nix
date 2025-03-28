@@ -39,6 +39,18 @@
           version = "1.7.2";
           hash = "sha256-Omzdh6p3xz2HSq0WlbMFzFcgBINwTthMqF7fkgWKweE=";
         })
+        (pkgs.fetchValheimThunderstoreMod {
+          owner = "Azumatt";
+          name = "AzuAutoStore";
+          version = "3.0.8";
+          hash = "sha256-ooghhDinwLTwEpTTQFj/brdb9Yj5aLGr+zYsjrsq9A0=";
+        })
+        (pkgs.fetchValheimThunderstoreMod {
+          owner = "Goldenrevolver";
+          name = "Loyal_Spears_Auto_Pickup_And_Return_To_Owner";
+          version = "1.2.0";
+          hash = "sha256-TKA5n1azBbQFbq0uEs2+lc4yUmB9DhwNHkfjPLDk0e8=";
+        })
         # ...
       ];
       bepinexConfigs = [
