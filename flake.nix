@@ -52,6 +52,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixvim-config = {
+      url = "github:olistrik/nixvim-config";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        unstable.follows = "unstable";
+        nixvim.follows = "nixvim";
+        snowfall-lib.follows = "snowfall-lib";
+      };
+    };
+
     steam-fetcher = {
       url = "github:nix-community/steam-fetcher";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -97,14 +107,10 @@
         allowUnfree = true;
       };
 
-      nixvimModules = lib.snowfall.module.create-modules {
-        src = ./modules/nixvim;
-      };
-
       overlays = with inputs; [
         valheim-server.overlays.default
         steam-fetcher.overlays.default
-        nixvim.overlays.default
+        nixvim-config.overlays.default
         niri-flake.overlays.niri
         nix-matlab.overlay # why.
       ];
@@ -126,14 +132,15 @@
 
         valheim-server.nixosModules.default
 
-
         # until I work out where to put this.
         ({ ... }: {
 
-          nix.registry.nixpkgs.flake = nixpkgs;
-          nix.registry.unstable.flake = unstable;
-          nix.registry.olistrik.flake = self;
-          nix.registry.templates.flake = self;
+          nix.registry = {
+            nixpkgs.flake = nixpkgs;
+            unstable.flake = unstable;
+            olistrik.flake = self;
+            templates.flake = self;
+          };
 
           nix.settings = {
             auto-optimise-store = true;
