@@ -1,16 +1,26 @@
 { pkgs, ... }: {
+  olistrik.services.nixwarden.secrets = {
+    "valheim.adminlist.txt" = [{
+      location = "/var/lib/valheim/adminlist.txt";
+      wantedBy = [ "valheim.service" ];
+      userGroup = "valheim:valheim";
+    }];
+  };
+
   olistrik.services.valheim-server = {
     enable = true;
     extraOptions = {
+      adminListFile = "/var/lib/valheim/adminlist.txt";
+
       bepinexMods = [
         # This does NOT fetch mod dependencies.  
         # You need to add those manually, if there are any (besides BepInEx).
-        (pkgs.fetchValheimThunderstoreMod {
-          owner = "blacks7ar";
-          name = "WieldEquipmentWhileSwimming";
-          version = "1.1.2";
-          hash = "sha256-UotiInuJAZsR1sL9aquTBQf7sw5kzG+2fG8QlFl+2Fc=";
-        })
+        # (pkgs.fetchValheimThunderstoreMod {
+        #   owner = "blacks7ar";
+        #   name = "WieldEquipmentWhileSwimming";
+        #   version = "1.1.2";
+        #   hash = "sha256-UotiInuJAZsR1sL9aquTBQf7sw5kzG+2fG8QlFl+2Fc=";
+        # })
         (pkgs.fetchValheimThunderstoreMod {
           owner = "Azumatt";
           name = "AzuMiscPatches";
@@ -29,11 +39,23 @@
           version = "1.7.2";
           hash = "sha256-Omzdh6p3xz2HSq0WlbMFzFcgBINwTthMqF7fkgWKweE=";
         })
+        (pkgs.fetchValheimThunderstoreMod {
+          owner = "Azumatt";
+          name = "AzuAutoStore";
+          version = "3.0.8";
+          hash = "sha256-ooghhDinwLTwEpTTQFj/brdb9Yj5aLGr+zYsjrsq9A0=";
+        })
+        (pkgs.fetchValheimThunderstoreMod {
+          owner = "Goldenrevolver";
+          name = "Loyal_Spears_Auto_Pickup_And_Return_To_Owner";
+          version = "1.2.0";
+          hash = "sha256-TKA5n1azBbQFbq0uEs2+lc4yUmB9DhwNHkfjPLDk0e8=";
+        })
         # ...
       ];
       bepinexConfigs = [
         # ./Azumatt_and_ValheimPlusDevs.PerfectPlacement.cfg
-        ./blacks7ar.WieldEquipmentWhileSwimming.cfg
+        # ./blacks7ar.WieldEquipmentWhileSwimming.cfg
         ./Azumatt.AzuMiscPatches.cfg
         ./Azumatt.AzuExtendedPlayerInventory.cfg
         ./Azumatt.AzuCraftyBoxes.cfg

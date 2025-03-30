@@ -697,15 +697,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1742810262,
-        "narHash": "sha256-iA3/DlBYV5NXl8cSZLEffqzX2FuZcortBMS3jAXXV5g=",
-        "owner": "hamburger1984",
+        "lastModified": 1743168973,
+        "narHash": "sha256-daU3UJe28qOcfeS45fVpcsNtu8kR1U6VOlX5XzRka+w=",
+        "owner": "olistrik",
         "repo": "valheim-server-flake",
-        "rev": "f6bde1790d01037c7f3c5b32c43533e55aeaf09f",
+        "rev": "59cd3c5a12e7ca7ce1f3e316db48ec5158442ac9",
         "type": "github"
       },
       "original": {
-        "owner": "hamburger1984",
+        "owner": "olistrik",
         "repo": "valheim-server-flake",
         "type": "github"
       }

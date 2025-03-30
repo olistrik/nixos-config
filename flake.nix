@@ -58,7 +58,7 @@
     };
 
     valheim-server = {
-      url = "github:hamburger1984/valheim-server-flake";
+      url = "github:olistrik/valheim-server-flake";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         steam-fetcher.follows = "steam-fetcher";
