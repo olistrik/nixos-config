@@ -522,6 +522,35 @@
         "type": "github"
       }
     },
+    "nixvim-config": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "nixvim": [
+          "nixvim"
+        ],
+        "snowfall-lib": [
+          "snowfall-lib"
+        ],
+        "unstable": [
+          "unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1743368522,
+        "narHash": "sha256-HxUYfTYIObR6uMSOqCH9EdK0MYKO6Z/Un2gXgaHoNwc=",
+        "owner": "olistrik",
+        "repo": "nixvim-config",
+        "rev": "2348463be50a7cd5ed482f87c4e32ba41a32f847",
+        "type": "github"
+      },
+      "original": {
+        "owner": "olistrik",
+        "repo": "nixvim-config",
+        "type": "github"
+      }
+    },
     "nuschtosSearch": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -556,6 +585,7 @@
         "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",
+        "nixvim-config": "nixvim-config",
         "snowfall-lib": "snowfall-lib",
         "steam-fetcher": "steam-fetcher",
         "templates": "templates",
