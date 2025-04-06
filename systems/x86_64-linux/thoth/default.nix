@@ -18,18 +18,23 @@ with lib.olistrik;
       workstation = enabled;
     };
 
-    virtualisation = {
-      docker = enabled;
-    };
-
     wayland = {
       niri = enabled;
       ags = enabled;
+    };
+
+    virtualisation = {
+      docker = enabled;
     };
   };
 
   # Required for ZFS.
   networking.hostId = "8177229e";
+
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
   # Impermanence. Get rekt python.
   olistrik.impermanence.enable = true;
@@ -38,35 +43,25 @@ with lib.olistrik;
   olistrik.impermanence.zfs.snapshots = [ "zroot/local/root@blank" ];
   # When I'm ready for home impermanence, I'll add "zroot/local/home@blank"
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  # Enable laptop powersaving features
+  services.thermald.enable = true;
+  services.tlp.enable = true;
+  services.upower.enable = true;
 
-  # Enable wireless.
+  # Enable Network Manager for WiFi.
+  networking.networkmanager.enable = true;
+  olistrik.user.extraGroups = [ "networkmanager" ];
+
+  # Apparently I am in the minority of preferring wires.
   hardware.bluetooth.enable = true;
   hardware.bluetooth.settings = {
     General = {
       Enable = "Source,Sink,Media,Socket";
     };
   };
-  networking.networkmanager.enable = true;
-  olistrik.user.extraGroups = [ "networkmanager" ];
 
-  # Enable laptop powersaving features
-  services.thermald.enable = true;
-  services.tlp.enable = true;
-  services.upower.enable = true;
-
-  # Enable printing service
-  services.printing.enable = true;
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    openFirewall = true;
-  };
-
-  # Configure audio priority
+  # Configure audio priority (WIP: The wireplumber docs are really confusing.)
+  # TODO: make this cleaner.
   # headphones ? bluetooth > HDMI > Speaker 
   services.pipewire.wireplumber.extraConfig."10-sink-priority" = {
     "monitor.alsa.rules" = [
@@ -103,7 +98,14 @@ with lib.olistrik;
     ];
   };
 
-  # hardware.opentabletdriver.enable = true;
+  # Enable printing service. It doesn't work very well though.
+  services.printing.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
 
   # matlab is a piece of sh*t
   environment.systemPackages = with pkgs; [
@@ -120,39 +122,18 @@ with lib.olistrik;
       '');
     })
 
-    rtl-sdr
-    sdrpp
-    noaa-apt
   ];
 
-  hardware.rtl-sdr.enable = true;
-  programs.adb.enable = true;
+  # SDR stuff.
+  # hardware.rtl-sdr.enable = true;
+  # rtl-sdr sdrpp noaa-apt
 
   programs.nix-ld.enable = true;
+  #### @max wut?:
+  #   nix-ld.libraries = pkgs.steam-run.fhsenv.args.multiPkgs pkgs;
 
-  # enable i2c for ddc/ci monitor control.
-  hardware.i2c.enable = true;
+  services.libinput.touchpad.disableWhileTyping = true;
 
   # NEVER CHANGE.
   system.stateVersion = "24.05"; # Did you read the comment?
 }
-
-# Legacy from nixogen:
-
-#### Yubikey management stuff:
-# environment.systemPackages = with pkgs; [ yubikey-manager ];
-# services.udev.packages = [ pkgs.yubikey-personalization ];
-# services.pcscd.enable = true;
-
-#### wut?:
-# hardware.opengl = {
-#   enable = true;
-#   driSupport = true;
-#   extraPackages = with pkgs; [ vaapiVdpau libvdpau-va-gl ];
-# };
-
-#### @max wut?:
-# programs.nix-ld = {
-#   enable = true;
-#   libraries = pkgs.steam-run.fhsenv.args.multiPkgs pkgs;
-# };
