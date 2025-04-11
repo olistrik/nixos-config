@@ -727,11 +727,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1743168973,
-        "narHash": "sha256-daU3UJe28qOcfeS45fVpcsNtu8kR1U6VOlX5XzRka+w=",
+        "lastModified": 1743948338,
+        "narHash": "sha256-FmSxk/ttCOdwe//MHGXwlCFld0wkUHZb7kFRXbxxXx8=",
         "owner": "olistrik",
         "repo": "valheim-server-flake",
-        "rev": "59cd3c5a12e7ca7ce1f3e316db48ec5158442ac9",
+        "rev": "77e45245fe578e9cba7e66ab1a96f82dc5b03bd1",
         "type": "github"
       },
       "original": {
