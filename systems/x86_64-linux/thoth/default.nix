@@ -123,6 +123,7 @@ with lib.olistrik;
     # })
 
     libreoffice
+    nix-output-monitor
   ];
 
   # SDR stuff.
