@@ -48,6 +48,9 @@ in
       useRoutingFeatures = mkDefault "client";
     };
 
+
+    programs.appimage.binfmt = true;
+
     environment.shellAliases = {
       nxs = "nix-search";
     };
