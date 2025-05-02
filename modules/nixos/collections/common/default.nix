@@ -2,6 +2,7 @@
 with lib;
 with lib.olistrik;
 let
+  pkg = lib.olistrik.packages pkgs;
   cfg = config.olistrik.collections.common;
 in
 {
@@ -47,6 +48,10 @@ in
       useRoutingFeatures = mkDefault "client";
     };
 
+    environment.shellAliases = {
+      nxs = "nix-search";
+    };
+
     environment.systemPackages = with pkgs; with olistrik; [
       # Fetchers
       git
@@ -68,6 +73,9 @@ in
       parallel
       ripgrep
       tmux
+
+      # nix-utilities
+      nix-search
 
       # maintainance tools
       gen-package-lock
