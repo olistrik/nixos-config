@@ -16,7 +16,8 @@ in
       way-displays.enable = true;
       xwayland-satellite.enable = true;
       swayidle.enable = true;
-      wbg.enable = true;
+      swaybg.enable = true;
+      # wbg.enable = true;
     };
 
     programs.niri.enable = true;
