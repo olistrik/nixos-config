@@ -25,6 +25,13 @@ with lib; with olistrik;
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.open = true;
 
+  environment.systemPackages = with pkgs; [
+    cudatoolkit
+    cudaPackages.cudnn
+    cudaPackages.cufft
+    # cudaPackages.tensorrt # requires some bullshit nvidia signup.
+  ];
+
   environment.sessionVariables = {
     CUDA_PATH = "${pkgs.cudatoolkit}";
     EXTRA_LDFLAGS = "-L/lib -L${pkgs.linuxPackages.nvidia_x11}/lib";
