@@ -2,7 +2,6 @@
 with lib;
 with lib.olistrik;
 let
-  pkg = lib.olistrik.packages pkgs;
   cfg = config.olistrik.collections.common;
 in
 {
@@ -47,7 +46,6 @@ in
       enable = true;
       useRoutingFeatures = mkDefault "client";
     };
-
 
     programs.appimage.binfmt = true;
 
