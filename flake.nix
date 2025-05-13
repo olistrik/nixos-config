@@ -24,6 +24,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-wsl = {
+      url = "github:nix-community/nixos-wsl";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -120,16 +125,10 @@
         nix-matlab.overlay # why.
       ];
 
-      # Temporary, immich is not in 24.05
-      # systems.hosts.hestia.modules = with inputs; [
-      #   ({ ... }: {
-      #     disabledModules = [ "services/databases/redis.nix" ];
-      #     imports = [
-      #       "${unstable}/nixos/modules/services/web-apps/immich.nix"
-      #       "${unstable}/nixos/modules/services/databases/redis.nix"
-      #     ];
-      #   })
-      # ];
+      # Add wsl modules for loki.
+      systems.hosts.loki.modules = with inputs; [
+        nixos-wsl.nixosModules.default
+      ];
 
       systems.modules.nixos = with inputs; [
         disko.nixosModules.default
