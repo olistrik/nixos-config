@@ -74,6 +74,7 @@ in
       parallel
       ripgrep
       tmux
+      mosh
 
       # nix-utilities
       nix-search
