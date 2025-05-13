@@ -22,15 +22,10 @@ with lib; with olistrik;
     };
   };
 
+  programs.mosh.enable = true;
+
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.open = true;
-
-  environment.systemPackages = with pkgs; [
-    cudatoolkit
-    cudaPackages.cudnn
-    cudaPackages.cufft
-    # cudaPackages.tensorrt # requires some bullshit nvidia signup.
-  ];
 
   environment.sessionVariables = {
     CUDA_PATH = "${pkgs.cudatoolkit}";
