@@ -8,7 +8,11 @@
 { lib, pkgs, ... }:
 with lib; with olistrik;
 {
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    cudaSupport = true;
+    cudaVersion = "12";
+  };
 
   wsl = {
     enable = true;
@@ -35,10 +39,30 @@ with lib; with olistrik;
       "/usr/lib/wsl/lib"
       "${pkgs.linuxPackages.nvidia_x11}/lib"
       "${pkgs.ncurses5}/lib"
-      "/run/opengl-driver/lib"
     ];
     MESA_D3D12_DEFAULT_ADAPTER_NAME = "Nvidia";
   };
+
+  # environment.systemPackages = with pkgs; [
+  #   cudatoolkit
+  # ];
+  #
+  # environment.sessionVariables = {
+  #   CUDA_PATH = "${pkgs.cudatoolkit}";
+  #   EXTRA_LDFLAGS = "-L/lib -L${pkgs.linuxPackages.nvidia_x11}/lib";
+  #   EXTRA_CCFLAGS = "-I/usr/include";
+  #   LD_LIBRARY_PATH = [
+  #     "/usr/lib/wsl/lib"
+  #     "${pkgs.linuxPackages.nvidia_x11}/lib"
+  #     "${pkgs.ncurses5}/lib"
+  #     "/run/opengl-driver/lib"
+  #   ];
+  #   MESA_D3D12_DEFAULT_ADAPTER_NAME = "Nvidia";
+  # };
+
+  # I probably want a global toggle for this, it will follow
+  # config.cudaSupport, but that feels a little heavy handed.
+  olistrik.programs.btop.cudaSupport = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

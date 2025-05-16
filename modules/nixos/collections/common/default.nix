@@ -16,6 +16,7 @@ in
         zsh = enabled;
         zoxide = enabled;
         tmux = enabled;
+        btop = enabled;
       };
       tools = {
         direnv = enabled;
