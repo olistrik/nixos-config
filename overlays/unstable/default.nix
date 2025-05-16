@@ -2,5 +2,5 @@
 { channels, ... }: final: prev: {
   # inherit (channels.unstable) ...;
 
-  inherit (channels.unstable) cudatoolkit;
+  # inherit (channels.unstable) cudatoolkit cudaPackages;
 }

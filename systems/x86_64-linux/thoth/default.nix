@@ -106,7 +106,6 @@ with lib.olistrik;
     openFirewall = true;
   };
 
-
   # matlab is a piece of sh*t
   environment.systemPackages = with pkgs; [
     # matlab
@@ -135,6 +134,10 @@ with lib.olistrik;
   #   nix-ld.libraries = pkgs.steam-run.fhsenv.args.multiPkgs pkgs;
 
   services.libinput.touchpad.disableWhileTyping = true;
+
+  # I probably want a global toggle for this, it will follow
+  # config.rocmSupport, but that feels a little heavy handed.
+  olistrik.programs.btop.rocmSupport = true;
 
   # NEVER CHANGE.
   system.stateVersion = "24.05"; # Did you read the comment?
