@@ -18,6 +18,7 @@ with lib; with olistrik;
     enable = true;
     defaultUser = "oli";
     useWindowsDriver = true;
+    docker-desktop.enable = true;
   };
 
   olistrik = {
@@ -40,25 +41,36 @@ with lib; with olistrik;
       "${pkgs.linuxPackages.nvidia_x11}/lib"
       "${pkgs.ncurses5}/lib"
     ];
+
     MESA_D3D12_DEFAULT_ADAPTER_NAME = "Nvidia";
   };
 
-  # environment.systemPackages = with pkgs; [
-  #   cudatoolkit
-  # ];
-  #
-  # environment.sessionVariables = {
-  #   CUDA_PATH = "${pkgs.cudatoolkit}";
-  #   EXTRA_LDFLAGS = "-L/lib -L${pkgs.linuxPackages.nvidia_x11}/lib";
-  #   EXTRA_CCFLAGS = "-I/usr/include";
-  #   LD_LIBRARY_PATH = [
-  #     "/usr/lib/wsl/lib"
-  #     "${pkgs.linuxPackages.nvidia_x11}/lib"
-  #     "${pkgs.ncurses5}/lib"
-  #     "/run/opengl-driver/lib"
-  #   ];
-  #   MESA_D3D12_DEFAULT_ADAPTER_NAME = "Nvidia";
-  # };
+  hardware.nvidia-container-toolkit = {
+    enable = true;
+    mount-nvidia-executables = false;
+  };
+
+  virtualisation.docker = {
+    enable = true;
+    autoPrune.enable = true;
+    daemon.settings.features.cdi = true;
+    daemon.settings.cdi-spec-dirs = [ "/etc/cdi" ];
+  };
+
+  systemd.services = {
+    nvidia-cdi-generator = {
+      description = "Generate nvidia cdi";
+      wantedBy = [ "docker.service" ];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${pkgs.nvidia-docker}/bin/nvidia-ctk cdi generate --output=/etc/cdi/nvidia.yaml --nvidia-ctk-path=${pkgs.nvidia-container-toolkit}/bin/nvidia-ctk";
+      };
+    };
+  };
+
+  networking.interfaces = {
+    eth0.mtu = 1340;
+  };
 
   # I probably want a global toggle for this, it will follow
   # config.cudaSupport, but that feels a little heavy handed.
