@@ -56,6 +56,18 @@ with lib.olistrik;
           };
         };
       };
+      "loki.olii.nl" = {
+        serverName = "loki.olii.nl *.loki.olii.nl";
+        forceSSL = true;
+        useACMEHost = "olii.nl";
+        locations = {
+          "/" = {
+            proxyPass = "http://100.97.72.67";
+            recommendedProxySettings = true;
+            proxyWebsockets = true;
+          };
+        };
+      };
     };
   };
 
