@@ -69,7 +69,7 @@ with lib; with olistrik;
   };
 
   networking.interfaces = {
-    eth0.mtu = 1340;
+    eth0.mtu = 1500;
   };
 
   # I probably want a global toggle for this, it will follow
