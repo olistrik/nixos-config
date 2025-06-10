@@ -22,8 +22,7 @@ in
 
     # add fonts for polybar and Alacritty.
     fonts.packages = with pkgs; [
-      hermit
-      (nerdfonts.override { fonts = [ "Hermit" "JetBrainsMono" ]; })
+      nerd-fonts.jet-brains-mono
     ];
 
     # configure alacritty
