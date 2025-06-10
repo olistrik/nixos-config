@@ -38,7 +38,7 @@ in
 
     environment.systemPackages = with pkgs; [
       # Theming
-      yaru-theme
+      adwaita-icon-theme
 
       # Wallpaper utility
       wbg
@@ -59,17 +59,6 @@ in
     # done by niri-flake
     # security.pam.services.swaylock = { };
 
-    # environment.etc = {
-    #   "xdg/gtk-2.0/gtkrc".text = ''
-    #     gtk-theme-name = "Yaru-dark"
-    #     gtk-icon-theme-name = "Yaru-dark"
-    #   '';
-    #   "xdg/gtk-3.0/settings.ini".text = ''
-    #     [Settings]
-    #     gtk-theme-name = Yaru-dark
-    #     gtk-icon-theme-name = Yaru-dark
-    #   '';
-    # };
 
     # Provided by niri-flake?
     # xdg.portal = {
@@ -115,8 +104,8 @@ in
           settings = {
             "org/gnome/desktop/interface" = {
               color-scheme = "prefer-dark";
-              gtk-theme = "Yaru-dark";
-              gtk-icon-theme = "Yaru-dark";
+              gtk-theme = "Adwaita";
+              icon-theme = "Adwaita";
             };
           };
         }];
