@@ -45,6 +45,12 @@ with lib.olistrik;
 
   # Internal redirect for microtik portals.
   services.nginx = {
+    tailscaleForwardAuth = {
+      enable = true;
+      virtualHosts = [ "loki.olii.nl" ];
+    };
+
+    # These should probably be moved somewhere sensible.
     virtualHosts = {
       "router.olii.nl" = {
         forceSSL = true;
@@ -60,6 +66,11 @@ with lib.olistrik;
         forceSSL = true;
         useACMEHost = "olii.nl";
         locations = {
+          "/auth" = {
+            extraConfig = ''
+              proxy_set_header X-Requires-Capability "olii.nl/sub/loki";
+            '';
+          };
           "/" = {
             proxyPass = "http://100.97.72.67:3000";
             recommendedProxySettings = true;

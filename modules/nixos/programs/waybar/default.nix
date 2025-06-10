@@ -49,7 +49,7 @@ in
 
     environment.systemPackages = with pkgs; [
       waybar
-      (nerdfonts.override { fonts = [ "Hermit" "JetBrainsMono" ]; })
+      nerdfonts.jet-brains-mono
     ] ++ builtins.concatLists (builtins.catAttrs "requires" modules);
 
 

@@ -6,7 +6,7 @@
     # nix package sets
 
     # Normal nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
 
     # Unstable nixpkgs
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -52,17 +52,11 @@
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
 
-    nixvim = {
-      url = "github:nix-community/nixvim/nixos-24.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nixvim-config = {
       url = "github:olistrik/nixvim-config";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         unstable.follows = "unstable";
-        nixvim.follows = "nixvim";
         snowfall-lib.follows = "snowfall-lib";
       };
     };
@@ -94,6 +88,11 @@
       url = "github:diamondburned/nix-search";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    tailscale-forward-auth = {
+      url = "github:olistrik/tailscale-forward-auth";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs:
@@ -118,6 +117,7 @@
       };
 
       overlays = with inputs; [
+        tailscale-forward-auth.overlays.default
         valheim-server.overlays.default
         steam-fetcher.overlays.default
         nixvim-config.overlays.default
@@ -135,6 +135,7 @@
         impermanence.nixosModules.impermanence
 
         valheim-server.nixosModules.default
+        tailscale-forward-auth.nixosModules.default
 
         # until I work out where to put this.
         ({ ... }: {

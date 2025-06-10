@@ -108,6 +108,7 @@ with lib.olistrik;
 
   # matlab is a piece of sh*t
   environment.systemPackages = with pkgs; [
+    via
     # matlab
     # matlab-shell
     # (writeShellScriptBin "matlab-cli" ''
@@ -124,6 +125,10 @@ with lib.olistrik;
     libreoffice
     nix-output-monitor
   ];
+
+  hardware.keyboard.qmk.enable = true;
+
+  services.udev.packages = [ pkgs.via ];
 
   # SDR stuff.
   # hardware.rtl-sdr.enable = true;
