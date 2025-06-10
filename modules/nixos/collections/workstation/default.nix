@@ -22,7 +22,7 @@ in
 
     # add fonts for polybar and Alacritty.
     fonts.packages = with pkgs; [
-      nerd-fonts.jet-brains-mono
+      nerd-fonts.jetbrains-mono
     ];
 
     # configure alacritty
