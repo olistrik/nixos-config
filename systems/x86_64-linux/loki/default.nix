@@ -68,6 +68,7 @@ with lib; with olistrik;
     };
   };
 
+  # BUG: this does not fix the problem. Windows periodically resets the MTU.
   networking.interfaces = {
     eth0.mtu = 1500;
   };

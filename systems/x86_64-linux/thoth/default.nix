@@ -28,6 +28,19 @@ with lib.olistrik;
     };
   };
 
+  # services.nginx = {
+  #   enable = true;
+  #
+  #   virtualHosts = {
+  #     "foo.olii.nl" = {
+  #       tailscaleAuth = {
+  #         enable = true;
+  #         requiresCapability = "foo.olii.nl/cap/public";
+  #       };
+  #     };
+  #   };
+  # };
+
   # Required for ZFS.
   networking.hostId = "8177229e";
 
