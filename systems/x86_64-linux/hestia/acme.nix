@@ -1,7 +1,7 @@
 { config, ... }: {
   security.acme = {
     acceptTerms = true;
-    defaults.email = "oliverstrik+acme@gmail.com";
+    defaults.email = "acme@olii.nl";
     certs."olii.nl" = {
       dnsProvider = "cloudflare";
       domain = "*.olii.nl";

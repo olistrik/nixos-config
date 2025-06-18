@@ -70,6 +70,11 @@
           extraConfig = ''
             proxy_buffering off;
           '';
+
+          tailscaleForwardAuth = {
+            requiresCapability = "zigbee.olii.nl/cap/auth";
+          };
+
           locations = {
             "/" = {
               proxyPass = "http://localhost:8080";
@@ -87,6 +92,11 @@
           extraConfig = ''
             proxy_buffering off;
           '';
+
+          tailscaleForwardAuth = {
+            requiresCapability = "node-red.olii.nl/cap/auth";
+          };
+
           locations = {
             "/" = {
               proxyPass = "http://localhost:1880";
@@ -100,6 +110,11 @@
           extraConfig = ''
             proxy_buffering off;
           '';
+
+          tailscaleForwardAuth = {
+            requiresCapability = "home.olii.nl/cap/auth";
+          };
+
           locations = {
             "= /" = {
               extraConfig = ''

@@ -11,6 +11,7 @@ with lib.olistrik;
     ./build-all-systems.nix
 
     ./acme.nix
+    ./nginx.nix
     ./node-red.nix
     ./immich.nix
     ./nix-serve.nix
@@ -23,9 +24,6 @@ with lib.olistrik;
     common = enabled;
     server = enabled;
   };
-
-  # Required for ZFS.
-  networking.hostId = "1a75b647";
 
   # Impermanence. Get rekt python.
   olistrik.impermanence.enable = true;
@@ -43,61 +41,8 @@ with lib.olistrik;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
-  # Internal redirect for microtik portals.
-  services.nginx = {
-    tailscaleForwardAuth = {
-      enable = true;
-      virtualHosts = [ "loki.olii.nl" ];
-    };
-
-    # These should probably be moved somewhere sensible.
-    virtualHosts = {
-      "router.olii.nl" = {
-        forceSSL = true;
-        useACMEHost = "olii.nl";
-        locations = {
-          "/" = {
-            proxyPass = "http://192.168.88.1";
-            recommendedProxySettings = true;
-          };
-        };
-      };
-      "loki.olii.nl" = {
-        forceSSL = true;
-        useACMEHost = "olii.nl";
-        locations = {
-          "/auth" = {
-            extraConfig = ''
-              proxy_set_header X-Requires-Capability "olii.nl/sub/loki";
-            '';
-          };
-          "/" = {
-            proxyPass = "http://100.97.72.67:3000";
-            recommendedProxySettings = true;
-            proxyWebsockets = true;
-            extraConfig = ''
-              proxy_buffering off;
-              proxy_request_buffering off;
-            '';
-          };
-        };
-      };
-      "rmq.olii.nl" = {
-        forceSSL = true;
-        useACMEHost = "olii.nl";
-        locations = {
-          "/" = {
-            proxyPass = "http://100.97.72.67:15672/";
-            recommendedProxySettings = true;
-            proxyWebsockets = true;
-          };
-        };
-      };
-    };
-  };
-
-
   # NEVER CHANGE.
+  networking.hostId = "1a75b647"; # Required for ZFS.
   system.stateVersion = "24.05"; # Did you read the comment?
 }
 
