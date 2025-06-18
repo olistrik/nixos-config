@@ -12,6 +12,7 @@ in
   };
 
   config = mkIf cfg.enable {
+    # TODO: Every single item is graphical. Perhaps I should rethink my collections.
     environment.systemPackages = with pkgs;
       [
         # media
@@ -31,24 +32,5 @@ in
         firefox # Fuck you Google.
         thunderbird
       ];
-
-
-    services.udev.packages = [
-      (pkgs.writeTextFile
-        {
-          name = "arduino-udev-rules";
-          text = ''
-            SUBSYSTEMS=="usb", ATTRS{idVendor}=="2886", ATTRS{idProduct}=="0062", MODE="0664", TAG+="uaccess"
-            KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0664", TAG+="uaccess"
-          '';
-          destination = "/etc/udev/rules.d/70-arduino.rules";
-        })
-    ];
-
-    # TODO: add this to some keyboard module
-    # services.udev.extraRules = ''
-    #       ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", MODE="664", GROUP="plugdev"
-    #   	KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0664", GROUP="plugdev"
-    # '';
   };
 }

@@ -28,22 +28,6 @@ with lib.olistrik;
     };
   };
 
-  # services.nginx = {
-  #   enable = true;
-  #
-  #   virtualHosts = {
-  #     "foo.olii.nl" = {
-  #       tailscaleAuth = {
-  #         enable = true;
-  #         requiresCapability = "foo.olii.nl/cap/public";
-  #       };
-  #     };
-  #   };
-  # };
-
-  # Required for ZFS.
-  networking.hostId = "8177229e";
-
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -141,7 +125,24 @@ with lib.olistrik;
 
   hardware.keyboard.qmk.enable = true;
 
-  services.udev.packages = [ pkgs.via ];
+  services.udev.packages = [
+    pkgs.via
+    (pkgs.writeTextFile
+      {
+        name = "arduino-udev-rules";
+        text = ''
+          SUBSYSTEMS=="usb", ATTRS{idVendor}=="2886", ATTRS{idProduct}=="0062", MODE="0664", TAG+="uaccess"
+          KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0664", TAG+="uaccess"
+        '';
+        destination = "/etc/udev/rules.d/70-arduino.rules";
+      })
+  ];
+
+  # TODO: add this to some keyboard module
+  # services.udev.extraRules = ''
+  #       ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", MODE="664", GROUP="plugdev"
+  #   	KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0664", GROUP="plugdev"
+  # '';
 
   # SDR stuff.
   # hardware.rtl-sdr.enable = true;
@@ -158,5 +159,6 @@ with lib.olistrik;
   olistrik.programs.btop.rocmSupport = true;
 
   # NEVER CHANGE.
+  networking.hostId = "8177229e"; # Required for ZFS.
   system.stateVersion = "24.05"; # Did you read the comment?
 }

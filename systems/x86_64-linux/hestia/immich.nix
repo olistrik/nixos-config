@@ -12,6 +12,9 @@
       "immich.olii.nl" = {
         forceSSL = true;
         useACMEHost = "olii.nl";
+        tailscaleForwardAuth = {
+          requiresCapability = "immich.olii.nl/cap/auth";
+        };
         extraConfig = ''
           proxy_buffering off;
           client_max_body_size 0;
