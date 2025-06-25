@@ -11,6 +11,10 @@ with lib.olistrik;
     ./persistence-configuration.nix
   ];
 
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
+
   # Shared configurations.
   olistrik = {
     collections = {
@@ -145,7 +149,7 @@ with lib.olistrik;
   # '';
 
   # SDR stuff.
-  # hardware.rtl-sdr.enable = true;
+  hardware.rtl-sdr.enable = true;
   # rtl-sdr sdrpp noaa-apt
 
   programs.nix-ld.enable = true;
