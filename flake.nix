@@ -41,9 +41,17 @@
     ##########################
     # extras
 
-    ags = {
-      url = "github:aylur/ags";
+    astal = {
+      url = "github:aylur/astal/0507a6bf1035ddbe72fdb64c0fb5dc1c991faeaf";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    ags = {
+      url = "github:aylur/ags/3ed9737bdbc8fc7a7c7ceef2165c9109f336bff6";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        astal.follows = "astal";
+      };
     };
 
     niri-flake = {
