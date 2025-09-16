@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   imports = [
     ./node-red/extra-nodes.nix
   ];
@@ -34,6 +34,7 @@
     };
 
     zigbee2mqtt = {
+      package = pkgs.zigbee2mqtt_2;
       enable = true;
       settings = {
         serial = {
