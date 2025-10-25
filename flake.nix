@@ -127,10 +127,14 @@
       overlays = with inputs; [
         tailscale-forward-auth.overlays.default
         valheim-server.overlays.default
-        steam-fetcher.overlays.default
+        # steam-fetcher.overlays.default
         nixvim-config.overlays.default
+
         niri-flake.overlays.niri
-        nix-matlab.overlay # why.
+
+        # why non-standard?
+        nix-matlab.overlay
+        steam-fetcher.overlay
       ];
 
       # Add wsl modules for loki.
