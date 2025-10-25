@@ -129,8 +129,10 @@ with lib.olistrik;
 
   hardware.keyboard.qmk.enable = true;
 
+  programs.pulseview.enable = true;
   services.udev.packages = [
     pkgs.via
+    pkgs.libsigrok
     (pkgs.writeTextFile
       {
         name = "arduino-udev-rules";
