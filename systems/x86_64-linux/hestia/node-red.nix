@@ -52,10 +52,10 @@
       };
     };
 
-    esphome = {
-      enable = true;
-      openFirewall = true;
-    };
+    # esphome = {
+    #   enable = true;
+    #   openFirewall = true;
+    # };
 
     node-red = {
       enable = true;
