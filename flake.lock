@@ -502,11 +502,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1761390536,
-        "narHash": "sha256-CO0+0mv4MpMC6fJEjTTnWE/Q+wX6gSlpD/8juRsywcQ=",
+        "lastModified": 1763155479,
+        "narHash": "sha256-itL6J1RyxQ7OM9DcqiAAwhjtQiqDSvXnImwitNuqHlw=",
         "owner": "olistrik",
         "repo": "nixvim-config",
-        "rev": "67670e579d8c6bf761cf2ac387b494520305cc39",
+        "rev": "7912eee8e77d10e02e05f46f4388794c10b9ff9f",
         "type": "github"
       },
       "original": {
