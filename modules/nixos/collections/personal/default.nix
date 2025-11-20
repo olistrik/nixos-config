@@ -21,6 +21,7 @@ in
         mplayer
         zathura
         discord
+        signal-desktop
 
         # editing
         gimp

@@ -2,5 +2,6 @@
 { channels, ... }: final: prev: {
   # inherit (channels.unstable) ...;
 
-  # inherit (channels.unstable) cudatoolkit cudaPackages;
+  # WARN: REMOVE IN 25.11
+  inherit (channels.unstable) nextcloud32;
 }

@@ -27,6 +27,7 @@
       "/var/lib/immich"
       "/var/lib/redis-immich"
       "/var/lib/postgresql"
+      "/var/lib/nextcloud"
     ];
     files = [
       #log-rotate status

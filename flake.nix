@@ -142,6 +142,14 @@
         nixos-wsl.nixosModules.default
       ];
 
+      systems.hosts.hestia.modules = with inputs; [
+        ({
+          # WARN: REMOVE IN 25.11
+          disabledModules = [ "services/web-apps/nextcloud.nix" ];
+          imports = [ "${unstable}/nixos/modules/services/web-apps/nextcloud.nix" ];
+        })
+      ];
+
       systems.modules.nixos = with inputs; [
         disko.nixosModules.default
         impermanence.nixosModules.impermanence

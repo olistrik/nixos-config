@@ -17,6 +17,7 @@ with lib.olistrik;
     ./nix-serve.nix
     # ./palworld-server.nix
     ./valheim-server
+    ./nextcloud.nix
   ];
 
   # Shared configurations.

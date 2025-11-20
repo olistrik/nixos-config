@@ -7,7 +7,7 @@
     tailscaleForwardAuth = {
       enable = true;
       requiresCapability = "olii.nl/cap/auth";
-      permitPrivate = true;
+      # permitPrivate = true;
     };
 
     # General virtual hosts that are not specific to a service.
