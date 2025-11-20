@@ -18,6 +18,8 @@ in
       pavucontrol
     ];
 
+    programs.localsend.enable = true;
+
     # TODO: This needs some _serious_ cleanup. like seriously wtf was 23yo me doing.
 
     # add fonts for polybar and Alacritty.
