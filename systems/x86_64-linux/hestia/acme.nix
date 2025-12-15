@@ -6,7 +6,7 @@
       dnsProvider = "cloudflare";
       domain = "*.olii.nl";
       credentialsFile = "/var/lib/acme/olii.nl.creds";
-      group = config.services.nginx.group;
+      # group = config.services.nginx.group;
     };
   };
 

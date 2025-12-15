@@ -68,6 +68,7 @@ in
       zip
       unzip
       unrar
+      cachix
 
       # misc
       killall

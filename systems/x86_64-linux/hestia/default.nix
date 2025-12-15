@@ -11,12 +11,15 @@ with lib.olistrik;
     ./build-all-systems.nix
 
     ./acme.nix
-    ./nginx.nix
+    ./caddy.nix
+    # ./nginx.nix
+    ./tsidp.nix
+    ./postgres.nix
     ./node-red.nix
     ./immich.nix
     ./nix-serve.nix
     # ./palworld-server.nix
-    ./valheim-server
+    # ./valheim-server
     ./nextcloud.nix
   ];
 

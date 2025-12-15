@@ -61,74 +61,37 @@
       enable = true;
     };
 
-    nginx = {
-      enable = true;
-      recommendedProxySettings = true;
-      virtualHosts = {
-        "zigbee.olii.nl" = {
-          forceSSL = true;
-          useACMEHost = "olii.nl";
-          extraConfig = ''
-            proxy_buffering off;
-          '';
-
-          tailscaleForwardAuth = {
-            requiresCapability = "zigbee.olii.nl/cap/auth";
-          };
-
-          locations = {
-            "/" = {
-              proxyPass = "http://localhost:8080";
-              proxyWebsockets = true;
-            };
-            "/api" = {
-              proxyPass = "http://localhost:8080/api";
-              proxyWebsockets = true;
-            };
-          };
-        };
-        "node-red.olii.nl" = {
-          forceSSL = true;
-          useACMEHost = "olii.nl";
-          extraConfig = ''
-            proxy_buffering off;
-          '';
-
-          tailscaleForwardAuth = {
-            requiresCapability = "node-red.olii.nl/cap/auth";
-          };
-
-          locations = {
-            "/" = {
-              proxyPass = "http://localhost:1880";
-              proxyWebsockets = true;
-            };
-          };
-        };
-        "home.olii.nl" = {
-          forceSSL = true;
-          useACMEHost = "olii.nl";
-          extraConfig = ''
-            proxy_buffering off;
-          '';
-
-          tailscaleForwardAuth = {
-            requiresCapability = "home.olii.nl/cap/auth";
-          };
-
-          locations = {
-            "= /" = {
-              extraConfig = ''
-                rewrite ^ /dashboard;
-              '';
-            };
-            "/" = {
-              proxyPass = "http://localhost:1880";
-              proxyWebsockets = true;
-            };
-          };
-        };
-      };
+    caddy.virtualHosts = {
+      "zigbee.olii.nl".extraConfig = ''
+        reverse_proxy http://localhost:8080
+      '';
+      "node-red.olii.nl".extraConfig = ''
+        reverse_proxy http://localhost:1880
+      '';
     };
+
+    #   "home.olii.nl" = {
+    #     forceSSL = true;
+    #     useACMEHost = "olii.nl";
+    #     extraConfig = ''
+    #       proxy_buffering off;
+    #     '';
+    #
+    #     tailscaleForwardAuth = {
+    #       requiresCapability = "home.olii.nl/cap/auth";
+    #     };
+    #
+    #     locations = {
+    #       "= /" = {
+    #         extraConfig = ''
+    #           rewrite ^ /dashboard;
+    #         '';
+    #       };
+    #       "/" = {
+    #         proxyPass = "http://localhost:1880";
+    #         proxyWebsockets = true;
+    #       };
+    #     };
+    #   };
   };
 }
