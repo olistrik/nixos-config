@@ -61,6 +61,10 @@ with lib.olistrik;
     };
   };
 
+  # Weird AMD stuff.
+  hardware.cpu.amd.updateMicrocode = true;
+  hardware.firmware = [ pkgs.linux-firmware ];
+
   # Configure audio priority (WIP: The wireplumber docs are really confusing.)
   # TODO: make this cleaner.
   # headphones ? bluetooth > HDMI > Speaker 

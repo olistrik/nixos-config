@@ -11,8 +11,23 @@ in
     secretKeyFile = "/var/lib/nix-serve/cache-priv-key.pem";
   };
 
+  services.caddy.virtualHosts =
+    {
+      "cache.olii.nl".extraConfig = ''
+        # Serve /nix-cache-info with the fixed response
+        @nixcache path /nix-cache-info
+        respond @nixcache "StoreDir: /nix/store\nWantMassQuery: 1\nPriority: ${toString priority}\n" 200
+
+        # Proxy everything else to your service
+        route {
+        	reverse_proxy http://${cfg.bindAddress}:${toString cfg.port} {
+        		flush_interval -1
+        	}
+        }
+      '';
+    };
+
   services.nginx = {
-    enable = true;
     recommendedProxySettings = true;
     virtualHosts = {
       "cache.olii.nl" = {

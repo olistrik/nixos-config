@@ -60,14 +60,14 @@
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
 
-    nixvim-config = {
-      url = "github:olistrik/nixvim-config";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        unstable.follows = "unstable";
-        snowfall-lib.follows = "snowfall-lib";
-      };
-    };
+    # nixvim-config = {
+    #   url = "github:olistrik/nixvim-config";
+    #   inputs = {
+    #     nixpkgs.follows = "nixpkgs";
+    #     unstable.follows = "unstable";
+    #     snowfall-lib.follows = "snowfall-lib";
+    #   };
+    # };
 
     steam-fetcher = {
       url = "github:nix-community/steam-fetcher";
@@ -101,6 +101,11 @@
       url = "github:olistrik/tailscale-forward-auth";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    tsidp = {
+      url = "github:olistrik/tsidp/unix-socket-pr";
+      inputs.nixpkgs.follows = "unstable";
+    };
   };
 
   outputs = inputs:
@@ -125,10 +130,12 @@
       };
 
       overlays = with inputs; [
-        tailscale-forward-auth.overlays.default
         valheim-server.overlays.default
         # steam-fetcher.overlays.default
-        nixvim-config.overlays.default
+        # nixvim-config.overlays.default
+
+        tailscale-forward-auth.overlays.default
+        tsidp.overlays.default
 
         niri-flake.overlays.niri
 
@@ -156,6 +163,7 @@
 
         valheim-server.nixosModules.default
         tailscale-forward-auth.nixosModules.default
+        tsidp.nixosModules.default
 
         # until I work out where to put this.
         ({ ... }: {
@@ -170,11 +178,11 @@
           nix.settings = {
             auto-optimise-store = true;
             substituters = [
-              "https://cache.olii.nl"
+              # "https://cache.olii.nl"
               "https://cache.nixos.org"
             ];
             trusted-public-keys = [
-              "cache.olii.nl:/eobpj1e29xJJ4r2ixYFR4E0t0zNDqu2g9/3ryaRa60="
+              # "cache.olii.nl:/eobpj1e29xJJ4r2ixYFR4E0t0zNDqu2g9/3ryaRa60="
               "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
             ];
           };
