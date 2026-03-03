@@ -26,10 +26,10 @@ in
   };
 
   # WARN: REMOVE IN 25.11
-  systemd.services.nextcloud-setup = {
-    after = lib.mkForce [ "postgresql.service" ];
-    requires = lib.mkForce [ "postgresql.service" ];
-  };
+  # systemd.services.nextcloud-setup = {
+  #   after = lib.mkForce [ "postgresql.service" ];
+  #   requires = lib.mkForce [ "postgresql.service" ];
+  # };
 
   users.groups.nextcloud.members = lib.mkForce [ "nextcloud" ];
   services.nginx.enable = lib.mkOverride 999 false;

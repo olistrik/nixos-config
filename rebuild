@@ -33,4 +33,4 @@ else
 fi
 
 export NIX_SSHOPTS="-A"
-nixos-rebuild $config $target $builder --use-remote-sudo $@
+nixos-rebuild $config $target $builder --sudo --ask-sudo-password $@

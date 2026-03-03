@@ -2,11 +2,21 @@
   security.acme = {
     acceptTerms = true;
     defaults.email = "acme@olii.nl";
-    certs."olii.nl" = {
-      dnsProvider = "cloudflare";
-      domain = "*.olii.nl";
-      credentialsFile = "/var/lib/acme/olii.nl.creds";
-      # group = config.services.nginx.group;
+    certs = {
+      "olii.nl" = {
+        dnsProvider = "cloudflare";
+        domain = "*.olii.nl";
+        credentialsFile = "/var/lib/acme/olii.nl.creds";
+        # group = config.services.nginx.group;
+      };
+
+      "rhythmotion.nl" = {
+        dnsProvider = "cloudflare";
+        credentialsFile = "/var/lib/acme/olii.nl.creds";
+        extraDomainNames = [
+          "signup.rhythmotion.nl"
+        ];
+      };
     };
   };
 
