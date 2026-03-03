@@ -6,7 +6,8 @@
     # nix package sets
 
     # Normal nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs-old.url = "github:nixos/nixpkgs/nixos-25.05";
 
     # Unstable nixpkgs
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -43,13 +44,13 @@
 
     astal = {
       url = "github:aylur/astal/0507a6bf1035ddbe72fdb64c0fb5dc1c991faeaf";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-old";
     };
 
     ags = {
       url = "github:aylur/ags/3ed9737bdbc8fc7a7c7ceef2165c9109f336bff6";
       inputs = {
-        nixpkgs.follows = "nixpkgs";
+        nixpkgs.follows = "nixpkgs-old";
         astal.follows = "astal";
       };
     };
@@ -82,10 +83,10 @@
       };
     };
 
-    nix-matlab = {
-      url = "gitlab:doronbehar/nix-matlab";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # nix-matlab = {
+    #   url = "gitlab:doronbehar/nix-matlab";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     minimal-tmux = {
       url = "github:niksingh710/minimal-tmux-status";
@@ -140,7 +141,7 @@
         niri-flake.overlays.niri
 
         # why non-standard?
-        nix-matlab.overlay
+        # nix-matlab.overlay
         steam-fetcher.overlay
       ];
 
@@ -152,9 +153,14 @@
       systems.hosts.hestia.modules = with inputs; [
         ({
           # WARN: REMOVE IN 25.11
-          disabledModules = [ "services/web-apps/nextcloud.nix" ];
-          imports = [ "${unstable}/nixos/modules/services/web-apps/nextcloud.nix" ];
+          # disabledModules = [ "services/web-apps/nextcloud.nix" ];
+          # imports = [ "${unstable}/nixos/modules/services/web-apps/nextcloud.nix" ];
+
+          disabledModules = [ "services/security/tsidp.nix" ];
         })
+        tsidp.nixosModules.default
+
+        tailscale-forward-auth.nixosModules.default
       ];
 
       systems.modules.nixos = with inputs; [
@@ -162,8 +168,6 @@
         impermanence.nixosModules.impermanence
 
         valheim-server.nixosModules.default
-        tailscale-forward-auth.nixosModules.default
-        tsidp.nixosModules.default
 
         # until I work out where to put this.
         ({ ... }: {
