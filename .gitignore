@@ -1,7 +1,1 @@
-result
-.envrc
-.direnv
-*.iso
-
-# secrets
-.nixwarden.key
+old/
