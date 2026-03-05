@@ -9,7 +9,9 @@
         # docker
       ];
 
-      foo = true; # Works with or without docker.
+      olistrik.modules.docker.foo = true;
+
+      # foo = true; # Works with or without docker.
       virtualisation.docker.enable = false; # Fails with docker.
 
       # Bootloader
