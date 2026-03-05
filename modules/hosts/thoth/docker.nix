@@ -1,18 +1,20 @@
 {
   modules.optional = {
     docker =
-      { lib, ... }:
+      { lib, cfg, ... }:
       let
         inherit (lib) mkEnableOption;
       in
       {
         options = {
-          foo = mkEnableOption "bar";
+          foo = mkEnableOption "foo";
         };
 
         config = {
+          olistrik.modules.docker.foo = true;
+
           virtualisation.docker = {
-            enable = true;
+            enable = cfg.foo;
           };
         };
       };

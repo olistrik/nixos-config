@@ -17,11 +17,15 @@ let
     mkOption
     mkEnableOption
     types
+    attrByPath
+    setAttrByPath
     ;
   inherit (lib.attrsets)
     filterAttrs
     ;
   inherit (lib.strings) escapeNixIdentifier;
+
+  attrsWithout = name: filterAttrs (n: _: n != name);
 
   # the module provided to `apply` seems to be nested two deep.
   # I don't know why, I don't know if this is always the case.
@@ -44,15 +48,17 @@ let
 
   # wraps the `config` block of a module with the condition.
   injectCondition =
-    condition: module:
+    condition: namespace: module:
     if isFunction module then
       # Can't get the `config` block until it's called; so wrap it and try again later.
-      args@{ pkgs, ... }: injectCondition condition (module args)
+      args@{ pkgs, config, ... }:
+      injectCondition condition namespace (module (args // { cfg = attrByPath namespace { } config; }))
     else if isAttrs module && (module ? config || module ? options) then
       # If it has either `config` or `options` then it's a "full module".
       # prepend the conditional to the config if it exists and leave the rest.
       module
       // {
+        options = if module ? options then (setAttrByPath namespace module.options) else { };
         config = mkIf condition (module.config or { });
       }
     else if isAttrs module then
@@ -60,7 +66,7 @@ let
       # everything else is what would have been in "config".
       {
         imports = if module ? imports then module.imports else [ ];
-        config = mkIf condition (filterAttrs (n: _: n != "imports") module);
+        config = mkIf condition (attrsWithout "imports" module);
       }
     else
       # Otherwise it 'sn't a module? maybe error instead?
@@ -71,7 +77,9 @@ let
     { pkgs, config, ... }:
     let
       child = unwrapModule parent;
-      patched = (injectCondition config.modules.optional.${name}.enable child);
+      patched = (
+        injectCondition config.modules.optional.${name}.enable [ "olistrik" "modules" name ] child
+      );
       module = rewrap parent patched;
     in
     {
