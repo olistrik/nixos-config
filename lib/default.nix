@@ -1,0 +1,71 @@
+{ lib }:
+
+let
+  # Returns a list of all .nix files, excluding those starting with "_"
+  listFiles =
+    dir:
+    let
+      expand =
+        path:
+        if builtins.readFileType path == "directory" then
+          lib.filesystem.listFilesRecursive path
+        else
+          [ path ];
+    in
+    lib.filter (
+      path:
+      let
+        name = builtins.baseNameOf path;
+      in
+      (lib.hasSuffix ".nix" name) && !(lib.hasPrefix "_" name)
+    ) (lib.concatMap expand (if builtins.isList dir then dir else [ dir ]));
+
+  # depth: How many levels to traverse before wrapping as a module
+  # path:  The current attribute breadcrumbs (for the 'key')
+  # shards: The list of { file, value } pairs at this level
+  loadDepth =
+    depth: path: shards:
+    if depth == 0 then
+      # LEAF: We've reached the target depth.
+      # Combine all shards into one "Virtual Module".
+      {
+        key = "sharded-module-" + (lib.concatStringsSep "." path);
+        # Each shard's _file attribute ensures accurate error traces
+        imports = map (s: {
+          _file = s.file;
+          imports = [ s.value ];
+        }) shards;
+      }
+    else
+      # BRANCH: Gather unique keys and recurse
+      let
+        allKeys = lib.unique (
+          builtins.concatMap (s: if builtins.isAttrs s.value then builtins.attrNames s.value else [ ]) shards
+        );
+      in
+      lib.genAttrs allKeys (
+        key:
+        let
+          # Only pass shards that actually contain this key
+          subShards = builtins.filter (s: builtins.isAttrs s.value && s.value ? ${key}) shards;
+          nextShards = map (s: {
+            file = s.file;
+            value = s.value.${key};
+          }) subShards;
+        in
+        loadDepth (depth - 1) (path ++ [ key ]) nextShards
+      );
+
+in
+{
+  importSharded =
+    dir: depth:
+    let
+      paths = listFiles dir;
+      initialShards = map (p: {
+        file = toString p;
+        value = import p;
+      }) paths;
+    in
+    loadDepth depth [ ] initialShards;
+}

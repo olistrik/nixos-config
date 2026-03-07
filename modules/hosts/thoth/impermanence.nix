@@ -1,23 +1,30 @@
-{ ... }:
 {
-  fileSystems."/persist".neededForBoot = true;
-  environment.persistence."/persist" = {
-    hideMounts = true;
-    directories = [
-      # system
-      "/etc/NetworkManager/system-connections"
-      "/var/log"
-      "/var/lib/nixos"
-      "/var/lib/systemd/coredump"
-      "/var/lib/bluetooth"
+  nixos.hosts.thoth =
+    { self, ... }:
+    {
+      imports = [
+        (self.sources.impermanence + "/nixos.nix")
+      ];
 
-      # services
-      "/var/lib/tailscale"
-      "/var/lib/docker"
-    ];
-    files = [
-      # machine-id
-      "/etc/machine-id"
-    ];
-  };
+      fileSystems."/persist".neededForBoot = true;
+      environment.persistence."/persist" = {
+        hideMounts = true;
+        directories = [
+          # system
+          "/etc/NetworkManager/system-connections"
+          "/var/log"
+          "/var/lib/nixos"
+          "/var/lib/systemd/coredump"
+          "/var/lib/bluetooth"
+
+          # services
+          "/var/lib/tailscale"
+          "/var/lib/docker"
+        ];
+        files = [
+          # machine-id
+          "/etc/machine-id"
+        ];
+      };
+    };
 }
