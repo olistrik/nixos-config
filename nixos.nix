@@ -7,7 +7,7 @@ let
   nixosSystem = import "${sources.nixpkgs}/nixos/lib/eval-config.nix";
 
   # custom lib;
-  lib = import ./lib { inherit (pkgs) lib; };
+  lib = import ./lib.nix { inherit (pkgs) lib; };
   # module attrset is three deep <class>.<namespace>.<module>;
   modules = lib.importSharded ./modules 3;
 

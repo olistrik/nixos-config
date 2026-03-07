@@ -1,24 +1,6 @@
-{ lib }:
-
+{ self, lib, ... }:
 let
-  # Returns a list of all .nix files, excluding those starting with "_"
-  listFiles =
-    dir:
-    let
-      expand =
-        path:
-        if builtins.readFileType path == "directory" then
-          lib.filesystem.listFilesRecursive path
-        else
-          [ path ];
-    in
-    lib.filter (
-      path:
-      let
-        name = builtins.baseNameOf path;
-      in
-      (lib.hasSuffix ".nix" name) && !(lib.hasPrefix "_" name)
-    ) (lib.concatMap expand (if builtins.isList dir then dir else [ dir ]));
+  inherit (self.lib.loader) listFiles;
 
   # depth: How many levels to traverse before wrapping as a module
   # path:  The current attribute breadcrumbs (for the 'key')
@@ -58,7 +40,7 @@ let
 
 in
 {
-  importSharded =
+  modules.importSharded =
     dir: depth:
     let
       paths = listFiles dir;
