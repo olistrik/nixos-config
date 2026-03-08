@@ -1,32 +1,35 @@
-# Thoth is my personal laptop as it is used primarily for university work and
-# provisioning my other nixos hosts.
 {
   nixos.hosts.thoth =
-    { self, ... }:
+    { self, pkgs, ... }:
     {
+
       imports = with self.modules.nixos; [
-        ./_hardware-configuration.nix
+        hardware.touchpad
+        hardware.keyboard
 
-        # I don't really _like_ this; but I don't want to make disko into a module.
-        (self.sources.disko + "/module.nix")
-        ./_disko-configuration.nix
+        collections.personal
+        collections.workstation
 
-        # double imports work fine; they're deduped by the keys as expected.
-        containers.docker
-        containers.docker
+        services.printing
+
+        programs.nix-ld
+
+        programs.niri
+        programs.ags
       ];
 
-      nixpkgs.config = {
-        allowUnfree = true;
-      };
-
-      # Bootloader.
-      boot.loader.systemd-boot.enable = true;
-      boot.loader.efi.canTouchEfiVariables = true;
-      boot.loader.efi.efiSysMountPoint = "/boot/efi";
-
-      # Documentation.
+      # TODO: put somewhere useful.
       documentation.nixos.enable = false;
+
+      # Weird AMD stuff.
+      hardware.cpu.amd.updateMicrocode = true;
+      hardware.firmware = [ pkgs.linux-firmware ];
+      # rocm?
+
+      # TODO: put somewhere useful.
+      environment.systemPackages = with pkgs; [
+        nix-output-monitor # honestly don't know what this is.
+      ];
 
       # NEVER CHANGE.
       networking.hostId = "8177229e"; # Required for ZFS.

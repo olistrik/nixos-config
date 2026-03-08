@@ -38,10 +38,8 @@ let
         loadDepth (depth - 1) (path ++ [ key ]) nextShards
       );
 
-in
-{
-  modules.importSharded =
-    dir: depth:
+  importSharded =
+    depth: dir:
     let
       paths = listFiles dir;
       initialShards = map (p: {
@@ -50,4 +48,13 @@ in
       }) paths;
     in
     loadDepth depth [ ] initialShards;
+
+in
+{
+  modules = {
+    inherit importSharded;
+  };
+
+  # modules are currently depth 3: <class>.<namespace>.<module>
+  importModules = importSharded 3;
 }
