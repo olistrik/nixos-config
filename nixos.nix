@@ -1,34 +1,17 @@
 let
   sources = import ./npins;
 
-  # sources;
-  pkgs = import sources.nixpkgs { config.allowUnfree = true; };
-  unstable = import sources.unstable { config.allowUnfree = true; };
-  nixosSystem = import "${sources.nixpkgs}/nixos/lib/eval-config.nix";
+  # import my custom library;
+  lib = import ./lib.nix { inherit sources; };
 
-  # custom lib;
-  lib = import ./lib.nix { inherit (pkgs) lib; };
-  # module attrset is three deep <class>.<namespace>.<module>;
-  modules = lib.importSharded ./modules 3;
+  # recursively import all my modules.
+  modules = lib.importModules ./modules;
 
-  mkHost =
-    hostname: # todo; infer from attr.
-    hostVars:
-    nixosSystem {
-      specialArgs = {
-        self = {
-          inherit
-            sources
-            hostVars
-            lib
-            modules
-            ;
-          # packages = import ./packages.nix { inherit pkgs sources; };
-        };
-      };
-      modules = with modules.nixos; [ hosts.${hostname} ];
-    };
+  # init mmkHosts with `self` context
+  mkHosts = lib.mkHostsWith {
+    inherit sources lib modules;
+  };
 in
-{
-  thoth = mkHost "thoth" { };
+mkHosts {
+  thoth = { };
 }

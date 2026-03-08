@@ -1,12 +1,21 @@
 {
   nixos.hosts.thoth =
-    { self, ... }:
+    {
+      self,
+      lib,
+      config,
+      ...
+    }:
+    let
+      snapshots = [ "zroot/local/root@blank" ];
+    in
     {
       imports = [
         (self.sources.impermanence + "/nixos.nix")
       ];
 
       fileSystems."/persist".neededForBoot = true;
+
       environment.persistence."/persist" = {
         hideMounts = true;
         directories = [
@@ -26,5 +35,13 @@
           "/etc/machine-id"
         ];
       };
+
+      # TODO: move somewhere better; or fix impermanence so
+      # users can be mutable. /etc/shadow I think.
+      users.mutableUsers = false;
+
+      boot.initrd.postResumeCommands = lib.mkAfter (
+        builtins.concatStringsSep "/n" (map (snapshot: "zfs rollback -r ${snapshot}") snapshots)
+      );
     };
 }

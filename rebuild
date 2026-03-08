@@ -1,3 +1,17 @@
-#!/usr/bin/env bash
+#!/usr/bin/env bash 
 
-nixos-rebuild -f ./nixos.nix -A $(hostname) $@
+TARGET="$(hostname)"
+
+while getopts "t:" opt; do
+  case "$opt" in
+    t) TARGET="$OPTARG" ;;
+    *) echo "Usage: $0 [-t target] [nixos-rebuild-args...]"; exit 1 ;;
+  esac
+done
+
+shift $((OPTIND - 1))
+
+export NH_FILE=./nixos.nix
+export NH_ATTRP="${TARGET}"
+
+nh os "$@"
