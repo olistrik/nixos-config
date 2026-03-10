@@ -29,6 +29,19 @@
       "url": "https://github.com/nix-community/impermanence/archive/7b1d382faf603b6d264f58627330f9faa5cba149.tar.gz",
       "hash": "1iip4kjrk09mnha9jhafvcg61g1d0g6pqnljzdp08zz6zk38jzyk"
     },
+    "nix-wrapper-modules": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "BirdeeHub",
+        "repo": "nix-wrapper-modules"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "b485665d7d1be76d17ae3b6cc2603ed4e1bb089a",
+      "url": "https://github.com/BirdeeHub/nix-wrapper-modules/archive/b485665d7d1be76d17ae3b6cc2603ed4e1bb089a.tar.gz",
+      "hash": "1ks1nfy9sr0dd1pdqy2k36c8sj8xm9ikjpnj1ibhnmdfw19zl20p"
+    },
     "nixpkgs": {
       "type": "Channel",
       "name": "nixos-25.11",

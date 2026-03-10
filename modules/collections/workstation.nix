@@ -9,16 +9,20 @@
     {
       imports = with self.modules.nixos; [
         system.theme
-        programs.alacritty
+        # programs.alacritty
       ];
 
       # programs that don't need "much" configuration.
-      environment.systemPackages = with pkgs; [
-        # Git helpers
-        git-igitt
+      environment.systemPackages =
+        with pkgs;
+        with self.pkgs;
+        [
+          # Git helpers
+          git-igitt
+          pavucontrol
 
-        pavucontrol
-      ];
+          wrapped.alacritty
+        ];
 
       programs.localsend.enable = true;
 
@@ -28,19 +32,6 @@
       fonts.packages = with pkgs; [
         nerd-fonts.jetbrains-mono
       ];
-
-      # configure alacritty
-      olistrik.programs.alacritty = {
-        settings = {
-          colors = config.olistrik.system.theme // {
-            draw_bold_text_with_bright_colors = true;
-          };
-          font = {
-            normal.family = "JetBrainsMono NerdFont";
-          };
-          window.opacity = 0.95;
-        };
-      };
 
       security.rtkit.enable = true;
       services.pipewire = {
