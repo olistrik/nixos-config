@@ -12,10 +12,12 @@
       imports = [ self.modules.wrappers.programs.alacritty ];
 
       config = {
+        theme = "tokyo_night";
+
         settings = {
           font.normal.family = "JetBrainsMono NerdFont";
           window.opacity = 0.95;
-          colors = {
+          colors = lib.mkIf (config.theme == null) {
             # Ayu mirage theme
             primary = {
               background = "#212733";

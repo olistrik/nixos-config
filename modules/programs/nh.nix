@@ -3,6 +3,9 @@
     programs.nh = {
       enable = true;
     };
-    nix.settings.experimental-features = [ "nix-command" ];
+    nix.settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
   };
 }
