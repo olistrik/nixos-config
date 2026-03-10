@@ -11,7 +11,7 @@ done
 
 shift $((OPTIND - 1))
 
-export NH_FILE=./nixos.nix
+export NH_FILE=./hosts.nix
 export NH_ATTRP="${TARGET}"
 
 nh os "$@"

@@ -54,7 +54,6 @@ in
   modules = {
     inherit importSharded;
   };
-
   # modules are currently depth 3: <class>.<namespace>.<module>
   importModules = importSharded 3;
 }

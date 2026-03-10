@@ -1,6 +1,6 @@
-{ self, ... }:
+{ pkgs, ... }:
 let
-  nixosSystem = import "${self.sources.nixpkgs}/nixos/lib/eval-config.nix";
+  nixosSystem = import "${pkgs.path}/nixos/lib/eval-config.nix";
 
   mkHost =
     self: hostname: hostVars:

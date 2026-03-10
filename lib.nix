@@ -1,9 +1,9 @@
 {
-  sources ? null,
-  ...
+  sources ? import ./npins,
+  pkgs ? import sources.nixpkgs { },
 }:
 let
-  inherit (import (sources.nixpkgs or <nixpkgs>) { }) lib;
+  lib = pkgs.lib;
   inherit ((import ./lib/loader/list-files.nix { inherit lib; }).loader) listFiles;
 
   # 1. Get the list of files (excluding underscore-prefixed)
@@ -16,7 +16,7 @@ let
     let
       # Context to be passed to every library file
       ctx = {
-        inherit lib;
+        inherit lib pkgs;
         self = {
           inherit sources;
           # if lib needs anything else; it will go in here.
