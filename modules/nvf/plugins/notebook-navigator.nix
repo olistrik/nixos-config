@@ -34,10 +34,22 @@
           package = pkgs.vimPlugins.molten-nvim;
         };
 
+        withNodeJs = true;
+        withRuby = true;
         withPython3 = true;
+
+        extraPackages = with pkgs; [
+          imagemagick
+        ];
+        luaPackages = [
+          "magick"
+        ];
         python3Packages = [
           "pynvim"
           "jupyter-client"
+          "cairosvg"
+          "ipython"
+          "nbformat"
         ];
 
         extraPlugins.notebook-navigator = {
@@ -54,16 +66,16 @@
 
           setup = "require('notebook-navigator').setup(${toLuaObject cfg.setupOpts})";
         };
-        # keymaps = [
-        #   (mkKeymap "n" keys.runCell "require('notebook-navigator').run_cell()" {
-        #     lua = true;
-        #     desc = mappings.runCell.description;
-        #   })
-        #   (mkKeymap "n" keys.runAndMove "require('notebook-navigator').run_and_move()" {
-        #     lua = true;
-        #     desc = mappings.runAndMove.description;
-        #   })
-        # ];
+        keymaps = [
+          (mkKeymap "n" keys.runCell "require('notebook-navigator').run_cell" {
+            lua = true;
+            desc = mappings.runCell.description;
+          })
+          (mkKeymap "n" keys.runAndMove "require('notebook-navigator').run_and_move" {
+            lua = true;
+            desc = mappings.runAndMove.description;
+          })
+        ];
       };
     };
   nvf.config.notebook-navigator =
