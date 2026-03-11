@@ -12,13 +12,18 @@
       imports = [ self.modules.wrappers.programs.alacritty ];
 
       config = {
-        theme = "tokyo_night";
+        theme = "tokyonight_night";
+        themePackage = pkgs.vimPlugins."tokyonight-nvim";
+        themePath = "/extras/alacritty/";
 
         settings = {
-          font.normal.family = "JetBrainsMono NerdFont";
+          font = {
+            normal.family = "JetBrainsMono NerdFont Mono";
+            size = 11.5; # 11.25 causes glyphs to be off by 1px.
+          };
           window.opacity = 0.95;
           colors = lib.mkIf (config.theme == null) {
-            # Ayu mirage theme
+            # 2016 Ayu mirage theme
             primary = {
               background = "#212733";
               foreground = "#d9d7ce";
@@ -77,6 +82,10 @@
 
       options = {
         themePackage = mkPackageOption pkgs "alacritty-theme" { };
+        themePath = mkOption {
+          type = with types; str;
+          default = "/share/alacritty-theme";
+        };
         theme = mkOption {
           type = with types; nullOr str;
           default = null;
@@ -96,20 +105,22 @@
 
       config.settings =
         let
+          inherit (lib.strings) normalizePath;
+          path = normalizePath "/${config.themePath}/${config.theme}.toml";
           # We want to check that the theme actually exists.
           # We need to do this at build time, to avoid IFD.
           alacrittyTheme = config.themePackage.overrideAttrs (prevAttrs: {
             name = "alacritty-theme-for-wrapper";
             postInstall =
               let
-                inherit (config) theme;
+                inherit (config) theme themePath;
               in
               lib.concatStringsSep "\n" [
                 (prevAttrs.postInstall or "")
                 (lib.optionalString (theme != null)
                   # bash
                   ''
-                    if [ ! -f "$out/share/alacritty-theme/${theme}.toml" ]; then
+                    if [ ! -f "$out${path}" ]; then
                       echo "error: alacritty theme '${theme}' does not exist"
                       exit 1
                     fi
@@ -117,7 +128,7 @@
                 )
               ];
           });
-          theme = "${alacrittyTheme}/share/alacritty-theme/${config.theme}.toml";
+          theme = "${alacrittyTheme}${path}";
         in
         lib.mkIf (config.theme != null) {
           general.import = lib.mkIf (lib.versionAtLeast config.package.version "0.14") [ theme ];
