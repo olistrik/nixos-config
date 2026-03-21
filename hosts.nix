@@ -6,4 +6,5 @@ let
 in
 mkHosts {
   thoth = { };
+  hestia = { };
 }

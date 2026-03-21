@@ -16,6 +16,22 @@
       "url": "https://api.github.com/repos/nix-community/disko/tarball/v1.13.0",
       "hash": "03jz60kw0khm1lp72q65z8gq69bfrqqbj08kw0hbiav1qh3g7p08"
     },
+    "flake-compat": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "NixOS",
+        "repo": "flake-compat"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v1.1.0",
+      "revision": "ff81ac966bb2cae68946d5ed5fc4994f96d0ffec",
+      "url": "https://api.github.com/repos/NixOS/flake-compat/tarball/v1.1.0",
+      "hash": "19d2z6xsvpxm184m41qrpi1bplilwipgnzv9jy17fgw421785q1m"
+    },
     "impermanence": {
       "type": "Git",
       "repository": {
@@ -60,6 +76,19 @@
       "revision": "6681e33727409d4ccfa687de981b594110a735d6",
       "url": "https://github.com/notashelf/nvf/archive/6681e33727409d4ccfa687de981b594110a735d6.tar.gz",
       "hash": "0ki9p35v80lyq7p27x6wgb1328576si495kd4399y2n2pdxm3l0h"
+    },
+    "tsidp": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "olistrik",
+        "repo": "tsidp"
+      },
+      "branch": "unix-socket-pr",
+      "submodules": false,
+      "revision": "dc4b016ec97a76529aa0a7c42042a4cba263dc6f",
+      "url": "https://github.com/olistrik/tsidp/archive/dc4b016ec97a76529aa0a7c42042a4cba263dc6f.tar.gz",
+      "hash": "0lzr7x86nk12mnlbp3ndkyqc1xmdniv37z12r5bnllbgv23bivip"
     },
     "unstable": {
       "type": "Channel",
