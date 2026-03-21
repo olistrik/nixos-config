@@ -28,6 +28,7 @@
       hardware.firmware = [ pkgs.linux-firmware ];
       # rocm?
 
+      # TODO: put somewhere useful.
       programs.adb.enable = true;
 
       # TODO: put somewhere useful.

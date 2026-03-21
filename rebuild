@@ -1,17 +1,32 @@
-#!/usr/bin/env bash 
+#!/usr/bin/env bash
 
-TARGET="$(hostname)"
+TARGET=""
+BUILDER=""
+PASS_THROUGH=()
 
-while getopts "t:" opt; do
-  case "$opt" in
-    t) TARGET="$OPTARG" ;;
-    *) echo "Usage: $0 [-t target] [nixos-rebuild-args...]"; exit 1 ;;
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -t|--target)
+      TARGET="$2"; shift 2 ;;
+    -b|--builder)
+      BUILDER="$2"; shift 2 ;;
+    --)
+      shift; PASS_THROUGH+=("$@"); break ;;
+    *)
+      PASS_THROUGH+=("$1"); shift ;;
   esac
 done
 
-shift $((OPTIND - 1))
+HOSTNAME="$(hostname)"
+
+[[ -z "$TARGET" ]] && TARGET="$HOSTNAME"
+[[ -z "$BUILDER" ]] && BUILDER="$TARGET"
+
+ARGS=()
+[[ "$TARGET" != "$HOSTNAME" ]] && ARGS+=(--target-host "$TARGET")
+[[ "$BUILDER" != "$HOSTNAME" ]] && ARGS+=(--build-host "$BUILDER")
 
 export NH_FILE=./hosts.nix
 export NH_ATTRP="${TARGET}"
 
-nh os "$@"
+nh os "${PASS_THROUGH[@]}" "${ARGS[@]}"

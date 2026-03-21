@@ -1,0 +1,3 @@
+{
+  nodePackages = import ./nodePackages;
+}
