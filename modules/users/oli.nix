@@ -25,9 +25,9 @@
   };
 
   nixos.hosts.all =
-    { self, ... }:
+    { my, ... }:
     {
-      imports = with self.modules.nixos; [
+      imports = with my.modules.nixos; [
         users.oli
       ];
     };

@@ -2,14 +2,14 @@
   # TODO: Pretty much all of this should be somewhere else.
   nixos.hosts.all =
     {
-      self,
+      my,
       lib,
       pkgs,
       ...
     }:
     {
 
-      imports = with self.modules.nixos.programs; [
+      imports = with my.modules.nixos.programs; [
         neovim
         zsh
         zoxide

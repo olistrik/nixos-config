@@ -1,12 +1,12 @@
 {
   nvf.config.lsp =
-    { _, lib, ... }:
+    { my, lib, ... }:
     let
       inherit (lib.nvim.dag) entryAnywhere;
     in
     {
       # TODO: Why?
-      imports = with _.modules.nvf; [ config.completion ];
+      imports = with my.modules.nvf; [ config.completion ];
 
       config.vim = {
         lsp = {

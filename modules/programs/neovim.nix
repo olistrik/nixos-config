@@ -1,10 +1,10 @@
 {
   nixos.programs.neovim =
-    { self, ... }:
+    { my, ... }:
     {
       environment.variables.EDITOR = "nvim";
 
       # TODO: load the wrapper.
-      environment.systemPackages = with self.pkgs.wrapped; [ nvim-full ];
+      environment.systemPackages = with my.pkgs.wrapped; [ nvim-full ];
     };
 }

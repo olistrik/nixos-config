@@ -50,9 +50,9 @@
     };
 
   nvf.config.opencode =
-    { _, ... }:
+    { my, ... }:
     {
-      imports = [ _.modules.nvf.plugins.opencode ];
+      imports = [ my.modules.nvf.plugins.opencode ];
 
       vim.assistant.opencode = {
         enable = true;

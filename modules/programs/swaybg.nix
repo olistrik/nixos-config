@@ -1,13 +1,13 @@
 {
   nixos.programs.swaybg =
     {
-      self,
+      my,
       lib,
       pkgs,
       ...
     }:
     let
-      inherit (self.lib.attrsets) attrsToArgs;
+      inherit (my.lib.attrsets) attrsToArgs;
     in
     {
       systemd.user.services = {

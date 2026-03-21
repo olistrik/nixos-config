@@ -5,13 +5,13 @@
   lib ? import ./lib.nix { inherit pkgs; },
 }:
 let
-  self = {
+  my = {
     inherit
       lib
       sources
       ;
-    pkgs = import ./packages.nix { inherit self; };
-    modules = import ./modules.nix { inherit self; };
+    pkgs = import ./packages.nix { inherit my; };
+    modules = import ./modules.nix { inherit my; };
   };
 in
-self
+my

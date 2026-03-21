@@ -1,8 +1,8 @@
 {
   nixos.programs.niri =
-    { self, pkgs, ... }:
+    { my, pkgs, ... }:
     {
-      imports = with self.modules.nixos.programs; [
+      imports = with my.modules.nixos.programs; [
         way-displays # TODO: niri's own display management should be enough now.
         xwayland-satellite
         swayidle

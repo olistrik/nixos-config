@@ -1,8 +1,8 @@
 {
-  self ? import ./self.nix { },
+  my ? import ./my.nix { },
 }:
 let
-  mkHosts = self.lib.mkHostsWith self;
+  mkHosts = my.lib.mkHostsWith my;
 in
 mkHosts {
   thoth = { };

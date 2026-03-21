@@ -26,20 +26,17 @@ could make a PR and fix it, or I could just not be dependent on another library
 for a dozen or so lines of arguably simple nix code.
 
 
-## [self.nix](./self.nix)
+## [my.nix](./my.nix)
 
 Before I go into details about each of the entrypoints, I will first explain
-the `self` context. [self.nix](./self.nix) sets up the shared context for all
-of my entrypoints. I got tired writing it out every time so I wrapped it up
-into a function. It more or less functions as `inputs` + `self` from flakes, so
-if you want to use any of my modules, wrappers, or packages you'll likely want
-to instantiate `self` manually, and override at least nixpkgs using the
-`override` argument.
+the `my` context. I got tired writing out the same default imports every time
+so I wrapped it up into a function. It more or less functions as `inputs` +
+`self` from flakes, so if you want to use any of my modules, wrappers, or
+packages you'll likely want to instantiate `my` manually, and override at
+least nixpkgs using the `override` argument.
 
-I'd like to move the fixed point recursion of `lib` up into `self` as this
-should simplify things across all the entrypoints. I'm also not overly happy
-with the name `self` as other module systems such as `nvf` use it, so for those
-I use `_` instead. At somepoint I'll come up with a better name and unify it.
+I'd like to move the fixed point recursion of `lib` up into `my` as this
+should simplify things across all the entrypoints.
 
 # Entrypoints
 
@@ -54,8 +51,8 @@ the other entrypoints. Useful when you want everything at once.
 ## [hosts.nix](./hosts.nix)
 
 Returns an attrset of `nixosSystems`, one for each machine. Currently defines
-`thoth` and `hestia`. Machines are built using `self.lib.mkHostsWith`, which
-bootstraps `lib.evalConfig` with `self` included via the specialArgs,
+`thoth` and `hestia`. Machines are built using `my.lib.mkHostsWith`, which
+bootstraps `lib.evalConfig` with `my` included via the specialArgs,
 automatically imports the modules `nixos.hosts.all` and
 `nixos.hosts.<hostname>`, and sets `networking.hostName` to `<hostname>`.
 
@@ -70,7 +67,7 @@ can reference each other.
 ## [modules.nix](./modules.nix)
 
 Returns a structured attrset of my custom modules. Modules are imported
-recursively using [`self.lib.importModules`](./lib/modules/import-sharded.nix),
+recursively using [`my.lib.importModules`](./lib/modules/import-sharded.nix),
 mirroring how flake-parts imports sub-modules. However, files are expected to
 be attrsets (not modules), and uses an extended module path;
 `<class>.<namespace>.<module>`.
@@ -128,6 +125,6 @@ functions are called with `callPackage`. Also merges in the outputs of
 
 Returns an attrset of wrapped programs using
 [nix-wrapper-modules](https://github.com/BirdeeHub/nix-wrapper-modules).
-Wrappers are evaluated by importing modules from `self.modules.wrappers.my`.
+Wrappers are evaluated by importing modules from `my.modules.wrappers.my`.
 Each wrapper is built using `nix-wrapper-modules.evalModules` with access to
-`self` as a special argument.
+`my` as a special argument.

@@ -1,7 +1,7 @@
 {
   nixos.hosts.hestia =
     {
-      self,
+      my,
       lib,
       config,
       ...
@@ -11,7 +11,7 @@
     in
     {
       imports = [
-        (self.sources.impermanence + "/nixos.nix")
+        (my.sources.impermanence + "/nixos.nix")
       ];
 
       fileSystems."/persist".neededForBoot = true;

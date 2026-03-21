@@ -1,4 +1,4 @@
 {
-  self ? import ./self.nix { },
+  my ? import ./my.nix { },
 }:
-self.lib.importModules ./modules
+my.lib.importModules ./modules

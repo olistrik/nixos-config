@@ -1,7 +1,6 @@
 {
   nixos.programs.way-displays =
     {
-      self,
       lib,
       pkgs,
       ...

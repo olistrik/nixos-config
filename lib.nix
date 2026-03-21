@@ -13,7 +13,7 @@ let
     let
       ctx = {
         inherit lib pkgs;
-        self = {
+        my = {
           inherit sources;
           lib = final;
         };

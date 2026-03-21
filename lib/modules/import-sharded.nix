@@ -1,6 +1,6 @@
-{ self, lib, ... }:
+{ my, lib, ... }:
 let
-  inherit (self.lib.loader) listFiles;
+  inherit (my.lib.loader) listFiles;
 
   # depth: How many levels to traverse before wrapping as a module
   # path:  The current attribute breadcrumbs (for the 'key')

@@ -1,13 +1,13 @@
 {
   nvf.config.base =
-    { _, lib, ... }:
+    { my, lib, ... }:
     let
       inherit (lib.generators) mkLuaInline;
       inherit (lib.nvim.dag) entryBefore entryAfter;
       inherit (lib.nvim.binds) mkKeymap;
     in
     {
-      imports = with _.modules.nvf.config; [
+      imports = with my.modules.nvf.config; [
         theming
 
         lualine

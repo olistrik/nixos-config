@@ -2,7 +2,7 @@
 {
   nixos.hosts.hestia =
     {
-      self,
+      my,
       pkgs,
       lib,
       config,
@@ -11,7 +11,7 @@
     let
       extra-nodes = pkgs.symlinkJoin {
         name = "red-node_extra-nodes";
-        paths = with self.pkgs.nodePackages; [
+        paths = with my.pkgs.nodePackages; [
           node-red-contrib-zigbee2mqtt
           node-red-contrib-toggle
           node-red-contrib-wiz-local-control
