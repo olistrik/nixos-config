@@ -23,6 +23,6 @@ let
   mapModules = mapAttrs (_: val: evalPackage val);
   mapNamespaces = mapAttrs (_: val: mapModules val);
 
-  wrappers = mapModules my.modules.wrappers.my;
+  wrappers = mapModules my.modules.wrappers.config;
 in
 wrappers
