@@ -1,5 +1,5 @@
 {
-  wrappers.my.alacritty =
+  wrappers.config.alacritty =
     {
       my,
       config,

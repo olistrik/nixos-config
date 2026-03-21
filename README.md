@@ -102,7 +102,7 @@ of [nvf](https://github.com/notashelf/nvf).
 
 - `wrappers.programs.*` is for custom wrapper modules not (yet) part of
 [nix-wrapper-modules](https://github.com/BirdeeHub/nix-wrapper-modules).
-- `wrappers.my.*` is for _my_ configurations of a wrapper (custom or
+- `wrappers.config.*` is for _my_ configurations of a wrapper (custom or
 otherwise).
 
 ## [nvf.nix](./nvf.nix)
