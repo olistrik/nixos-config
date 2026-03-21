@@ -1,10 +1,10 @@
-{
-  my ? import ./my.nix { },
-  sources ? my.sources,
-  pkgs ? import sources.nixpkgs { },
-  nvf ? (import sources.nvf).outputs,
+args@{
+  my ? import ./my.nix args,
+  ...
 }:
 let
+  pkgs = import my.sources.nixpkgs { };
+  nvf = (import my.sources.nvf).outputs;
 
   baseConfig =
     extraModules:

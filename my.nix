@@ -1,17 +1,13 @@
-{
-  overrides ? { },
-  sources ? (import ./npins) // overrides,
-  pkgs ? import sources.nixpkgs { },
-  lib ? import ./lib.nix { inherit pkgs; },
+args@{
+  ...
 }:
 let
   my = {
-    inherit
-      lib
-      sources
-      ;
+    sources = (import ./npins) // args;
+    lib = import ./lib.nix { inherit my; };
     pkgs = import ./packages.nix { inherit my; };
     modules = import ./modules.nix { inherit my; };
+    hosts = import ./hosts.nix { inherit my; };
   };
 in
 my

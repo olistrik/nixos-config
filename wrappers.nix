@@ -1,13 +1,14 @@
-{
-  my ? import ./my.nix { },
-  sources ? my.sources,
-  pkgs ? import sources.nixpkgs { },
-  nix-wrapper-modules ? import (sources.nix-wrapper-modules) {
-    inherit (sources) nixpkgs;
-    inherit pkgs;
-  },
+args@{
+  my ? import ./my.nix args,
+  ...
 }:
 let
+  pkgs = import my.sources.nixpkgs { };
+  nix-wrapper-modules = import (my.sources.nix-wrapper-modules) {
+    inherit (my.sources) nixpkgs;
+    inherit pkgs;
+  };
+
   inherit (pkgs.lib) toList mapAttrs;
   inherit (nix-wrapper-modules.lib) evalModules;
 

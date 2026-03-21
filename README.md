@@ -25,28 +25,50 @@ for over a year now](https://github.com/hercules-ci/flake-parts/issues/299). I
 could make a PR and fix it, or I could just not be dependent on another library
 for a dozen or so lines of arguably simple nix code.
 
-
 ## [my.nix](./my.nix)
 
 Before I go into details about each of the entrypoints, I will first explain
 the `my` context. I got tired writing out the same default imports every time
 so I wrapped it up into a function. It more or less functions as `inputs` +
 `self` from flakes, so if you want to use any of my modules, wrappers, or
-packages you'll likely want to instantiate `my` manually, and override at
-least nixpkgs using the `override` argument.
-
-I'd like to move the fixed point recursion of `lib` up into `my` as this
-should simplify things across all the entrypoints.
+packages independently you'll likely want to instantiate `my` manually, and
+override at least nixpkgs using the `extraSources` argument.
 
 # Entrypoints
 
 Unlike flakes, there are several entrypoints to this repo, each can be used
 independently, and import eachother as necessary.
 
+All the entrypoints are functions which accept an attrset of sources to
+override my own. They can also be provided with a `my` attrset, but this should
+typically be avoided as this is used by [`my.nix`](./my.nix) to bootstrap itself.
+
 ## [default.nix](default.nix)
 
-A convenience wrapper exposing `lib`, `modules`, `hosts`, and `packages` from
-the other entrypoints. Useful when you want everything at once.
+A convenience wrapper exposing `lib`, `modules`, `hosts`, and `pkgs` from
+the other entrypoints. Useful when you want everything at once, and probably
+the most sensible way of using this repo.
+
+For example, a simple shell with my full nvim config:
+
+```nix
+let
+  sources = import ./npins;
+  # npins add channel nixos-25.11 --name nixpkgs
+  pkgs = import sources.nixpkgs { };
+  # npins add github olistrik nixos-config --name olistrik
+  olistrik = import sources.olistrik {
+    # optional; equivalent to `flake.inputs.nixpkgs.follows`;
+    inherit (sources) nixpkgs;
+  };
+
+in
+pkgs.mkShell {
+  packages = with olistrik.pkgs; [
+    wrapped.nvim-full
+  ];
+}
+```
 
 ## [hosts.nix](./hosts.nix)
 
@@ -61,8 +83,7 @@ automatically imports the modules `nixos.hosts.all` and
 Returns a nested attrset of my custom lib functions, recursively loaded from
 `./lib/`. Each file can declare it's own namespace within lib which may be
 arbitrarily deep. These are all merged into a single attrset using
-`lib.recursiveUpdate`. `lib.fix` is used for fixed-point recursion so functions
-can reference each other.
+`lib.recursiveUpdate`.
 
 ## [modules.nix](./modules.nix)
 
