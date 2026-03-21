@@ -25,49 +25,23 @@ for over a year now](https://github.com/hercules-ci/flake-parts/issues/299). I
 could make a PR and fix it, or I could just not be dependent on another library
 for a dozen or so lines of arguably simple nix code.
 
-## [my.nix](./my.nix)
-
-Before I go into details about each of the entrypoints, I will first explain
-the `my` context. I got tired writing out the same default imports every time
-so I wrapped it up into a function. It more or less functions as `inputs` +
-`self` from flakes, so if you want to use any of my modules, wrappers, or
-packages independently you'll likely want to instantiate `my` manually, and
-override at least nixpkgs using the `extraSources` argument.
 
 # Entrypoints
 
-Unlike flakes, there are several entrypoints to this repo, each can be used
-independently, and import eachother as necessary.
+Unlike flakes, there are several entrypoints to this repo and each can be used
+independently. However as they all import the `default.nix`, there's really not
+much point in using them that way.
 
 All the entrypoints are functions which accept an attrset of sources to
-override my own. They can also be provided with a `my` attrset, but this should
-typically be avoided as this is used by [`my.nix`](./my.nix) to bootstrap itself.
+override my own. They can also be provided with a `my` context, but this should
+typically be avoided as this is used by [`default.nix`](./default.nix) to bootstrap itself.
 
 ## [default.nix](default.nix)
 
-A convenience wrapper that returns the result of `my.nix`. Useful when you want
-everything at once, and probably the most sensible way of using this repo.
-
-For example, a simple shell with my full nvim config:
-
-```nix
-let
-  sources = import ./npins;
-  # npins add channel nixos-25.11 --name nixpkgs
-  pkgs = import sources.nixpkgs { };
-  # npins add github olistrik nixos-config --name olistrik
-  olistrik = import sources.olistrik {
-    # optional; equivalent to `flake.inputs.nixpkgs.follows`;
-    inherit (sources) nixpkgs;
-  };
-
-in
-pkgs.mkShell {
-  packages = with olistrik.pkgs; [
-    wrapped.nvim.full
-  ];
-}
-```
+This is the main entrypoint. It uses the magic of `let` and fix-point recusion
+to instantiate the `my` context with all the outputs of this repo, while also
+providing the `my` context to said outputs. This is how `lib` functions and
+`modules` can reference eachother.
 
 ## [hosts.nix](./hosts.nix)
 
@@ -136,3 +110,29 @@ functions are called with `callPackage`.
 
 This is currently a work in progress, I'd like to make this more automatic as I
 have with lib and modules.
+
+# Examples
+
+## shell.nix
+
+Here is a simple shell using npins with my full nvim config.
+
+```nix
+let
+  sources = import ./npins;
+  # npins add channel nixos-25.11 --name nixpkgs
+  pkgs = import sources.nixpkgs { };
+  # npins add github olistrik nixos-config --name olistrik
+  olistrik = import sources.olistrik {
+    # optional; equivalent to `flake.inputs.nixpkgs.follows`;
+    inherit (sources) nixpkgs;
+  };
+
+in
+pkgs.mkShell {
+  packages = with olistrik.pkgs; [
+    wrapped.nvim.full
+  ];
+}
+```
+
