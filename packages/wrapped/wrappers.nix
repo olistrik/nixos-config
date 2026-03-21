@@ -1,7 +1,4 @@
-args@{
-  my ? import ./my.nix args,
-  ...
-}:
+{ my }:
 let
   pkgs = import my.sources.nixpkgs { };
   nix-wrapper-modules = import (my.sources.nix-wrapper-modules) {

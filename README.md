@@ -64,7 +64,7 @@ let
 in
 pkgs.mkShell {
   packages = with olistrik.pkgs; [
-    wrapped.nvim-full
+    wrapped.nvim.full
   ];
 }
 ```
@@ -125,30 +125,14 @@ of [nvf](https://github.com/notashelf/nvf).
 - `wrappers.config.*` is for _my_ configurations of a wrapper (custom or
 otherwise).
 
-## [nvf.nix](./nvf.nix)
-
-Returns an attrset of Neovim configurations built with
-[nvf](https://github.com/notashelf/nvf), using my modules. Currently provides
-`nvim-minimal` (just base, keymaps, and wayland support) and `nvim-full` (adds
-LSP and opencode support). The `default` alias points to `nvim-full`.
-
-This isn't included in `my` context, and I wouldn't recommend using this
-directly, but it serves as a good example of how you _could_ integrate my
-`nvf.plugins.*` or `nvf.config.*` modules.
-
 ## [packages.nix](./packages.nix)
 
 Returns a nested attrset of all my custom packages from `./packages/`. Leaf
-functions are called with `callPackage`. Also merges in the outputs of
-`wrappers.nix` and `nvf.nix` under a `wrapped` key for convenience.
+functions are called with `callPackage`.
 
-## [wrappers.nix](./wrappers.nix)
+`./packages/wrapped` is a special case; this exports the final packages for my
+`nix-wrapper-modules` under `pkgs.wrapped.*`, and my `nvf` configurations under
+`pkgs.wrapped.nvim.*`.
 
-Returns an attrset of wrapped programs using
-[nix-wrapper-modules](https://github.com/BirdeeHub/nix-wrapper-modules).
-Wrappers are evaluated by importing modules from `my.modules.wrappers.my`.
-Each wrapper is built using `nix-wrapper-modules.evalModules` with access to
-`my` as a special argument.
-
-As with nvf, this isn't included in `my` context, and I wouldn't recommend
-using this directly.
+This is currently a work in progress, I'd like to make this more automatic as I
+have with lib and modules.
