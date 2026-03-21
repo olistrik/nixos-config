@@ -1,3 +1,11 @@
+> [!IMPORTANT]
+> I've reciently migrated from flakes to bare nix with npins. I've also noticed
+> this repo gets a suprising number of clones which I'm assuming is just bots
+> being botty. However, if I've broken your flake config (sorry about that),
+> you can fix it by pointing the input at the
+> [legacy-flakes](https://github.com/olistrik/nixos-config/tree/legacy-flakes)
+> branch.
+
 My Nix configurations for anything I can put nix on. I've used flakes and
 snowfall-lib in the past, but I've become quite tired of complex behavior being
 hidden away in dependencies and my entire repo being copied into the store.
