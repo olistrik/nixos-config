@@ -45,9 +45,8 @@ typically be avoided as this is used by [`my.nix`](./my.nix) to bootstrap itself
 
 ## [default.nix](default.nix)
 
-A convenience wrapper exposing `lib`, `modules`, `hosts`, and `pkgs` from
-the other entrypoints. Useful when you want everything at once, and probably
-the most sensible way of using this repo.
+A convenience wrapper that returns the result of `my.nix`. Useful when you want
+everything at once, and probably the most sensible way of using this repo.
 
 For example, a simple shell with my full nvim config:
 
@@ -133,8 +132,9 @@ Returns an attrset of Neovim configurations built with
 `nvim-minimal` (just base, keymaps, and wayland support) and `nvim-full` (adds
 LSP and opencode support). The `default` alias points to `nvim-full`.
 
-I wouldn't recommend using this directly, but it serves as a good example of
-how you _could_ integrate my `nvf.plugins.*` or `nvf.config.*` modules.
+This isn't included in `my` context, and I wouldn't recommend using this
+directly, but it serves as a good example of how you _could_ integrate my
+`nvf.plugins.*` or `nvf.config.*` modules.
 
 ## [packages.nix](./packages.nix)
 
@@ -149,3 +149,6 @@ Returns an attrset of wrapped programs using
 Wrappers are evaluated by importing modules from `my.modules.wrappers.my`.
 Each wrapper is built using `nix-wrapper-modules.evalModules` with access to
 `my` as a special argument.
+
+As with nvf, this isn't included in `my` context, and I wouldn't recommend
+using this directly.
