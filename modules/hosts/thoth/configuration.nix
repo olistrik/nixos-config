@@ -16,6 +16,8 @@
 
         programs.niri
         programs.ags
+
+        system.virtualisation
       ];
 
       # TODO: put somewhere useful.
@@ -25,6 +27,8 @@
       hardware.cpu.amd.updateMicrocode = true;
       hardware.firmware = [ pkgs.linux-firmware ];
       # rocm?
+
+      programs.adb.enable = true;
 
       # TODO: put somewhere useful.
       environment.systemPackages = with pkgs; [
