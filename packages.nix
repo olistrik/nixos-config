@@ -4,7 +4,6 @@ args@{
 }:
 let
   pkgs = import my.sources.nixpkgs { };
-  pkgset = import ./packages;
   mapAttrsRecursive =
     f: set:
     builtins.mapAttrs (
@@ -12,9 +11,8 @@ let
     ) set;
   packages = mapAttrsRecursive (
     path: val: if builtins.isFunction val then (pkgs.callPackage val { }) else val
-  ) pkgset;
-  wrappers = import ./wrappers.nix { inherit my; };
-  nvf = import ./nvf.nix { inherit my; };
-  wrapped = wrappers // nvf;
+  ) (import ./packages);
+
+  wrapped = import ./packages/wrapped { inherit my; };
 in
-packages // { inherit wrapped; }
+packages // wrapped

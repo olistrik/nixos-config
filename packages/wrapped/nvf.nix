@@ -1,7 +1,4 @@
-args@{
-  my ? import ./my.nix args,
-  ...
-}:
+{ my }:
 let
   pkgs = import my.sources.nixpkgs { };
   nvf = (import my.sources.nvf).outputs;
@@ -24,14 +21,16 @@ let
         ++ extraModules;
     }).neovim;
 in
-rec {
-  nvim-minimal = baseConfig [ ];
-  nvim-full = baseConfig (
-    with my.modules.nvf.config;
-    [
-      lsp
-      opencode
-    ]
-  );
-  default = nvim-full;
+{
+  nvim = rec {
+    minimal = baseConfig [ ];
+    full = baseConfig (
+      with my.modules.nvf.config;
+      [
+        lsp
+        opencode
+      ]
+    );
+    default = full;
+  };
 }

@@ -5,6 +5,6 @@
       environment.variables.EDITOR = "nvim";
 
       # TODO: load the wrapper.
-      environment.systemPackages = with my.pkgs.wrapped; [ nvim-full ];
+      environment.systemPackages = [ my.pkgs.wrapped.nvim.default ];
     };
 }
