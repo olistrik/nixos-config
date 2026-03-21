@@ -1,27 +1,17 @@
-{
-  sources ? import ./npins,
-  pkgs ? import sources.nixpkgs { },
+args@{
+  my ? import ./my.nix args,
+  ...
 }:
 let
+  pkgs = import my.sources.nixpkgs { };
   lib = pkgs.lib;
+
   inherit ((import ./lib/loader/list-files.nix { inherit lib; }).loader) listFiles;
 
   libFiles = listFiles ./lib;
 
-  finalLib = lib.fix (
-    final:
-    let
-      ctx = {
-        inherit lib pkgs;
-        my = {
-          inherit sources;
-          lib = final;
-        };
-      };
-      appliedFiles = map (f: import f ctx) libFiles;
+  ctx = { inherit lib pkgs my; };
+  appliedFiles = map (f: import f ctx) libFiles;
 
-    in
-    builtins.foldl' lib.recursiveUpdate { } appliedFiles
-  );
 in
-finalLib
+builtins.foldl' lib.recursiveUpdate { } appliedFiles
