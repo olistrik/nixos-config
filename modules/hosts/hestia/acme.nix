@@ -15,16 +15,16 @@
           extraDomainNames = [ "signup.rhythmotion.nl" ];
         };
       };
+    };
 
-      olistrik.services.nixwarden.secrets = {
-        "olii.nl.creds" = [
-          {
-            location = "/var/lib/acme/olii.nl.creds";
-            wantedBy = [ "acme-olii.nl.service" ];
-            userGroup = "acme:acme";
-          }
-        ];
-      };
+    olistrik.services.nixwarden.secrets = {
+      "olii.nl.creds" = [
+        {
+          location = "/var/lib/acme/olii.nl.creds";
+          wantedBy = [ "acme-olii.nl.service" ];
+          userGroup = "acme:acme";
+        }
+      ];
     };
   };
 }

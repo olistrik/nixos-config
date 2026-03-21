@@ -4,4 +4,5 @@
   node-red-contrib-toggle = import ./node-red-contrib-toggle;
   node-red-contrib-wiz-local-control = import ./node-red-contrib-wiz-local-control;
   node-red-contrib-zigbee2mqtt = import ./node-red-contrib-zigbee2mqtt;
+  gen-package-lock = import ./gen-package-lock.nix;
 }

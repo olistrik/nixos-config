@@ -1,18 +1,19 @@
-{ buildNpmPackage, fetchFromGitHub }: buildNpmPackage rec {
+{ buildNpmPackage, fetchFromGitHub }:
+buildNpmPackage rec {
   pname = "node-red-contrib-esphome";
-  version = "0.2.7";
+  version = "0.3.3";
 
   src = fetchFromGitHub {
     owner = "twocolors";
     repo = pname;
-    rev = "488a62a";
-    hash = "sha256-nkbaluTFDQ1csC/XjhVTevJzi05RXTGV4/9+0cvtouM=";
+    rev = "0.3.3";
+    hash = "sha256-3FcybyptRGozzM7rsENMGT+SUe1ecv/eHfvIzKSRWbU=";
   };
 
   postPatch = ''
     cp ${./package-lock.json} package-lock.json
   '';
 
-  npmDepsHash = "sha256-2adeWfiZnWH64AKmSCVshlogugc0dWoQpTK51CZ0NMs=";
+  npmDepsHash = "sha256-/kcr6byiU17cIM+fqjKFY6Tk1xuA8CUJqFsbIvxLTkA=";
   npmPackFlags = [ "--ignore-scripts" ];
 }
