@@ -1,7 +1,7 @@
 {
   wrappers.my.alacritty =
     {
-      self,
+      my,
       config,
       pkgs,
       lib,
@@ -9,7 +9,7 @@
       ...
     }:
     {
-      imports = [ self.modules.wrappers.programs.alacritty ];
+      imports = [ my.modules.wrappers.programs.alacritty ];
 
       config = {
         theme = "tokyonight_night";

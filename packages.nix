@@ -1,6 +1,6 @@
 {
-  self ? import ./self.nix { },
-  sources ? self.sources,
+  my ? import ./my.nix { },
+  sources ? my.sources,
   pkgs ? import sources.nixpkgs { },
   ...
 }@args:

@@ -1,6 +1,6 @@
 {
   nixos.programs.swayidle =
-    { self, pkgs, ... }:
+    { pkgs, ... }:
     {
       systemd.user.services = {
         swayidle = {

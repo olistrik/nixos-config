@@ -1,18 +1,18 @@
 {
   nixos.hosts.hestia =
     {
-      self,
+      my,
       pkgs,
       config,
       ...
     }:
     let
-      tsidp = pkgs.callPackage (self.sources.tsidp + "/nix/package.nix") { };
+      tsidp = pkgs.callPackage (my.sources.tsidp + "/nix/package.nix") { };
       cfg = config.services.tsidp;
     in
     {
       disabledModules = [ "services/security/tsidp.nix" ];
-      imports = [ (self.sources.tsidp + "/nix/module.nix") ];
+      imports = [ (my.sources.tsidp + "/nix/module.nix") ];
       # overlays? modules?
       services.tsidp = {
         enable = true;

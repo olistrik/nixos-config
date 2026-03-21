@@ -1,9 +1,9 @@
 {
   nixos.hosts.thoth =
-    { self, pkgs, ... }:
+    { my, pkgs, ... }:
     {
 
-      imports = with self.modules.nixos; [
+      imports = with my.modules.nixos; [
         hardware.touchpad
         hardware.keyboard
 

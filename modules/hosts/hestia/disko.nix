@@ -1,9 +1,9 @@
 {
   nixos.hosts.hestia =
-    { self, ... }:
+    { my, ... }:
     {
       imports = [
-        (self.sources.disko + "/module.nix")
+        (my.sources.disko + "/module.nix")
         ./_disk-config.nix
       ];
     };

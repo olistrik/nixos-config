@@ -1,6 +1,6 @@
 {
   nixos.programs.xwayland-satellite =
-    { self, pkgs, ... }:
+    { pkgs, ... }:
     {
       # TODO: How the fuck do I get set DISPLAY generically if niri keeps unsetting it.
       environment.sessionVariables = {

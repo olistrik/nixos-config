@@ -79,9 +79,9 @@
       };
     };
   nvf.config.notebook-navigator =
-    { _, ... }:
+    { my, ... }:
     {
-      imports = [ _.modules.nvf.plugins.notebook-navigator ];
+      imports = [ my.modules.nvf.plugins.notebook-navigator ];
 
       vim.assistant.notebook-navigator = {
         enable = true;

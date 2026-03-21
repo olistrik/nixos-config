@@ -1,7 +1,6 @@
 {
   nixos.programs.ags =
     {
-      self,
       lib,
       pkgs,
       ...

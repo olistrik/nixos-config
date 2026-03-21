@@ -1,6 +1,6 @@
 {
-  self ? import ./self.nix { },
-  sources ? self.sources,
+  my ? import ./my.nix { },
+  sources ? my.sources,
   pkgs ? import sources.nixpkgs { },
   nvf ? (import sources.nvf).outputs,
 }:
@@ -11,11 +11,11 @@ let
     (nvf.lib.neovimConfiguration {
       inherit pkgs;
       extraSpecialArgs = {
-        _ = self;
+        inherit my;
       };
 
       modules =
-        with self.modules.nvf.config;
+        with my.modules.nvf.config;
         [
           base
           keymaps
@@ -27,7 +27,7 @@ in
 rec {
   nvim-minimal = baseConfig [ ];
   nvim-full = baseConfig (
-    with self.modules.nvf.config;
+    with my.modules.nvf.config;
     [
       lsp
       opencode

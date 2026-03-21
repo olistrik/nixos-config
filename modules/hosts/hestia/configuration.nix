@@ -3,9 +3,9 @@
 
 {
   nixos.hosts.hestia =
-    { self, ... }:
+    { my, ... }:
     {
-      imports = with self.modules.nixos; [
+      imports = with my.modules.nixos; [
         collections.server
 
         services.nixwarden

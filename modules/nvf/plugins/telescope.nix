@@ -1,7 +1,7 @@
 {
   nvf.config.telescope =
     {
-      _,
+      my,
       pkgs,
       config,
       lib,
@@ -9,7 +9,7 @@
       ...
     }:
     {
-      imports = with _.modules.nvf.plugins; [
+      imports = with my.modules.nvf.plugins; [
         telescope-file-browser
         telescope-fzf-native
       ];

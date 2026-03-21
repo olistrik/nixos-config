@@ -3,14 +3,14 @@ let
   nixosSystem = import "${pkgs.path}/nixos/lib/eval-config.nix";
 
   mkHost =
-    self: hostname: hostVars:
+    my: hostname: hostVars:
     nixosSystem {
       specialArgs = {
-        self = self // {
+        my = my // {
           inherit hostVars;
         };
       };
-      modules = with self.modules.nixos; [
+      modules = with my.modules.nixos; [
         hosts.all # meta package for anything that should be on all hosts.
         hosts.${hostname}
         ({
@@ -19,7 +19,7 @@ let
       ];
     };
 
-  mkHostsWith = self: builtins.mapAttrs (mkHost self);
+  mkHostsWith = my: builtins.mapAttrs (mkHost my);
 in
 {
   inherit mkHost mkHostsWith;

@@ -1,13 +1,13 @@
 {
   nixos.collections.workstation =
     {
-      self,
+      my,
       pkgs,
       config,
       ...
     }:
     {
-      imports = with self.modules.nixos; [
+      imports = with my.modules.nixos; [
         system.theme
         # programs.alacritty
       ];
@@ -15,7 +15,7 @@
       # programs that don't need "much" configuration.
       environment.systemPackages =
         with pkgs;
-        with self.pkgs;
+        with my.pkgs;
         [
           # Git helpers
           git-igitt

@@ -1,9 +1,9 @@
 let
-  self = import ./self.nix { };
-  hosts = import ./hosts.nix { inherit self; };
+  my = import ./my.nix { };
+  hosts = import ./hosts.nix { inherit my; };
 in
 {
-  inherit (self) lib modules;
+  inherit (my) lib modules;
   inherit hosts;
-  packages = self.pkgs;
+  packages = my.pkgs;
 }

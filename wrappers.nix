@@ -1,6 +1,6 @@
 {
-  self ? import ./self.nix { },
-  sources ? self.sources,
+  my ? import ./my.nix { },
+  sources ? my.sources,
   pkgs ? import sources.nixpkgs { },
   nix-wrapper-modules ? import (sources.nix-wrapper-modules) {
     inherit (sources) nixpkgs;
@@ -15,7 +15,7 @@ let
     module:
     (evalModules {
       specialArgs = {
-        inherit self;
+        inherit my;
       };
       modules = [ { inherit pkgs; } ] ++ toList module;
     }).config.wrapper;
@@ -23,6 +23,6 @@ let
   mapModules = mapAttrs (_: val: evalPackage val);
   mapNamespaces = mapAttrs (_: val: mapModules val);
 
-  wrappers = mapModules self.modules.wrappers.my;
+  wrappers = mapModules my.modules.wrappers.my;
 in
 wrappers
