@@ -90,7 +90,7 @@ imported automatically.
 - `nvf.plugins.*` is for custom nvf plugins or options that aren't (yet) part
 of [nvf](https://github.com/notashelf/nvf).
 - `nvf.config.*` is for _my_ configuration of a plugin (custom or otherwise).
-- `nvf.keybinds.*` is for _my_ keybindings for a plugin (custom or otherwise).
+- `nvf.config.keymaps` is for all keybindings.
 
 ### wrappers
 
