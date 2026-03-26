@@ -27,6 +27,7 @@
           };
           rust = {
             enable = true;
+            lsp.package = [ "rust-analyzer" ]; # Don't use nixpkgs for this.
           };
           python = {
             enable = true;
