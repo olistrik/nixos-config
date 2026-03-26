@@ -25,6 +25,9 @@
           lua = {
             enable = true;
           };
+          rust = {
+            enable = true;
+          };
           python = {
             enable = true;
             lsp.servers = [ "ty" ];
