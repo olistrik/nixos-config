@@ -10,7 +10,7 @@
         treesitter = {
           enable = true;
 
-          grammars = pkgs.vimPlugins.nvim-treesitter.allGrammars;
+          # grammars = pkgs.vimPlugins.nvim-treesitter.allGrammars;
 
           fold = true;
           # indent.enable = true;
