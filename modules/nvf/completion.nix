@@ -4,6 +4,12 @@
       autocomplete.blink-cmp = {
         enable = true;
         setupOpts = {
+          completion = {
+            ghost_text.enabled = true;
+            list.selection = {
+              preselect = false;
+            };
+          };
           sources.default = [
             "lsp"
             "path"

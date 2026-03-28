@@ -13,7 +13,7 @@
           # grammars = pkgs.vimPlugins.nvim-treesitter.allGrammars;
 
           fold = true;
-          # indent.enable = true;
+          indent.enable = false;
           highlight.enable = true;
           # context.enable = true;
           # incrementalSelection.enable = true; # removed from treesitter?
@@ -35,6 +35,7 @@
           };
         };
       };
+
     };
 
   nvf.config.keymaps = {
