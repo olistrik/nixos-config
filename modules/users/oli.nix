@@ -12,6 +12,7 @@
         "video"
         "input"
         "tty"
+        "dialout"
       ];
 
       # TODO: We can do better.
