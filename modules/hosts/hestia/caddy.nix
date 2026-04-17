@@ -33,7 +33,8 @@
             plugins = [
               "github.com/tailscale/caddy-tailscale@v0.0.0=github.com/olistrik/caddy-tailscale@fix-tailscale-auth-panic"
             ];
-            hash = "sha256-tCpuXETAMjRZYB2+nr90Hb03HyHGAw9q2KAlTdKtng8=";
+            hash = "sha256-jQpEL/pd62HylrazRyRsEXC7+zmyqMQk6eOovcMZdjU=";
+
             doInstallCheck = false;
           };
           virtualHosts = {
