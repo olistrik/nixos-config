@@ -17,6 +17,8 @@
         programs.niri
         programs.ags
 
+        programs.pulseview
+
         system.virtualisation
       ];
 
