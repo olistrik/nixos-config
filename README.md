@@ -20,11 +20,10 @@ homeManagerModule, package, and overlay for alacritty all in a single file. But
 _should_ you?
 
 Plus, flake-parts modules incorrectly handles module keys, which prevents
-`evalModules` from deduplicating imports. [There's been an issue detailing it
-for over a year now](https://github.com/hercules-ci/flake-parts/issues/299). I
-could make a PR and fix it, or I could just not be dependent on another library
-for a dozen or so lines of arguably simple nix code.
-
+`evalModules` from deduplicating imports. [There's been a PR for this open for
+years](https://github.com/hercules-ci/flake-parts/pull/251), but it remains
+unmerged as it could have negative implications on the behavior of flakes.
+I'm more unhappy with the behavior as is, so now I have one less dependency :tada:.
 
 # Entrypoints
 
