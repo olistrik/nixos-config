@@ -98,6 +98,9 @@
         # nix-utilities
         nix-search
 
+        # to wake things
+        wakeonlan
+
         # maintainance tools
         # gen-package-lock # TODO: this is custom.
       ];
