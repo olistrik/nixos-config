@@ -22,6 +22,9 @@
             enable = true;
             format.type = [ "nixfmt" ];
           };
+          go = {
+            enable = true;
+          };
           lua = {
             enable = true;
           };
