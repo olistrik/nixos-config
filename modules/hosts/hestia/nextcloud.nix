@@ -26,6 +26,10 @@
         };
         settings = {
           # social_login_auto_redirect = true;
+          mail_smtpmode = "sendmail";
+          mail_sendmailmode = "pipe";
+          mail_from_address = "noreply";
+          mail_domain = "olii.nl";
         };
         extraApps = {
           inherit (cfg.package.packages.apps)
@@ -36,6 +40,44 @@
             sociallogin
             ;
         };
+      };
+
+      users.users.msmtp = {
+        home = "/var/lib/msmtp/";
+        group = "msmtp";
+        isSystemUser = true;
+      };
+      users.groups.msmtp.members = [
+        "nextcloud"
+        "oli"
+      ];
+
+      olistrik.services.nixwarden.secrets = {
+        "noreply@olii.nl.pass" = [
+          {
+            location = "/var/lib/msmtp/noreply@olii.nl.pass";
+            # wantedBy = [];
+            userGroup = "msmtp:msmtp";
+            permissions = "440";
+          }
+        ];
+      };
+
+      programs.msmtp = {
+        enable = true;
+        accounts.default = {
+          host = "smtp.migadu.com";
+          port = 465;
+          auth = "plain";
+          tls = "on";
+          tls_starttls = "off";
+          from = "noreply@olii.nl";
+          user = "noreply@olii.nl";
+          passwordeval = "cat /var/lib/msmtp/noreply@olii.nl.pass";
+        };
+        extraConfig = ''
+          syslog LOG_MAIL
+        '';
       };
 
       # # WARN: REMOVE IN 25.11
