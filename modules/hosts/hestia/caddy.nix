@@ -31,16 +31,17 @@
           '';
           package = pkgs.caddy.withPlugins {
             plugins = [
-              "github.com/tailscale/caddy-tailscale@v0.0.0=github.com/olistrik/caddy-tailscale@fix-tailscale-auth-panic"
+              "github.com/tailscale/caddy-tailscale@v0.0.0=github.com/olistrik/caddy-tailscale@tailscale-grants"
             ];
-            hash = "sha256-jQpEL/pd62HylrazRyRsEXC7+zmyqMQk6eOovcMZdjU=";
+            hash = "sha256-EV2KZAqNB2TumD0coaIMWqoogScHJtKcwv7uDAzHONU=";
 
             doInstallCheck = false;
           };
           virtualHosts = {
             "hello.olii.nl".extraConfig = ''
-              tailscale_auth
-              respond `Hello {{http.auth.user.tailscale_login}}`
+              @admin `"hello.olii.nl/admin" in {tailscale.grants}`
+              respond @admin `Hello admin, {{placeholder "http.auth.user.id"}}`
+              respond "not authorized" 401
             '';
           };
         };

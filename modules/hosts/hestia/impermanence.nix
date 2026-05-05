@@ -44,6 +44,9 @@
           "/var/lib/redis-immich"
           "/var/lib/postgresql"
           "/var/lib/nextcloud"
+
+          # msmtp
+          "/var/lib/msmtp"
         ];
         files = [
           #log-rotate status
