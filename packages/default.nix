@@ -1,3 +1,4 @@
 {
-  nodePackages = import ./nodePackages;
+	nodePackages = import ./nodePackages;
+	hindsight-api = import ./hindsight-api;
 }

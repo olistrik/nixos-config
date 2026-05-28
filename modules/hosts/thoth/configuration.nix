@@ -28,6 +28,16 @@
       # Weird AMD stuff.
       hardware.cpu.amd.updateMicrocode = true;
       hardware.firmware = [ pkgs.linux-firmware ];
+
+      # https://gist.github.com/danielrosehill/6a531b079906f160911a87dea50e1507
+      boot.kernelParams = [
+        # "amdgpu.sg_display=0"
+        # "amdgpu.dcdebugmask=0x10"
+        # "iommu=soft"
+        "amdgpu.gpu_recovery=1"
+        # "amdgpu.gfx_off=0"
+        "amdgpu.runpm=0"
+      ];
       # rocm?
 
       # TODO: put somewhere useful.

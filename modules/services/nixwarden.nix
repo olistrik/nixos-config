@@ -124,23 +124,23 @@
             };
           };
 
-          environment.systemPackages = with pkgs; [
-            (writeScriptBin "nixwarden" ''
-              token=$(cat ${cfg.accessTokenFile})
-              secrets=$(${bws} --access-token $token secret list)
-
-              function getSecret() {
-                echo $secrets | ${jq} ".[] | select(.key == \"$1\").value" | xargs printf
-              }
-
-              function writeSecret() {
-                echo "$2 ($3 $4):"
-                getSecret $1
-              }
-
-              ${writeSecrets}
-            '')
-          ];
+          # environment.systemPackages = with pkgs; [
+          #   (writeScriptBin "nixwarden" ''
+          #     token=$(cat ${cfg.accessTokenFile})
+          #     secrets=$(${bws} --access-token $token secret list)
+          #
+          #     function getSecret() {
+          #       echo $secrets | ${jq} ".[] | select(.key == \"$1\").value" | xargs printf
+          #     }
+          #
+          #     function writeSecret() {
+          #       echo "$2 ($3 $4):"
+          #       getSecret $1
+          #     }
+          #
+          #     ${writeSecrets}
+          #   '')
+          # ];
         };
     };
 }

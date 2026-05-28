@@ -25,6 +25,11 @@
         # ./nextcloud.nix
       ];
 
+      # Enable Hindsight API
+      services.hindsight = {
+		enable = true;
+      };
+
       # Enable Nixwarden
       olistrik.services.nixwarden = {
         accessTokenFile = "/var/lib/nixwarden/.nixwarden.key";
