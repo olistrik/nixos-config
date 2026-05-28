@@ -61,8 +61,8 @@
     "nixpkgs": {
       "type": "Channel",
       "name": "nixos-25.11",
-      "url": "https://releases.nixos.org/nixos/25.11/nixos-25.11.9320.1766437c5509/nixexprs.tar.xz",
-      "hash": "0ad6mhx843ad5y3jxfm3892swdhwvpf9iz15mddcljpcjgdfkdcl"
+      "url": "https://releases.nixos.org/nixos/25.11/nixos-25.11.11422.25f538306313/nixexprs.tar.xz",
+      "hash": "16r660pwpfcrn8c4big4w9sz148lwrj2sj8w7i42r250b4n3sbqb"
     },
     "nvf": {
       "type": "Git",

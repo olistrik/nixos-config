@@ -8,13 +8,21 @@
       wlib,
       ...
     }:
+    let
+      # Create a fontconfig configuration that adds bundled fonts
+      # while preserving system font discovery via <include>
+      fontconfig-conf = pkgs.makeFontsConf { fontDirectories = [ pkgs.nerd-fonts.jetbrains-mono ]; };
+    in
     {
       imports = [ my.modules.wrappers.programs.alacritty ];
-
       config = {
         theme = "tokyonight_night";
         themePackage = pkgs.vimPlugins."tokyonight-nvim";
         themePath = "/extras/alacritty/";
+
+        env = {
+          FONTCONFIG_FILE = "${fontconfig-conf}";
+        };
 
         settings = {
           font = {
