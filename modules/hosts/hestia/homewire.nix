@@ -2,7 +2,6 @@
   nixos.hosts.hestia =
     {
       my,
-      pkgs,
       ...
     }:
     {
@@ -81,44 +80,5 @@
           permissions = "0400";
         }
       ];
-
-      # One-time migration from the zellij-run database. The marker prevents
-      # an old copy from being restored if the live database is ever removed.
-      system.activationScripts.homewireDatabaseMigration = {
-        deps = [
-          "groups"
-          "users"
-        ];
-        text = ''
-          oldDatabase=/home/oli/homewire/homewire.db
-          dataDirectory=/var/lib/homewire
-          newDatabase=$dataDirectory/homewire.db
-          migrationMarker=$dataDirectory/.zellij-database-migrated
-
-          if [ ! -e "$migrationMarker" ]; then
-            if [ -e "$newDatabase" ]; then
-              echo "Homewire database exists without migration marker; refusing to overwrite it" >&2
-              exit 1
-            fi
-            if [ ! -e "$oldDatabase" ]; then
-              echo "Homewire zellij database not found at $oldDatabase" >&2
-              exit 1
-            fi
-
-            checkpoint=$(${pkgs.sqlite}/bin/sqlite3 "$oldDatabase" 'PRAGMA wal_checkpoint(TRUNCATE);')
-            case "$checkpoint" in
-              0\|*) ;;
-              *)
-                echo "Homewire database checkpoint was busy: $checkpoint" >&2
-                exit 1
-                ;;
-            esac
-
-            ${pkgs.coreutils}/bin/install -d -m 0750 -o homewire -g homewire "$dataDirectory"
-            ${pkgs.coreutils}/bin/install -m 0600 -o homewire -g homewire "$oldDatabase" "$newDatabase"
-            ${pkgs.coreutils}/bin/install -m 0640 -o homewire -g homewire /dev/null "$migrationMarker"
-          fi
-        '';
-      };
     };
 }

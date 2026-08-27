@@ -31,6 +31,7 @@
           "/var/lib/acme"
           "/var/lib/nix-serve"
           "/var/lib/private/tsidp"
+          "/var/lib/homewire"
 
           # home assistant
           "/var/lib/mosquitto"

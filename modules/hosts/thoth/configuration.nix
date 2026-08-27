@@ -46,6 +46,12 @@
         android-tools
       ];
 
+      nix.gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 30d";
+      };
+
       # NEVER CHANGE.
       networking.hostId = "8177229e"; # Required for ZFS.
       system.stateVersion = "24.05"; # Did you read the comment?

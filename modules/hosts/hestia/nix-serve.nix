@@ -15,36 +15,18 @@
 
       services.caddy.virtualHosts = {
         "cache.olii.nl".handler = ''
-          # Serve /nix-cache-info with the fixed response
-          @nixcache path /nix-cache-info
-          respond @nixcache "StoreDir: /nix/store\nWantMassQuery: 1\nPriority: ${toString priority}\n" 200
 
-          # Proxy everything else to your service
           route {
+            # Serve /nix-cache-info with the fixed response
+            @nixcache path /nix-cache-info
+            respond @nixcache "StoreDir: /nix/store\nWantMassQuery: 1\nPriority: ${toString priority}\n" 200
+
+            # Proxy everything else to your service
           	reverse_proxy http://${cfg.bindAddress}:${toString cfg.port} {
           		flush_interval -1
           	}
           }
         '';
-      };
-
-      services.nginx = {
-        recommendedProxySettings = true;
-        virtualHosts = {
-          "cache.olii.nl" = {
-            forceSSL = true;
-            useACMEHost = "olii.nl";
-            locations = {
-              "/nix-cache-info" = {
-                return = ''200 "StoreDir: /nix/store\nWantMassQuery: 1\nPriority: ${toString priority}\n"'';
-              };
-              "/" = {
-                proxyPass = "http://${cfg.bindAddress}:${toString cfg.port}";
-                proxyWebsockets = true;
-              };
-            };
-          };
-        };
       };
     };
 }
