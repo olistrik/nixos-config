@@ -56,10 +56,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "1.5.0",
-      "revision": "7f185e0ec37b65b4730f892e0de9a831b0610f3a",
-      "url": "https://api.github.com/repos/Mic92/nix-fast-build/tarball/1.5.0",
-      "hash": "sha256-8csvAFJtFzA/9hX3C784sMlaQME40LQmWI2V+YzCNhc="
+      "version": "2.0.0",
+      "revision": "807539facae08bede14d1ad258b4003721252e79",
+      "url": "https://api.github.com/repos/Mic92/nix-fast-build/tarball/refs/tags/2.0.0",
+      "hash": "sha256-YPcBOBKTed4ulVb337au24wCNizub+jo9AiL5zSvNdM="
     },
     "nix-wrapper-modules": {
       "type": "Git",
@@ -70,15 +70,15 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "168fd6f514a9f8fa47df4fdcf9ecd61db10aec68",
-      "url": "https://github.com/BirdeeHub/nix-wrapper-modules/archive/168fd6f514a9f8fa47df4fdcf9ecd61db10aec68.tar.gz",
-      "hash": "sha256-Udj+9DzeLccvPKoW9Q8xFdqIhrw2jhYMoqxBv+8iWzo="
+      "revision": "04ef216559b18214853879df862f493a9e6bb8cf",
+      "url": "https://github.com/BirdeeHub/nix-wrapper-modules/archive/04ef216559b18214853879df862f493a9e6bb8cf.tar.gz",
+      "hash": "sha256-bWBt7v2FhgG6WTLgSi8nYGi1zXaTdA+vTdCRdvR2vcw="
     },
     "nixpkgs": {
       "type": "Channel",
       "name": "nixos-26.05",
-      "url": "https://releases.nixos.org/nixos/26.05/nixos-26.05.1550.bd0ff2d3eac2/nixexprs.tar.xz",
-      "hash": "sha256-YMnBf9lk/LYgvqfmSSJuOGigtRs5Lsy26pJHVlR9yMY="
+      "url": "https://releases.nixos.org/nixos/26.05/nixos-26.05.8477.062346a6d85b/nixexprs.tar.xz",
+      "hash": "sha256-mGPB6ofYpLaHyCO7tI0L1hCb69lsY0t7dqIsYIhXP7Y="
     },
     "nvf": {
       "type": "Git",
@@ -89,9 +89,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "5e206fb0a31329e91309dd6db9060c3adaf03727",
-      "url": "https://github.com/notashelf/nvf/archive/5e206fb0a31329e91309dd6db9060c3adaf03727.tar.gz",
-      "hash": "sha256-APeWI4Ylr/2d9GlurnOD0hkdvlUy1vmOsXBD2K3rVa4="
+      "revision": "f019fe83c224eedb145982a9a26b764e7cb2fdd0",
+      "url": "https://github.com/notashelf/nvf/archive/f019fe83c224eedb145982a9a26b764e7cb2fdd0.tar.gz",
+      "hash": "sha256-gxa6C1+Xfl0ys5h0X/ocusbwT3ABIdX38mrX3MRmPnM="
     },
     "tsidp": {
       "type": "Git",
@@ -109,8 +109,8 @@
     "unstable": {
       "type": "Channel",
       "name": "nixos-unstable",
-      "url": "https://releases.nixos.org/nixos/unstable/nixos-26.05pre1004030.64c08a7ca051/nixexprs.tar.xz",
-      "hash": "sha256-NpH8iEQ5JHv/BtUuzTEXUMDxPLetCDzIv4OxL8H7Kps="
+      "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1060451.56c02bc00adc/nixexprs.tar.xz",
+      "hash": "sha256-FoOSoBG7tEvOlGRTpWnVdY506Ner4y7r7UYO3OGgmE8="
     }
   },
   "version": 7

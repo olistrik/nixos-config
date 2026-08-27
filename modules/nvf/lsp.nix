@@ -30,7 +30,8 @@
           };
           rust = {
             enable = true;
-            lsp.package = [ "rust-analyzer" ]; # Don't use nixpkgs for this.
+            # TODO: lsp.package doesn't exist anymore.
+            # lsp.package = [ "rust-analyzer" ]; # Don't use nixpkgs for this.
           };
           typescript = {
             enable = true;
