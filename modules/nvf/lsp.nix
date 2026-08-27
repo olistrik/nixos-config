@@ -32,6 +32,9 @@
             enable = true;
             lsp.package = [ "rust-analyzer" ]; # Don't use nixpkgs for this.
           };
+          typescript = {
+            enable = true;
+          };
           python = {
             enable = true;
             lsp.servers = [ "ty" ];

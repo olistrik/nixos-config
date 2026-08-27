@@ -64,14 +64,14 @@
         # };
 
         node-red = {
-          enable = true;
+          enable = false;
         };
 
         caddy.virtualHosts = {
-          "zigbee.olii.nl".extraConfig = ''
+          "zigbee.olii.nl".handler = ''
             reverse_proxy http://localhost:8080
           '';
-          "node-red.olii.nl".extraConfig = ''
+          "node-red.olii.nl".handler = ''
             reverse_proxy http://localhost:1880
           '';
         };

@@ -3,6 +3,7 @@
     {
       my,
       lib,
+      pkgs,
       config,
       ...
     }:
@@ -29,6 +30,7 @@
           "/var/lib/tailscale"
           "/var/lib/acme"
           "/var/lib/nix-serve"
+          "/var/lib/private/tsidp"
 
           # home assistant
           "/var/lib/mosquitto"
@@ -44,6 +46,8 @@
           "/var/lib/redis-immich"
           "/var/lib/postgresql"
           "/var/lib/nextcloud"
+          "/var/lib/redis-nextcloud"
+          "/var/lib/hindsight"
 
           # msmtp
           "/var/lib/msmtp"
@@ -72,8 +76,21 @@
       # users can be mutable. /etc/shadow I think.
       users.mutableUsers = false;
 
-      boot.initrd.postResumeCommands = lib.mkAfter (
-        builtins.concatStringsSep "/n" (map (snapshot: "zfs rollback -r ${snapshot}") snapshots)
-      );
+      boot.zfs.forceImportRoot = true;
+      boot.initrd.systemd.services.impermanence-zfs-rollback = {
+        description = "Roll back ZFS root datasets for impermanence";
+        unitConfig.DefaultDependencies = false;
+        serviceConfig.Type = "oneshot";
+        requiredBy = [ "initrd.target" ];
+        before = [ "sysroot.mount" ];
+        requires = [ "zfs-import.target" ];
+        after = [
+          "zfs-import.target"
+          "local-fs-pre.target"
+        ];
+        script = lib.concatStringsSep "\n" (
+          map (snapshot: "${pkgs.zfs}/bin/zfs rollback -r ${snapshot}") snapshots
+        );
+      };
     };
 }

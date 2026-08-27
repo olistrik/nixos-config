@@ -12,7 +12,7 @@
 
           # grammars = pkgs.vimPlugins.nvim-treesitter.allGrammars;
 
-          fold = true;
+          fold = false;
           indent.enable = false;
           highlight.enable = true;
           # context.enable = true;

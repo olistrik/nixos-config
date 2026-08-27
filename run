@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Run any package from this repository using `nix run --file`.
+# Avoids needing a flake while keeping the same ergonomics.
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+if [ $# -eq 0 ] || [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+  echo "Usage: $(basename "$0") <package-attr> [-- args...]"
+  echo ""
+  echo "Build and run any package from this repository."
+  echo "Package attributes are relative to the repo root (e.g. pkgs.wrapped.omp)."
+  echo ""
+  echo "Examples:"
+  echo "  $(basename "$0") pkgs.wrapped.omp              # Run OMP"
+  echo "  $(basename "$0") pkgs.hindsight-api            # Run Hindsight API"
+  echo "  $(basename "$0") pkgs.wrapped.alacritty        # Run Alacritty"
+  echo "  $(basename "$0") pkgs.wrapped.nvim.default     # Run Neovim (nvf)"
+  echo "  $(basename "$0") pkgs.wrapped.omp -- --help    # Pass args"
+  exit 0
+fi
+
+exec nix run --file "$SCRIPT_DIR" "$@"

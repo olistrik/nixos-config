@@ -117,6 +117,19 @@
           (mkKeymap [ "n" "v" ] ";;" ";" { noremap = false; })
         ];
 
+        autocmds = [
+          {
+            event = [ "FileType" ];
+            pattern = [ "markdown" ];
+            callback = mkLuaInline /* lua */ ''
+              function()
+                vim.wo.conceallevel = 0
+              end
+            '';
+            desc = "Show formatting characters in markdown";
+          }
+        ];
+
         clipboard = {
           enable = true;
           registers = "unnamed,unnamedplus";

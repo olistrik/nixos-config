@@ -11,7 +11,7 @@
 
       imports = with my.modules.nixos.programs; [
         neovim
-        zsh
+        # zsh
         zoxide
         # tmux # broken
         direnv
@@ -64,6 +64,7 @@
 
       programs.appimage.binfmt = true;
 
+      users.defaultUserShell = my.pkgs.wrapped.zsh;
       environment.shellAliases = {
         nxs = "nix-search";
       };
@@ -76,6 +77,7 @@
         git
         wget
         curl
+        sshfs
 
         # Monitoring
         htop
@@ -94,9 +96,11 @@
         ripgrep
         tmux
         mosh
+        my.pkgs.wrapped.zellij
 
         # nix-utilities
         nix-search
+        my.pkgs.nix-fast-build
 
         # to wake things
         wakeonlan

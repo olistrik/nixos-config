@@ -75,10 +75,9 @@
           #################################
           ## Enable pay-respects on ESC-ESC
 
-          # Defined shortcut keys: [Esc] [Esc]
-          bindkey -M emacs '\e\e' pay-respects
-          bindkey -M vicmd '\e\e' pay-respects
-          bindkey -M viins '\e\e' pay-respects
+          bindkey -M emacs '\e\e' f
+          bindkey -M vicmd '\e\e' f
+          bindkey -M viins '\e\e' f
 
           #################################
           ## Enable vi mode
@@ -156,6 +155,8 @@
             'm:{a-z\-}={A-Z\_}' \
             'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
             'r:|?=** m:{a-z\-}={A-Z\_}'
+
+          source $HOME/.zshrc
         '';
 
         promptInit = ''

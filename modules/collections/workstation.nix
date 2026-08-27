@@ -9,7 +9,6 @@
     {
       imports = with my.modules.nixos; [
         system.theme
-        # programs.alacritty
       ];
 
       # programs that don't need "much" configuration.
@@ -20,7 +19,10 @@
           # Git helpers
           git-igitt
           pavucontrol
+          wf-recorder
+          slurp
 
+          # these are already configured.
           wrapped.alacritty
         ];
 

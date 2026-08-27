@@ -1,7 +1,11 @@
 {
   nixos.collections.server =
-    { lib, config, ... }:
+    { lib, config, my, ... }:
     {
+      imports = with my.modules.nixos; [
+        services.caddy-tailscale
+      ];
+
       # Enable the OpenSSH daemon.
       services.openssh = {
         enable = true;

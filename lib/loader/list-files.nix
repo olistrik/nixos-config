@@ -1,4 +1,7 @@
 { lib, ... }:
+let
+  inherit (lib.lists) toList;
+in
 {
   # Returns a list of all .nix files, excluding those starting with "_"
   loader.listFiles =
@@ -17,5 +20,5 @@
         name = builtins.baseNameOf path;
       in
       (lib.hasSuffix ".nix" name) && !(lib.hasPrefix "_" name)
-    ) (lib.concatMap expand (if builtins.isList dir then dir else [ dir ]));
+    ) (lib.concatMap expand (toList dir));
 }

@@ -3,6 +3,7 @@
     {
       config,
       lib,
+      my,
       pkgs,
       ...
     }:
@@ -12,10 +13,23 @@
         services.caddy.virtualHosts = mkOption {
           type = attrsOf (
             submodule (
-              { name, config, ... }:
+              {
+                name,
+                config,
+                lib,
+                ...
+              }:
+              let
+                inherit (lib) mkDefault;
+              in
               {
                 config = mkIf (hasSuffix "olii.nl" name) {
                   useACMEHost = "olii.nl";
+                  tailscale = {
+                    auth = mkDefault true;
+                    permitLocal = mkDefault true;
+                    requireCapability = mkDefault "${name}/cap/auth";
+                  };
                 };
               }
             )
@@ -26,29 +40,16 @@
       config = {
         services.caddy = {
           enable = true;
-          logFormat = mkForce ''
-            level DEBUG
-          '';
-          package = pkgs.caddy.withPlugins {
-            plugins = [
-              "github.com/tailscale/caddy-tailscale@v0.0.0=github.com/olistrik/caddy-tailscale@tailscale-grants"
-            ];
-            hash = "sha256-EV2KZAqNB2TumD0coaIMWqoogScHJtKcwv7uDAzHONU=";
-
-            doInstallCheck = false;
-          };
+          # logFormat = mkForce ''
+          #   level DEBUG
+          # '';
+          package = my.pkgs.caddy-tailscale;
           virtualHosts = {
-            "hello.olii.nl".extraConfig = ''
-              @admin `"hello.olii.nl/admin" in {tailscale.grants}`
-              respond @admin `Hello admin, {{placeholder "http.auth.user.id"}}`
-              respond "not authorized" 401
-            '';
-          };
-        };
-
-        systemd.services.caddy = {
-          serviceConfig = {
-            BindPaths = [ "/run/tailscale/tailscaled.sock" ];
+            "hello.olii.nl" = {
+              handler = ''
+                respond "Hello, {http.auth.user.id}"
+              '';
+            };
           };
         };
       };

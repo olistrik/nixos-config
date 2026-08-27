@@ -14,7 +14,7 @@
       "version": "v1.13.0",
       "revision": "56ef5e72fec74b993ad0973b2dfa4eadeb48ba41",
       "url": "https://api.github.com/repos/nix-community/disko/tarball/v1.13.0",
-      "hash": "03jz60kw0khm1lp72q65z8gq69bfrqqbj08kw0hbiav1qh3g7p08"
+      "hash": "sha256-CNzzBsRhq7gg4BMBuTDObiWDH/rFYHEuDRVOwCcwXw4="
     },
     "flake-compat": {
       "type": "GitRelease",
@@ -30,7 +30,7 @@
       "version": "v1.1.0",
       "revision": "ff81ac966bb2cae68946d5ed5fc4994f96d0ffec",
       "url": "https://api.github.com/repos/NixOS/flake-compat/tarball/v1.1.0",
-      "hash": "19d2z6xsvpxm184m41qrpi1bplilwipgnzv9jy17fgw421785q1m"
+      "hash": "sha256-NeCCThCEP3eCl2l/+27kNNK7QrwZB1IJCrXfrbv5oqU="
     },
     "impermanence": {
       "type": "Git",
@@ -43,7 +43,23 @@
       "submodules": false,
       "revision": "7b1d382faf603b6d264f58627330f9faa5cba149",
       "url": "https://github.com/nix-community/impermanence/archive/7b1d382faf603b6d264f58627330f9faa5cba149.tar.gz",
-      "hash": "1iip4kjrk09mnha9jhafvcg61g1d0g6pqnljzdp08zz6zk38jzyk"
+      "hash": "sha256-03+JxvzmfwRu+5JafM0DLbxgHttOQZkUtDWBmeUkN8Y="
+    },
+    "nix-fast-build": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "Mic92",
+        "repo": "nix-fast-build"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "1.5.0",
+      "revision": "7f185e0ec37b65b4730f892e0de9a831b0610f3a",
+      "url": "https://api.github.com/repos/Mic92/nix-fast-build/tarball/1.5.0",
+      "hash": "sha256-8csvAFJtFzA/9hX3C784sMlaQME40LQmWI2V+YzCNhc="
     },
     "nix-wrapper-modules": {
       "type": "Git",
@@ -56,13 +72,13 @@
       "submodules": false,
       "revision": "168fd6f514a9f8fa47df4fdcf9ecd61db10aec68",
       "url": "https://github.com/BirdeeHub/nix-wrapper-modules/archive/168fd6f514a9f8fa47df4fdcf9ecd61db10aec68.tar.gz",
-      "hash": "0fjv4bpvyhdcl861d3inpj38inhm647za5ma7hpwfbfy7ksgxn2i"
+      "hash": "sha256-Udj+9DzeLccvPKoW9Q8xFdqIhrw2jhYMoqxBv+8iWzo="
     },
     "nixpkgs": {
       "type": "Channel",
-      "name": "nixos-25.11",
-      "url": "https://releases.nixos.org/nixos/25.11/nixos-25.11.11422.25f538306313/nixexprs.tar.xz",
-      "hash": "16r660pwpfcrn8c4big4w9sz148lwrj2sj8w7i42r250b4n3sbqb"
+      "name": "nixos-26.05",
+      "url": "https://releases.nixos.org/nixos/26.05/nixos-26.05.1550.bd0ff2d3eac2/nixexprs.tar.xz",
+      "hash": "sha256-YMnBf9lk/LYgvqfmSSJuOGigtRs5Lsy26pJHVlR9yMY="
     },
     "nvf": {
       "type": "Git",
@@ -75,7 +91,7 @@
       "submodules": false,
       "revision": "5e206fb0a31329e91309dd6db9060c3adaf03727",
       "url": "https://github.com/notashelf/nvf/archive/5e206fb0a31329e91309dd6db9060c3adaf03727.tar.gz",
-      "hash": "1bjmxfnxhhvhn67gkmijanz1s6fjhdrswvk9yjfzvbr5hqirdxq0"
+      "hash": "sha256-APeWI4Ylr/2d9GlurnOD0hkdvlUy1vmOsXBD2K3rVa4="
     },
     "tsidp": {
       "type": "Git",
@@ -86,16 +102,16 @@
       },
       "branch": "unix-socket-pr",
       "submodules": false,
-      "revision": "dc4b016ec97a76529aa0a7c42042a4cba263dc6f",
-      "url": "https://github.com/olistrik/tsidp/archive/dc4b016ec97a76529aa0a7c42042a4cba263dc6f.tar.gz",
-      "hash": "0lzr7x86nk12mnlbp3ndkyqc1xmdniv37z12r5bnllbgv23bivip"
+      "revision": "53769d41f4916beb39043706f08c2fe858051aaa",
+      "url": "https://github.com/olistrik/tsidp/archive/53769d41f4916beb39043706f08c2fe858051aaa.tar.gz",
+      "hash": "sha256-EXFHS1f/zoKGS03XMI/OBi+lJPNF/DhOiwlIeYVYGoI="
     },
     "unstable": {
       "type": "Channel",
       "name": "nixos-unstable",
       "url": "https://releases.nixos.org/nixos/unstable/nixos-26.05pre1004030.64c08a7ca051/nixexprs.tar.xz",
-      "hash": "16razg0jzcc3pz43q25dnwyg3h2h2wqwsbnm0vzpn91r8j4gr49n"
+      "hash": "sha256-NpH8iEQ5JHv/BtUuzTEXUMDxPLetCDzIv4OxL8H7Kps="
     }
   },
-  "version": 5
+  "version": 7
 }

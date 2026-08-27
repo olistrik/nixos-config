@@ -14,7 +14,7 @@
       };
 
       services.caddy.virtualHosts = {
-        "cache.olii.nl".extraConfig = ''
+        "cache.olii.nl".handler = ''
           # Serve /nix-cache-info with the fixed response
           @nixcache path /nix-cache-info
           respond @nixcache "StoreDir: /nix/store\nWantMassQuery: 1\nPriority: ${toString priority}\n" 200

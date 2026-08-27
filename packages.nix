@@ -14,5 +14,9 @@ let
   ) (import ./packages);
 
   wrapped = import ./packages/wrapped { inherit my; };
+
+  nix-fast-build = pkgs.callPackage "${my.sources.nix-fast-build}/default.nix" { };
 in
-packages // wrapped
+packages // wrapped // {
+  inherit nix-fast-build;
+}

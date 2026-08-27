@@ -92,7 +92,7 @@
       services.phpfpm.pools.nextcloud.settings."listen.group" = config.services.caddy.group;
 
       services.caddy.virtualHosts = {
-        ${cfg.hostName}.extraConfig = ''
+        ${cfg.hostName}.handler = ''
           header {
               Strict-Transport-Security max-age=31536000;
           }

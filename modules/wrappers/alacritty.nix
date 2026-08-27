@@ -22,6 +22,7 @@
 
         env = {
           FONTCONFIG_FILE = "${fontconfig-conf}";
+          SHELL = "${lib.getExe my.pkgs.wrapped.zsh}";
         };
 
         settings = {

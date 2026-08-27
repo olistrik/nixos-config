@@ -36,7 +36,7 @@
 
         llmProvider = mkOption {
           type = types.str;
-          default = "opencode-go";
+          default = "deepseek";
           description = "LLM provider (passed as HINDSIGHT_API_LLM_PROVIDER)";
         };
 
@@ -68,34 +68,34 @@
         };
         users.groups.hindsight = { };
 
-		# PostgreSQL database and user (peer auth via Unix socket)
-		services.postgresql = {
-			enable = true;
-			extensions = plug: with plug; [ pgvector ];
-			ensureDatabases = [ "hindsight" ];
-			ensureUsers = [
-				{
-					name = "hindsight";
-					ensureDBOwnership = true;
-				}
-			];
-		};
+        # PostgreSQL database and user (peer auth via Unix socket)
+        services.postgresql = {
+          enable = true;
+          extensions = plug: with plug; [ pgvector ];
+          ensureDatabases = [ "hindsight" ];
+          ensureUsers = [
+            {
+              name = "hindsight";
+              ensureDBOwnership = true;
+            }
+          ];
+        };
 
-		# One-shot to create the pgvector extension as superuser before the
-		# API server runs its migrations.  Hindsight's own user isn't superuser
-		# and can't CREATE EXTENSION.
-		systemd.services.hindsight-pg-init = {
-			description = "Initialize Hindsight PostgreSQL extensions";
-			before = [ "hindsight-api.service" ];
-			wantedBy = [ "hindsight-api.service" ];
-			serviceConfig = {
-				Type = "oneshot";
-				User = "postgres";
-			};
-			script = ''
-				${pkgs.postgresql}/bin/psql -d hindsight -c "CREATE EXTENSION IF NOT EXISTS vector;"
-			'';
-		};
+        # One-shot to create the pgvector extension as superuser before the
+        # API server runs its migrations.  Hindsight's own user isn't superuser
+        # and can't CREATE EXTENSION.
+        systemd.services.hindsight-pg-init = {
+          description = "Initialize Hindsight PostgreSQL extensions";
+          before = [ "hindsight-api.service" ];
+          wantedBy = [ "hindsight-api.service" ];
+          serviceConfig = {
+            Type = "oneshot";
+            User = "postgres";
+          };
+          script = ''
+            				${pkgs.postgresql}/bin/psql -d hindsight -c "CREATE EXTENSION IF NOT EXISTS vector;"
+            			'';
+        };
 
         # Systemd service
         systemd.services.hindsight-api = {
@@ -120,24 +120,24 @@
             StateDirectory = "hindsight";
             WorkingDirectory = "/var/lib/hindsight";
 
-			Environment = [
-				"HINDSIGHT_API_HOST=${cfg.host}"
-				"HINDSIGHT_API_PORT=${toString cfg.port}"
-				# Unix socket peer auth.  Socket path omitted because
-				# to_libpq_url() URL-encodes query values, mangling paths.
-				"HINDSIGHT_API_DATABASE_URL=postgresql:///hindsight"
-				"HINDSIGHT_API_LLM_PROVIDER=${cfg.llmProvider}"
-				# Remote embeddings via OpenAI-compatible endpoint (same base URL as LLM provider)
-				"HINDSIGHT_API_EMBEDDINGS_PROVIDER=openai"
-				# Disable local reranker — set to "cohere" and add HINDSIGHT_API_RERANKER_COHERE_API_KEY
-				# in the env file to enable reranking.
-				"HINDSIGHT_API_RERANKER_PROVIDER=rrf"
-				"HINDSIGHT_API_RUN_MIGRATIONS_ON_STARTUP=true"
-			];
+            Environment = [
+              "HINDSIGHT_API_HOST=${cfg.host}"
+              "HINDSIGHT_API_PORT=${toString cfg.port}"
+              # Unix socket peer auth.  Socket path omitted because
+              # to_libpq_url() URL-encodes query values, mangling paths.
+              "HINDSIGHT_API_DATABASE_URL=postgresql:///hindsight"
+              "HINDSIGHT_API_LLM_PROVIDER=${cfg.llmProvider}"
+              # Remote embeddings via OpenAI-compatible endpoint (same base URL as LLM provider)
+              "HINDSIGHT_API_EMBEDDINGS_PROVIDER=openai"
+              # Disable local reranker — set to "cohere" and add HINDSIGHT_API_RERANKER_COHERE_API_KEY
+              # in the env file to enable reranking.
+              "HINDSIGHT_API_RERANKER_PROVIDER=rrf"
+              "HINDSIGHT_API_RUN_MIGRATIONS_ON_STARTUP=true"
+            ];
 
-			# Leading dash means "ignore if file doesn't exist" — nixwarden may
-			# not have synced yet on first boot.
-			EnvironmentFile = optional (cfg.llmApiKeyFile != null) "-${cfg.llmApiKeyFile}";
+            # Leading dash means "ignore if file doesn't exist" — nixwarden may
+            # not have synced yet on first boot.
+            EnvironmentFile = optional (cfg.llmApiKeyFile != null) "-${cfg.llmApiKeyFile}";
 
             # Hardening
             PrivateTmp = true;
@@ -157,7 +157,7 @@
         # Caddy reverse proxy
         services.caddy.virtualHosts.${cfg.virtualHost} = {
           useACMEHost = "olii.nl";
-          extraConfig = ''
+          handler = ''
             reverse_proxy http://${cfg.host}:${toString cfg.port}
           '';
         };

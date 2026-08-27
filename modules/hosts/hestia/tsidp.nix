@@ -27,7 +27,7 @@
 
       services.caddy.virtualHosts = {
         ${cfg.settings.serverURL} = {
-          extraConfig = ''
+          handler = ''
             reverse_proxy unix/${cfg.settings.unixSocket}
           '';
         };

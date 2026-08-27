@@ -9,7 +9,7 @@
         spotify
         feh
         mplayer
-        zathura
+        sioyek
         discord
         signal-desktop
 

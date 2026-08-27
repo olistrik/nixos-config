@@ -7,11 +7,11 @@
         "olii.nl" = {
           dnsProvider = "cloudflare";
           domain = "*.olii.nl";
-          credentialsFile = "/var/lib/acme/olii.nl.creds";
+          environmentFile = "/var/lib/acme/olii.nl.creds";
         };
         "rhythmotion.nl" = {
           dnsProvider = "cloudflare";
-          credentialsFile = "/var/lib/acme/olii.nl.creds";
+          environmentFile = "/var/lib/acme/olii.nl.creds";
           extraDomainNames = [ "signup.rhythmotion.nl" ];
         };
       };

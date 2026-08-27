@@ -7,27 +7,12 @@
     {
       imports = with my.modules.nixos; [
         collections.server
-
         services.nixwarden
-
-        # ./build-all-systems.nix
-        #
-        # ./acme.nix
-        # ./caddy.nix
-        # # ./nginx.nix
-        # ./tsidp.nix
-        # ./postgres.nix
-        # ./node-red.nix
-        # ./immich.nix
-        # ./nix-serve.nix
-        # # ./palworld-server.nix
-        # # ./valheim-server
-        # ./nextcloud.nix
       ];
 
       # Enable Hindsight API
       services.hindsight = {
-		enable = true;
+        enable = true;
       };
 
       # Enable Nixwarden
