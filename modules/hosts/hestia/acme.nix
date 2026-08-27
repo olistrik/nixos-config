@@ -9,11 +9,11 @@
           domain = "*.olii.nl";
           environmentFile = "/var/lib/acme/olii.nl.creds";
         };
-        "rhythmotion.nl" = {
-          dnsProvider = "cloudflare";
-          environmentFile = "/var/lib/acme/olii.nl.creds";
-          extraDomainNames = [ "signup.rhythmotion.nl" ];
-        };
+        # "rhythmotion.nl" = {
+        #   dnsProvider = "cloudflare";
+        #   environmentFile = "/var/lib/acme/olii.nl.creds";
+        #   extraDomainNames = [ "signup.rhythmotion.nl" ];
+        # };
       };
     };
 

@@ -12,7 +12,7 @@
 
       # Enable Hindsight API
       services.hindsight = {
-        enable = true;
+        # enable = true;
       };
 
       # Enable Nixwarden

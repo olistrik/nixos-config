@@ -32,6 +32,18 @@
       "url": "https://api.github.com/repos/NixOS/flake-compat/tarball/v1.1.0",
       "hash": "sha256-NeCCThCEP3eCl2l/+27kNNK7QrwZB1IJCrXfrbv5oqU="
     },
+    "homewire": {
+      "type": "Git",
+      "repository": {
+        "type": "Git",
+        "url": "git+ssh://git@github.com/olistrik/homewire.git"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "7dd26afe2a397ffbdf1c566be79ce2e0174c3e1c",
+      "url": null,
+      "hash": "sha256-i3XDw13UF19zTYvDGzcdNFIV65ZTPkCpXFXqUs9OB7o="
+    },
     "impermanence": {
       "type": "Git",
       "repository": {
