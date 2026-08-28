@@ -1,0 +1,45 @@
+name: Update npins
+
+on:
+  schedule:
+    # A little over six hours before Hestia builds every Monday at midnight.
+    - cron: "43 17 * * 0"
+      timezone: Europe/Amsterdam
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-npins
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: NixOS/nix-installer-action@main
+        with:
+          extra-conf: experimental-features = nix-command flakes
+
+      - name: Update pins
+        run: |
+          nix run nixpkgs#npins -- upgrade
+          mapfile -t pins < <(
+            jq -r '.pins | keys[] | select(. != "homewire")' npins/sources.json
+          )
+          nix run nixpkgs#npins -- update "${pins[@]}"
+
+      - name: Commit updated pins
+        run: |
+          if git diff --quiet -- npins; then
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add npins
+          git commit -m "chore: update npins"
+          git push
