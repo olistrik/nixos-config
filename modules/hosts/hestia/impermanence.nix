@@ -36,7 +36,6 @@
           # home assistant
           "/var/lib/mosquitto"
           "/var/lib/zigbee2mqtt"
-          "/var/lib/node-red"
 
           # game servers
           "/var/lib/valheim"
