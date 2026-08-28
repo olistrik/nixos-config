@@ -1,9 +1,13 @@
 {
   nixos.hosts.hestia =
-    { config, ... }:
+    { config, pkgs, ... }:
     let
       cfg = config.services.nix-serve;
-      priority = 50;
+      cacheInfoRoot = pkgs.writeTextDir "nix-cache-info" ''
+        StoreDir: /nix/store
+        WantMassQuery: 1
+        Priority: 50
+      '';
     in
     {
       # Enable nix-serve
@@ -17,14 +21,14 @@
         "cache.olii.nl".handler = ''
 
           route {
-            # Serve /nix-cache-info with the fixed response
             @nixcache path /nix-cache-info
-            respond @nixcache "StoreDir: /nix/store\nWantMassQuery: 1\nPriority: ${toString priority}\n" 200
+            root @nixcache ${cacheInfoRoot}
+            header @nixcache Content-Type text/plain
+            file_server @nixcache
 
-            # Proxy everything else to your service
-          	reverse_proxy http://${cfg.bindAddress}:${toString cfg.port} {
-          		flush_interval -1
-          	}
+            reverse_proxy http://${cfg.bindAddress}:${toString cfg.port} {
+              flush_interval -1
+            }
           }
         '';
       };

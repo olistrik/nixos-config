@@ -24,10 +24,16 @@
             wants = [ "network-online.target" ];
             serviceConfig = {
               Type = "oneshot";
+              # The service evaluates configurations independently of the
+              # running NixOS evaluation, so it does not inherit
+              # nixpkgs.config.allowUnfree from all-hosts.nix.
+              Environment = [ "NIXPKGS_ALLOW_UNFREE=1" ];
             };
             path = with pkgs; [
               nix
               coreutils
+              git
+              openssh
             ];
             script = ''
               set -euo pipefail
