@@ -81,10 +81,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "2.0.1",
-      "revision": "a7217fc192e2cbb3ee6809b1a00604b24ac12152",
-      "url": "https://api.github.com/repos/Mic92/nix-fast-build/tarball/refs/tags/2.0.1",
-      "hash": "sha256-VOzpaf8Si/c7B5xXwxZi+i34LKoDaMgPNZbSMZkpXP4="
+      "version": "2.0.0",
+      "revision": "807539facae08bede14d1ad258b4003721252e79",
+      "url": "https://api.github.com/repos/Mic92/nix-fast-build/tarball/refs/tags/2.0.0",
+      "hash": "sha256-YPcBOBKTed4ulVb337au24wCNizub+jo9AiL5zSvNdM="
     },
     "nix-wrapper-modules": {
       "type": "Git",
@@ -102,7 +102,6 @@
     "nixpkgs": {
       "type": "Channel",
       "name": "nixos-26.05",
-      "artifact": "nixexprs.tar.xz",
       "url": "https://releases.nixos.org/nixos/26.05/nixos-26.05.8477.062346a6d85b/nixexprs.tar.xz",
       "hash": "sha256-mGPB6ofYpLaHyCO7tI0L1hCb69lsY0t7dqIsYIhXP7Y="
     },
@@ -135,10 +134,9 @@
     "unstable": {
       "type": "Channel",
       "name": "nixos-unstable",
-      "artifact": "nixexprs.tar.xz",
-      "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1062397.9fbb54b33e91/nixexprs.tar.xz",
-      "hash": "sha256-IkjmqLoWzeqBAi1VIkdhDLMGjQDJ4suEDp59Zwxpswg="
+      "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1060451.56c02bc00adc/nixexprs.tar.xz",
+      "hash": "sha256-FoOSoBG7tEvOlGRTpWnVdY506Ner4y7r7UYO3OGgmE8="
     }
   },
-  "version": 8
+  "version": 7
 }

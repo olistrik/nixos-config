@@ -10,9 +10,9 @@
       '';
     in
     {
-      age.secrets."nix-serve-key.pem" = {
-        owner = "nix-serve";
-      };
+      # nix-serve uses DynamicUser and receives this through LoadCredential,
+      # so agenix must leave the source secret owned by root.
+      age.secrets."nix-serve-key.pem" = { };
 
       # Enable nix-serve
       services.nix-serve = {
