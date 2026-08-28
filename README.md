@@ -110,6 +110,18 @@ functions are called with `callPackage`.
 This is currently a work in progress, I'd like to make this more automatic as I
 have with lib and modules.
 
+# Hestia cache warmer
+
+Hestia updates `npins` weekly, builds the `thoth` and `hestia` system
+closures, and retains them as GC roots for `cache.olii.nl`. This lets normal
+weekly updates substitute pre-built results from the cache.
+
+The builder accepts only an SSH-signed `master` tip. Personal signing keys may
+change configuration; Hestia's signing key may create only `npins` updates.
+It evaluates and builds as an unprivileged user, then a separate publisher
+signs and fast-forward pushes a successful pin-only update. Its persistent
+state and repository-scoped SSH keys are under `/persist/nix-cache-builder/`.
+
 # Examples
 
 ## shell.nix
@@ -134,4 +146,3 @@ pkgs.mkShell {
   ];
 }
 ```
-
