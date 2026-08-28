@@ -20,10 +20,14 @@
         programs.pulseview
 
         system.virtualisation
+        system.agenix
       ];
 
       # TODO: put somewhere useful.
       documentation.nixos.enable = false;
+
+      age.identityPaths = [ "/persist/age/thoth-identity" ];
+      environment.shellAliases.agenix = "agenix -i /persist/age/thoth-identity";
 
       # Weird AMD stuff.
       hardware.cpu.amd.updateMicrocode = true;

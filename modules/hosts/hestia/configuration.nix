@@ -7,7 +7,7 @@
     {
       imports = with my.modules.nixos; [
         collections.server
-        services.nixwarden
+        system.agenix
       ];
 
       # Enable Hindsight API
@@ -15,10 +15,7 @@
         # enable = true;
       };
 
-      # Enable Nixwarden
-      olistrik.services.nixwarden = {
-        accessTokenFile = "/var/lib/nixwarden/.nixwarden.key";
-      };
+      age.identityPaths = [ "/persist/age/hestia-identity" ];
 
       nix.gc = {
         automatic = true;

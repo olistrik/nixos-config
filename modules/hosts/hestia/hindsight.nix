@@ -43,7 +43,7 @@
         llmApiKeyFile = mkOption {
           type = types.nullOr types.str;
           default = "/var/lib/hindsight/.env";
-          description = "Path to environment file containing HINDSIGHT_API_LLM_API_KEY (managed by nixwarden)";
+          description = "Path to environment file containing HINDSIGHT_API_LLM_API_KEY";
         };
 
         environment = mkOption {
@@ -60,8 +60,7 @@
       };
 
       config = mkIf cfg.enable {
-        # Fixed user so nixwarden (which runs before this service) can write
-        # the env file with the correct ownership.
+
         users.users.hindsight = {
           isSystemUser = true;
           group = "hindsight";
@@ -135,8 +134,8 @@
               "HINDSIGHT_API_RUN_MIGRATIONS_ON_STARTUP=true"
             ];
 
-            # Leading dash means "ignore if file doesn't exist" — nixwarden may
-            # not have synced yet on first boot.
+            # Leading dash means "ignore if the optional environment file does
+            # not exist".
             EnvironmentFile = optional (cfg.llmApiKeyFile != null) "-${cfg.llmApiKeyFile}";
 
             # Hardening
@@ -162,16 +161,6 @@
           '';
         };
 
-        # Nixwarden secret for LLM API key
-        olistrik.services.nixwarden.secrets = mkIf (cfg.llmApiKeyFile != null) {
-          "hindsight-api.env" = [
-            {
-              location = cfg.llmApiKeyFile;
-              wantedBy = [ "hindsight-api.service" ];
-              userGroup = "hindsight:hindsight";
-            }
-          ];
-        };
       };
     };
 }

@@ -72,7 +72,7 @@
         Defaults lecture = never
       '';
 
-      # TODO: extract to own module with nixwarden secrets.
+      # TODO: extract to its own module with managed secrets.
       services.tailscale = {
         enable = true;
         useRoutingFeatures = lib.mkDefault "client";

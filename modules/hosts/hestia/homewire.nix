@@ -2,10 +2,15 @@
   nixos.hosts.hestia =
     {
       my,
+      config,
       ...
     }:
     {
       imports = [ my.projects.homewire.nixosModules.default ];
+
+      age.secrets."homewire.env" = {
+        owner = "homewire";
+      };
 
       services.caddy.virtualHosts."wire.olii.nl".handler = ''
         reverse_proxy http://127.0.0.1:3030
@@ -18,7 +23,7 @@
 
       services.homewire = {
         enable = true;
-        environmentFile = "/var/lib/homewire/homewire.env";
+        environmentFile = config.age.secrets."homewire.env".path;
 
         zigbee2mqtt = {
           enable = true;
@@ -71,14 +76,5 @@
           };
         };
       };
-
-      olistrik.services.nixwarden.secrets."homewire.env" = [
-        {
-          location = "/var/lib/homewire/homewire.env";
-          wantedBy = [ "homewire.service" ];
-          userGroup = "homewire:homewire";
-          permissions = "0400";
-        }
-      ];
     };
 }

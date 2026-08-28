@@ -1,5 +1,9 @@
 {
-  nixos.hosts.hestia = {
+  nixos.hosts.hestia = { config, ... }: {
+    age.secrets."acme-cloudflare.env" = {
+      owner = "acme";
+    };
+
     security.acme = {
       acceptTerms = true;
       defaults.email = "acme@olii.nl";
@@ -7,7 +11,7 @@
         "olii.nl" = {
           dnsProvider = "cloudflare";
           domain = "*.olii.nl";
-          environmentFile = "/var/lib/acme/olii.nl.creds";
+          environmentFile = config.age.secrets."acme-cloudflare.env".path;
         };
         # "rhythmotion.nl" = {
         #   dnsProvider = "cloudflare";
@@ -15,16 +19,6 @@
         #   extraDomainNames = [ "signup.rhythmotion.nl" ];
         # };
       };
-    };
-
-    olistrik.services.nixwarden.secrets = {
-      "olii.nl.creds" = [
-        {
-          location = "/var/lib/acme/olii.nl.creds";
-          wantedBy = [ "acme-olii.nl.service" ];
-          userGroup = "acme:acme";
-        }
-      ];
     };
   };
 }

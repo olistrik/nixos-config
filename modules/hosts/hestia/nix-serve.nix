@@ -10,11 +10,14 @@
       '';
     in
     {
+      age.secrets."nix-serve-key.pem" = {
+        owner = "nix-serve";
+      };
+
       # Enable nix-serve
       services.nix-serve = {
         enable = true;
-        # maybe this needs to go in nixwarden?
-        secretKeyFile = "/var/lib/nix-serve/cache-priv-key.pem";
+        secretKeyFile = config.age.secrets."nix-serve-key.pem".path;
       };
 
       services.caddy.virtualHosts = {

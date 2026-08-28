@@ -3,16 +3,6 @@
   nixos.servers.valheim =
     { pkgs, ... }:
     {
-      olistrik.services.nixwarden.secrets = {
-        "valheim.adminlist.txt" = [
-          {
-            location = "/var/lib/valheim/adminlist.txt";
-            wantedBy = [ "valheim.service" ];
-            userGroup = "valheim:valheim";
-          }
-        ];
-      };
-
       olistrik.services.valheim-server = {
         enable = true;
         extraOptions = {

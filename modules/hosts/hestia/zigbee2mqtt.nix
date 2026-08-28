@@ -1,27 +1,20 @@
 {
   nixos.hosts.hestia =
-    { pkgs, ... }:
+    { pkgs, config, ... }:
     {
       networking.firewall.allowedTCPPorts = [
         80
         443
       ];
 
-      olistrik.services.nixwarden.secrets = {
-        "zigbee@mqtt.pass" = [
-          {
-            location = "/var/lib/mosquitto/zigbee@mqtt.pass";
-            wantedBy = [ "mosquitto.service" ];
-            userGroup = "mosquitto:mosquitto";
-          }
-        ];
-        "zigbee2mqtt-secret.yaml" = [
-          {
-            location = "/var/lib/zigbee2mqtt/secret.yaml";
-            wantedBy = [ "zigbee2mqtt.service" ];
-            userGroup = "zigbee2mqtt:zigbee2mqtt";
-          }
-        ];
+      age.secrets = {
+        "mosquitto-zigbee.pass" = {
+          owner = "mosquitto";
+        };
+        "zigbee2mqtt-secret.yaml" = {
+          owner = "zigbee2mqtt";
+          path = "/var/lib/zigbee2mqtt/secret.yaml";
+        };
       };
 
       services = {
@@ -30,7 +23,7 @@
           listeners = [
             {
               acl = [ "pattern readwrite #" ];
-              users.zigbee.passwordFile = "/var/lib/mosquitto/zigbee@mqtt.pass";
+              users.zigbee.passwordFile = config.age.secrets."mosquitto-zigbee.pass".path;
             }
           ];
         };

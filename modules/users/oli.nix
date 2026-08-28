@@ -1,6 +1,8 @@
 {
-  nixos.users.oli = {
+  nixos.users.oli = { config, ... }: {
     nix.settings.trusted-users = [ "oli" ];
+
+    age.secrets.oli-password = { };
 
     users.users.oli = {
       isNormalUser = true;
@@ -15,8 +17,7 @@
         "dialout"
       ];
 
-      # TODO: We can do better.
-      hashedPasswordFile = "/persist/secret/user.password";
+      hashedPasswordFile = config.age.secrets.oli-password.path;
 
       openssh.authorizedKeys.keys = [
         "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIMcvHSxN1mFGgB6r19eHIqGKvhNOwddvVe43NwhKHmWzAAAABHNzaDo= oli@yubikey"

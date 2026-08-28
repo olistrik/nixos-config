@@ -52,15 +52,8 @@
         "oli"
       ];
 
-      olistrik.services.nixwarden.secrets = {
-        "noreply@olii.nl.pass" = [
-          {
-            location = "/var/lib/msmtp/noreply@olii.nl.pass";
-            # wantedBy = [];
-            userGroup = "msmtp:msmtp";
-            permissions = "440";
-          }
-        ];
+      age.secrets."msmtp-noreply.pass" = {
+        owner = "msmtp";
       };
 
       programs.msmtp = {
@@ -73,7 +66,7 @@
           tls_starttls = "off";
           from = "noreply@olii.nl";
           user = "noreply@olii.nl";
-          passwordeval = "cat /var/lib/msmtp/noreply@olii.nl.pass";
+          passwordeval = "cat ${config.age.secrets."msmtp-noreply.pass".path}";
         };
         extraConfig = ''
           syslog LOG_MAIL

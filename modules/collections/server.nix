@@ -1,6 +1,11 @@
 {
   nixos.collections.server =
-    { lib, config, my, ... }:
+    {
+      lib,
+      config,
+      my,
+      ...
+    }:
     {
       imports = with my.modules.nixos; [
         services.caddy-tailscale
@@ -23,7 +28,7 @@
         enable = true;
         useRoutingFeatures = "server"; # Enable IP Forwarding for exit node.
         extraSetFlags = [ "--advertise-exit-node" ]; # Enable exit node.
-        # authKeyFile = ...; # TODO: via Nixwarden.
+        # authKeyFile = ...; # TODO: manage as a secret.
       };
       #
       # users.users.oli.openssh.authorizedKeys.keys = [

@@ -5,7 +5,7 @@ let
     plugins = [
       "github.com/tailscale/caddy-tailscale@v0.0.0=github.com/olistrik/caddy-tailscale@v0.0.0-20260709152620-9630b5196abf"
     ];
-    hash = "sha256-JrplMsDYUR1XiYs4MOTtbP2umwFQXSaRmMTkiSomqDM=";
+    hash = "sha256-dVt/b+kURSu60+f/5IghJN5v8UtiTp08JbFIadqG0LA=";
 
     doInstallCheck = false;
   };
