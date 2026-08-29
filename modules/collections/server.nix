@@ -17,6 +17,8 @@
         settings = {
           PermitRootLogin = "no";
           PasswordAuthentication = false;
+          KbdInteractiveAuthentication = false;
+          PubkeyAuthentication = true;
         };
         authorizedKeysFiles = lib.mkForce [
           "/etc/ssh/authorized_keys.d/%u"
