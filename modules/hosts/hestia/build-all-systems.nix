@@ -1,6 +1,6 @@
 {
   nixos.hosts.hestia =
-    { lib, pkgs, ... }:
+    { lib, pkgs, config, ... }:
     let
       repositoryUrl = "https://github.com/olistrik/nixos-config.git";
       pushUrl = "git@github.com:olistrik/nixos-config.git";
@@ -15,12 +15,9 @@
         "hestia"
       ];
 
-      # Only these identities may introduce arbitrary configuration changes.
-      # Their private keys remain on Oli's own devices.
-      userAllowedSigners = pkgs.writeText "nix-cache-user-allowed-signers" ''
-        oliverstrik@gmail.com namespaces="git" sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIMcvHSxN1mFGgB6r19eHIqGKvhNOwddvVe43NwhKHmWzAAAABHNzaDo=
-        oliverstrik@gmail.com namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHwyuoI18ZEoo/c38XvI6HwvRlxigxd3lPzshi7RtVw2
-      '';
+      # This is the system-wide Git SSH trust policy, declared in
+      # collections/all-hosts.nix. Its private keys remain on Oli's devices.
+      userAllowedSigners = config.environment.etc."git/allowed_signers".source;
 
       # Published by GitHub at https://api.github.com/meta. Pinning this avoids
       # trusting an SSH host key obtained during the first automated push.

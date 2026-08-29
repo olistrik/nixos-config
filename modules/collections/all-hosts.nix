@@ -85,6 +85,20 @@
         nxs = "nix-search";
       };
 
+      # This file is the single source of truth for user SSH commit signers.
+      # Hestia's automated configuration verifier consumes its store path too.
+      environment.etc."git/allowed_signers".text = ''
+        strik@olii.nl namespaces="git" sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIMcvHSxN1mFGgB6r19eHIqGKvhNOwddvVe43NwhKHmWzAAAABHNzaDo=
+        strik@olii.nl namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHwyuoI18ZEoo/c38XvI6HwvRlxigxd3lPzshi7RtVw2
+      '';
+
+      environment.etc."gitconfig".text = ''
+        [gpg]
+          format = ssh
+        [gpg "ssh"]
+          allowedSignersFile = /etc/git/allowed_signers
+      '';
+
       environment.systemPackages = with pkgs; [
         # Version Control
         npins
