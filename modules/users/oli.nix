@@ -1,7 +1,5 @@
 {
   nixos.users.oli = { config, ... }: {
-    nix.settings.trusted-users = [ "oli" ];
-
     age.secrets.oli-password = { };
 
     users.users.oli = {
