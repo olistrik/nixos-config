@@ -28,6 +28,9 @@
                   tailscale = {
                     auth = mkDefault true;
                     permitLocal = mkDefault true;
+                    localNetworks = [
+                      "192.168.10.0/24"
+                    ];
                     requireCapability = mkDefault "${name}/cap/auth";
                   };
                 };
