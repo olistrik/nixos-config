@@ -4,7 +4,6 @@
     {
       services.immich = {
         enable = true;
-        openFirewall = true;
       };
 
       # TODO: assumes caddy? not that big of a deal though.
