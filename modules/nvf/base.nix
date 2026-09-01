@@ -18,7 +18,6 @@
         autoformat
         autoindent
         minimap
-        notebook-navigator
 
         # nix-comment-lang
       ];
