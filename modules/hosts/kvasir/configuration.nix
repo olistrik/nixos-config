@@ -3,7 +3,7 @@
     { my, ... }:
     {
       imports = [
-	./_hardware-configuration.nix
+        ./_hardware-configuration.nix
 
         my.modules.nixos.system.agenix
       ];

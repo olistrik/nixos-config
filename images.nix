@@ -17,6 +17,11 @@ let
       "${my.sources.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
       "${my.sources.nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
       {
+        nix.settings.experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
+
         users.users.root.openssh.authorizedKeys.keys = with my.pubkey; [
           thoth.oli.ssh
           yubikey.personal.ssh
