@@ -1,13 +1,23 @@
 {
 
-  nvf.config.theming = {
-    vim.theme = {
-      enable = true;
-      name = "tokyonight";
-      style = "night";
-      transparent = true;
+  nvf.config.theming =
+    { lib, ... }:
+    {
+      vim = {
+        theme = {
+          enable = true;
+          name = "tokyonight";
+          style = "night";
+          transparent = true;
+        };
+
+        luaConfigRC.linux-console-theme = lib.nvim.dag.entryAfter [ "pluginConfigs" ] /* lua */ ''
+          if vim.env.TERM == "linux" then
+            vim.cmd.colorscheme("slate")
+          end
+        '';
+      };
     };
-  };
 
   nvf.theme.ayu-mirage =
     { pkgs, ... }:
