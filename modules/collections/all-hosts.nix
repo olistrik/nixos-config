@@ -85,11 +85,12 @@
         nxs = "nix-search";
       };
 
-      # This file is the single source of truth for user SSH commit signers.
+      # Public keys come from the shared identity registry.
       # Hestia's automated configuration verifier consumes its store path too.
       environment.etc."git/allowed_signers".text = ''
-        strik@olii.nl namespaces="git" sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIMcvHSxN1mFGgB6r19eHIqGKvhNOwddvVe43NwhKHmWzAAAABHNzaDo=
-        strik@olii.nl namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHwyuoI18ZEoo/c38XvI6HwvRlxigxd3lPzshi7RtVw2
+        strik@olii.nl namespaces="git" ${my.pubkey.yubikey.personal.ssh}
+        strik@olii.nl namespaces="git" ${my.pubkey.kvasir.oli.ssh}
+        strik@olii.nl namespaces="git" ${my.pubkey.thoth.oli.ssh}
       '';
 
       environment.etc."gitconfig".text = ''

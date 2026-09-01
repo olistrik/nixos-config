@@ -1,18 +1,19 @@
 let
-  readRecipient = file: builtins.replaceStrings [ "\n" ] [ "" ] (builtins.readFile file);
-
-  thoth = readRecipient ./secrets/recipients/thoth.pub;
-  hestia = readRecipient ./secrets/recipients/hestia.pub;
+  pubkey = import ./pubkeys.nix;
+  thoth = pubkey.thoth.host.age;
+  hestia = pubkey.hestia.host.age;
+  kvasir = pubkey.kvasir.host.age;
 in
 {
   # Add encrypted secret files here. For example:
   #
-  # "secrets/example.age".publicKeys = [ thoth ];
-  # "secrets/shared.age".publicKeys = [ thoth hestia ];
+  # "secrets/example.age".publicKeys = [ pubkey.thoth.host.age ];
+  # "secrets/shared.age".publicKeys = [ pubkey.thoth.host.age pubkey.hestia.host.age ];
   "secrets/oli-password.age" = {
     publicKeys = [
       thoth
       hestia
+      kvasir
     ];
     armor = true;
   };

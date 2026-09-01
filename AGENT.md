@@ -26,6 +26,7 @@ my = {
 | `./modules.nix` | Custom modules, shard-imported from `./modules/` |
 | `./packages.nix` | Custom packages, callPackage'd from `./packages/` |
 | `./hosts.nix` | NixOS host configs via `my.lib.mkHostsWith` |
+| `./images.nix` | Standalone bootable image derivations |
 
 ## Module system
 
@@ -131,5 +132,5 @@ The Alacritty wrapper is at `modules/wrappers/alacritty.nix`. It has a `wrappers
 - Wants aliases only defined if the target program exists at runtime
 - Prefers `lib.getExe` over raw `${pkgs.foo}/bin/foo`
 - Nix style: uses let-bindings for tool paths in zshrc content
-- Machines: `thoth` and `hestia` (both NixOS), `muninn` (ubuntu + Nix), `huginn` (rpi debian + Nix).
+- Machines: `thoth`, `hestia`, and `kvasir` (NixOS), `muninn` (ubuntu + Nix), `huginn` (rpi debian + Nix).
 - `muninn` and `huginn` use `my.pkgs` but are otherwise not described by this repo.

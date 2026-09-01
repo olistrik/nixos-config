@@ -45,10 +45,17 @@ providing the `my` context to said outputs. This is how `lib` functions and
 ## [hosts.nix](./hosts.nix)
 
 Returns an attrset of `nixosSystems`, one for each machine. Currently defines
-`thoth` and `hestia`. Machines are built using `my.lib.mkHostsWith`, which
-bootstraps `lib.evalConfig` with `my` included via the specialArgs,
-automatically imports the modules `nixos.hosts.all` and
+`thoth`, `hestia`, and `kvasir`. Machines are built using
+`my.lib.mkHostsWith`, which bootstraps `lib.evalConfig` with `my` included via
+the specialArgs, automatically imports the modules `nixos.hosts.all` and
 `nixos.hosts.<hostname>`, and sets `networking.hostName` to `<hostname>`.
+
+## [images.nix](./images.nix)
+
+Returns independently configured bootable images. These do not use the host
+constructor or import `nixos.hosts.all`. The `installer` image is a minimal
+NixOS installation CD with Git and the minimal Neovim wrapper, and can be built
+with `nix-build images.nix -A installer`.
 
 ## [lib.nix](./lib.nix)
 

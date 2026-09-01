@@ -8,4 +8,5 @@ in
 mkHosts {
   thoth = { };
   hestia = { };
+  kvasir = { };
 }
