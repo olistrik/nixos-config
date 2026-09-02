@@ -1,6 +1,6 @@
 {
         nixos.hosts.kvasir =
-                { my, ... }:
+                { my, pkgs, ... }:
                 {
                         imports = with my.modules.nixos; [
                                 ./_hardware-configuration.nix
@@ -21,6 +21,10 @@
 
                         age.identityPaths = [ "/persist/age/kvasir-identity" ];
                         environment.shellAliases.agenix = "agenix -i /persist/age/kvasir-identity";
+
+                        environment.systemPackages = with pkgs; [
+                                slack
+                        ];
 
                         networking.hostId = "007f0200";
                         system.stateVersion = "26.05";
