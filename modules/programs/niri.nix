@@ -3,32 +3,19 @@
     { my, pkgs, ... }:
     {
       imports = with my.modules.nixos.programs; [
-        way-displays # TODO: niri's own display management should be enough now.
-        xwayland-satellite
         swayidle
         swaybg
       ];
 
-      programs.niri.enable = true;
-
-      xdg.portal = {
-        config.niri = {
-          # Fix for chromium based apps getting upset because I don't use Nautilus
-          "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
-
-          # Apparently messing with this unsets the Niri defaults. Not sure why.
-          # https://github.com/YaLTeR/niri/blob/7cfecf4b1b9b8c11c80061fb31926f888228499d/resources/niri-portals.conf#L3
-          default = [
-            "gnome"
-            "gtk"
-          ];
-          "org.freedesktop.impl.portal.Access" = [ "gtk" ];
-          "org.freedesktop.impl.portal.Notification" = [ "gtk" ];
-          "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
-        };
+      programs.niri = {
+        enable = true;
+        useNautilus = false;
       };
 
       environment.systemPackages = with pkgs; [
+        # X11 compatibility; niri starts and manages it automatically.
+        xwayland-satellite
+
         # Theming
         adwaita-icon-theme
 
@@ -45,38 +32,8 @@
         walker
 
         # auth agent. plasma-polkit-agent. Can be started with systemd.
-        # provided by niri-flake
         # pantheon.pantheon-agent-polkit
       ];
-
-      # done by niri-flake
-      # security.pam.services.swaylock = { };
-
-      # Provided by niri-flake?
-      # xdg.portal = {
-      #   enable = true;
-      #   xdgOpenUsePortal = true;
-      #   extraPortals = with pkgs; [
-      #     xdg-desktop-portal-gtk
-      #     xdg-desktop-portal-gnome
-      #   ];
-      #
-      #   config = {
-      #     common = {
-      #       default = [ "gtk" ];
-      #     };
-      #     niri = {
-      #       default = [ "gnome" "gtk" ];
-      #       "org.freedesktop.impl.portal.Secret" = [
-      #         "gnome-keyring"
-      #       ];
-      #     };
-      #   };
-      # };
-      #
-      # services.gnome.gnome-keyring = {
-      #   enable = true;
-      # };
 
       services.greetd = {
         enable = true;
