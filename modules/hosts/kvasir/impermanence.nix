@@ -21,6 +21,8 @@
           "/var/lib/systemd/coredump"
           "/var/lib/bluetooth"
           "/var/lib/tailscale"
+          "/var/lib/clamav"
+          "/var/lib/libvirt"
         ];
         files = [
           "/etc/machine-id"
