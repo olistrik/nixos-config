@@ -40,23 +40,27 @@
             enable = true;
             lsp.servers = [ "ty" ];
           };
+
+          terraform = {
+            enable = true;
+          };
         };
 
         luaConfigRC = {
           lsp-hover-highlight = entryAnywhere /* lua */ ''
             vim.api.nvim_create_autocmd("LspAttach", {
-            	callback = function(args)
-            		local client = vim.lsp.get_client_by_id(args.data.client_id)
-            		if client:supports_method("textDocument/documentHighlight") then
-            			vim.cmd([[
+                    callback = function(args)
+                            local client = vim.lsp.get_client_by_id(args.data.client_id)
+                            if client:supports_method("textDocument/documentHighlight") then
+                                    vim.cmd([[
                     augroup lsp_document_highlight
                       autocmd! * <buffer>
                       autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
                       autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
                     augroup END
                   ]])
-            		end
-            	end,
+                            end
+                    end,
             })
           '';
         };
