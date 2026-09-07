@@ -9,6 +9,8 @@
     {
       imports = with my.modules.nixos; [
         system.theme
+
+        programs.firefox
       ];
 
       # programs that don't need "much" configuration.

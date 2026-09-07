@@ -20,7 +20,6 @@
         vscode
 
         # browsers
-        firefox # Fuck you Google.
         thunderbird
       ];
     };
