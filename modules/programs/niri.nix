@@ -1,6 +1,11 @@
 {
   nixos.programs.niri =
-    { my, pkgs, ... }:
+    {
+      my,
+      lib,
+      pkgs,
+      ...
+    }:
     {
       imports = with my.modules.nixos.programs; [
         swayidle
@@ -45,6 +50,10 @@
           default_session = initial_session;
         };
       };
+
+      # Start greetd immediately instead of waiting for systemd's boot job
+      # queue to become idle, which leaves the console visible for ~5 seconds.
+      systemd.services.greetd.serviceConfig.Type = lib.mkForce "simple";
 
       programs.dconf = {
         enable = true;
