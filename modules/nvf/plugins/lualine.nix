@@ -1,6 +1,9 @@
 {
   nvf.config.lualine =
-    { config, ... }:
+    { config, lib, ... }:
+    let
+      inherit (lib.generators) mkLuaInline;
+    in
     {
       config.vim = {
         statusline.lualine = {
@@ -14,8 +17,8 @@
           #   right = ")";
           # };
 
-          activeSection = {
-            a = [
+          setupOpts.sections = {
+            lualine_a = map mkLuaInline [
               /* lua */ ''
                 {
                   "mode",
@@ -34,7 +37,7 @@
                 }
               ''
             ];
-            b = [
+            lualine_b = map mkLuaInline [
               /* lua */ ''
                 {
                   "filetype",
@@ -58,7 +61,7 @@
                 }
               ''
             ];
-            c = [
+            lualine_c = map mkLuaInline [
               /* lua */ ''
                 {
                   "diff",
@@ -74,7 +77,7 @@
                 }
               ''
             ];
-            x = [
+            lualine_x = map mkLuaInline [
               /* lua */ ''
                 {
                   -- Lsp server name
@@ -120,7 +123,7 @@
                 }
               ''
             ];
-            y = [
+            lualine_y = map mkLuaInline [
               /* lua */ ''
                 {
                   "",
@@ -144,7 +147,7 @@
                 }
               ''
             ];
-            z = [
+            lualine_z = map mkLuaInline [
               /* lua */ ''
                 {
                   "",
