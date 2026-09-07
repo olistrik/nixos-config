@@ -1,9 +1,13 @@
 {
   nixos.hosts.hestia =
-    { config, ... }:
+    { config, pkgs, my, ... }:
+    let
+      unstable = import my.sources.unstable { inherit (pkgs) system; config.allowUnfree = true; };
+    in
     {
       services.immich = {
         enable = true;
+        package = unstable.immich;
       };
 
       # TODO: assumes caddy? not that big of a deal though.
