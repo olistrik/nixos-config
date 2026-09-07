@@ -17,6 +17,19 @@
           alias soy="nohup sioyek $@ > /dev/null 2>&1"
         fi
 
+        #################################
+        ## Nix
+
+        if (( $+commands[nix-prefetch-url] )); then
+          prefetch() {
+            if [ $# -ne 1 ]; then
+              echo "prefetch <url>"
+              return 1
+            fi
+            nix-prefetch-url --type sha256 "$1" | xargs nix hash convert --hash-algo sha256 --to sri
+          }
+        fi
+
         if (( $+commands[docker-compose] )); then
           alias dc="docker-compose"
           alias dcu="docker-compose up -d"
