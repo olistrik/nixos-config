@@ -28,12 +28,19 @@
           "/etc/NetworkManager/system-connections"
           "/var/log"
           "/var/lib/nixos"
-          "/var/lib/systemd/coredump"
+          # The whole directory, not just `coredump`: it also holds
+          # credential.secret (see below), which systemd opens with
+          # O_NOFOLLOW and refuses to read through impermanence's
+          # symlink-based `files` persistence ("Too many levels of
+          # symbolic links"), so it needs a real bind mount instead.
+          "/var/lib/systemd"
           "/var/lib/bluetooth"
           "/var/lib/tailscale"
           "/var/lib/clamav"
           "/var/lib/libvirt"
           "/var/lib/logrotate"
+          "/var/lib/fprint"
+          "/var/lib/sbctl"
         ];
         files = [
           "/etc/machine-id"

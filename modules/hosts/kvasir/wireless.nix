@@ -15,6 +15,10 @@
       };
     };
 
+    boot.extraModprobeConfig = ''
+      options rtw89_pci disable_aspm_l1=1 disable_aspm_l1ss=1 disable_clkreq=1
+    '';
+
     # Configure audio priority (WIP: The wireplumber docs are really confusing.)
     # TODO: make this cleaner.
     # headphones ? bluetooth > HDMI > Speaker

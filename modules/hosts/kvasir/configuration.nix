@@ -5,6 +5,10 @@
                         imports = with my.modules.nixos; [
                                 ./_hardware-configuration.nix
 
+                                hardware.touchpad
+                                hardware.keyboard
+                                hardware.fingerprint
+
                                 collections.personal
                                 collections.workstation
 
@@ -30,6 +34,8 @@
                                 slack
 
                                 firefoxpwa
+
+                                nodejs
 
                                 # (my.pkgs.mkPakeApp {
                                 #         url = "https://researchable.simplicate.app";
