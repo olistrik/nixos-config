@@ -55,7 +55,8 @@
       "submodules": false,
       "revision": "7dd26afe2a397ffbdf1c566be79ce2e0174c3e1c",
       "url": null,
-      "hash": "sha256-i3XDw13UF19zTYvDGzcdNFIV65ZTPkCpXFXqUs9OB7o="
+      "hash": "sha256-i3XDw13UF19zTYvDGzcdNFIV65ZTPkCpXFXqUs9OB7o=",
+      "frozen": true
     },
     "impermanence": {
       "type": "Git",
