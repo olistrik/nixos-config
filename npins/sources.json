@@ -113,15 +113,15 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "e88c449105c6aafa460196d3cbd16718655aee0f",
-      "url": "https://github.com/BirdeeHub/nix-wrapper-modules/archive/e88c449105c6aafa460196d3cbd16718655aee0f.tar.gz",
-      "hash": "sha256-oNMrijfyaoRjjWhxHNFSBYyEB4u/zb/AxoKewC56LvE="
+      "revision": "1db3c116a6aa61823f8d8f3c47c306846428fc54",
+      "url": "https://github.com/BirdeeHub/nix-wrapper-modules/archive/1db3c116a6aa61823f8d8f3c47c306846428fc54.tar.gz",
+      "hash": "sha256-7xWS16u13YGlRNKWaAPzRbEyh4OLOXJe31k7h4AnXNU="
     },
     "nixpkgs": {
       "type": "Channel",
       "name": "nixos-26.05",
-      "url": "https://releases.nixos.org/nixos/26.05/nixos-26.05.9227.c25784012c99/nixexprs.tar.xz",
-      "hash": "sha256-aVla+xR1lotA4iEMo6ltSr5oKVvWxBZ8Gc9KjbwxJq8="
+      "url": "https://releases.nixos.org/nixos/26.05/nixos-26.05.9729.c3eea5b2156d/nixexprs.tar.xz",
+      "hash": "sha256-it+7kNGnOOHBCEnl4SfZ7QtfGziH3EryzHqwvJpjAfg="
     },
     "nvf": {
       "type": "Git",
@@ -132,9 +132,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "5e4f212f8720c17fdd06f5c57591f251aff67453",
-      "url": "https://github.com/notashelf/nvf/archive/5e4f212f8720c17fdd06f5c57591f251aff67453.tar.gz",
-      "hash": "sha256-ozY1uUiOLXt3KLpUQwu8Y1DG+lKa53Gke7NW9gvUu3I="
+      "revision": "2d6b480abfa9fcf84841e62c27922bfa3f3d0d2b",
+      "url": "https://github.com/notashelf/nvf/archive/2d6b480abfa9fcf84841e62c27922bfa3f3d0d2b.tar.gz",
+      "hash": "sha256-C9GsjXostGh50d62SYEXVJOSDTwk7RjAumJmwzkJKEY="
     },
     "tsidp": {
       "type": "Git",
@@ -152,8 +152,8 @@
     "unstable": {
       "type": "Channel",
       "name": "nixos-unstable",
-      "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1068089.c043004d1c69/nixexprs.tar.xz",
-      "hash": "sha256-PRK1fSEiAcO29DkUoOlsVLGYRK3h1YKVr+qQJB0VcYQ="
+      "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1073009.ef34387ddd75/nixexprs.tar.xz",
+      "hash": "sha256-3i80JnZ9pZ7tWReb/Sqpc32cfzffCu8TWLnbnH0hN9c="
     }
   },
   "version": 7
