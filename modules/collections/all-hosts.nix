@@ -23,11 +23,9 @@
       nix.settings = {
         substituters = [
           "https://cache.olii.nl"
-          "https://cache.nixos.org"
         ];
         trusted-public-keys = [
-          "cache.olii.nl-1:/eobpj1e29xJJ4r2ixYFR4E0t0zNDqu2g9/3ryaRa60="
-          "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+          "cache.olii.nl:/eobpj1e29xJJ4r2ixYFR4E0t0zNDqu2g9/3ryaRa60="
         ];
 
         connect-timeout = 3;
