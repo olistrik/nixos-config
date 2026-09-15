@@ -68,7 +68,7 @@
           alias gra="git rebase --abort"
           alias gri="git rebase -i"
           alias gp="git push"
-          alias gpf="git push --force-with-lease"
+          alias gpf="git pushf"
 
           git-chain-from() {
             if [ $# -ne 1 ]; then

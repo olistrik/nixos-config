@@ -91,19 +91,23 @@
         strik@olii.nl namespaces="git" ${my.pubkey.thoth.oli.ssh}
       '';
 
-      environment.etc."gitconfig".text = ''
-        [gpg]
-          format = ssh
-        [gpg "ssh"]
-          allowedSignersFile = /etc/git/allowed_signers
-      '';
+      programs.git = {
+        enable = true;
+        config = {
+          gpg.format = "ssh";
+          gpg."ssh".allowedSignersFile = "/etc/git/allowed_signers";
+          commit.gpgsign = true;
+          push.autoSetupRemote = true;
+          push.useForceIfIncludes = true;
+          alias.pushf = "push --force-with-lease --force-if-includes";
+        };
+      };
 
       environment.systemPackages = with pkgs; [
         # Version Control
         npins
 
         # Fetchers
-        git
         wget
         curl
         sshfs
