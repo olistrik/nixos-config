@@ -1,6 +1,11 @@
 {
   nixos.hosts.hestia =
-    { lib, pkgs, config, ... }:
+    {
+      lib,
+      pkgs,
+      config,
+      ...
+    }:
     let
       repositoryUrl = "https://github.com/olistrik/nixos-config.git";
       pushUrl = "git@github.com:olistrik/nixos-config.git";
@@ -13,6 +18,7 @@
       systems = [
         "thoth"
         "hestia"
+        "kvasir"
       ];
 
       # This is the system-wide Git SSH trust policy, declared in
