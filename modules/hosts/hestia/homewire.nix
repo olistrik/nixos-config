@@ -8,6 +8,10 @@
     {
       imports = [ my.projects.homewire.nixosModules.default ];
 
+      environment.persistence."/persist".directories = [
+        "/var/lib/homewire"
+      ];
+
       age.secrets."homewire.env" = {
         owner = "homewire";
       };

@@ -8,6 +8,7 @@
       imports = with my.modules.nixos; [
         collections.server
         system.agenix
+        system.impermanence
       ];
 
       # Enable Hindsight API

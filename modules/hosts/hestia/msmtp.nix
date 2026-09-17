@@ -12,6 +12,10 @@
         "oli"
       ];
 
+      environment.persistence."/persist".directories = [
+        "/var/lib/msmtp"
+      ];
+
       age.secrets."msmtp-noreply.pass" = {
         owner = "msmtp";
         group = "msmtp";

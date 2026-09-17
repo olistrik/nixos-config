@@ -16,5 +16,9 @@
         #   local sameuser  all     peer        map=superuser_map
         # '';
       };
+
+      environment.persistence."/persist".directories = [
+        "/var/lib/postgresql"
+      ];
     };
 }

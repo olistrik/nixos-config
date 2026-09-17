@@ -21,6 +21,7 @@
                                 system.virtualisation
                                 system.agenix
                                 system.plymouth
+                                system.impermanence
                         ];
 
                         age.identityPaths = [ "/persist/age/kvasir-identity" ];

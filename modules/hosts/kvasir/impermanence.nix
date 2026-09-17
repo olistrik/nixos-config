@@ -1,53 +1,17 @@
 {
   nixos.hosts.kvasir =
+    { pkgs, ... }:
     {
-      my,
-      pkgs,
-      ...
-    }:
-    {
-      imports = [
-        (my.sources.impermanence + "/nixos.nix")
-      ];
-
-      fileSystems."/persist".neededForBoot = true;
-
-      # logrotate replaces its state file with a rename(), which fails with
-      # "Device or resource busy" if the state file itself is a bind mount
-      # (as it would be if persisted directly via `files`). Point it at a
-      # file inside a persisted directory instead, so the rename happens
-      # inside the mount rather than on top of it.
-      services.logrotate.extraArgs = [
-        "--state"
-        "/var/lib/logrotate/logrotate.status"
-      ];
-
       environment.persistence."/persist" = {
-        hideMounts = true;
         directories = [
-          "/etc/NetworkManager/system-connections"
-          "/var/log"
-          "/var/lib/nixos"
           # The whole directory, not just `coredump`: it also holds
           # credential.secret (see below), which systemd opens with
           # O_NOFOLLOW and refuses to read through impermanence's
           # symlink-based `files` persistence ("Too many levels of
           # symbolic links"), so it needs a real bind mount instead.
           "/var/lib/systemd"
-          "/var/lib/bluetooth"
-          "/var/lib/tailscale"
-          "/var/lib/clamav"
-          "/var/lib/libvirt"
-          "/var/lib/logrotate"
-          "/var/lib/fprint"
-          "/var/lib/sbctl"
-        ];
-        files = [
-          "/etc/machine-id"
         ];
       };
-
-      users.mutableUsers = false;
 
       boot.initrd.systemd.services.impermanence-btrfs-rollback = {
         description = "Restore the blank Btrfs root for impermanence";

@@ -1,71 +1,29 @@
 {
   nixos.hosts.hestia =
     {
-      my,
       lib,
       pkgs,
-      config,
       ...
     }:
     let
       snapshots = [ "zroot/local/root@blank" ];
     in
     {
-      imports = [
-        (my.sources.impermanence + "/nixos.nix")
-      ];
-
-      fileSystems."/persist".neededForBoot = true;
-
-      # logrotate replaces its state file with a rename(), which fails with
-      # "Device or resource busy" if the state file itself is a bind mount
-      # (as it would be if persisted directly via `files`). Point it at a
-      # file inside a persisted directory instead, so the rename happens
-      # inside the mount rather than on top of it.
-      services.logrotate.extraArgs = [
-        "--state"
-        "/var/lib/logrotate/logrotate.status"
-      ];
-
       environment.persistence."/persist" = {
-        hideMounts = true;
         directories = [
-          # system
-          "/var/log"
-          "/var/lib/nixos"
           "/var/lib/systemd/coredump"
-          "/var/lib/logrotate"
 
-          # services
-          "/var/lib/tailscale"
+          # shared TLS material for every caddy virtualHost on this host.
           "/var/lib/acme"
-          "/var/lib/nix-serve"
-          "/var/lib/private/tsidp"
-          "/var/lib/homewire"
 
-          # home assistant
-          "/var/lib/mosquitto"
-          "/var/lib/zigbee2mqtt"
-
-          # game servers
+          # WARN: these two modules aren't currently wired into
+          # nixos.hosts.hestia (see the WARN comments in their own files),
+          # so their persistence can't be colocated there without silently
+          # dropping it.
           "/var/lib/valheim"
           "/var/lib/palworld-server"
-
-          # storage servers
-          "/var/lib/immich"
-          "/var/lib/redis-immich"
-          "/var/lib/postgresql"
-          "/var/lib/nextcloud"
-          "/var/lib/redis-nextcloud"
-          "/var/lib/hindsight"
-
-          # msmtp
-          "/var/lib/msmtp"
         ];
         files = [
-          # machine-id
-          "/etc/machine-id"
-
           # ssh host keys
           "/etc/ssh/ssh_host_ed25519_key"
           "/etc/ssh/ssh_host_ed25519_key.pub"
@@ -78,10 +36,6 @@
           # or just directly bind them.
         ];
       };
-
-      # TODO: move somewhere better; or fix impermanence so
-      # users can be mutable. /etc/shadow I think.
-      users.mutableUsers = false;
 
       boot.zfs.forceImportRoot = true;
       boot.initrd.systemd.services.impermanence-zfs-rollback = {

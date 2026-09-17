@@ -25,6 +25,10 @@
         };
       };
 
+      environment.persistence."/persist".directories = [
+        "/var/lib/private/tsidp"
+      ];
+
       services.caddy.virtualHosts = {
         ${cfg.settings.serverURL} = {
           handler = ''

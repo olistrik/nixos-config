@@ -7,6 +7,11 @@
         443
       ];
 
+      environment.persistence."/persist".directories = [
+        "/var/lib/mosquitto"
+        "/var/lib/zigbee2mqtt"
+      ];
+
       age.secrets = {
         "mosquitto-zigbee.pass" = {
           owner = "mosquitto";

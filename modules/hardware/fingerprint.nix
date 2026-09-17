@@ -78,6 +78,10 @@
       };
       services.udev.packages = [ pkgs.libfprint ];
 
+      environment.persistence."/persist".directories = [
+        "/var/lib/fprint"
+      ];
+
       # sudo's PAM service always exists; swaylock's is declared by the niri
       # module (nixpkgs' wayland-session.nix). Set fprintAuth explicitly on
       # both rather than relying on its default (which just mirrors

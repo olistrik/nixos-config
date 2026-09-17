@@ -60,6 +60,9 @@
       };
 
       config = mkIf cfg.enable {
+        environment.persistence."/persist".directories = [
+          "/var/lib/hindsight"
+        ];
 
         users.users.hindsight = {
           isSystemUser = true;
@@ -93,7 +96,7 @@
           };
           script = ''
             				${pkgs.postgresql}/bin/psql -d hindsight -c "CREATE EXTENSION IF NOT EXISTS vector;"
-            			'';
+            				'';
         };
 
         # Systemd service
@@ -160,7 +163,6 @@
             reverse_proxy http://${cfg.host}:${toString cfg.port}
           '';
         };
-
       };
     };
 }

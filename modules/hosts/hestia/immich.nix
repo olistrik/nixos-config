@@ -10,6 +10,11 @@
         package = unstable.immich;
       };
 
+      environment.persistence."/persist".directories = [
+        "/var/lib/immich"
+        "/var/lib/redis-immich"
+      ];
+
       # TODO: assumes caddy? not that big of a deal though.
       services.caddy.virtualHosts = {
         "immich.olii.nl".handler = with config.services.immich; ''

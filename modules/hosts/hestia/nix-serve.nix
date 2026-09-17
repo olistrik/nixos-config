@@ -20,6 +20,10 @@
         secretKeyFile = config.age.secrets."nix-serve-key.pem".path;
       };
 
+      environment.persistence."/persist".directories = [
+        "/var/lib/nix-serve"
+      ];
+
       services.caddy.virtualHosts = {
         "cache.olii.nl".handler = ''
 

@@ -21,6 +21,7 @@
 
         system.virtualisation
         system.agenix
+        system.impermanence
       ];
 
       # TODO: put somewhere useful.

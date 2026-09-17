@@ -8,5 +8,9 @@
                         daemon.enable = true;
                         updater.enable = true;
                 };
+
+                environment.persistence."/persist".directories = [
+                        "/var/lib/clamav"
+                ];
         };
 }

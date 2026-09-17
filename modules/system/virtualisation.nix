@@ -15,5 +15,10 @@
       virtualisation.libvirtd.enable = true;
 
       users.users.oli.extraGroups = [ "libvirtd" ];
+
+      environment.persistence."/persist".directories = [
+        "/var/lib/docker"
+        "/var/lib/libvirt"
+      ];
     };
 }

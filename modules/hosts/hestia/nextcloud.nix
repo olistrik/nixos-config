@@ -48,6 +48,11 @@
       #   requires = lib.mkForce [ "postgresql.service" ];
       # };
 
+      environment.persistence."/persist".directories = [
+        "/var/lib/nextcloud"
+        "/var/lib/redis-nextcloud"
+      ];
+
       users.groups.nextcloud.members = lib.mkForce [ "nextcloud" ];
       services.nginx.enable = lib.mkOverride 999 false;
       services.phpfpm.pools.nextcloud.settings."listen.owner" = config.services.caddy.user;

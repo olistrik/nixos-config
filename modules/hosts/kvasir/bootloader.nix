@@ -18,6 +18,10 @@
         pkgs.sbctl
       ];
 
+      environment.persistence."/persist".directories = [
+        "/var/lib/sbctl"
+      ];
+
       boot.loader.systemd-boot.enable = lib.mkForce false;
       boot.loader.efi.canTouchEfiVariables = true;
       boot.loader.efi.efiSysMountPoint = "/boot/efi";
