@@ -16,7 +16,6 @@
           ## Magic Shit
 
           setopt correct                   # Auto correct mistakes
-          setopt extendedglob              # Extended globbing. Allows using regular expressions with *
           setopt nocaseglob                # Case insensitive globbing
           # setopt rcexpandparam             # Array expension with parameters
           # setopt nocheckjobs               # Don't warn about running processes when exiting
@@ -53,8 +52,9 @@
             eval "$(direnv hook zsh)"
           fi
 
-          # TODO: only if it exists.
-          source $HOME/.zshrc
+          if [ -f "$HOME/.zshrc" ]; then
+            source "$HOME/.zshrc"
+          fi
         '';
 
         enableCompletion = true;

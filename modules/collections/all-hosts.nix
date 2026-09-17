@@ -12,7 +12,6 @@
       imports = with my.modules.nixos.programs; [
         neovim
         # zsh
-        zoxide
         # tmux # broken
         direnv
         nh

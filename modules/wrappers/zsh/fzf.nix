@@ -43,6 +43,10 @@
             source "$(${fzf-share})/key-bindings.zsh"
             source "$(${fzf-share})/completion.zsh"
           '';
+
+        # key-bindings.zsh/completion.zsh call bare `fzf` (and `fzf-tmux`),
+        # not an embedded path, so it needs to be on PATH at runtime.
+        runtimePkgs = [ pkgs.fzf ];
       };
     };
 }
