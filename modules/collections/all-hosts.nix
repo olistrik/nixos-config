@@ -12,7 +12,6 @@
       imports = with my.modules.nixos.programs; [
         neovim
         # zsh
-        # tmux # broken
         direnv
         nh
       ];
@@ -126,7 +125,6 @@
         tree
         parallel
         ripgrep
-        tmux
         mosh
         my.pkgs.wrapped.zellij
 
