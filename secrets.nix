@@ -25,6 +25,13 @@ in
     armor = true;
   };
 
+  "secrets/dragonwilds-server.env.age" = {
+    publicKeys = [
+      hestia
+    ];
+    armor = true;
+  };
+
   "secrets/mosquitto-zigbee.pass.age" = {
     publicKeys = [
       hestia
