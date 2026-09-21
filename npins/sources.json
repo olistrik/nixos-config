@@ -99,10 +99,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "2.0.2",
-      "revision": "1731201c3f9f68cb41a0583cfd4b050c947b68cf",
-      "url": "https://api.github.com/repos/Mic92/nix-fast-build/tarball/refs/tags/2.0.2",
-      "hash": "sha256-bD5s8NbVSQevMEA7ewS4S5wkxnfat/QV0WRjGK1Kx6o="
+      "version": "2.0.3",
+      "revision": "d252e56a121a6090d8396d3b601c64aca3d71f8f",
+      "url": "https://api.github.com/repos/Mic92/nix-fast-build/tarball/refs/tags/2.0.3",
+      "hash": "sha256-L4HfADUq4Imq1LnvmjBPFBEAZAIKD9Pnj6ExRkVqHC4="
     },
     "nix-wrapper-modules": {
       "type": "Git",
@@ -120,8 +120,8 @@
     "nixpkgs": {
       "type": "Channel",
       "name": "nixos-26.05",
-      "url": "https://releases.nixos.org/nixos/26.05/nixos-26.05.9729.c3eea5b2156d/nixexprs.tar.xz",
-      "hash": "sha256-it+7kNGnOOHBCEnl4SfZ7QtfGziH3EryzHqwvJpjAfg="
+      "url": "https://releases.nixos.org/nixos/26.05/nixos-26.05.10304.6d663c0533ff/nixexprs.tar.xz",
+      "hash": "sha256-lIL3uDaS4Q9Ks6klLrBlDr+XS71sbjMJFSipIp2yPjs="
     },
     "nvf": {
       "type": "Git",
@@ -132,9 +132,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "2d6b480abfa9fcf84841e62c27922bfa3f3d0d2b",
-      "url": "https://github.com/notashelf/nvf/archive/2d6b480abfa9fcf84841e62c27922bfa3f3d0d2b.tar.gz",
-      "hash": "sha256-C9GsjXostGh50d62SYEXVJOSDTwk7RjAumJmwzkJKEY="
+      "revision": "85bf39cd0409ad8a7fa5b3ad0d29e89e9da97a0e",
+      "url": "https://github.com/notashelf/nvf/archive/85bf39cd0409ad8a7fa5b3ad0d29e89e9da97a0e.tar.gz",
+      "hash": "sha256-6GDssza3F+ukpUujSuTL50vW5AHaoG+4vjsDgWqRyeQ="
     },
     "tsidp": {
       "type": "Git",
@@ -152,8 +152,8 @@
     "unstable": {
       "type": "Channel",
       "name": "nixos-unstable",
-      "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1073009.ef34387ddd75/nixexprs.tar.xz",
-      "hash": "sha256-3i80JnZ9pZ7tWReb/Sqpc32cfzffCu8TWLnbnH0hN9c="
+      "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1076192.20b1ddd1aa5a/nixexprs.tar.xz",
+      "hash": "sha256-BMbikTjbh5H7ac/OjwGoJrlooh4dgNqhs51ABM83M7g="
     }
   },
   "version": 7
