@@ -18,9 +18,12 @@
 
       age.identityPaths = [ "/persist/age/hestia-identity" ];
 
+      # Deliberately not "weekly" (Monday 00:00): that collides with the
+      # build-all-systems timer, and running both against the store at once
+      # can GC a source path npins just fetched mid-evaluation.
       nix.gc = {
         automatic = true;
-        dates = "weekly";
+        dates = "Thu 03:00";
         options = "--delete-older-than 30d";
       };
 
