@@ -4,7 +4,7 @@
     { my, pkgs, ... }:
     let
       unstable = import my.sources.unstable {
-        inherit (pkgs) system;
+        system = pkgs.stdenv.hostPlatform.system;
         config.allowUnfree = true;
       };
     in

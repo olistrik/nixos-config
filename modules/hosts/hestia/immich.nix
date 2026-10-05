@@ -2,7 +2,7 @@
   nixos.hosts.hestia =
     { config, pkgs, my, ... }:
     let
-      unstable = import my.sources.unstable { inherit (pkgs) system; config.allowUnfree = true; };
+      unstable = import my.sources.unstable { system = pkgs.stdenv.hostPlatform.system; config.allowUnfree = true; };
     in
     {
       services.immich = {

@@ -8,7 +8,7 @@
       config.vim = {
         statusline.lualine = {
           enable = true;
-          sectionSeparator = {
+          setupOpts.options.section_separators = {
             left = "";
             right = "";
           };
