@@ -45,6 +45,19 @@
       "url": "https://api.github.com/repos/NixOS/flake-compat/tarball/v1.1.0",
       "hash": "sha256-NeCCThCEP3eCl2l/+27kNNK7QrwZB1IJCrXfrbv5oqU="
     },
+    "glitchpaper": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "olistrik",
+        "repo": "glitch-paper"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "8fc951a649e54ff0f1255fa65e12c07a6bb5e04a",
+      "url": "https://github.com/olistrik/glitch-paper/archive/8fc951a649e54ff0f1255fa65e12c07a6bb5e04a.tar.gz",
+      "hash": "sha256-Bl5NiKHVOZbtiveQ0FN1KLhZbOhEc/N87EY6U1iGDrs="
+    },
     "homewire": {
       "type": "Git",
       "repository": {

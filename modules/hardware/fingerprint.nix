@@ -83,28 +83,30 @@
       ];
 
       # sudo's PAM service always exists; swaylock's is declared by the niri
-      # module (nixpkgs' wayland-session.nix). Set fprintAuth explicitly on
-      # both rather than relying on its default (which just mirrors
+      # module (nixpkgs' wayland-session.nix) and swaylock-plugin's by the
+      # glitchpaper module. Set fprintAuth explicitly on each rather than
+      # relying on its default (which just mirrors
       # services.fprintd.enable), so enabling the fprintd service doesn't
       # silently opt every future PAM service into fingerprint auth too.
-      security.pam.services = {
-        sudo.fprintAuth = true;
-
-        swaylock = {
+      security.pam.services =
+        {
+          sudo.fprintAuth = true;
+        }
+        // lib.genAttrs [ "swaylock" "swaylock-plugin" ] (name: {
           fprintAuth = true;
-          # swaylock re-authenticates on every keystroke, so with fprintd's
-          # default order (auth'd first) a pending fingerprint scan blocks
-          # the password field from responding at all. Putting pam_unix
-          # first (with nullok, since an empty first attempt shouldn't
-          # match against an unset password) keeps typing responsive, and
-          # fprintd is still tried as a `sufficient` fallback. `rules.*` is
-          # nixpkgs' experimental per-rule override knob (may need
-          # adjusting on a nixpkgs bump if its shape changes).
+          # swaylock (and its swaylock-plugin fork) re-authenticates on every
+          # keystroke, so with fprintd's default order (auth'd first) a
+          # pending fingerprint scan blocks the password field from
+          # responding at all. Putting pam_unix first (with nullok, since an
+          # empty first attempt shouldn't match against an unset password)
+          # keeps typing responsive, and fprintd is still tried as a
+          # `sufficient` fallback. `rules.*` is nixpkgs' experimental
+          # per-rule override knob (may need adjusting on a nixpkgs bump if
+          # its shape changes).
           rules.auth = {
-            unix.order = config.security.pam.services.swaylock.rules.auth.fprintd.order - 10;
+            unix.order = config.security.pam.services.${name}.rules.auth.fprintd.order - 10;
             unix.settings.nullok = lib.mkForce true;
           };
-        };
-      };
+        });
     };
 }

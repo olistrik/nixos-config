@@ -10,6 +10,7 @@
       imports = with my.modules.nixos.programs; [
         swayidle
         swaybg
+        glitchpaper
       ];
 
       programs.niri = {
