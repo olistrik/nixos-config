@@ -12,7 +12,7 @@
     {
       services.nextcloud = {
         enable = true;
-        package = pkgs.nextcloud34;
+        package = pkgs.nextcloud35;
         hostName = "cloud.olii.nl";
         https = true;
         database.createLocally = true;
