@@ -494,10 +494,28 @@
               fi
 
               read -r BASE EXPECTED_DIFF_HASH STATUS <"$PUBLISH_REQUEST"
-              test "$(git_safe rev-parse HEAD)" = "$BASE"
               ${verifyCommit} "$REPOSITORY" "$BASE"
 
-              ACTUAL_DIFF_HASH="$(git_safe diff --binary HEAD -- npins | sha256sum | cut -d' ' -f1)"
+              # A previous run may have committed and then failed before the
+              # push. Resume from that commit instead of recommitting, but only
+              # if it is a bot commit on top of BASE containing exactly the
+              # pin diff that was built.
+              RESUMING=0
+              if [[ "$(git_safe rev-parse HEAD)" != "$BASE" ]]; then
+                test "$(git_safe rev-parse HEAD^)" = "$BASE"
+                ${verifyCommit} "$REPOSITORY" HEAD --require-bot
+                if [[ -n "$(git_safe status --porcelain)" ]]; then
+                  echo "refusing to resume with a dirty working tree" >&2
+                  exit 1
+                fi
+                ACTUAL_DIFF_HASH="$(git_safe diff --binary "$BASE" HEAD -- npins | sha256sum | cut -d' ' -f1)"
+                CHANGED_PATHS="$(git_safe diff --name-only "$BASE" HEAD)"
+                RESUMING=1
+              else
+                ACTUAL_DIFF_HASH="$(git_safe diff --binary HEAD -- npins | sha256sum | cut -d' ' -f1)"
+                CHANGED_PATHS="$(git_safe status --short | sed 's/^...//')"
+              fi
+
               if [[ "$ACTUAL_DIFF_HASH" != "$EXPECTED_DIFF_HASH" ]]; then
                 echo "refusing to publish a pin diff changed after the build" >&2
                 exit 1
@@ -511,20 +529,24 @@
                     exit 1
                     ;;
                 esac
-              done < <(git_safe status --short | sed 's/^...//')
+              done <<<"$CHANGED_PATHS"
 
-              git_safe checkout -B npins-update "$BASE"
-              git_safe add -- npins/sources.json npins/default.nix
-              git \
-                -c safe.directory="$REPOSITORY" \
-                -C "$REPOSITORY" \
-                -c core.hooksPath=/dev/null \
-                -c gpg.format=ssh \
-                -c gpg.ssh.program=${lib.getExe' pkgs.openssh "ssh-keygen"} \
-                -c user.name=Hestia \
-                -c user.email=nix-cache-builder@hestia \
-                -c user.signingKey="$SIGNING_KEY" \
-                commit -S -m 'chore: update npins'
+              if [[ "$RESUMING" == 1 ]]; then
+                echo "resuming publication of existing pin commit $(git_safe rev-parse HEAD)"
+              else
+                git_safe checkout -B npins-update "$BASE"
+                git_safe add -- npins/sources.json npins/default.nix
+                git \
+                  -c safe.directory="$REPOSITORY" \
+                  -C "$REPOSITORY" \
+                  -c core.hooksPath=/dev/null \
+                  -c gpg.format=ssh \
+                  -c gpg.ssh.program=${lib.getExe' pkgs.openssh "ssh-keygen"} \
+                  -c user.name=Hestia \
+                  -c user.email=nix-cache-builder@hestia \
+                  -c user.signingKey="$SIGNING_KEY" \
+                  commit -S -m 'chore: update npins'
+              fi
 
               COMMIT="$(git_safe rev-parse HEAD)"
               ${verifyCommit} "$REPOSITORY" "$COMMIT"
@@ -534,7 +556,10 @@
               if git_safe ls-remote --exit-code ${pushUrl} refs/heads/npins-update >/dev/null 2>&1; then
                 git_safe fetch ${pushUrl} +refs/heads/npins-update:refs/remotes/origin/npins-update
                 EXISTING_UPDATE="$(git_safe rev-parse refs/remotes/origin/npins-update)"
-                if ! ${verifyCommit} "$REPOSITORY" "$EXISTING_UPDATE" --require-bot; then
+                git_safe fetch ${pushUrl} +refs/heads/master:refs/remotes/origin/master
+                if git_safe merge-base --is-ancestor "$EXISTING_UPDATE" refs/remotes/origin/master; then
+                  echo "npins-update head $EXISTING_UPDATE is already merged into master; replacing it"
+                elif ! ${verifyCommit} "$REPOSITORY" "$EXISTING_UPDATE" --require-bot; then
                   echo "refusing to overwrite npins-update: existing head $EXISTING_UPDATE is not a bot commit" >&2
                   exit 1
                 fi
