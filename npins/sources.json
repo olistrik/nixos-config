@@ -13,6 +13,19 @@
       "url": "https://github.com/ryantm/agenix/archive/3daa710894355fa2fad8243380af373a2b4046ef.tar.gz",
       "hash": "sha256-n7wew722m1OTBT9DOIMxNX/NF4zfsSUABAO5eW3wikE="
     },
+    "ags-config": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "olistrik",
+        "repo": "ags-config"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "d6ec87cd814727618ab38b977eb427f09ecae589",
+      "url": "https://github.com/olistrik/ags-config/archive/d6ec87cd814727618ab38b977eb427f09ecae589.tar.gz",
+      "hash": "sha256-OCxm8ST5FlcKmLHw22Djtn7f/VZ+JBMZdbsfA32vSVA="
+    },
     "disko": {
       "type": "GitRelease",
       "repository": {
