@@ -11,6 +11,7 @@
         swayidle
         swaybg
         glitchpaper
+        walker
       ];
 
       programs.niri = {
@@ -35,7 +36,6 @@
 
         # notification daemon (mako, dunst, ags).
         mako # temp until I get ags doing this.
-        walker
 
         # auth agent. plasma-polkit-agent. Can be started with systemd.
         # pantheon.pantheon-agent-polkit
