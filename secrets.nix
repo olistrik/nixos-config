@@ -66,4 +66,11 @@ in
     ];
     armor = true;
   };
+
+  "secrets/mailflow.env.age" = {
+    publicKeys = [
+      hestia
+    ];
+    armor = true;
+  };
 }
