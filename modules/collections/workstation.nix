@@ -11,6 +11,7 @@
         system.theme
 
         programs.firefox
+        programs.udisks
       ];
 
       # programs that don't need "much" configuration.
@@ -23,6 +24,11 @@
           pavucontrol
           wf-recorder
           slurp
+
+          # k8n
+          kubectl
+          teleport
+          k9s
 
           # these are already configured.
           wrapped.alacritty

@@ -79,9 +79,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "7dd26afe2a397ffbdf1c566be79ce2e0174c3e1c",
+      "revision": "157e47f3ab8b9c7d901f35fe24cb99550f239a35",
       "url": null,
-      "hash": "sha256-i3XDw13UF19zTYvDGzcdNFIV65ZTPkCpXFXqUs9OB7o=",
+      "hash": "sha256-FCN3qpIxHvURCIou+WXoaFLuJYTf5YoCmud+LPdfWBQ=",
       "frozen": true
     },
     "impermanence": {
