@@ -29,6 +29,7 @@
           kubectl
           teleport
           k9s
+          doctl
 
           # these are already configured.
           wrapped.alacritty
