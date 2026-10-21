@@ -66,6 +66,10 @@
 
             config.extraConfig = mkMerge [
               (mkIf config.tailscale.auth ''
+                # Never trust client-supplied identity headers, even on the LAN bypass.
+                request_header -Tailscale-*
+                request_header -X-Homewire-*
+
                 ${optionalString config.tailscale.permitLocal ''
                   @lan remote_ip ${concatStringsSep " " config.tailscale.localNetworks}
                   handle @lan {
