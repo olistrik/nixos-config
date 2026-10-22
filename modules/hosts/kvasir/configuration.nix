@@ -34,6 +34,7 @@
                         environment.systemPackages = with pkgs; [
                                 slack
                                 glab
+                                gh
                                 jq
 
                                 firefoxpwa
