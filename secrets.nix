@@ -60,6 +60,20 @@ in
     armor = true;
   };
 
+  "secrets/homewire-zigbee-token.age" = {
+    publicKeys = [
+      hestia
+    ];
+    armor = true;
+  };
+
+  "secrets/homewire-esphome-token.age" = {
+    publicKeys = [
+      hestia
+    ];
+    armor = true;
+  };
+
   "secrets/nix-serve-key.pem.age" = {
     publicKeys = [
       hestia
