@@ -1,0 +1,293 @@
+// The house, assembled from the old homewire graph (local/house.json, lifted with
+// scripts/legacy-lift.mjs) and the hand written parts below. Regenerate with
+// `node local/assemble-house.mjs`.
+//
+// Still missing, because the events do not exist yet:
+//   - the living room dial's event names were checked on the real dial (see its profile).
+//   - the bathroom switch (an EnOcean PTM 215Z) has no profile in the sidecar yet. Its four
+//     buttons must be mapped onto "b1.button.press" .. "b4.button.release" (endpoints b1..b4
+//     of its profile) for the tap logic below to see them.
+//   - the ESPHome plugin has not been run against the real air conditioners yet; they are in
+//     the document but nothing is wired to them.
+{
+  version: 1,
+
+  plugins: {
+    // The sidecar's own settings. The remotes' Hue vendor frames need their cluster bound, which
+    // the sidecar does itself when a dimmer is configured.
+    zigbee: { config: {
+      devices: {
+        "0x001788010db2d9e6": { transition: 0.4 },
+        "0x001788010db377d0": { transition: 0.4 },
+        "0x001788010db2d968": { transition: 0.4 },
+        "0x001788010d992b6e": { transition: 0.4 },
+        "0x001788010d4e8f54": { transition: 0 },
+        "0x001788010e1bfd0a": { transition: 0.4 },
+        "0x8c6fb9fffe140173": { transition: 0.2 },
+        "0x980c33fffec6ddfc": { transition: 0.2 },
+        "0x980c33fffe9e0f16": { transition: 0.2 },
+        "0x980c33fffec6e6d7": { transition: 0.2 },
+      },
+    } },
+    // The two Midea air conditioners, found by address (their old fixed IPs). Nothing is wired to
+    // them; they are here to be seen and set from the UI.
+    esphome: { config: { discover: true, devices: [{ host: "192.168.30.17" }, { host: "192.168.30.18" }] } },
+  },
+
+  profiles: {
+    // The tap dial, as in the old nix event map: a tap toggles, holding buttons 1 and 2 ramps up,
+    // 3 and 4 down, and releasing a hold stops it. The button is the action's endpoint prefix
+    // (b1 to b4), which the filters and maps below use to pick the sofa or the dining table lamps.
+    // Verified on the dial: taps are press and short_release, holds add hold repeats and a
+    // long_release. Turning it sends standard level steps (the default map turns them into
+    // brightness steps scaled by the rotation speed) and a button 20 event, which is not a button.
+    "zigbee/philips_8719514440937_8719514440999": {
+      traits: ["battery", "brightness"],
+      event_map: {
+        "philips:button_1_short_release": "b1.onoff.toggle",
+        "philips:button_1_hold": "b1.brightness.move_up",
+        "philips:button_1_long_release": "b1.brightness.stop",
+        "philips:button_2_short_release": "b2.onoff.toggle",
+        "philips:button_2_hold": "b2.brightness.move_up",
+        "philips:button_2_long_release": "b2.brightness.stop",
+        "philips:button_3_short_release": "b3.onoff.toggle",
+        "philips:button_3_hold": "b3.brightness.move_down",
+        "philips:button_3_long_release": "b3.brightness.stop",
+        "philips:button_4_short_release": "b4.onoff.toggle",
+        "philips:button_4_hold": "b4.brightness.move_down",
+        "philips:button_4_long_release": "b4.brightness.stop",
+        // Every button also recalls a scene on the dial's own scene ids; nothing here uses scenes.
+        "zcl:genScenes.commandRecall": [],
+      },
+    },
+
+    // The Hue dimmer, as in the old nix event maps: on toggles, off switches off, up and down step
+    // and ramp while held. These use the Hue vendor frames (verified on a bench dimmer). The
+    // standard frames the same presses also send are swallowed, or everything would fire twice.
+    "zigbee/philips_929002398602": {
+      traits: ["battery"],
+      event_map: {
+        "philips:button_1_press": "onoff.toggle",
+        "philips:button_4_press": "onoff.off",
+        "philips:button_2_press": "brightness.step_up",
+        "philips:button_2_hold": "brightness.move_up",
+        "philips:button_2_long_release": "brightness.stop",
+        "philips:button_3_press": "brightness.step_down",
+        "philips:button_3_hold": "brightness.move_down",
+        "philips:button_3_long_release": "brightness.stop",
+        "zcl:genOnOff.commandOn": [],
+        "zcl:genOnOff.commandOffWithEffect": [],
+        "zcl:genLevelCtrl.commandStepUp": [],
+        "zcl:genLevelCtrl.commandStepDown": [],
+        "zcl:genLevelCtrl.commandStop": [],
+        "zcl:genScenes.commandRecall": [],
+      },
+    },
+    // The bathroom switch, an EnOcean PTM 215Z (Green Power). The sidecar forwards its frames as
+    // zgp:command_<id>; the ids are the model's own (press and release of A0, A1, B0, B1, which
+    // zigbee2mqtt called buttons 1 to 4). The combined presses and the energy bar are not used.
+    "zigbee/enocean_ptm215z": {
+      description: "EnOcean PTM 215Z",
+      traits: ["button"],
+      event_map: {
+        "zgp:command_16": "b1.button.press",
+        "zgp:command_20": "b1.button.release",
+        "zgp:command_17": "b2.button.press",
+        "zgp:command_21": "b2.button.release",
+        "zgp:command_19": "b3.button.press",
+        "zgp:command_23": "b3.button.release",
+        "zgp:command_18": "b4.button.press",
+        "zgp:command_22": "b4.button.release",
+        "zgp:command_34": [],
+        "zgp:command_98": [],
+        "zgp:command_99": [],
+        "zgp:command_100": [],
+        "zgp:command_101": [],
+      },
+    },
+  },
+
+  nodes: {
+    // ---- devices (from the old graph, names kept) ----
+    "livingroom-remote-01": { kind: "device", source: "zigbee:0x001788010debc19f", profile: "zigbee/philips_929002398602", description: "Livingroom Remote 01" },
+    "sofa-floor-lamp": { kind: "device", source: "zigbee:0x001788010c0c5f24", profile: "zigbee/philips_9290024684", description: "Sofa Floor Lamp" },
+    "hall-lamp": { kind: "device", source: "zigbee:0x8c6fb9fffe140173", profile: "zigbee/ikea_led2201g8", description: "Hall Lamp" },
+    "bedroom-lamp": { kind: "device", source: "zigbee:0x001788010db2d9e6", profile: "zigbee/philips_9290024688", description: "Bedroom Lamp" },
+    "kitchen-button": { kind: "device", source: "zigbee:0x001788010b9f5916", profile: "zigbee/philips_8718699693985", description: "Kitchen Button",
+      event_map: {
+        "zcl:genOnOff.commandOn": "onoff.toggle",
+        "zcl:genOnOff.commandOffWithEffect": "onoff.toggle",
+      } },
+    "sofa-lamp-01": { kind: "device", source: "zigbee:0x001788010db377d0", profile: "zigbee/philips_9290024688", description: "Sofa Lamp 01" },
+    "sofa-lamp-02": { kind: "device", source: "zigbee:0x001788010db2d968", profile: "zigbee/philips_9290024688", description: "Sofa Lamp 02" },
+    "hobbyroom-02": { kind: "device", source: "zigbee:0x001788010d96ab3d", profile: "zigbee/philips_5309230p6", description: "Hobbyroom 02" },
+    "study-01": { kind: "device", source: "zigbee:0x001788010d992b6e", profile: "zigbee/philips_8719514338142", description: "Study 01" },
+    "study-02": { kind: "device", source: "zigbee:0x001788010d4e8f54", profile: "zigbee/philips_8719514338142", description: "Study 02" },
+    "livingroom-remote-02": { kind: "device", source: "zigbee:0x001788010d89aaf8", profile: "zigbee/philips_929002398602", description: "Livingroom remote 02" },
+    "hallway-occupancy-sensor": { kind: "device", source: "zigbee:0x001788010cd9e5f4", profile: "zigbee/philips_9290030675", description: "Hallway Occupancy Sensor" },
+    "livingroom-dial": { kind: "device", source: "zigbee:0x001788010d7ddfb3", profile: "zigbee/philips_8719514440937_8719514440999", description: "Livingroom Dial" },
+    "dining-table-lamp": { kind: "device", source: "zigbee:0x001788010e1bfd0a", profile: "zigbee/philips_8719514301481", description: "Dining Table Lamp" },
+    "kitchen-01": { kind: "device", source: "zigbee:0x980c33fffec6ddfc", profile: "zigbee/ikea_led2005r5_led2106r3", description: "Kitchen 01" },
+    "kitchen-02": { kind: "device", source: "zigbee:0x980c33fffe9e0f16", profile: "zigbee/ikea_led2005r5_led2106r3", description: "Kitchen 02" },
+    "kitchen-03": { kind: "device", source: "zigbee:0x980c33fffec6e6d7", profile: "zigbee/ikea_led2005r5_led2106r3", description: "Kitchen 03" },
+    "bedroom-remote-01": { kind: "device", source: "zigbee:0x001788010d295d05", profile: "zigbee/philips_929002398602", description: "Bedroom Remote 01" },
+    "shoe-cupboard-light": { kind: "device", source: "zigbee:0x881a14fffe95bee7", profile: "zigbee/ikea_led2201g8", description: "Shoe cupboard light" },
+    "shoe-cupboard-door": { kind: "device", source: "zigbee:0x048727fffe97ea83", profile: "zigbee/ikea_e2013", description: "Shoe cupboard door" },
+    "shower-light": { kind: "device", source: "zigbee:0x38398ffffe10e419", profile: "zigbee/ikea_led2110r3", description: "Shower Light" },
+    "bathroom-light": { kind: "device", source: "zigbee:0xe8e07efffe5472c0", profile: "zigbee/ikea_led2110r3", description: "Bathroom Light" },
+    "landing-light": { kind: "device", source: "zigbee:0xa46dd4fffe5bbdb8", profile: "zigbee/ikea_led2109g6", description: "Landing Light" },
+    "landing-occupancy-sensor": { kind: "device", source: "zigbee:0x001788010cd9e4e2", profile: "zigbee/philips_9290030675", description: "Landing Occupancy Sensor" },
+    "lemon-tree-lamp": { kind: "device", source: "zigbee:0xec1bbdfffea70fb3", profile: "zigbee/lidl_hg06337", description: "Lemon Tree Lamp" },
+    "power-meter": { kind: "device", source: "zigbee:0x449fdafffec150cb", profile: "zigbee/ikea_e22xx", description: "power_meter" },
+    "bath-02": { kind: "device", source: "zigbee:0xa4c1386ec7f68ee8", profile: "zigbee/eglo_12242", description: "Bath 02" },
+    "bath-01": { kind: "device", source: "zigbee:0xa4c138218145626f", profile: "zigbee/eglo_12242", description: "Bath 01" },
+    "bathroom-switch": { kind: "device", source: "zigbee:0x00000000017188c1", profile: "zigbee/enocean_ptm215z", description: "Bathroom Switch" },
+    "livingroom-driver": { kind: "device", source: "zigbee:0x6ce4a4fffebd12a5", profile: "zigbee/ikea_icpshc24_30eu_il_1_icpshc24_10eu_il_2", description: "Livingroom LED driver" },
+
+    "air-conditioner-8dd5a6": { kind: "device", source: "esphome:bc:ff:4d:8d:d5:a6", profile: "esphome/air_conditioner_8dd5a6", description: "Air conditioner" },
+    "air-conditioner-8dd65b": { kind: "device", source: "esphome:bc:ff:4d:8d:d6:5b", profile: "esphome/air_conditioner_8dd65b", description: "Air conditioner" },
+
+    // ---- sofa, dining table and the living room remotes: buses the lamps are bound to ----
+    "junction-6554": { kind: "functional", type: "functional/junction" },
+    "junction-68f9": { kind: "functional", type: "functional/junction" },
+    "junction-8486": { kind: "functional", type: "functional/junction" },
+    "junction-bc05": { kind: "functional", type: "functional/junction" },
+
+    // ---- living room dial: buttons 1 and 3 drive the sofa lamps, 2 and 4 the dining table lamp ----
+    "dial-sofa": { kind: "functional", type: "functional/map", config: { rules: [{ match: "^b[13]\\.(.*)$", replace: "$1" }] } },
+    "dial-dining": { kind: "functional", type: "functional/map", config: { rules: [{ match: "^b[24]\\.(.*)$", replace: "$1" }] } },
+
+    // ---- bathroom: shower and bath groups, and the switch's tap logic ----
+    "junction-62d9": { kind: "functional", type: "functional/junction" },
+    "junction-05f6": { kind: "functional", type: "functional/junction" },
+    "bathroom-tap": { kind: "functional", type: "functional/tap", config: { tap: "200ms", double_tap: "200ms" } },
+    "bathroom-all": { kind: "functional", type: "functional/map", config: { rules: [
+      { match: "^b1\\.button\\.tap$", replace: "onoff.on" },
+      { match: "^b2\\.button\\.tap$", replace: "onoff.off" },
+      { match: "^b1\\.button\\.double_tap$", replace: "brightness.step_up" },
+      { match: "^b2\\.button\\.double_tap$", replace: "brightness.step_down" },
+    ] } },
+    "bathroom-shower": { kind: "functional", type: "functional/map", config: { rules: [{ match: "^b3\\.button\\.tap$", replace: "onoff.toggle" }] } },
+    "bathroom-bath": { kind: "functional", type: "functional/map", config: { rules: [{ match: "^b4\\.button\\.tap$", replace: "onoff.toggle" }] } },
+
+    // ---- shoe cupboard: the lamp follows the door, and goes off two minutes after it opens ----
+    "shoe-cupboard-follow": { kind: "functional", type: "functional/when", config: {
+      prop: "contact.value", // true is closed
+      rules: [{ value: false, action: "onoff.on" }, { value: true, action: "onoff.off" }],
+    } },
+    "shoe-cupboard-left-open": { kind: "functional", type: "functional/when", config: {
+      prop: "contact.value",
+      rules: [{ value: false, action: "onoff.off" }],
+    } },
+    // The door's open arrives as an action (onoff.on): flip it to off before the delay, and reset
+    // after it, or the light (already in the chain's history via follow) drops the held action.
+    "shoe-cupboard-flip": { kind: "functional", type: "functional/map", config: { rules: [{ match: "^onoff\\.on$", replace: "onoff.off" }] } },
+    "shoe-cupboard-timeout": { kind: "functional", type: "functional/delay", config: { mode: "debounce", after: "2m" } },
+    "shoe-cupboard-reset": { kind: "functional", type: "functional/reset" },
+
+    // ---- motion lights: occupied switches the lamp on, clear switches it off ----
+    "hall-motion": { kind: "functional", type: "functional/when", config: {
+      prop: "occupancy.occupied",
+      rules: [{ value: true, action: "onoff.on" }, { value: false, action: "onoff.off" }],
+    } },
+    "landing-motion": { kind: "functional", type: "functional/when", config: {
+      prop: "occupancy.occupied",
+      rules: [{ value: true, action: "onoff.on" }, { value: false, action: "onoff.off" }],
+    } },
+
+    // ---- lemon tree lamp: on at six, off at six in the evening ----
+    "lemon-tree-morning": { kind: "functional", type: "functional/cron", config: { schedule: "0 6 * * *", action: "onoff.on", timezone: "Europe/Amsterdam" } },
+    "lemon-tree-evening": { kind: "functional", type: "functional/cron", config: { schedule: "0 18 * * *", action: "onoff.off", timezone: "Europe/Amsterdam" } },
+  },
+
+  edges: [
+    // bound pairs and groups from the old graph (state and actions travel both ways)
+    { from: "junction-6554", to: "sofa-floor-lamp", directed: false },
+    { from: "junction-6554", to: "sofa-lamp-01", directed: false },
+    { from: "bedroom-remote-01", to: "bedroom-lamp", directed: false },
+    { from: "sofa-lamp-02", to: "sofa-lamp-01", directed: false },
+    { from: "kitchen-button", to: "kitchen-03", directed: false },
+    { from: "kitchen-button", to: "kitchen-01", directed: false },
+    { from: "kitchen-button", to: "kitchen-02", directed: false },
+    { from: "shower-light", to: "bathroom-light", directed: false },
+    { from: "junction-62d9", to: "shower-light", directed: false },
+    { from: "bath-01", to: "bath-02", directed: false },
+    { from: "junction-05f6", to: "bath-02", directed: false },
+    { from: "junction-68f9", to: "dining-table-lamp", directed: false },
+    { from: "junction-8486", to: "livingroom-remote-02", directed: false },
+    { from: "junction-bc05", to: "livingroom-remote-02", directed: false },
+    { from: "junction-bc05", to: "junction-6554" },
+    { from: "junction-8486", to: "junction-68f9" },
+    { from: "livingroom-remote-01", to: "livingroom-driver", directed: false },
+
+    // shoe cupboard
+    { from: "shoe-cupboard-door", to: "shoe-cupboard-follow" },
+    { from: "shoe-cupboard-follow", to: "shoe-cupboard-light" },
+    { from: "shoe-cupboard-door", to: "shoe-cupboard-left-open" },
+    { from: "shoe-cupboard-left-open", to: "shoe-cupboard-flip" },
+    { from: "shoe-cupboard-flip", to: "shoe-cupboard-timeout" },
+    { from: "shoe-cupboard-timeout", to: "shoe-cupboard-reset" },
+    { from: "shoe-cupboard-reset", to: "shoe-cupboard-light" },
+
+    // motion lights
+    { from: "hallway-occupancy-sensor", to: "hall-motion" },
+    { from: "hall-motion", to: "hall-lamp" },
+    { from: "landing-occupancy-sensor", to: "landing-motion" },
+    { from: "landing-motion", to: "landing-light" },
+
+    // lemon tree lamp
+    { from: "lemon-tree-morning", to: "lemon-tree-lamp" },
+    { from: "lemon-tree-evening", to: "lemon-tree-lamp" },
+
+    // living room dial: the maps drop the button number; rotation is a plain action and reaches both
+    { from: "livingroom-dial", to: "dial-sofa" },
+    { from: "dial-sofa", to: "junction-6554" },
+    { from: "livingroom-dial", to: "dial-dining" },
+    { from: "dial-dining", to: "junction-68f9" },
+
+    // bathroom switch: buttons 1 and 2 drive both groups, 3 the shower, 4 the bath (a device ignores an action for a button it does not have, so no filters)
+    { from: "bathroom-switch", to: "bathroom-tap" },
+    { from: "bathroom-tap", to: "bathroom-all" },
+    { from: "bathroom-all", to: "junction-62d9" },
+    { from: "bathroom-all", to: "junction-05f6" },
+    { from: "bathroom-tap", to: "bathroom-shower" },
+    { from: "bathroom-shower", to: "junction-62d9" },
+    { from: "bathroom-tap", to: "bathroom-bath" },
+    { from: "bathroom-bath", to: "junction-05f6" },
+  ],
+
+  layout: { positions: {
+      "junction-05f6": { x: 50, y: -850 },
+      "junction-62d9": { x: 50, y: -1010 },
+      "junction-6554": { x: -170, y: -390 },
+      "junction-68f9": { x: 110, y: -390 },
+      "junction-8486": { x: 50, y: -330 },
+      "junction-bc05": { x: -110, y: -330 },
+      "bathroom-switch": { x: -290, y: -930 },
+      "kitchen-button": { x: 530, y: -770 },
+      "sofa-floor-lamp": { x: -230, y: -450 },
+      "landing-occupancy-sensor": { x: 530, y: -410 },
+      "hallway-occupancy-sensor": { x: 530, y: -270 },
+      "bedroom-remote-01": { x: 530, y: -550 },
+      "livingroom-dial": { x: -30, y: -450 },
+      "livingroom-remote-02": { x: -30, y: -330 },
+      "sofa-lamp-02": { x: -350, y: -330 },
+      "bedroom-lamp": { x: 690, y: -550 },
+      "sofa-lamp-01": { x: -230, y: -330 },
+      "livingroom-remote-01": { x: 530, y: -130 },
+      "dining-table-lamp": { x: 190, y: -390 },
+      "shoe-cupboard-door": { x: -310, y: -670 },
+      "shower-light": { x: 130, y: -1010 },
+      "livingroom-driver": { x: 690, y: -10 },
+      "shoe-cupboard-light": { x: 190, y: -670 },
+      "hall-lamp": { x: 690, y: -270 },
+      "kitchen-02": { x: 690, y: -770 },
+      "kitchen-01": { x: 610, y: -850 },
+      "kitchen-03": { x: 610, y: -710 },
+      "landing-light": { x: 690, y: -410 },
+      "bath-01": { x: 230, y: -850 },
+      "bath-02": { x: 130, y: -850 },
+      "bathroom-light": { x: 230, y: -1010 },
+      "lemon-tree-lamp": { x: 130, y: -10 },
+  } },
+}

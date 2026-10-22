@@ -77,11 +77,11 @@
         "type": "Git",
         "url": "git+ssh://git@github.com/olistrik/homewire.git"
       },
-      "branch": "master",
+      "branch": "main",
       "submodules": false,
-      "revision": "157e47f3ab8b9c7d901f35fe24cb99550f239a35",
+      "revision": "2a9811e62f420232546630c4ba78e26c370f00da",
       "url": null,
-      "hash": "sha256-FCN3qpIxHvURCIou+WXoaFLuJYTf5YoCmud+LPdfWBQ=",
+      "hash": "sha256-CLOoGOYmw5s+bGooajiWdUNtfs0BUu4/YPQrFp5ZHr0=",
       "frozen": true
     },
     "impermanence": {
