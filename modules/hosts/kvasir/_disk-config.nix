@@ -47,15 +47,11 @@ in
     lvm_vg.kvasir = {
       type = "lvm_vg";
       lvs = {
-        # This must be at least as large as the memory that may be in use when
-        # hibernating. Keeping it as an LV gives the kernel a stable resume
-        # device while leaving the swap encrypted by cryptroot.
+        # Plain swap, encrypted by cryptroot. Hibernation is disabled (it was
+        # crashing), so this is deliberately not a resumeDevice.
         swap = {
           size = "48G";
-          content = {
-            type = "swap";
-            resumeDevice = true;
-          };
+          content.type = "swap";
         };
 
         system = {
