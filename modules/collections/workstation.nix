@@ -30,6 +30,7 @@
           teleport
           k9s
           doctl
+          _1password-cli
 
           # these are already configured.
           wrapped.alacritty
