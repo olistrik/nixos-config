@@ -74,6 +74,9 @@
             # Only Caddy sits in front of us.
             TRUST_PROXY_HOPS = "1";
             UPDATE_CHECK_DISABLED = "true";
+            # No IPv6 route on hestia; SMTP hosts with AAAA records otherwise
+            # fail with ENETUNREACH.
+            NODE_OPTIONS = "--dns-result-order=ipv4first";
           };
 
           serviceConfig = {
