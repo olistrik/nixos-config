@@ -12,6 +12,7 @@
 
         programs.firefox
         programs.udisks
+        programs.yubikey
       ];
 
       # programs that don't need "much" configuration.
