@@ -58,6 +58,12 @@
         dataDir = "/var/lib/homewired";
         documentFile = ./house.json5;
 
+        devRelay = {
+          enable = true;
+          # kvasir on the tailnet: where `scripts/dev-house --attach` runs the kernel under development.
+          preferred = "ws://100.78.97.101:8480/plugin";
+        };
+
         nodeTypes.functional.component = "${my.projects.homewire.packages.homewire-functional}/functional.wasm";
 
         plugins.zigbee = {

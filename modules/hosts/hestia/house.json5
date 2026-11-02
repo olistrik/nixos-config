@@ -144,8 +144,8 @@
     "bathroom-switch": { kind: "device", source: "zigbee:0x00000000017188c1", profile: "zigbee/enocean_ptm215z", description: "Bathroom Switch" },
     "livingroom-driver": { kind: "device", source: "zigbee:0x6ce4a4fffebd12a5", profile: "zigbee/ikea_icpshc24_30eu_il_1_icpshc24_10eu_il_2", description: "Livingroom LED driver" },
 
-    "air-conditioner-8dd5a6": { kind: "device", source: "esphome:bc:ff:4d:8d:d5:a6", profile: "esphome/air_conditioner_8dd5a6", description: "Air conditioner" },
-    "air-conditioner-8dd65b": { kind: "device", source: "esphome:bc:ff:4d:8d:d6:5b", profile: "esphome/air_conditioner_8dd65b", description: "Air conditioner" },
+    "livingroom-airco": { kind: "device", source: "esphome:bc:ff:4d:8d:d5:a6", profile: "esphome/air_conditioner_8dd5a6", description: "Livingroom Airco" },
+    "bedroom-airco": { kind: "device", source: "esphome:bc:ff:4d:8d:d6:5b", profile: "esphome/air_conditioner_8dd65b", description: "Bedroom Airco" },
 
     // ---- sofa, dining table and the living room remotes: buses the lamps are bound to ----
     "junction-6554": { kind: "functional", type: "functional/junction" },
