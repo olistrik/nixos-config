@@ -158,9 +158,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "557d2eb05a76e5939e6a75351343cae5731a71f8",
-      "url": "https://github.com/notashelf/nvf/archive/557d2eb05a76e5939e6a75351343cae5731a71f8.tar.gz",
-      "hash": "sha256-xpH3z+T5NELixXRjxGJ3mx30kz63Xt2B0ZfPWl7hcUg="
+      "revision": "ab3159aea7707333e689289a74545b26c1c9d37c",
+      "url": "https://github.com/notashelf/nvf/archive/ab3159aea7707333e689289a74545b26c1c9d37c.tar.gz",
+      "hash": "sha256-N5ulCQwTIcd3Il7uE491pbkRTWL2BtZKf/B5jfavmCo="
     },
     "tsidp": {
       "type": "Git",

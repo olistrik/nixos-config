@@ -20,7 +20,7 @@
     {
       options.vim.telescope = {
         mappings = {
-          browseRelative = mkMappingOption "Relative file browser [Telescope]" "<leader><tab>";
+          browseRelative = mkMappingOption "Telescope" "Relative file browser" "<leader><tab>";
         };
 
         fileBrowser = mkOption {

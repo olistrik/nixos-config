@@ -24,8 +24,8 @@
         setupOpts = mkPluginSetupOption "notebook-navigator" { };
 
         mappings = {
-          runCell = mkMappingOption "Run code cell [Notebook Navigator]" "<leader>X";
-          runAndMove = mkMappingOption "Run code cell and move to next [Notebook Navigator]" "<leader>x";
+          runCell = mkMappingOption "Notebook Navigator" "Run code cell" "<leader>X";
+          runAndMove = mkMappingOption "Notebook Navigator" "Run code cell and move to next" "<leader>x";
         };
       };
 

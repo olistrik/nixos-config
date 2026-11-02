@@ -17,9 +17,9 @@
     {
       options.vim.assistant.codecompanion-nvim = {
         mappings = {
-          actions = mkMappingOption "Actions menu [CodeCompanion]" "<leader>ca";
-          toggleChat = mkMappingOption "Toggle chat window [CodeCompanion]" "<leader>cc";
-          addSelection = mkMappingOption "Add visual selection to chat [CodeCompanion]" "<leader>cy";
+          actions = mkMappingOption "CodeCompanion" "Actions menu" "<leader>ca";
+          toggleChat = mkMappingOption "CodeCompanion" "Toggle chat window" "<leader>cc";
+          addSelection = mkMappingOption "CodeCompanion" "Add visual selection to chat" "<leader>cy";
         };
       };
 
