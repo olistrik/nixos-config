@@ -33,6 +33,9 @@
           doctl
           _1password-cli
 
+          # android
+          android-tools
+
           # these are already configured.
           wrapped.alacritty
         ];

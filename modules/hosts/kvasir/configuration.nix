@@ -36,6 +36,7 @@
                                 glab
                                 gh
                                 jq
+                                python3
 
                                 firefoxpwa
 

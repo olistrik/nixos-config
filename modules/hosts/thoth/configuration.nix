@@ -48,7 +48,6 @@
       # TODO: put somewhere useful.
       environment.systemPackages = with pkgs; [
         nix-output-monitor # honestly don't know what this is.
-        android-tools
       ];
 
       nix.gc = {
