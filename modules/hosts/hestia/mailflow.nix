@@ -77,6 +77,9 @@
             # No IPv6 route on hestia; SMTP hosts with AAAA records otherwise
             # fail with ENETUNREACH.
             NODE_OPTIONS = "--dns-result-order=ipv4first";
+            # Image proxy cache (4.x); lives under CacheDirectory below.
+            IMAGE_CACHE_DIR = "/var/cache/mailflow/images";
+            IMAGE_CACHE_MAX_MB = "512";
           };
 
           serviceConfig = {
@@ -86,6 +89,7 @@
             User = "mailflow";
             Group = "mailflow";
             Restart = "on-failure";
+            CacheDirectory = "mailflow";
 
             # Hardening
             PrivateTmp = true;
@@ -106,6 +110,7 @@
           handle {
             root * ${my.pkgs.mailflow.frontend}
             header Cache-Control "no-store"
+            encode zstd gzip
             try_files {path} /index.html
             file_server
           }

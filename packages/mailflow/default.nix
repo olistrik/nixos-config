@@ -7,13 +7,13 @@
 }:
 
 let
-  version = "3.9.0";
+  version = "4.3.0";
 
   src = fetchFromGitHub {
     owner = "maathimself";
     repo = "mailflow";
-    rev = "b5334759ed8ef7f667e531660905ece177487bb5";
-    hash = "sha256-06unvD88fC7sh4Ycf1u5vg/NJ4bQDEzN15UlWB/+woI=";
+    rev = "1b5dbfdbc32f318ee90d6ec9ed3e0a7556487cbc";
+    hash = "sha256-1PboNZkHn6SRuyYy0huGmtZ4Cf/MLbGDwCszb8t31Hw=";
   };
 
   frontend = buildNpmPackage {
@@ -21,7 +21,7 @@ let
     inherit version src;
     sourceRoot = "${src.name}/frontend";
     nodejs = nodejs_22;
-    npmDepsHash = "sha256-3lkR05hHAR+beva6eH5GdlLTKuK8SVLDj2e5lxmvtUk=";
+    npmDepsHash = "sha256-J1Dv+WjgDesJJ8z/957QoBTRUV5aKmf4M4LijfRpd4c=";
 
     # electron is only used for desktop packaging, never by the vite build.
     env.ELECTRON_SKIP_BINARY_DOWNLOAD = "1";
@@ -38,7 +38,7 @@ let
     inherit version src;
     sourceRoot = "${src.name}/backend";
     nodejs = nodejs_22;
-    npmDepsHash = "sha256-PRtKu7cXshzoozf6ExhnkjZu+IjtUMRBOJSXL9ov9NU=";
+    npmDepsHash = "sha256-amd5hK5YKJvoApkwXS2P1Iknm4nBtuRsxlSQzev8VFg=";
 
     dontNpmBuild = true;
     npmFlags = [ "--omit=dev" ];
