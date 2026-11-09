@@ -26,6 +26,19 @@
       "url": "https://github.com/olistrik/ags-config/archive/52b30ec110f60d94e50bff29c8390cb25bf11b5a.tar.gz",
       "hash": "sha256-41d8rzvpjfm/2wLSJTZXvl0frHA4qvBl3GtOunm5yVQ="
     },
+    "caffiend": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "olistrik",
+        "repo": "caffiend"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "fcc4bb836756ca9d80afc0036828e81442ede6d5",
+      "url": "https://github.com/olistrik/caffiend/archive/fcc4bb836756ca9d80afc0036828e81442ede6d5.tar.gz",
+      "hash": "sha256-BcVPwhjbqBBlkGdoP1h+iTWT+/aPBr/uFidxTaEty1M="
+    },
     "disko": {
       "type": "GitRelease",
       "repository": {

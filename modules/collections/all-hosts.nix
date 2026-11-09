@@ -130,6 +130,7 @@
 
         # nix-utilities
         nix-search
+        nxv
         my.pkgs.nix-fast-build
 
         # to wake things
