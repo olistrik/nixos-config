@@ -3,9 +3,9 @@
 let
   base = pkgs.caddy.withPlugins {
     plugins = [
-      "github.com/tailscale/caddy-tailscale@v0.0.0=github.com/olistrik/caddy-tailscale@v0.0.0-20261021181040-16af7c65dd4a"
+      "github.com/tailscale/caddy-tailscale@v0.0.0=github.com/olistrik/caddy-tailscale@v0.0.0-20261109143848-accb17d43fad"
     ];
-    hash = "sha256-jFPebkgtF/qftOW4qiowHcYITjYsrKsazTQZehrYWEA=";
+    hash = "sha256-+zeq0WyQ2ar81RwcdpHj0XziYRK6uT1/iFoq0w6grJU=";
 
     doInstallCheck = false;
   };
