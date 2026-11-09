@@ -60,6 +60,9 @@
       };
 
       environment.etc."xdg/mako/config".text = ''
+        # popups disappear on their own after 5s
+        default-timeout=5000
+
         # Custom sound for Slack messages from Wesley Seubring that mention merge_requests.
         [app-name=Slack summary~="Wesley Seubring" body~="merge_requests"]
         on-notify=exec ${pkgs.pipewire}/bin/pw-play ${./sounds/not_another_one.mp3}
