@@ -31,7 +31,6 @@
           teleport
           k9s
           doctl
-          _1password-cli
 
           # android
           android-tools
@@ -39,6 +38,11 @@
           # these are already configured.
           wrapped.alacritty
         ];
+      programs._1password.enable = true;
+      programs._1password-gui = {
+        enable = true;
+        polkitPolicyOwners = [ "oli" ];
+      };
 
       programs.localsend.enable = true;
 
