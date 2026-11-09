@@ -63,8 +63,8 @@
         # popups disappear on their own after 5s
         default-timeout=5000
 
-        # Custom sound for Slack messages from Wesley Seubring that mention merge_requests.
-        [app-name=Slack summary~="Wesley Seubring" body~="merge_requests"]
+        # Custom sound for Slack messages from Wesley Seubring whose body mentions gitlab.com.
+        [app-name=Slack summary~="Wesley Seubring" body~="gitlab\.com"]
         on-notify=exec ${pkgs.pipewire}/bin/pw-play ${./sounds/not_another_one.mp3}
       '';
 
