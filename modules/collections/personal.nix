@@ -17,7 +17,6 @@
         gimp
         inkscape
         obsidian
-        vscode
 
         # browsers
         thunderbird
