@@ -2,6 +2,7 @@
   nixos.programs.niri =
     {
       my,
+      config,
       lib,
       pkgs,
       ...
@@ -40,6 +41,29 @@
         # auth agent. plasma-polkit-agent. Can be started with systemd.
         # pantheon.pantheon-agent-polkit
       ];
+
+      # mako 1.11 does not read /etc/xdg on its own, so start it with an explicit
+      # --config (the D-Bus activated instance gets no arguments).
+      systemd.user.services.mako = {
+        description = "Lightweight Wayland notification daemon";
+        wantedBy = [ "graphical-session.target" ];
+        partOf = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+        unitConfig.ConditionEnvironment = "WAYLAND_DISPLAY";
+        restartTriggers = [ config.environment.etc."xdg/mako/config".source ];
+        serviceConfig = {
+          Type = "dbus";
+          BusName = "org.freedesktop.Notifications";
+          ExecStart = "${pkgs.mako}/bin/mako --config /etc/xdg/mako/config";
+          ExecReload = "${pkgs.mako}/bin/makoctl reload";
+        };
+      };
+
+      environment.etc."xdg/mako/config".text = ''
+        # Custom sound for Slack messages from Wesley Seubring that mention merge_requests.
+        [app-name=Slack summary~="Wesley Seubring" body~="merge_requests"]
+        on-notify=exec ${pkgs.pipewire}/bin/pw-play ${./sounds/not_another_one.mp3}
+      '';
 
       services.greetd = {
         enable = true;
