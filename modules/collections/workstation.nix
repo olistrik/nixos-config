@@ -31,6 +31,7 @@
           teleport
           k9s
           doctl
+          argocd
 
           # android
           android-tools
