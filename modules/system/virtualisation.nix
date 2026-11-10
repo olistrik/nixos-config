@@ -12,6 +12,10 @@
         };
       };
 
+      # The rootless daemon's user unit has no CA bundle in its environment,
+      # so registry pulls fail TLS verification.
+      systemd.user.services.docker.environment.SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
+
       virtualisation.libvirtd.enable = true;
 
       users.users.oli.extraGroups = [ "libvirtd" ];
