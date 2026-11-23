@@ -59,14 +59,28 @@
         };
       };
 
-      environment.etc."xdg/mako/config".text = ''
-        # popups disappear on their own after 5s
-        default-timeout=5000
+      environment.etc."xdg/mako/config".text =
+        let
+          # Play the sound at most once per minute, tracked via a stamp file.
+          debouncedSound = pkgs.writeShellScript "not-another-one" ''
+            stamp="''${XDG_RUNTIME_DIR:-/tmp}/not-another-one.stamp"
+            now=$(${pkgs.coreutils}/bin/date +%s)
+            last=$(${pkgs.coreutils}/bin/cat "$stamp" 2>/dev/null || echo 0)
+            if [ $((now - last)) -ge 60 ]; then
+              echo "$now" > "$stamp"
+              exec ${pkgs.pipewire}/bin/pw-play ${./sounds/not_another_one.mp3}
+            fi
+          '';
+        in
+        ''
+          # popups disappear on their own after 5s
+          default-timeout=5000
 
-        # Custom sound for Slack messages from Wesley Seubring whose body mentions gitlab.com.
-        [app-name=Slack summary~="Wesley Seubring" body~="gitlab\.com"]
-        on-notify=exec ${pkgs.pipewire}/bin/pw-play ${./sounds/not_another_one.mp3}
-      '';
+          # Custom sound for Slack messages from Wesley Seubring whose body mentions gitlab.com.
+          # Debounced to at most once a minute.
+          [app-name=Slack summary~="Wesley Seubring" body~="gitlab\.com"]
+          on-notify=exec ${debouncedSound}
+        '';
 
       services.greetd = {
         enable = true;

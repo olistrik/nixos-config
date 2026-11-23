@@ -11,7 +11,7 @@
     let
       # Create a fontconfig configuration that adds bundled fonts
       # while preserving system font discovery via <include>
-      fontconfig-conf = pkgs.makeFontsConf { fontDirectories = [ pkgs.nerd-fonts.jetbrains-mono ]; };
+      fontconfig-conf = pkgs.makeFontsConf { fontDirectories = [ pkgs.nerd-fonts.atkynson-mono ]; };
     in
     {
       imports = [ my.modules.wrappers.programs.alacritty ];
@@ -27,8 +27,8 @@
 
         settings = {
           font = {
-            normal.family = "JetBrainsMono NerdFont Mono";
-            size = 11.5; # 11.25 causes glyphs to be off by 1px.
+            normal.family = "AtkynsonMono Nerd Font Mono";
+            size = 11.0;
           };
           window.opacity = 0.95;
         };

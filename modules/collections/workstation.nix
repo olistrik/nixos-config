@@ -51,7 +51,7 @@
 
       # add fonts for polybar and Alacritty.
       fonts.packages = with pkgs; [
-        nerd-fonts.jetbrains-mono
+        nerd-fonts.atkynson-mono
       ];
 
       security.rtkit.enable = true;
